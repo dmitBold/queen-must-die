@@ -1,103 +1,116 @@
+using System.Collections.Generic;
+using Core;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Collections.Generic;
-using TMPro;
+using Zenject;
 
-public class CodeLock : MonoBehaviour
+namespace NightCycle
 {
-    [Header("Settings")]
-    [SerializeField] private int[] correctCombination = { 0, 1, 2 };
-    [SerializeField] private LayerMask cylinderLayer;
-
-    [Header("Cylinders")]
-    [SerializeField] private List<CodeLockCylinder> cylinders;
-
-    [Header("Events")]
-    public UnityEvent OnUnlocked;
-
-    private bool isFocused = false;
-    private bool isUnlocked = false;
-
-    //TEST
-    public AudioClip unlockSound;
-    public Camera cam;
-    public string tutorialText;
-    string og_text;
-    public TextMeshProUGUI textArea;
-    //TEST
-
-    void Start()
+    public class CodeLock : MonoBehaviour
     {
-        foreach (var cylinder in cylinders)
+        [Header("Settings")]
+        [SerializeField] private int[] correctCombination = { 0, 1, 2 };
+        [SerializeField] private LayerMask cylinderLayer;
+
+        [Header("Cylinders")]
+        [SerializeField] private List<CodeLockCylinder> cylinders;
+
+        [Header("Events")]
+        public UnityEvent OnUnlocked;
+
+        private bool isFocused = false;
+        private bool isUnlocked = false;
+
+        //TEST
+        public AudioClip unlockSound;
+        public Camera cam;
+        public string tutorialText;
+        string og_text;
+        public TextMeshProUGUI textArea;
+        //TEST
+
+        private AudioService _audioService;
+
+        [Inject]
+        public void Constructor(AudioService audioService)
         {
-            cylinder.OnValueChanged += CheckCombination;
+            _audioService = audioService;
         }
-        og_text = textArea.text;
-    }
 
-    public void Enter()
-    {
-        Debug.Log("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        isFocused = true;
-        //HUDController.instance.EnableInteractionText("Кликай по цифрам. E - выйти");
-        textArea.text = tutorialText;
-    }
-
-    public void Exit()
-    {
-        isFocused = false;
-        textArea.text = og_text;
-    }
-
-    void Update()
-    {
-        if (!isFocused || isUnlocked) return;
-
-        // Обработка клика по цилиндрам
-        if (Input.GetMouseButtonDown(0))
+        void Start()
         {
-            HandleClick();
-        }
-        for (int i = 0; i < cylinders.Count; i++)
-        {
-            Debug.Log(cylinders[i].CurrentValue);
-        }
-    }
-
-    private void HandleClick()
-    {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f, cylinderLayer))
-        {
-            if (hit.collider.TryGetComponent<CodeLockCylinder>(out var cylinder))
+            foreach (var cylinder in cylinders)
             {
-                cylinder.Rotate();
+                cylinder.OnValueChanged += CheckCombination;
+            }
+            og_text = textArea.text;
+        }
+
+        public void Enter()
+        {
+            Debug.Log("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+            isFocused = true;
+            //HUDController.instance.EnableInteractionText("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. E - пїЅпїЅпїЅпїЅпїЅ");
+            textArea.text = tutorialText;
+        }
+
+        public void Exit()
+        {
+            isFocused = false;
+            textArea.text = og_text;
+        }
+
+        void Update()
+        {
+            if (!isFocused || isUnlocked) return;
+
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            if (Input.GetMouseButtonDown(0))
+            {
+                HandleClick();
+            }
+            for (int i = 0; i < cylinders.Count; i++)
+            {
+                Debug.Log(cylinders[i].CurrentValue);
             }
         }
-    }
 
-    private void CheckCombination()
-    {
-        if (isUnlocked) return;
-
-        for (int i = 0; i < cylinders.Count; i++)
+        private void HandleClick()
         {
-            if (cylinders[i].CurrentValue != correctCombination[i])
-                return; // Код не совпал
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, 10f, cylinderLayer))
+            {
+                if (hit.collider.TryGetComponent<CodeLockCylinder>(out var cylinder))
+                {
+                    cylinder.Rotate();
+                }
+            }
         }
 
-        Unlock();
-    }
-
-    private void Unlock()
-    {
-        isUnlocked = true;
-        if (unlockSound != null)
+        private void CheckCombination()
         {
-            SoundManager.Instance.PlaySound(unlockSound);
+            if (isUnlocked) return;
+
+            for (int i = 0; i < cylinders.Count; i++)
+            {
+                if (cylinders[i].CurrentValue != correctCombination[i])
+                    return; // пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+            }
+
+            Unlock();
         }
-        Debug.Log("<color=green>Замок открыт! У меня толстый член!</color>");
-        OnUnlocked?.Invoke();
-        // Сюда в инспекторе можно будет повесить открытие двери, звук или выдачу предмета
+
+        private void Unlock()
+        {
+            isUnlocked = true;
+            if (unlockSound != null)
+            {
+                _audioService.PlaySound(unlockSound);
+            }
+            Debug.Log("<color=green>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ! пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ!</color>");
+            OnUnlocked?.Invoke();
+            // пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        }
     }
 }

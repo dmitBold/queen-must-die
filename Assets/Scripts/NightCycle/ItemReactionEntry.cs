@@ -1,6 +1,11 @@
-[System.Serializable]
-public class ItemReactionEntry
+using Inventory;
+
+namespace NightCycle
 {
-    public ItemData item;
-    public ItemReactionNight reaction;
+    [System.Serializable]
+    public class ItemReactionEntry
+    {
+        public ItemData item;
+        public ItemReactionNight reaction;
+    }
 }

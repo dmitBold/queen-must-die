@@ -1,41 +1,54 @@
+using Core;
 using UnityEngine;
+using Zenject;
 
-[RequireComponent(typeof(Interactable))]
-public class NightDialogueInteractable : MonoBehaviour, IFocusable
+namespace NightCycle
 {
-    [Header("Настройки диалога")]
-    [TextArea(3, 5)]
-    public string[] dialoguePages;
-
-    //TEST
-    public AudioClip interact_sound;
-    bool play_once = true;
-    //TEST
-
-    public void OnEnterFocus()
+    [RequireComponent(typeof(Interactable))]
+    public class NightDialogueInteractable : MonoBehaviour, IFocusable
     {
-        PlayIneractionSound();
-        NightDialogueManager.Instance.StartDialogue(this, dialoguePages);
-    }
+        [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+        [TextArea(3, 5)]
+        public string[] dialoguePages;
 
-    public void OnExitFocus()
-    {
-        NightDialogueManager.Instance.ForceEndDialogue();
-    }
-
-    public void PlayIneractionSound()
-    {
-        Debug.Log("sss");
         //TEST
-        if (interact_sound != null)
+        public AudioClip interact_sound;
+        bool play_once = true;
+        //TEST
+
+        private AudioService _audioService;
+
+        [Inject]
+        public void Constructor(AudioService audioService)
         {
-            if (play_once)
-            {
-                Debug.Log("sss");
-                SoundManager.Instance.PlaySound(interact_sound);
-                play_once = false;
-            }
+            _audioService = audioService;
         }
-        //TEST
+
+        public void OnEnterFocus()
+        {
+            PlayIneractionSound();
+            NightDialogueManager.Instance.StartDialogue(this, dialoguePages);
+        }
+
+        public void OnExitFocus()
+        {
+            NightDialogueManager.Instance.ForceEndDialogue();
+        }
+
+        public void PlayIneractionSound()
+        {
+            Debug.Log("sss");
+            //TEST
+            if (interact_sound != null)
+            {
+                if (play_once)
+                {
+                    Debug.Log("sss");
+                   _audioService.PlaySound(interact_sound);
+                    play_once = false;
+                }
+            }
+            //TEST
+        }
     }
 }

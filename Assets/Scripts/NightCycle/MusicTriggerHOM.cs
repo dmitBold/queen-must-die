@@ -1,28 +1,40 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using Zenject;
 
-public class MusicTriggerHOM : MonoBehaviour
+namespace NightCycle
 {
-
-    public float door_delay;
-    public GameObject door;
-
-    private void OnTriggerEnter(Collider other)
+    public class MusicTriggerHOM : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+
+        public float door_delay;
+        public GameObject door;
+
+        private CleanupManager _cleanupManager;
+
+        [Inject]
+        public void Constructor(CleanupManager cleanupManager)
         {
-            //Debug.Log("TRTRTRTRTRTR");
-            CleanupManager.Instance.StartCleanup();
-            CleanupManager.Instance.UpdateMusic();
-            StartCoroutine(WaitAndExecute(door_delay));
-            //gameObject.SetActive(false);
+            _cleanupManager = cleanupManager;
         }
-    }
 
-    IEnumerator WaitAndExecute(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        door.SetActive(true);
-        gameObject.SetActive(false);
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                //Debug.Log("TRTRTRTRTRTR");
+                _cleanupManager.StartCleanup();
+                _cleanupManager.UpdateMusic();
+                StartCoroutine(WaitAndExecute(door_delay));
+                //gameObject.SetActive(false);
+            }
+        }
+
+        IEnumerator WaitAndExecute(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            door.SetActive(true);
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -1,22 +1,36 @@
+using Core;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Events;   
+using Zenject;
 
-public class TriggerHandler : MonoBehaviour
+namespace NightCycle
 {
-    [SerializeField] private string targetTag = "Player";
-    [SerializeField] private UnityEvent onTriggerEnter;
-    public AudioClip triggerSound;
-
-    private void OnTriggerEnter(Collider other)
+    public class TriggerHandler : MonoBehaviour
     {
-        if (other.CompareTag(targetTag))
+        [SerializeField] private string targetTag = "Player";
+        [SerializeField] private UnityEvent onTriggerEnter;
+        public AudioClip triggerSound;
+        
+        
+        private AudioService _audioService;
+
+        [Inject]
+        public void Constructor(AudioService audioService)
         {
-            if (triggerSound != null)
+            _audioService = audioService;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(targetTag))
             {
-                SoundManager.Instance.PlaySound(triggerSound);
+                if (triggerSound != null)
+                {
+                    _audioService.PlaySound(triggerSound);
+                }
+                onTriggerEnter?.Invoke();
+                gameObject.SetActive(false);
             }
-            onTriggerEnter?.Invoke();
-            gameObject.SetActive(false);
         }
     }
 }

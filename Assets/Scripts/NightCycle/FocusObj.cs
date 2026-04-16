@@ -1,109 +1,107 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using static PlayerStateController;
-using UnityEngine.Events;
 
-public class FocusObj : MonoBehaviour, IFocusable
+namespace NightCycle
 {
-    [Header("References")]
-    [SerializeField] Camera FocusCamera;
-    [SerializeField] Camera MainCamera;
-    [SerializeField] Canvas FocusCanvas;
-    [SerializeField] Transform ModelRoot;
-    //[SerializeField] InventoryUI inventoryUI;
-
-    [Header("Rotation")]
-    [SerializeField] float rotationSpeed = 80f;
-
-    public CodeLock lockk;
-
-    public bool isActive;
-
-    //test
-    //public UnityEvent OnCompleted;
-    //[SerializeField] LayerMask socketLayer;
-
-    //AssemblySocket currentSocket;
-
-    //public List<AssemblySocket> sockets;
-
-    public void OnEnterFocus()
+    public class FocusObj : MonoBehaviour, IFocusable
     {
-        //Debug.Log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-        EnterFocus();
-        lockk.Enter();
-        //HUDController.instance.EnableInteractionText("E чтобы выйти");
-    }
+        [Header("References")]
+        [SerializeField] Camera FocusCamera;
+        [SerializeField] Camera MainCamera;
+        [SerializeField] Canvas FocusCanvas;
+        [SerializeField] Transform ModelRoot;
+        //[SerializeField] InventoryUI inventoryUI;
 
-    public void OnExitFocus()
-    {
-        ExitFocus();
-        lockk.Exit();
-    }
+        [Header("Rotation")]
+        [SerializeField] float rotationSpeed = 80f;
 
-    public void Test()
-    {
-        Debug.Log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-    }
+        public CodeLock lockk;
 
-    void Start()
-    {
-        FocusCamera.gameObject.SetActive(false);
-    }
+        public bool isActive;
 
-    public void EnterFocus()
-    {
-        Debug.Log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-        FocusCanvas.gameObject.SetActive(true);
+        //test
+        //public UnityEvent OnCompleted;
+        //[SerializeField] LayerMask socketLayer;
 
-        isActive = true;
+        //AssemblySocket currentSocket;
 
-        FocusCamera.gameObject.SetActive(true);
-        MainCamera.gameObject.SetActive(false);
+        //public List<AssemblySocket> sockets;
 
-        Debug.Log("[Focus] Enter");
-    }
+        public void OnEnterFocus()
+        {
+            //Debug.Log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+            EnterFocus();
+            lockk.Enter();
+            //HUDController.instance.EnableInteractionText("E пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
+        }
 
-    public void ExitFocus()
-    {
+        public void OnExitFocus()
+        {
+            ExitFocus();
+            lockk.Exit();
+        }
 
-        FocusCanvas.gameObject.SetActive(false);
+        public void Test()
+        {
+            Debug.Log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+        }
 
-        isActive = false;
- 
-        //PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
-
-        if (FocusCamera)
+        void Start()
         {
             FocusCamera.gameObject.SetActive(false);
-            MainCamera.gameObject.SetActive(true);
         }
-        Debug.Log("[Focus] Exit");
-    }
 
-    void HandleRotation()
-    {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        public void EnterFocus()
+        {
+            Debug.Log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+            FocusCanvas.gameObject.SetActive(true);
 
-        ModelRoot.Rotate(Vector3.up, -h * rotationSpeed * Time.deltaTime, /*Space.World*/ Space.Self);
-        ModelRoot.Rotate(Vector3.right, v * rotationSpeed * Time.deltaTime, /*Space.World*/ Space.Self);
-    }
+            isActive = true;
 
-    void Update()
-    {
-        if (!isActive)
-            return;
+            FocusCamera.gameObject.SetActive(true);
+            MainCamera.gameObject.SetActive(false);
+
+            Debug.Log("[Focus] Enter");
+        }
+
+        public void ExitFocus()
+        {
+
+            FocusCanvas.gameObject.SetActive(false);
+
+            isActive = false;
+ 
+            //PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
+
+            if (FocusCamera)
+            {
+                FocusCamera.gameObject.SetActive(false);
+                MainCamera.gameObject.SetActive(true);
+            }
+            Debug.Log("[Focus] Exit");
+        }
+
+        void HandleRotation()
+        {
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
+
+            ModelRoot.Rotate(Vector3.up, -h * rotationSpeed * Time.deltaTime, /*Space.World*/ Space.Self);
+            ModelRoot.Rotate(Vector3.right, v * rotationSpeed * Time.deltaTime, /*Space.World*/ Space.Self);
+        }
+
+        void Update()
+        {
+            if (!isActive)
+                return;
 
 
-        HandleRotation();
+            HandleRotation();
 
-        /*if (Input.GetKeyDown(KeyCode.E))
+            /*if (Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("AAAAA");
         }*/
-    }
+        }
 
+    }
 }

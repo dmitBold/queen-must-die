@@ -2,31 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AG_Manager : MonoBehaviour
+namespace NightCycle
 {
-    public List<CandleController> FirePlaces;
-    public float FireTime;
-    public float FirstDelay;
-
-    IEnumerator FireRoutine()
+    public class AG_Manager : MonoBehaviour
     {
-        yield return new WaitForSeconds(FirstDelay);
+        public List<CandleController> FirePlaces;
+        public float FireTime;
+        public float FirstDelay;
 
-        for (int i = 0; i < FirePlaces.Count; i += 2)
+        IEnumerator FireRoutine()
         {
-            yield return new WaitForSeconds(FireTime);
+            yield return new WaitForSeconds(FirstDelay);
 
-            FirePlaces[i].SetCandleState(false);
-            if (i + 1 < FirePlaces.Count)
+            for (int i = 0; i < FirePlaces.Count; i += 2)
             {
-                FirePlaces[i + 1].SetCandleState(false);
+                yield return new WaitForSeconds(FireTime);
+
+                FirePlaces[i].SetCandleState(false);
+                if (i + 1 < FirePlaces.Count)
+                {
+                    FirePlaces[i + 1].SetCandleState(false);
+                }
             }
         }
-    }
 
-    public void TurnOffFIRE()
-    {
-        StartCoroutine(FireRoutine());
-    }
+        public void TurnOffFIRE()
+        {
+            StartCoroutine(FireRoutine());
+        }
 
+    }
 }

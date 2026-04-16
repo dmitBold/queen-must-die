@@ -1,38 +1,41 @@
+using Inventory;
 using UnityEngine;
-using static PlayerStateController;
+using static NightCycle.PlayerStateController;
 
-public class PlayerInteraction : MonoBehaviour
+namespace NightCycle
 {
-
-    public float PlayerReach = 3f;
-    Interactable currentInteractable;
-    ItemTarget currentItemTarget;
-    bool isInItemSelection;
-
-    [SerializeField] InventoryUI inventoryUI;
-
-    //string prev_msg;
-    //test
-    private IFocusable activeFocus;
-    private float currentHoldTimer = 0f;
-    private bool isInteractionProcessed = false;
-    //test
-    void Update()
+    public class PlayerInteraction : MonoBehaviour
     {
-        Debug.Log(PlayerStateController.Instance.CurrentMode);
 
+        public float PlayerReach = 3f;
+        Interactable currentInteractable;
+        ItemTarget currentItemTarget;
+        bool isInItemSelection;
 
+        [SerializeField] InventoryUI inventoryUI;
+
+        //string prev_msg;
         //test
-        if(PlayerStateController.Instance.CurrentMode == PlayerMode.FreeMovement)
+        private IFocusable activeFocus;
+        private float currentHoldTimer = 0f;
+        private bool isInteractionProcessed = false;
+        //test
+        void Update()
         {
-            CheckInteraction();
-            HandleInteractionInput();
-        }
-        //test
-        //CheckInteraction();
+            Debug.Log(PlayerStateController.Instance.CurrentMode);
 
 
-        /*if(Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
+            //test
+            if(PlayerStateController.Instance.CurrentMode == PlayerMode.FreeMovement)
+            {
+                CheckInteraction();
+                HandleInteractionInput();
+            }
+            //test
+            //CheckInteraction();
+
+
+            /*if(Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
         {
             //currentInteractable.Interact();
             TryInteract();
@@ -44,157 +47,157 @@ public class PlayerInteraction : MonoBehaviour
             isInItemSelection = false;
             inventoryUI.ExitItemSelection();
         }*/
-        //test
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            ToggleInteraction();
-            //Debug.Log(PlayerStateController.Instance.CurrentMode);
-            //Debug.Log(inventoryUI.currentMode);
-            //if (PlayerStateController.Instance.CurrentMode == PlayerMode.ItemSelection/*inventoryUI.currentMode == InventoryUI.InventoryMode.NightItemSelection && isInItemSelection*/)
-            //{
-            //  isInItemSelection = false;
-            //currentInteractable.message = prev_msg;
-            //inventoryUI.ExitItemSelection();
-            //if()
-            //inventoryUI.currentMode = InventoryUI.InventoryMode.Day;
-            //}
-            //else if(PlayerStateController.Instance.CurrentMode == PlayerMode.Assembly/*inventoryUI.currentMode == InventoryUI.InventoryMode.AssemblyItemSelection*/)
-            //{
-            //Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            //  currentInteractable.Interact_Assembly();
-            //}
-            //else if (currentInteractable != null)
-            //{
-            //  TryInteract();
-            //}
+            //test
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                ToggleInteraction();
+                //Debug.Log(PlayerStateController.Instance.CurrentMode);
+                //Debug.Log(inventoryUI.currentMode);
+                //if (PlayerStateController.Instance.CurrentMode == PlayerMode.ItemSelection/*inventoryUI.currentMode == InventoryUI.InventoryMode.NightItemSelection && isInItemSelection*/)
+                //{
+                //  isInItemSelection = false;
+                //currentInteractable.message = prev_msg;
+                //inventoryUI.ExitItemSelection();
+                //if()
+                //inventoryUI.currentMode = InventoryUI.InventoryMode.Day;
+                //}
+                //else if(PlayerStateController.Instance.CurrentMode == PlayerMode.Assembly/*inventoryUI.currentMode == InventoryUI.InventoryMode.AssemblyItemSelection*/)
+                //{
+                //Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                //  currentInteractable.Interact_Assembly();
+                //}
+                //else if (currentInteractable != null)
+                //{
+                //  TryInteract();
+                //}
+            }
+
         }
 
-    }
-
-    void ToggleInteraction()
-    {
-        // Если мы уже с чем-то взаимодействуем - выходим
-        if (activeFocus != null)
+        void ToggleInteraction()
         {
-            activeFocus.OnExitFocus();
-            activeFocus = null;
-            PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
-            return;
-        }
-
-        // Если мы смотрим на объект и нажали E
-        if (currentInteractable != null)
-        {
-            // Пытаемся взять интерфейс фокуса у объекта
-            activeFocus = currentInteractable.GetComponent<IFocusable>();
-
+            // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if (activeFocus != null)
             {
-                activeFocus.OnEnterFocus();
-                Debug.Log("AAA!!!");
-                PlayerStateController.Instance.SetMode(PlayerMode.Focused);
+                activeFocus.OnExitFocus();
+                activeFocus = null;
+                PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
+                return;
             }
-            else
+
+            // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ E
+            if (currentInteractable != null)
             {
-                // Если это обычный объект (без пазла) - просто вызываем UnityEvent
-                currentInteractable.Interact();
-            }
-        }
-    }
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                activeFocus = currentInteractable.GetComponent<IFocusable>();
 
-    void TryInteract()
-    {
-        if(currentItemTarget != null)
-        {
-            EnterItemSelectionMode();
-            return;
-        }
-
-        if(currentInteractable != null)
-        {
-            //EnterItemSelectionMode();
-            //currentInteractable.Interact();
-            ToggleInteraction();
-        }
-
-    }
-
-    void EnterItemSelectionMode()
-    {
-        //Debug.Log("AAAAAAAAAAAAAAAAAAA!!!!!!!!!!!!!!!!!!");
-        //prev_msg = currentInteractable.message;
-        //currentInteractable.message = "E чтобы выйти";
-        HUDController.instance.EnableInteractionText("E чтобы выйти");
-
-        isInItemSelection = true;
-
-        //PlayerStateController.Instance.SetMode(PlayerMode.ItemSelection);
-
-        inventoryUI.OpenForItemTarget(currentItemTarget);
-    }
-
-    void CheckInteraction()
-    {
-        RaycastHit hit;
-        if (Camera.main is null)
-        {
-            Debug.Log("AAA");
-        }
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-        if (Physics.Raycast(ray, out hit, PlayerReach))
-        {
-            if (hit.collider.tag == "Interactable")
-            {
-                Interactable newInteractable = hit.collider.GetComponent<Interactable>();
-
-                //test
-                currentItemTarget = hit.collider.GetComponent<ItemTarget>();
-                //test
-
-                if (currentInteractable && newInteractable != currentInteractable)
+                if (activeFocus != null)
                 {
-                    currentInteractable.DisableOutline();
-                    ResetHoldProgress();
+                    activeFocus.OnEnterFocus();
+                    Debug.Log("AAA!!!");
+                    PlayerStateController.Instance.SetMode(PlayerMode.Focused);
                 }
-
-                if (newInteractable.enabled)
+                else
                 {
-                    SetNewCurrentInteractable(newInteractable);
+                    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ) - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ UnityEvent
+                    currentInteractable.Interact();
+                }
+            }
+        }
+
+        void TryInteract()
+        {
+            if(currentItemTarget != null)
+            {
+                EnterItemSelectionMode();
+                return;
+            }
+
+            if(currentInteractable != null)
+            {
+                //EnterItemSelectionMode();
+                //currentInteractable.Interact();
+                ToggleInteraction();
+            }
+
+        }
+
+        void EnterItemSelectionMode()
+        {
+            //Debug.Log("AAAAAAAAAAAAAAAAAAA!!!!!!!!!!!!!!!!!!");
+            //prev_msg = currentInteractable.message;
+            //currentInteractable.message = "E пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ";
+            HUDController.instance.EnableInteractionText("E пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
+
+            isInItemSelection = true;
+
+            //PlayerStateController.Instance.SetMode(PlayerMode.ItemSelection);
+
+            inventoryUI.OpenForItemTarget(currentItemTarget);
+        }
+
+        void CheckInteraction()
+        {
+            RaycastHit hit;
+            if (Camera.main is null)
+            {
+                Debug.Log("AAA");
+            }
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            if (Physics.Raycast(ray, out hit, PlayerReach))
+            {
+                if (hit.collider.tag == "Interactable")
+                {
+                    Interactable newInteractable = hit.collider.GetComponent<Interactable>();
+
+                    //test
+                    currentItemTarget = hit.collider.GetComponent<ItemTarget>();
+                    //test
+
+                    if (currentInteractable && newInteractable != currentInteractable)
+                    {
+                        currentInteractable.DisableOutline();
+                        ResetHoldProgress();
+                    }
+
+                    if (newInteractable.enabled)
+                    {
+                        SetNewCurrentInteractable(newInteractable);
+                    }
+                    else
+                    {
+                        DisableCurrentInteractable();
+                    }
+
                 }
                 else
                 {
                     DisableCurrentInteractable();
                 }
-
             }
             else
             {
                 DisableCurrentInteractable();
             }
         }
-        else
+
+        void SetNewCurrentInteractable(Interactable newInteractable)
         {
-            DisableCurrentInteractable();
+            //if (currentInteractable == newInteractable) return;
+
+            currentInteractable = newInteractable;
+            currentInteractable.EnableOutline();
+            HUDController.instance.EnableInteractionText(currentInteractable.message);
         }
-    }
 
-    void SetNewCurrentInteractable(Interactable newInteractable)
-    {
-        //if (currentInteractable == newInteractable) return;
-
-        currentInteractable = newInteractable;
-        currentInteractable.EnableOutline();
-        HUDController.instance.EnableInteractionText(currentInteractable.message);
-    }
-
-    /*void DisableCurrentInteractable()
+        /*void DisableCurrentInteractable()
     {
         HUDController.instance.DisableInteractionText();
         if (currentInteractable)
         {
             currentInteractable.DisableOutline();
             //currentInteractable = null;
-            if (PlayerStateController.Instance.CurrentMode != PlayerMode.ItemSelection && PlayerStateController.Instance.CurrentMode != PlayerMode.Assembly) // В ItemSelectionMode интерактор фиксирован
+            if (PlayerStateController.Instance.CurrentMode != PlayerMode.ItemSelection && PlayerStateController.Instance.CurrentMode != PlayerMode.Assembly) // пїЅ ItemSelectionMode пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             {
                 //Debug.Log(inventoryUI.currentMode);
                 //currentItemTarget = null;
@@ -209,89 +212,90 @@ public class PlayerInteraction : MonoBehaviour
 
     }*/
 
-    void DisableCurrentInteractable()
-    {
-        HUDController.instance.DisableInteractionText();
-
-        ResetHoldProgress();
-
-        if (currentInteractable)
+        void DisableCurrentInteractable()
         {
-            currentInteractable.DisableOutline();
+            HUDController.instance.DisableInteractionText();
 
-            // Если мы НЕ в режиме фокуса, значит можно забыть про объект
-            if (PlayerStateController.Instance.CurrentMode == PlayerMode.FreeMovement)
-            {
-                currentInteractable = null;
-            }
-        }
-    }
-
-    //TEST TEST TEST
-    void HandleInteractionInput()
-    {
-        if (currentInteractable == null)
-        {
             ResetHoldProgress();
-            return;
-        }
 
-        if (currentInteractable.interactionType == Interactable.InteractionType.Instant)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (currentInteractable)
             {
-                ToggleInteraction();
+                currentInteractable.DisableOutline();
+
+                // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+                if (PlayerStateController.Instance.CurrentMode == PlayerMode.FreeMovement)
+                {
+                    currentInteractable = null;
+                }
             }
         }
-        else if (currentInteractable.interactionType == Interactable.InteractionType.Hold)
+
+        //TEST TEST TEST
+        void HandleInteractionInput()
         {
-            if (Input.GetKey(KeyCode.E))
+            if (currentInteractable == null)
             {
-                if (!isInteractionProcessed)
+                ResetHoldProgress();
+                return;
+            }
+
+            if (currentInteractable.interactionType == Interactable.InteractionType.Instant)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    currentHoldTimer += Time.deltaTime;
-
-                    float progress = currentHoldTimer / currentInteractable.holdDuration;
-                    HUDController.instance.UpdateProgress(progress);
-
-                    if (currentHoldTimer >= currentInteractable.holdDuration)
+                    ToggleInteraction();
+                }
+            }
+            else if (currentInteractable.interactionType == Interactable.InteractionType.Hold)
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    if (!isInteractionProcessed)
                     {
-                        ToggleInteraction();
-                        isInteractionProcessed = true; 
-                        HUDController.instance.HideProgress(); 
+                        currentHoldTimer += Time.deltaTime;
+
+                        float progress = currentHoldTimer / currentInteractable.holdDuration;
+                        HUDController.instance.UpdateProgress(progress);
+
+                        if (currentHoldTimer >= currentInteractable.holdDuration)
+                        {
+                            ToggleInteraction();
+                            isInteractionProcessed = true; 
+                            HUDController.instance.HideProgress(); 
+                        }
                     }
                 }
+                else
+                {
+                    ResetHoldProgress();
+                }
+            }
+        }
+
+        void ResetHoldProgress()
+        {
+            currentHoldTimer = 0f;
+            isInteractionProcessed = false;
+            HUDController.instance.HideProgress();
+        }
+        //TEST TEST TEST
+
+        //TEST TEST TEST TEST TEST TEST TEST TEST
+        public void ForceExitFocus()
+        {
+            if (activeFocus != null)
+            {
+                activeFocus.OnExitFocus();
+                activeFocus = null;
+                PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
             }
             else
             {
-                ResetHoldProgress();
+                Debug.Log("BAD BAD BAD BAD BAD!!!");
+                PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
             }
         }
-    }
+        //TEST TEST TEST TEST TEST TEST TEST TEST
 
-    void ResetHoldProgress()
-    {
-        currentHoldTimer = 0f;
-        isInteractionProcessed = false;
-        HUDController.instance.HideProgress();
     }
-    //TEST TEST TEST
-
-    //TEST TEST TEST TEST TEST TEST TEST TEST
-    public void ForceExitFocus()
-    {
-        if (activeFocus != null)
-        {
-            activeFocus.OnExitFocus();
-            activeFocus = null;
-            PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
-        }
-        else
-        {
-            Debug.Log("BAD BAD BAD BAD BAD!!!");
-            PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
-        }
-    }
-    //TEST TEST TEST TEST TEST TEST TEST TEST
-
 }

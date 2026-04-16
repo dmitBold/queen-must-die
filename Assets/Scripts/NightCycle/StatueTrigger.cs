@@ -1,30 +1,30 @@
-using UnityEngine;
-using System;
-using UnityEngine.Events;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class StatueTrigger : MonoBehaviour
+namespace NightCycle
 {
-    public List<StatueController> controllers;
-    public GameObject nextTrigger;
-
-    private void OnTriggerEnter(Collider other)
+    public class StatueTrigger : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        public List<StatueController> controllers;
+        public GameObject nextTrigger;
+
+        private void OnTriggerEnter(Collider other)
         {
-            foreach (var controller in controllers)
+            if (other.CompareTag("Player"))
             {
-                controller.advance_pose();
-            }
+                foreach (var controller in controllers)
+                {
+                    controller.advance_pose();
+                }
 
-            if(nextTrigger != null)
-            {
-                nextTrigger.SetActive(true);
-            }
+                if(nextTrigger != null)
+                {
+                    nextTrigger.SetActive(true);
+                }
 
-            gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            }
         }
-    }
 
+    }
 }

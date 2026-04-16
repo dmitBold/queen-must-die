@@ -1,22 +1,36 @@
+using Inventory;
 using UnityEngine;
+using Zenject;
 
-public class PickupItem : MonoBehaviour
+namespace NightCycle
 {
-    [SerializeField] ItemData item;
-    [SerializeField] bool destroyOnPickup = true;
-    //[SerializeField] GameObject obj;
-    //[SerializeField] InventoryUI inventoryUI;
-
-    public void Pickup()
+    //TODO развернуть зависимость
+    public class PickupItem : MonoBehaviour
     {
+        [SerializeField] ItemData item;
+        [SerializeField] bool destroyOnPickup = true;
+        //[SerializeField] GameObject obj;
+        //[SerializeField] InventoryUI inventoryUI;
 
-        InventoryManager.Instance.AddItem(item);
-        //inventoryUI.Open();
-        if (destroyOnPickup)
+        private InventoryManager _inventoryManager;
+
+        [Inject]
+        public void Constructor(InventoryManager inventoryManager)
         {
-            gameObject.SetActive(false);
-            //obj.SetActive(false);
-            destroyOnPickup = false;
+            _inventoryManager = inventoryManager;
+        }
+
+        public void Pickup()
+        {
+
+            _inventoryManager.AddItem(item);
+            //inventoryUI.Open();
+            if (destroyOnPickup)
+            {
+                gameObject.SetActive(false);
+                //obj.SetActive(false);
+                destroyOnPickup = false;
+            }
         }
     }
 }

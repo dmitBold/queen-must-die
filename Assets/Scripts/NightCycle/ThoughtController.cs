@@ -1,83 +1,87 @@
+using Dialogue;
 using UnityEngine;
 
-public class ThoughtController : MonoBehaviour
+namespace NightCycle
 {
-    public static ThoughtController Instance;
-
-    [SerializeField] ThoughtView view;
-
-    private bool isActive = false;
-
-    private void Awake()
+    public class ThoughtController : MonoBehaviour
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
+        public static ThoughtController Instance;
 
-    private void Start()
-    {
-        view.Hide();
-    }
+        [SerializeField] ThoughtView view;
 
-    public void ShowThought(string text)
-    {
-        if (isActive) return;
+        private bool isActive = false;
 
-        isActive = true;
-
-        PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
-
-        view.Show();
-        view.PlayText(text);
-
-        HUDController.instance.DisableInteractionText();
-    }
-
-    public void CloseThought()
-    {
-        if (!isActive) return;
-
-        isActive = false;
-
-        view.Hide();
-
-        PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.FreeMovement);
-    }
-
-    private void Update()
-    {
-        if (!isActive) return;
-
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        private void Awake()
         {
-            CloseThought();
-            return;
+            if (Instance == null) Instance = this;
+            else Destroy(gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        private void Start()
         {
-            OnNextPressed();
+            view.Hide();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        public void ShowThought(string text)
         {
-            OnBackPressed();
+            if (isActive) return;
+
+            isActive = true;
+
+            PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
+
+            view.Show();
+            view.PlayText(text);
+
+            HUDController.instance.DisableInteractionText();
         }
-    }
 
-    public void OnNextPressed()
-    {
-        var result = view.Skip();
-
-        if (result == TypewriterEffect.SkipResult.DialogueFinished)
+        public void CloseThought()
         {
-            CloseThought();
-        }
-    }
+            if (!isActive) return;
 
-    public void OnBackPressed()
-    {
-        view.Back();
+            isActive = false;
+
+            view.Hide();
+
+            PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.FreeMovement);
+        }
+
+        private void Update()
+        {
+            if (!isActive) return;
+
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CloseThought();
+                return;
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                OnNextPressed();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                OnBackPressed();
+            }
+        }
+
+        public void OnNextPressed()
+        {
+            var result = view.Skip();
+
+            if (result == TypewriterEffect.SkipResult.DialogueFinished)
+            {
+                CloseThought();
+            }
+        }
+
+        public void OnBackPressed()
+        {
+            view.Back();
+        }
     }
 }

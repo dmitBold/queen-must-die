@@ -1,45 +1,49 @@
-using UnityEngine;
 using System.Collections.Generic;
+using Inventory;
+using UnityEngine;
 
-public class ItemTarget : MonoBehaviour, IFocusable
+namespace NightCycle
 {
-    [Header("Allowed Items")]
-    [SerializeField] List<ItemReactionEntry> reactions = new();
-    [SerializeField] InventoryUI inventoryUI;
-    Dictionary<ItemData, ItemReactionNight> lookup;
-
-    public void OnEnterFocus()
+    public class ItemTarget : MonoBehaviour, IFocusable
     {
-        // Вместо изменения глобального PlayerMode, мы просто говорим UI: "Откройся для меня"
-        inventoryUI.OpenForItemTarget(this);
-    }
+        [Header("Allowed Items")]
+        [SerializeField] List<ItemReactionEntry> reactions = new();
+        [SerializeField] InventoryUI inventoryUI;
+        Dictionary<ItemData, ItemReactionNight> lookup;
 
-    public void OnExitFocus()
-    {
-        inventoryUI.ExitItemSelection();
-    }
-
-    void Awake()
-    {
-        lookup = new Dictionary<ItemData, ItemReactionNight>();
-
-        foreach (var entry in reactions)
+        public void OnEnterFocus()
         {
-            if (entry.item != null && entry.reaction != null)
-                lookup[entry.item] = entry.reaction;
+            // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ PlayerMode, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ UI: "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ"
+            inventoryUI.OpenForItemTarget(this);
         }
-    }
 
-    public bool CanApply(ItemData item)
-    {
-        return item != null && lookup.ContainsKey(item);
-    }
+        public void OnExitFocus()
+        {
+            inventoryUI.ExitItemSelection();
+        }
 
-    public void Apply(ItemData item)
-    {
-        if (!CanApply(item))
-            return;
+        void Awake()
+        {
+            lookup = new Dictionary<ItemData, ItemReactionNight>();
 
-        lookup[item].Execute(this);
+            foreach (var entry in reactions)
+            {
+                if (entry.item != null && entry.reaction != null)
+                    lookup[entry.item] = entry.reaction;
+            }
+        }
+
+        public bool CanApply(ItemData item)
+        {
+            return item != null && lookup.ContainsKey(item);
+        }
+
+        public void Apply(ItemData item)
+        {
+            if (!CanApply(item))
+                return;
+
+            lookup[item].Execute(this);
+        }
     }
 }

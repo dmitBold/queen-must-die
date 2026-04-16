@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class BuildLoggerDisabler
+namespace NightCycle
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void OnBeforeSceneLoad()
+    public class BuildLoggerDisabler
     {
-        // Отключаем логи только в билде
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        static void OnBeforeSceneLoad()
+        {
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 #if !UNITY_EDITOR
             Debug.unityLogger.logEnabled = false;
 #endif
+        }
     }
 }

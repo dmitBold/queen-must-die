@@ -1,21 +1,23 @@
-using UnityEngine;
 using UnityEngine.Playables;
 
-public class DialogueBehaviour : PlayableBehaviour
+namespace NightCycle
 {
-    public string[] dialoguePages;
-    public bool pauseTimeline;
-    private bool hasTriggered = false;
-
-    public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+    public class DialogueBehaviour : PlayableBehaviour
     {
-        if (!hasTriggered && info.weight > 0)
+        public string[] dialoguePages;
+        public bool pauseTimeline;
+        private bool hasTriggered = false;
+
+        public override void ProcessFrame(Playable playable, FrameData info, object playerData)
         {
-            PlayableDirector director = playable.GetGraph().GetResolver() as PlayableDirector;
+            if (!hasTriggered && info.weight > 0)
+            {
+                PlayableDirector director = playable.GetGraph().GetResolver() as PlayableDirector;
 
-            NightDialogueManager.Instance.StartTimelineDialogue(dialoguePages, director, pauseTimeline);
+                NightDialogueManager.Instance.StartTimelineDialogue(dialoguePages, director, pauseTimeline);
 
-            hasTriggered = true;
+                hasTriggered = true;
+            }
         }
     }
 }

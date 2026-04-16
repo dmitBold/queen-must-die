@@ -1,143 +1,146 @@
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
-[RequireComponent(typeof(PlayableDirector))]
-public class SequenceController : MonoBehaviour
+namespace NightCycle
 {
-    private PlayableDirector director;
-
-    [Header("События катсцены")]
-    public UnityEvent onCutsceneStart;
-    public UnityEvent onCutsceneEnd;
-
-    [Header("Камера")]
-    public Camera CinemaCamera;
-
-    public Vector3 pos;
-    public Vector3 player_pos;
-
-    void OnEnable()
+    [RequireComponent(typeof(PlayableDirector))]
+    public class SequenceController : MonoBehaviour
     {
-        director = GetComponent<PlayableDirector>();
+        private PlayableDirector director;
 
-        if (director != null)
+        [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+        public UnityEvent onCutsceneStart;
+        public UnityEvent onCutsceneEnd;
+
+        [Header("пїЅпїЅпїЅпїЅпїЅпїЅ")]
+        public Camera CinemaCamera;
+
+        public Vector3 pos;
+        public Vector3 player_pos;
+
+        void OnEnable()
         {
-            director.played += OnPlayableDirectorPlayed;
-            director.stopped += OnPlayableDirectorStopped;
-        }
-        else
-        {
-            Debug.LogError("PlayableDirector НЕ найден на объекте!");
-        }
-    }
+            director = GetComponent<PlayableDirector>();
 
-    void OnDisable()
-    {
-        if (director != null)
-        {
-            director.played -= OnPlayableDirectorPlayed;
-            director.stopped -= OnPlayableDirectorStopped;
-        }
-    }
-
-    private void OnPlayableDirectorPlayed(PlayableDirector pd)
-    {
-        Debug.Log("Катсцена началась!");
-
-        if (onCutsceneStart != null)
-            onCutsceneStart.Invoke();
-    }
-
-    private void OnPlayableDirectorStopped(PlayableDirector pd)
-    {
-        Debug.Log("Катсцена закончилась!");
-
-        if (onCutsceneEnd != null)
-            onCutsceneEnd.Invoke();
-    }
-
-    public void CameraON()
-    {
-        Debug.Log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");   
-        if (CinemaCamera != null)
-        {
-            CinemaCamera.enabled = true;
-        }
-        else
-        {
-            Debug.LogWarning("CinemaCamera не назначена!");
-        }
-    }
-
-    public void CameraOFF()
-    {
-        Debug.Log("&&&&&&&&&&&&&&&&&&&&&&&&&&");
-        if (CinemaCamera != null)
-        {
-            CinemaCamera.enabled = false;
-        }
-    }
-
-    // ===== Управление сценами =====
-
-    public void SceneON(GameObject scene)
-    {
-        if (scene != null)
-        {
-            scene.SetActive(true);
+            if (director != null)
+            {
+                director.played += OnPlayableDirectorPlayed;
+                director.stopped += OnPlayableDirectorStopped;
+            }
+            else
+            {
+                Debug.LogError("PlayableDirector пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
+            }
         }
 
-        gameObject.SetActive(false);
-    }
-
-    public void OFF()
-    {
-        gameObject.SetActive(false);
-    }
-
-    void Start()
-    {
-        if (director != null && director.state == PlayState.Playing)
+        void OnDisable()
         {
-            OnPlayableDirectorPlayed(director);
+            if (director != null)
+            {
+                director.played -= OnPlayableDirectorPlayed;
+                director.stopped -= OnPlayableDirectorStopped;
+            }
         }
+
+        private void OnPlayableDirectorPlayed(PlayableDirector pd)
+        {
+            Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
+
+            if (onCutsceneStart != null)
+                onCutsceneStart.Invoke();
+        }
+
+        private void OnPlayableDirectorStopped(PlayableDirector pd)
+        {
+            Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
+
+            if (onCutsceneEnd != null)
+                onCutsceneEnd.Invoke();
+        }
+
+        public void CameraON()
+        {
+            Debug.Log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");   
+            if (CinemaCamera != null)
+            {
+                CinemaCamera.enabled = true;
+            }
+            else
+            {
+                Debug.LogWarning("CinemaCamera пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
+            }
+        }
+
+        public void CameraOFF()
+        {
+            Debug.Log("&&&&&&&&&&&&&&&&&&&&&&&&&&");
+            if (CinemaCamera != null)
+            {
+                CinemaCamera.enabled = false;
+            }
+        }
+
+        // ===== пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ =====
+
+        public void SceneON(GameObject scene)
+        {
+            if (scene != null)
+            {
+                scene.SetActive(true);
+            }
+
+            gameObject.SetActive(false);
+        }
+
+        public void OFF()
+        {
+            gameObject.SetActive(false);
+        }
+
+        void Start()
+        {
+            if (director != null && director.state == PlayState.Playing)
+            {
+                OnPlayableDirectorPlayed(director);
+            }
+        }
+
+        public void ObjOFF(GameObject obj)
+        {
+            obj.SetActive(false);
+        }
+
+        public void ObjON(GameObject obj)
+        {
+            obj.SetActive(true);
+        }
+
+
+        public void Setpos(Vector3 vec)
+        {
+            pos = vec;
+        }
+
+        public void MoveObj(GameObject obj)
+        {
+            obj.transform.position = pos;
+        }
+
+        public void MovePL(GameObject obj)
+        {
+            obj.transform.position = player_pos;
+        }
+
+        public void C_OFF(Camera cam)
+        {
+            cam.enabled = false;    
+        }
+
+        public void C_ON(Camera cam)
+        {
+            cam.enabled = true;
+        }
+
     }
-
-    public void ObjOFF(GameObject obj)
-    {
-        obj.SetActive(false);
-    }
-
-    public void ObjON(GameObject obj)
-    {
-        obj.SetActive(true);
-    }
-
-
-    public void Setpos(Vector3 vec)
-    {
-        pos = vec;
-    }
-
-    public void MoveObj(GameObject obj)
-    {
-        obj.transform.position = pos;
-    }
-
-    public void MovePL(GameObject obj)
-    {
-        obj.transform.position = player_pos;
-    }
-
-    public void C_OFF(Camera cam)
-    {
-        cam.enabled = false;    
-    }
-
-    public void C_ON(Camera cam)
-    {
-        cam.enabled = true;
-    }
-
 }

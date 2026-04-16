@@ -1,41 +1,54 @@
-using UnityEngine;
 using System.Collections;
+using Core;
+using UnityEngine;
+using Zenject;
 
-public class StartDialogueSound : MonoBehaviour
+namespace NightCycle
 {
-
-    public AudioClip StartSound;
-
-    [Header("Настройки диалога")]
-    [TextArea(3, 5)]
-    public string[] dialoguePages;
-
-    public float delay;
-
-    void Start()
+    public class StartDialogueSound : MonoBehaviour
     {
-        SoundManager.Instance.PlaySound(StartSound);
-        StartCoroutine(WaitAndExecute(delay));
-        //NightDialogueManager.Instance.StartDialogue(null, dialoguePages);
 
-        //PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
-    }
+        public AudioClip StartSound;
 
-    IEnumerator WaitAndExecute(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        OnSoundEnded();
-    }
+        [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+        [TextArea(3, 5)]
+        public string[] dialoguePages;
 
-    void OnSoundEnded()
-    {
-        NightDialogueManager.Instance.StartDialogue(null, dialoguePages);
+        public float delay;
 
-        PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
-    }
+        private AudioService _audioService;
 
-    void Update()
-    {
+        [Inject]
+        public void Constructor(AudioService audioService)
+        {
+            _audioService = audioService;
+        }
+
+        void Start()
+        {
+            _audioService.PlaySound(StartSound);
+            StartCoroutine(WaitAndExecute(delay));
+            //NightDialogueManager.Instance.StartDialogue(null, dialoguePages);
+
+            //PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
+        }
+
+        IEnumerator WaitAndExecute(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            OnSoundEnded();
+        }
+
+        void OnSoundEnded()
+        {
+            NightDialogueManager.Instance.StartDialogue(null, dialoguePages);
+
+            PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
+        }
+
+        void Update()
+        {
         
+        }
     }
 }

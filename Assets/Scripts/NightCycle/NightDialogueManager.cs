@@ -1,88 +1,88 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.UI;
-using static PlayerStateController;
 
-public class NightDialogueManager : MonoBehaviour
+namespace NightCycle
 {
-    public static NightDialogueManager Instance;
+    public class NightDialogueManager : MonoBehaviour
+    {
+        public static NightDialogueManager Instance;
 
-    [Header("UI Ссылки")]
-    [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private NightTypewriter typewriter;
+        [Header("UI пїЅпїЅпїЅпїЅпїЅпїЅ")]
+        [SerializeField] private GameObject dialoguePanel;
+        [SerializeField] private NightTypewriter typewriter;
     
-    private string[] currentPages;
-    private int currentPageIndex;
-    private NightDialogueInteractable currentNPC;
-    [SerializeField] PlayerInteraction playerInteraction;
+        private string[] currentPages;
+        private int currentPageIndex;
+        private NightDialogueInteractable currentNPC;
+        [SerializeField] PlayerInteraction playerInteraction;
 
-    private PlayableDirector currentDirector;
-    //test
-    public CinemachineBrain cameraBrain;
-    //test
+        private PlayableDirector currentDirector;
+        //test
+        public CinemachineBrain cameraBrain;
+        //test
 
-    void Awake()
-    {
-        Instance = this;
-        dialoguePanel.SetActive(false);
-    }
-
-    void Update()
-    {
-        if (dialoguePanel.activeSelf && Input.GetMouseButtonDown(0))
+        void Awake()
         {
-            HandleClick();
+            Instance = this;
+            dialoguePanel.SetActive(false);
         }
-    }
 
-    public void StartDialogue(NightDialogueInteractable npc, string[] pages)
-    {
-        if (pages == null || pages.Length == 0) return;
-
-        currentNPC = npc;
-        currentPages = pages;
-        currentPageIndex = 0;
-
-        currentDirector = null;
-
-        dialoguePanel.SetActive(true);
-        PlayCurrentPage();
-    }
-
-    private void HandleClick()
-    {
-        if (typewriter.IsTyping)
+        void Update()
         {
-            typewriter.SkipTyping();
-        }
-        else
-        {
-            currentPageIndex++;
-            
-            if (currentPageIndex < currentPages.Length)
+            if (dialoguePanel.activeSelf && Input.GetMouseButtonDown(0))
             {
-                PlayCurrentPage();
+                HandleClick();
+            }
+        }
+
+        public void StartDialogue(NightDialogueInteractable npc, string[] pages)
+        {
+            if (pages == null || pages.Length == 0) return;
+
+            currentNPC = npc;
+            currentPages = pages;
+            currentPageIndex = 0;
+
+            currentDirector = null;
+
+            dialoguePanel.SetActive(true);
+            PlayCurrentPage();
+        }
+
+        private void HandleClick()
+        {
+            if (typewriter.IsTyping)
+            {
+                typewriter.SkipTyping();
             }
             else
             {
-                EndDialogue();
-                //playerInteraction.ForceExitFocus();
+                currentPageIndex++;
+            
+                if (currentPageIndex < currentPages.Length)
+                {
+                    PlayCurrentPage();
+                }
+                else
+                {
+                    EndDialogue();
+                    //playerInteraction.ForceExitFocus();
+                }
             }
         }
-    }
 
-    private void PlayCurrentPage()
-    {
-        typewriter.TypeText(currentPages[currentPageIndex]);
-    }
+        private void PlayCurrentPage()
+        {
+            typewriter.TypeText(currentPages[currentPageIndex]);
+        }
 
-    /*public void EndDialogue()
+        /*public void EndDialogue()
     {
         dialoguePanel.SetActive(false);
     }*/
 
-    /*public void EndDialogue()
+        /*public void EndDialogue()
     {
         dialoguePanel.SetActive(false);
 
@@ -101,61 +101,62 @@ public class NightDialogueManager : MonoBehaviour
 
     }*/
 
-    public void EndDialogue()
-    {
-        dialoguePanel.SetActive(false);
-
-        if (currentDirector != null)
+        public void EndDialogue()
         {
-            //playerInteraction.ForceExitFocus();
-            if (cameraBrain != null)
-            {
-                cameraBrain.enabled = true;
-            }
-            currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
-            currentDirector = null;
+            dialoguePanel.SetActive(false);
 
+            if (currentDirector != null)
+            {
+                //playerInteraction.ForceExitFocus();
+                if (cameraBrain != null)
+                {
+                    cameraBrain.enabled = true;
+                }
+                currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
+                currentDirector = null;
+
+            }
+            else
+            {
+                if (playerInteraction != null)
+                {
+                    playerInteraction.ForceExitFocus();
+                }
+                currentNPC = null;
+            }
         }
-        else
+
+        public void ForceEndDialogue()
         {
-            if (playerInteraction != null)
-            {
-                playerInteraction.ForceExitFocus();
-            }
+            dialoguePanel.SetActive(false);
+        }
+
+
+        public void StartTimelineDialogue(string[] pages, PlayableDirector director, bool pauseTimeline)
+        {
+            if (pages == null || pages.Length == 0) return;
+
             currentNPC = null;
-        }
-    }
+            currentPages = pages;
+            currentPageIndex = 0;
 
-    public void ForceEndDialogue()
-    {
-        dialoguePanel.SetActive(false);
-    }
-
-
-    public void StartTimelineDialogue(string[] pages, PlayableDirector director, bool pauseTimeline)
-    {
-        if (pages == null || pages.Length == 0) return;
-
-        currentNPC = null;
-        currentPages = pages;
-        currentPageIndex = 0;
-
-        if (pauseTimeline && director != null)
-        {
-            currentDirector = director;
-            //currentDirector.Pause();
-            currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(0);
-            //TEST TEST
-            if (cameraBrain != null)
+            if (pauseTimeline && director != null)
             {
-                cameraBrain.enabled = false;
-            }
-            //TEST TEST
+                currentDirector = director;
+                //currentDirector.Pause();
+                currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(0);
+                //TEST TEST
+                if (cameraBrain != null)
+                {
+                    cameraBrain.enabled = false;
+                }
+                //TEST TEST
 
+            }
+
+            dialoguePanel.SetActive(true);
+            PlayCurrentPage();
         }
 
-        dialoguePanel.SetActive(true);
-        PlayCurrentPage();
     }
-
 }

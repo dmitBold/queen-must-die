@@ -1,11 +1,12 @@
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.Events;
 
-public class CutsceneManager : MonoBehaviour
+namespace NightCycle
 {
-    public void test()
+    public class CutsceneManager : MonoBehaviour
     {
-        Debug.Log("SSSSSSSSSSS$$$$$$$$$$$$$$$$$$$");
+        public void test()
+        {
+            Debug.Log("SSSSSSSSSSS$$$$$$$$$$$$$$$$$$$");
+        }
     }
 }

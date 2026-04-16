@@ -1,40 +1,51 @@
-using System.Collections.Generic;
+using Core;
 using UnityEngine;
+using Zenject;
 
-public class CleanupObject : MonoBehaviour
+namespace NightCycle
 {
-    [Header("Settings")]
-    //[SerializeField] private GameObject cleanupEffect; // Префаб частиц
-    [SerializeField] private AudioClip cleanupSound;   // Звук уборки
-    [SerializeField] private GameObject cleanObject;
-
-    [SerializeField] CleanupStage parentStage;
-
-    [SerializeField] private GameObject clear_GROUP;
-
-
-    public void Clean()
+    public class CleanupObject : MonoBehaviour
     {
-        if (cleanupSound != null)
+        [Header("Settings")]
+        //[SerializeField] private GameObject cleanupEffect; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        [SerializeField] private AudioClip cleanupSound;   // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        [SerializeField] private GameObject cleanObject;
+
+        [SerializeField] CleanupStage parentStage;
+
+        [SerializeField] private GameObject clear_GROUP;
+
+        private AudioService _audioService;
+
+        [Inject]
+        public void Constructor(AudioService audioService)
         {
-            SoundManager.Instance.PlaySound(cleanupSound);
+            _audioService = audioService;
         }
 
-        //Эффект
-        //if (cleanupEffect != null)
-        //{
-          //  Instantiate(cleanupEffect, transform.position, Quaternion.identity);
-        //}
-
-        if (parentStage != null)
+        public void Clean()
         {
-            parentStage.OnObjectCleaned();
-        }
+            if (cleanupSound != null)
+            {
+                _audioService.PlaySound(cleanupSound);
+            }
 
-        gameObject.SetActive(false);
-        if(clear_GROUP != null){
-            clear_GROUP.SetActive(false);
+            //
+            //if (cleanupEffect != null)
+            //{
+            //  Instantiate(cleanupEffect, transform.position, Quaternion.identity);
+            //}
+
+            if (parentStage != null)
+            {
+                parentStage.OnObjectCleaned();
+            }
+
+            gameObject.SetActive(false);
+            if(clear_GROUP != null){
+                clear_GROUP.SetActive(false);
+            }
+            cleanObject.SetActive(true);
         }
-        cleanObject.SetActive(true);
     }
 }

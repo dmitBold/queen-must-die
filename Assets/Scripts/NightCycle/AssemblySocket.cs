@@ -1,53 +1,57 @@
+using Inventory;
 using UnityEngine;
 
-public class AssemblySocket : MonoBehaviour
+namespace NightCycle
 {
-    [Header("Setup")]
-    [SerializeField] ItemData requiredItem;
-    [SerializeField] GameObject visualPart; // нога
-    [SerializeField] GameObject MainPart; // главная нога
-    //[SerializeField] Renderer highlightRenderer;
-    Outline outline;
-
-    bool isFilled;
-
-    public bool IsFilled => isFilled;
-    public ItemData RequiredItem => requiredItem;
-
-    void Awake()
+    public class AssemblySocket : MonoBehaviour
     {
-        if (visualPart != null) {
-            visualPart.SetActive(false);
-            MainPart.SetActive(false);
-        }
-        outline = GetComponent<Outline>();
-        //outline.enabled = false;
-        SetHighlight(false);
-    }
+        [Header("Setup")]
+        [SerializeField] ItemData requiredItem;
+        [SerializeField] GameObject visualPart; // пїЅпїЅпїЅпїЅ
+        [SerializeField] GameObject MainPart; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+        //[SerializeField] Renderer highlightRenderer;
+        Outline outline;
 
-    public bool CanAccept(ItemData item)
-    {
-        return !isFilled && item == requiredItem;
-    }
+        bool isFilled;
 
-    public void Apply(ItemData item)
-    {
-        if (!CanAccept(item))
-            return;
+        public bool IsFilled => isFilled;
+        public ItemData RequiredItem => requiredItem;
 
-        isFilled = true;
-
-        if (visualPart != null)
+        void Awake()
         {
-            visualPart.SetActive(true);
-            MainPart.SetActive(true);
+            if (visualPart != null) {
+                visualPart.SetActive(false);
+                MainPart.SetActive(false);
+            }
+            outline = GetComponent<Outline>();
+            //outline.enabled = false;
+            SetHighlight(false);
         }
 
-        SetHighlight(false);
-    }
+        public bool CanAccept(ItemData item)
+        {
+            return !isFilled && item == requiredItem;
+        }
 
-    public void SetHighlight(bool state)
-    {
-        outline.enabled = state;
+        public void Apply(ItemData item)
+        {
+            if (!CanAccept(item))
+                return;
+
+            isFilled = true;
+
+            if (visualPart != null)
+            {
+                visualPart.SetActive(true);
+                MainPart.SetActive(true);
+            }
+
+            SetHighlight(false);
+        }
+
+        public void SetHighlight(bool state)
+        {
+            outline.enabled = state;
+        }
     }
 }

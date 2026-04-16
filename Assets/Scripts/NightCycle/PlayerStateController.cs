@@ -1,51 +1,53 @@
 using UnityEngine;
 
-public class PlayerStateController : MonoBehaviour
+namespace NightCycle
 {
-    public static PlayerStateController Instance { get; private set; }
-
-    public enum PlayerMode
+    public class PlayerStateController : MonoBehaviour
     {
-        FreeMovement,
-        //ItemSelection,
-        //Assembly,
-        DoorState,
-        Focused // общий режим
-    }
+        public static PlayerStateController Instance { get; private set; }
 
-    public PlayerMode CurrentMode { get; private set; } = PlayerMode.FreeMovement;
-
-    private void Awake()
-    {
-        if (Instance != null)
+        public enum PlayerMode
         {
-            Destroy(gameObject);
-            return;
+            FreeMovement,
+            //ItemSelection,
+            //Assembly,
+            DoorState,
+            Focused // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         }
-        Instance = this;
-        //DontDestroyOnLoad(gameObject);
-    }
 
-    public void SetMode(PlayerMode newMode)
-    {
-        CurrentMode = newMode;
+        public PlayerMode CurrentMode { get; private set; } = PlayerMode.FreeMovement;
 
-        switch (newMode)
+        private void Awake()
         {
-            case PlayerMode.FreeMovement:
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                break;
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+
+        public void SetMode(PlayerMode newMode)
+        {
+            CurrentMode = newMode;
+
+            switch (newMode)
+            {
+                case PlayerMode.FreeMovement:
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    break;
 
 
-            //TEST TEST
-            case PlayerMode.DoorState:
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                break;
-            //TEST TEST
-            //case PlayerMode.InventoryView:
-            /*case PlayerMode.ItemSelection:
+                //TEST TEST
+                case PlayerMode.DoorState:
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    break;
+                //TEST TEST
+                //case PlayerMode.InventoryView:
+                /*case PlayerMode.ItemSelection:
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 break;
@@ -54,20 +56,21 @@ public class PlayerStateController : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 break;*/
-            case PlayerMode.Focused:
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                break;
+                case PlayerMode.Focused:
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    break;
+            }
         }
-    }
 
-    public bool CanMove()
-    {
-        return CurrentMode == PlayerMode.FreeMovement || CurrentMode == PlayerMode.DoorState;
-    }
+        public bool CanMove()
+        {
+            return CurrentMode == PlayerMode.FreeMovement || CurrentMode == PlayerMode.DoorState;
+        }
 
-    public bool CanRotate()
-    {
-        return CurrentMode == PlayerMode.FreeMovement;
+        public bool CanRotate()
+        {
+            return CurrentMode == PlayerMode.FreeMovement;
+        }
     }
 }

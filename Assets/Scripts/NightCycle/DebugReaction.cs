@@ -1,13 +1,16 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Items/Reactions/Debug Reaction")]
-public class DebugReaction : ItemReactionNight
+namespace NightCycle
 {
-    [TextArea]
-    public string message;
-
-    public override void Execute(ItemTarget target)
+    [CreateAssetMenu(menuName = "Items/Reactions/Debug Reaction")]
+    public class DebugReaction : ItemReactionNight
     {
-        Debug.Log($"[ItemReaction] {message} on {target.name}");
+        [TextArea]
+        public string message;
+
+        public override void Execute(ItemTarget target)
+        {
+            Debug.Log($"[ItemReaction] {message} on {target.name}");
+        }
     }
 }

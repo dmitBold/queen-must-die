@@ -1,52 +1,55 @@
-using UnityEngine;
+using Dialogue;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 
-public class ThoughtView : MonoBehaviour
+namespace NightCycle
 {
-    [Header("UI Elements")]
-    [SerializeField] GameObject root; 
-    [SerializeField] TextMeshProUGUI textComponent;
-    [SerializeField] public TypewriterEffect typewriter;
-
-    [Header("Buttons (Optional)")]
-    [SerializeField] GameObject nextButton;
-    [SerializeField] GameObject backButton; 
-    public void Hide()
+    public class ThoughtView : MonoBehaviour
     {
-        root.SetActive(false);
-    }
+        [Header("UI Elements")]
+        [SerializeField] GameObject root; 
+        [SerializeField] TextMeshProUGUI textComponent;
+        [SerializeField] public TypewriterEffect typewriter;
 
-    public void Show()
-    {
-        root.SetActive(true);
-    }
+        [Header("Buttons (Optional)")]
+        [SerializeField] GameObject nextButton;
+        [SerializeField] GameObject backButton; 
+        public void Hide()
+        {
+            root.SetActive(false);
+        }
 
-    public void PlayText(string content)
-    {
-        typewriter.chunks.Clear();
+        public void Show()
+        {
+            root.SetActive(true);
+        }
 
-        typewriter.Play(textComponent, content);
+        public void PlayText(string content)
+        {
+            typewriter.chunks.Clear();
 
-        UpdateButtonsState();
-    }
+            typewriter.Play(textComponent, content);
 
-    public TypewriterEffect.SkipResult Skip()
-    {
-        var result = typewriter.Skip();
-        UpdateButtonsState();
-        return result;
-    }
+            UpdateButtonsState();
+        }
 
-    public void Back()
-    {
-        typewriter.back();
-        UpdateButtonsState();
-    }
+        public TypewriterEffect.SkipResult Skip()
+        {
+            var result = typewriter.Skip();
+            UpdateButtonsState();
+            return result;
+        }
 
-    public void UpdateButtonsState()
-    {
-        if (backButton) backButton.SetActive(typewriter.CanGoBack);
-        if (nextButton) nextButton.SetActive(true);
+        public void Back()
+        {
+            typewriter.back();
+            UpdateButtonsState();
+        }
+
+        public void UpdateButtonsState()
+        {
+            if (backButton) backButton.SetActive(typewriter.CanGoBack);
+            if (nextButton) nextButton.SetActive(true);
+        }
     }
 }

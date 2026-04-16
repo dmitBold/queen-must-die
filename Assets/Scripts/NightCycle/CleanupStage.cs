@@ -1,21 +1,33 @@
 using UnityEngine;
+using Zenject;
 
-public class CleanupStage : MonoBehaviour
+namespace NightCycle
 {
-    [SerializeField] int objectsToCleanup = 0;
-    private int currentlyCleaned = 0;
-
-    public void OnObjectCleaned()
+    public class CleanupStage : MonoBehaviour
     {
-        currentlyCleaned++;
-        CheckCompletion();
-    }
+        [SerializeField] int objectsToCleanup = 0;
+        private int currentlyCleaned = 0;
 
-    private void CheckCompletion()
-    {
-        if (currentlyCleaned >= objectsToCleanup)
+        private CleanupManager _cleanupManager;
+
+        [Inject]
+        public void Constructor(CleanupManager cleanupManager)
         {
-            CleanupManager.Instance.AdvanceStage();
+            _cleanupManager = cleanupManager;
+        }
+
+        public void OnObjectCleaned()
+        {
+            currentlyCleaned++;
+            CheckCompletion();
+        }
+
+        private void CheckCompletion()
+        {
+            if (currentlyCleaned >= objectsToCleanup)
+            {
+                _cleanupManager.AdvanceStage();
+            }
         }
     }
 }

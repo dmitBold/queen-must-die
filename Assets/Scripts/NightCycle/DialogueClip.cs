@@ -1,24 +1,27 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-[System.Serializable]
-public class DialogueClip : PlayableAsset
+namespace NightCycle
 {
-    [Header("Настройки диалога")]
-    [TextArea(3, 5)]
-    public string[] dialoguePages;
-
-    [Tooltip("Остановить ли таймлайн, пока идет диалог?")]
-    public bool pauseTimeline = true;
-
-    public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
+    [System.Serializable]
+    public class DialogueClip : PlayableAsset
     {
-        var playable = ScriptPlayable<DialogueBehaviour>.Create(graph);
-        var behaviour = playable.GetBehaviour();
+        [Header("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+        [TextArea(3, 5)]
+        public string[] dialoguePages;
 
-        behaviour.dialoguePages = dialoguePages;
-        behaviour.pauseTimeline = pauseTimeline;
+        [Tooltip("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ?")]
+        public bool pauseTimeline = true;
 
-        return playable;
+        public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
+        {
+            var playable = ScriptPlayable<DialogueBehaviour>.Create(graph);
+            var behaviour = playable.GetBehaviour();
+
+            behaviour.dialoguePages = dialoguePages;
+            behaviour.pauseTimeline = pauseTimeline;
+
+            return playable;
+        }
     }
 }

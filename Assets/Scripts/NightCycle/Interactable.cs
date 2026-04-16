@@ -1,47 +1,58 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
+using Core;
 
-public class Interactable : MonoBehaviour
+namespace NightCycle
 {
-    Outline outline;
-    public string message;
-    public UnityEvent onInteraction;
-    //test
-    [SerializeField] AssemblyController assemblyController;
-    public enum InteractionType { Instant, Hold }
-    public InteractionType interactionType = InteractionType.Instant;
-    public float holdDuration = 1.0f;
-    //test
-
-    //TEST
-    //public AudioClip interact_sound;
-    //bool play_once = true;
-    //TEST
-
-
-    void Start()
+    public class Interactable : MonoBehaviour
     {
-        outline = GetComponent<Outline>();
-        outline.enabled = false;
-    }
+        Outline outline;
+        public string message;
+        public UnityEvent onInteraction;
+        //test
+        [SerializeField] AssemblyController assemblyController;
+        public enum InteractionType { Instant, Hold }
+        public InteractionType interactionType = InteractionType.Instant;
+        public float holdDuration = 1.0f;
+        //test
 
-    public void DisableOutline()
-    {
-        outline.enabled = false;
-    }
+        //TEST
+        //public AudioClip interact_sound;
+        //bool play_once = true;
+        //TEST
 
-    public void EnableOutline()
-    {
-        //outline.Rebuild();
-        outline.enabled = true;
-    }
+        private AudioService _audioService;
 
-    public void Interact()
-    {
-        onInteraction.Invoke();
-    }
+        [Inject]
+        public void Constructor(AudioService audioService)
+        {
+            _audioService = audioService;
+        }
 
-    /*public void PlayIneractionSound()
+        void Start()
+        {
+            outline = GetComponent<Outline>();
+            outline.enabled = false;
+        }
+
+        public void DisableOutline()
+        {
+            outline.enabled = false;
+        }
+
+        public void EnableOutline()
+        {
+            //outline.Rebuild();
+            outline.enabled = true;
+        }
+
+        public void Interact()
+        {
+            onInteraction.Invoke();
+        }
+
+        /*public void PlayIneractionSound()
     {
         Debug.Log("sss");
         //TEST
@@ -50,33 +61,34 @@ public class Interactable : MonoBehaviour
             if (play_once)
             {
                 Debug.Log("sss");
-                SoundManager.Instance.PlaySound(interact_sound);
+                _audioService.PlaySound(interact_sound);
                 play_once = false;
             }
         }
         //TEST
     }*/
 
-    public void Interact_Assembly()
-    {
-        if (!assemblyController.isActive)
+        public void Interact_Assembly()
         {
-            assemblyController.EnterAssembly();
-            HUDController.instance.EnableInteractionText("E чтобы выйти");
-        }
-        else
-        {
-            //outline = null;
-            //outline = GetComponent<Outline>();
-            /*outline.enabled = false;
+            if (!assemblyController.isActive)
+            {
+                assemblyController.EnterAssembly();
+                HUDController.instance.EnableInteractionText("E пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
+            }
+            else
+            {
+                //outline = null;
+                //outline = GetComponent<Outline>();
+                /*outline.enabled = false;
             outline.OutlineColor = outline.OutlineColor;
             outline.enabled = true;*/
-            outline.Rebuild();
-            outline.enabled = false;
-            outline.enabled = true;
-            assemblyController.ExitAssembly();
+                outline.Rebuild();
+                outline.enabled = false;
+                outline.enabled = true;
+                assemblyController.ExitAssembly();
             
+            }
         }
-    }
 
+    }
 }

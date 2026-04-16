@@ -1,68 +1,71 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class HUDController : MonoBehaviour
+namespace NightCycle
 {
-    [SerializeField] TMP_Text interactionText;
-    public static HUDController instance;
-    [SerializeField] public Image CrosshairImage;
-    [SerializeField] Image interactionProgressImage;
-    public Sprite DefaultImage;
-
-    private void Awake()
+    public class HUDController : MonoBehaviour
     {
-        instance = this;
-        DefaultImage = CrosshairImage.sprite;
-        SetDefaultImage();
+        [SerializeField] TMP_Text interactionText;
+        public static HUDController instance;
+        [SerializeField] public Image CrosshairImage;
+        [SerializeField] Image interactionProgressImage;
+        public Sprite DefaultImage;
 
-
-    }
-
-    public void EnableInteractionText(string text)
-    {
-        interactionText.text = text + " (E)";
-        interactionText.gameObject.SetActive(true);
-    }
-
-    public void DisableInteractionText()
-    {
-        interactionText.gameObject.SetActive(false);
-    }
-
-    public void ChangeCrosshairImage(Sprite sprite)
-    {
-        CrosshairImage.sprite = sprite;
-    }
-
-    private void Start()
-    {
-        if (interactionProgressImage != null)
+        private void Awake()
         {
+            instance = this;
+            DefaultImage = CrosshairImage.sprite;
+            SetDefaultImage();
+
+
+        }
+
+        public void EnableInteractionText(string text)
+        {
+            interactionText.text = text + " (E)";
+            interactionText.gameObject.SetActive(true);
+        }
+
+        public void DisableInteractionText()
+        {
+            interactionText.gameObject.SetActive(false);
+        }
+
+        public void ChangeCrosshairImage(Sprite sprite)
+        {
+            CrosshairImage.sprite = sprite;
+        }
+
+        private void Start()
+        {
+            if (interactionProgressImage != null)
+            {
+                interactionProgressImage.fillAmount = 0;
+                interactionProgressImage.gameObject.SetActive(false);
+            }
+        }
+
+        public void UpdateProgress(float percentage)
+        {
+            if (interactionProgressImage == null) return;
+
+            interactionProgressImage.gameObject.SetActive(true);
+            interactionProgressImage.fillAmount = percentage;
+        }
+
+        public void HideProgress()
+        {
+            if (interactionProgressImage == null) return;
+
             interactionProgressImage.fillAmount = 0;
             interactionProgressImage.gameObject.SetActive(false);
         }
+
+        public void SetDefaultImage()
+        {
+            ChangeCrosshairImage(DefaultImage);
+        }
+
     }
-
-    public void UpdateProgress(float percentage)
-    {
-        if (interactionProgressImage == null) return;
-
-        interactionProgressImage.gameObject.SetActive(true);
-        interactionProgressImage.fillAmount = percentage;
-    }
-
-    public void HideProgress()
-    {
-        if (interactionProgressImage == null) return;
-
-        interactionProgressImage.fillAmount = 0;
-        interactionProgressImage.gameObject.SetActive(false);
-    }
-
-    public void SetDefaultImage()
-    {
-        ChangeCrosshairImage(DefaultImage);
-    }
-
 }

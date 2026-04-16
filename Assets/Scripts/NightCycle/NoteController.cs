@@ -1,86 +1,90 @@
+using Dialogue;
 using UnityEngine;
 
-public class NoteController : MonoBehaviour
+namespace NightCycle
 {
-    public static NoteController Instance;
-
-    [SerializeField] NoteView view;
-
-    private bool isActive = false;
-    [SerializeField] PlayerInteraction playerInteraction;
-
-    private void Awake()
+    public class NoteController : MonoBehaviour
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
+        public static NoteController Instance;
 
-    private void Start()
-    {
-        view.Hide();
-    }
+        [SerializeField] NoteView view;
 
-    public void ShowNote(NoteInteractable note)
-    {
-        if (isActive) return;
+        private bool isActive = false;
+        [SerializeField] PlayerInteraction playerInteraction;
 
-        isActive = true;
-
-        PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
-
-        view.Show(note.noteImage, note.noteText);
-
-        HUDController.instance.DisableInteractionText();
-    }
-
-    public void CloseNote()
-    {
-        if (!isActive) return;
-
-        isActive = false;
-        view.Hide();
-
-        PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.FreeMovement);
-    }
-
-    private void Update()
-    {
-        if (!isActive || !view.Tintroot.activeSelf) return;
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        private void Awake()
         {
-            if (playerInteraction != null)
+            if (Instance == null) Instance = this;
+            else Destroy(gameObject);
+        }
+
+        private void Start()
+        {
+            view.Hide();
+        }
+
+        public void ShowNote(NoteInteractable note)
+        {
+            if (isActive) return;
+
+            isActive = true;
+
+            PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
+
+            view.Show(note.noteImage, note.noteText);
+
+            HUDController.instance.DisableInteractionText();
+        }
+
+        public void CloseNote()
+        {
+            if (!isActive) return;
+
+            isActive = false;
+            view.Hide();
+
+            PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.FreeMovement);
+        }
+
+        private void Update()
+        {
+            if (!isActive || !view.Tintroot.activeSelf) return;
+
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                playerInteraction.ForceExitFocus();
+                if (playerInteraction != null)
+                {
+                    playerInteraction.ForceExitFocus();
+                }
+                return;
             }
-            return;
+
+
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetMouseButtonDown(0))
+            {
+                OnNextPressed();
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetMouseButtonDown(1))
+            {
+                OnBackPressed();
+            }
         }
 
-
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetMouseButtonDown(0))
+        public void OnNextPressed()
         {
-            OnNextPressed();
+            var result = view.Skip();
+
+            if (result == TypewriterEffect.SkipResult.DialogueFinished)
+            {
+                if (playerInteraction != null) playerInteraction.ForceExitFocus();
+                else CloseNote();
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetMouseButtonDown(1))
+        public void OnBackPressed()
         {
-            OnBackPressed();
+            view.Back();
         }
-    }
-
-    public void OnNextPressed()
-    {
-        var result = view.Skip();
-
-        if (result == TypewriterEffect.SkipResult.DialogueFinished)
-        {
-            if (playerInteraction != null) playerInteraction.ForceExitFocus();
-            else CloseNote();
-        }
-    }
-
-    public void OnBackPressed()
-    {
-        view.Back();
     }
 }

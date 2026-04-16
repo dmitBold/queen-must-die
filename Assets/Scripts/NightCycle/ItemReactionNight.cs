@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public abstract class ItemReactionNight : ScriptableObject
+namespace NightCycle
 {
-    public abstract void Execute(ItemTarget target);
+    public abstract class ItemReactionNight : ScriptableObject
+    {
+        public abstract void Execute(ItemTarget target);
+    }
 }
 
 /*[CreateAssetMenu(menuName = "Items/Reactions/Debug Reaction")]

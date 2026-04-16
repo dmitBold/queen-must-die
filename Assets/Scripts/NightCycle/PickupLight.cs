@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public class PickupLight : MonoBehaviour
+namespace NightCycle
 {
-    [SerializeField] bool destroyOnPickup = true;
-    [SerializeField] PlayerFlashlight flashlight;
-    public void Pickup()
+    public class PickupLight : MonoBehaviour
     {
-        flashlight.Enable();
-
-        if (destroyOnPickup)
+        [SerializeField] bool destroyOnPickup = true;
+        [SerializeField] PlayerFlashlight flashlight;
+        public void Pickup()
         {
-            gameObject.SetActive(false);
-            destroyOnPickup = false;
+            flashlight.Enable();
+
+            if (destroyOnPickup)
+            {
+                gameObject.SetActive(false);
+                destroyOnPickup = false;
+            }
         }
     }
 }

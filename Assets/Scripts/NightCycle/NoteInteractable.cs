@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class NoteInteractable : MonoBehaviour, IFocusable
+namespace NightCycle
 {
-    public Sprite noteImage;
-
-    [TextArea(5, 20)]
-    public string noteText; // Текст записки
-
-    public void OnEnterFocus()
+    public class NoteInteractable : MonoBehaviour, IFocusable
     {
-        NoteController.Instance.ShowNote(this);
-    }
+        public Sprite noteImage;
 
-    public void OnExitFocus()
-    {
-        NoteController.Instance.CloseNote();
+        [TextArea(5, 20)]
+        public string noteText; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+        public void OnEnterFocus()
+        {
+            NoteController.Instance.ShowNote(this);
+        }
+
+        public void OnExitFocus()
+        {
+            NoteController.Instance.CloseNote();
+        }
     }
 }

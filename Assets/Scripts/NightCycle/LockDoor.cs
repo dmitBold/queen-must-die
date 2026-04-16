@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class LockDoor : MonoBehaviour
+namespace NightCycle
 {
-    public AudioClip LockSound;
-
-    public void Unlock()
+    public class LockDoor : MonoBehaviour
     {
-        this.enabled = false;
+        public AudioClip LockSound;
+
+        public void Unlock()
+        {
+            this.enabled = false;
+        }
     }
 }

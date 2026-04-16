@@ -1,35 +1,38 @@
 using UnityEngine;
 
-public class CandleController : MonoBehaviour
+namespace NightCycle
 {
-    public Light candleLight;   
-    public GameObject fireEffect; 
-    public MeshRenderer mesh;   
-
-    private Material candleMaterial;
-
-    void Awake()
+    public class CandleController : MonoBehaviour
     {
-        candleMaterial = mesh.material;
-    }
+        public Light candleLight;   
+        public GameObject fireEffect; 
+        public MeshRenderer mesh;   
 
-    public void SetCandleState(bool isLit)
-    {
-        candleLight.enabled = isLit;
+        private Material candleMaterial;
 
-        fireEffect.SetActive(isLit);
-
-        if (isLit)
+        void Awake()
         {
-            candleMaterial.EnableKeyword("_EMISSION");
-
+            candleMaterial = mesh.material;
         }
-        else
+
+        public void SetCandleState(bool isLit)
         {
-            candleMaterial.DisableKeyword("_EMISSION");
-        }
-    }
+            candleLight.enabled = isLit;
 
-    [ContextMenu("Turn Off")] void TestOff() => SetCandleState(false);
-    [ContextMenu("Turn On")] void TestOn() => SetCandleState(true);
+            fireEffect.SetActive(isLit);
+
+            if (isLit)
+            {
+                candleMaterial.EnableKeyword("_EMISSION");
+
+            }
+            else
+            {
+                candleMaterial.DisableKeyword("_EMISSION");
+            }
+        }
+
+        [ContextMenu("Turn Off")] void TestOff() => SetCandleState(false);
+        [ContextMenu("Turn On")] void TestOn() => SetCandleState(true);
+    }
 }

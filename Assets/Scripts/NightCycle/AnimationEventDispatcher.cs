@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AnimationEventDispatcher : MonoBehaviour
+namespace NightCycle
 {
-    public UnityEvent onAnimationTrigger;
-
-    public void TriggerEvent()
+    public class AnimationEventDispatcher : MonoBehaviour
     {
-        onAnimationTrigger?.Invoke();
+        public UnityEvent onAnimationTrigger;
+
+        public void TriggerEvent()
+        {
+            onAnimationTrigger?.Invoke();
+        }
     }
 }
