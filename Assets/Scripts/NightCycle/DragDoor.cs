@@ -28,9 +28,10 @@ namespace NightCycle
         private AudioService _audioService;
 
         [Inject]
-        public void Constructor(AudioService audioService)
+        public void Constructor(AudioService audioService, HUDController hudController)
         {
             _audioService = audioService;
+            controller = hudController;
         }
         //TEST
         void Start()

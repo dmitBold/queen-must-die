@@ -1,4 +1,6 @@
 using UnityEngine;
+using Zenject;
+using Unity.Cinemachine;
 
 namespace NightCycle
 {
@@ -21,8 +23,8 @@ namespace NightCycle
 
         [Header("References")]
         [SerializeField] private CharacterController characterController;
-        [SerializeField] private Camera mainCamera;
-        [SerializeField] private PlayerInputManager playerInputHandler;
+        [SerializeField] private CinemachineCamera mainCamera;
+        [Inject] private PlayerInputManager playerInputHandler;
 
 
         private Vector3 currentMovement;

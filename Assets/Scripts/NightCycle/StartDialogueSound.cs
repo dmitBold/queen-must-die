@@ -10,11 +10,13 @@ namespace NightCycle
 
         public AudioClip StartSound;
 
-        [Header("��������� �������")]
+        [Header(" ")]
         [TextArea(3, 5)]
         public string[] dialoguePages;
-
         public float delay;
+
+        public PlayerStateController _playerStateController;
+
 
         private AudioService _audioService;
 
@@ -43,12 +45,7 @@ namespace NightCycle
         {
             NightDialogueManager.Instance.StartDialogue(null, dialoguePages);
 
-            PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
-        }
-
-        void Update()
-        {
-        
+            _playerStateController.SetMode(PlayerStateController.PlayerMode.Focused);
         }
     }
 }

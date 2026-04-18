@@ -3,6 +3,7 @@ using Inventory;
 using UnityEngine;
 using UnityEngine.Events;
 using static NightCycle.PlayerStateController;
+using Zenject;
 
 namespace NightCycle
 {
@@ -15,7 +16,7 @@ namespace NightCycle
         [SerializeField] Canvas AssemblyCanvas;
         //TEST!!!!!!!!!!!!!!!!!!!!!!!!
         [SerializeField] Transform assemblyRoot; // ������
-        [SerializeField] InventoryUI inventoryUI;
+        [Inject] InventoryUI inventoryUI;
 
         [Header("Rotation")]
         [SerializeField] float rotationSpeed = 80f;

@@ -1,6 +1,7 @@
 using Inventory;
 using UnityEngine;
 using static NightCycle.PlayerStateController;
+using Zenject;
 
 namespace NightCycle
 {
@@ -12,7 +13,7 @@ namespace NightCycle
         ItemTarget currentItemTarget;
         bool isInItemSelection;
 
-        [SerializeField] InventoryUI inventoryUI;
+        [Inject] InventoryUI inventoryUI;
 
         //string prev_msg;
         //test
