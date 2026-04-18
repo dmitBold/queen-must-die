@@ -58962,7 +58962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &437745951
 Transform:
   m_ObjectHideFlags: 0
@@ -116118,7 +116118,7 @@ GameObject:
   - component: {fileID: 2047904698}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116131,8 +116131,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047904696}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.4, y: 4.02159, z: -19.607243}
+  m_LocalRotation: {x: 0.0094561335, y: 0.98685837, z: -0.062806234, w: 0.1485818}
+  m_LocalPosition: {x: -16.444824, y: 9.545, z: 0.7257931}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -116255,7 +116255,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 10
   m_Depth: 20
@@ -144019,7 +144019,7 @@ PrefabInstance:
     - target: {fileID: 281060584833038633, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
       propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8908110216911894046}
     - target: {fileID: 281060584833038633, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
       propertyPath: gravityMultiplier
       value: 10
@@ -144034,7 +144034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 587563254775125431, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1127454649717024361, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
       propertyPath: m_StepOffset
@@ -144087,7 +144087,7 @@ PrefabInstance:
     - target: {fileID: 1552364260001403124, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2047904701}
     - target: {fileID: 1552364260001403124, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
       propertyPath: DragImage
       value: 
@@ -144130,7 +144130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4661916316352681474, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
       propertyPath: Priority.m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6306457651937545413, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
       propertyPath: m_IsActive
@@ -151716,6 +151716,17 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8908110216911894041}
   m_Enabled: 1
+--- !u!114 &8908110216911894046 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4661916316352681474, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
+  m_PrefabInstance: {fileID: 6215508775597419233}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8908110216911894041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
 --- !u!1 &8916582642928543978
 GameObject:
   m_ObjectHideFlags: 0
