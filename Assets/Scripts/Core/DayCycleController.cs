@@ -5,6 +5,7 @@ using Inventory;
 using NightCycle;
 using UnityEngine;
 using Visitors;
+using UnityEngine.Events;
 using static Cards.CardManager;
 
 namespace Core
@@ -24,6 +25,7 @@ namespace Core
         public DayPlan dayPlan;
         public LevelLoader LevelLoader;
         public WarningManager warningManager;
+        public UnityEvent onDayEnded;
         //test
 
         enum DayState
@@ -238,11 +240,25 @@ namespace Core
         }
 
 
+        //void EndDay()
+        //{
+            //CurrentState = DayState.EndOfDay;
+            //Debug.Log("Day ended. Total visitors: " + currentSlotIndex);
+            //LevelLoader.LoadNext();
+        //}
+
         void EndDay()
         {
-            //CurrentState = DayState.EndOfDay;
             Debug.Log("Day ended. Total visitors: " + currentSlotIndex);
-            LevelLoader.LoadNext();
+            //TEST
+            //cardManager.SkipCard();
+            dialogue.Hide();
+            state = DayState.EndOfDay;
+            visitor.Despawn();
+            FinishChoice();
+            currentSlotIndex = dayPlan.slots.Count;
+            //TEST
+            onDayEnded.Invoke();
         }
 
         void Start()
