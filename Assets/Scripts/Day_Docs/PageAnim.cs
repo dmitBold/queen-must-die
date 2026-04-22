@@ -10,7 +10,7 @@ public class PageAnim : MonoBehaviour
 
     public void PlayArrival()
     {
-        Debug.Log("GY*FEGFY*EEFYEFY");
+        //Debug.Log("GY*FEGFY*EEFYEFY");
         animator.SetTrigger("arrive");
     }
 

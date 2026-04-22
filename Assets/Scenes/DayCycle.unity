@@ -12425,7 +12425,6 @@ MonoBehaviour:
   pageController: {fileID: 321702374}
   pagesManager: {fileID: 1889436190}
   dialogue: {fileID: 151644891}
-  choiceUI: {fileID: 1685998631}
   featherAnim: {fileID: 1645962291}
   onPagesEnded:
     m_PersistentCalls:
@@ -12442,6 +12441,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  worldState: {fileID: 2132362621}
+  choiceUI: {fileID: 919431923}
+  cardManager: {fileID: 347024424}
 --- !u!1 &1323266468
 GameObject:
   m_ObjectHideFlags: 0
@@ -15582,42 +15584,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 709304015}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1827393165}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1753060674}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1849328535}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -16574,7 +16540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1685998631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16587,11 +16553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e22a0f7a5f1a72469386859cf16994e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Choices.PageChoiceUI
-  leftButton: {fileID: 830607659}
-  rightButton: {fileID: 514742536}
-  leftText: {fileID: 1600388187}
-  rightText: {fileID: 480006708}
-  pagesManager: {fileID: 1889436190}
 --- !u!224 &1685998632
 RectTransform:
   m_ObjectHideFlags: 0
