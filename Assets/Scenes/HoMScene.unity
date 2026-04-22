@@ -4536,7 +4536,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   item: {fileID: 11400000, guid: 4a0088bf4fb170e43b3ad066a5b58e2e, type: 2}
   destroyOnPickup: 1
-  _configReference: {fileID: 0}
 --- !u!4 &433591553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 402328, guid: 11c91c53c305a0342a7e3f46d1a15670, type: 3}
@@ -16789,9 +16788,6 @@ PrefabInstance:
       addedObject: {fileID: 1145515382}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41455d1c348e8e046a9ea8876442a24f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1145515384}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 41455d1c348e8e046a9ea8876442a24f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1145515386}
   m_SourcePrefab: {fileID: 100100000, guid: 41455d1c348e8e046a9ea8876442a24f, type: 3}
 --- !u!1 &1145515377 stripped
@@ -16815,9 +16811,9 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1145515378}
-        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
-        m_MethodName: Interact_Assembly
+      - m_Target: {fileID: 1145515386}
+        m_TargetAssemblyTypeName: NightCycle.AssemblyInteractable, Assembly-CSharp
+        m_MethodName: Interact
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16917,45 +16913,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1145515384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1145515377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 800bbd5a2c67260478517feb53b2d02d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AssemblyController
-  assemblyCamera: {fileID: 0}
-  MainCamera: {fileID: 0}
-  AssemblyCanvas: {fileID: 0}
-  assemblyRoot: {fileID: 0}
-  rotationSpeed: 80
-  OnCompleted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1261943623}
-        m_TargetAssemblyTypeName: CleanupManager, Assembly-CSharp
-        m_MethodName: AdvanceStage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  socketLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  sockets:
-  - {fileID: 0}
-  - {fileID: 0}
-  isActive: 0
 --- !u!4 &1145515385 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 41455d1c348e8e046a9ea8876442a24f, type: 3}
@@ -16968,22 +16925,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145515377}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 865be8e9313f441498731fe0b973da6d, type: 3}
+  m_Script: {fileID: 11500000, guid: c9c72aeb565ffd0439edf38782fda3e6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CleanupManager
-  stages: []
-  musicTracks: []
-  scene_light: {fileID: 0}
-  OrderedCandles: []
-  ImmediateCandles: []
-  CandleTime: 0
-  FirstDelay: 0
-  candleSound: {fileID: 0}
-  TinderSound: {fileID: 0}
-  KnockSound: {fileID: 0}
-  door: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.AssemblyInteractable
+  onAssemblyCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1261943623}
+        m_TargetAssemblyTypeName: NightCycle.CleanupManager, Assembly-CSharp
+        m_MethodName: AdvanceStage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  viewPrefab: {fileID: 7731635846444126161, guid: 5a1c8429ebd83154095efa24cad8fe7f, type: 3}
 --- !u!1001 &1148965162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21649,7 +21611,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickupItem
   item: {fileID: 11400000, guid: f0fee9c85bf56e3478fcec193f6d7862, type: 2}
   destroyOnPickup: 1
-  _configReference: {fileID: 0}
 --- !u!4 &1731408254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 411900, guid: 1960faf6eb584ed791bfca46bf40ecf4, type: 3}

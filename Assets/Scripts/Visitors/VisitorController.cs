@@ -9,17 +9,13 @@ namespace Visitors
 {
     public class VisitorController : MonoBehaviour
     {
-
         public event Action OnVisitorArrived;
         public event Action OnVisitorLeft;
 
-        //[SerializeField] float arriveDelay = 1.0f;
-        //[SerializeField] float leaveDelay = 1.0f;
+        [SerializeField] private CageController cage;
+        [SerializeField] private Transform visitorSlot;
 
-        [SerializeField] CageController cage;
-        [SerializeField] Transform visitorSlot;
-
-        GameObject currentVisitor;
+        private GameObject currentVisitor;
         public CardData currentCard;
 
         public AudioClip cage_arrive;

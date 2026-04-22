@@ -7,9 +7,7 @@ namespace NightCycle
     {
         [Header("Setup")]
         [SerializeField] ItemData requiredItem;
-        [SerializeField] GameObject visualPart; // ����
-        [SerializeField] GameObject MainPart; // ������� ����
-        //[SerializeField] Renderer highlightRenderer;
+        [SerializeField] GameObject visualPart; 
         Outline outline;
 
         bool isFilled;
@@ -21,7 +19,6 @@ namespace NightCycle
         {
             if (visualPart != null) {
                 visualPart.SetActive(false);
-                MainPart.SetActive(false);
             }
             outline = GetComponent<Outline>();
             //outline.enabled = false;
@@ -43,7 +40,6 @@ namespace NightCycle
             if (visualPart != null)
             {
                 visualPart.SetActive(true);
-                MainPart.SetActive(true);
             }
 
             SetHighlight(false);
