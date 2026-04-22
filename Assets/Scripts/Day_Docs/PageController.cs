@@ -26,5 +26,7 @@ namespace Cards
         {
             pageAnim.PlayLeave();
         }
+
+        
     }
 }

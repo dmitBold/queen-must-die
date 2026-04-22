@@ -254,7 +254,7 @@ namespace Core
             //cardManager.SkipCard();
             dialogue.Hide();
             state = DayState.EndOfDay;
-            visitor.Despawn();
+            //visitor.Despawn();
             FinishChoice();
             currentSlotIndex = dayPlan.slots.Count;
             //TEST

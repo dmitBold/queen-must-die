@@ -5,6 +5,7 @@ using Inventory;
 using NightCycle;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 namespace Core
 {
@@ -13,11 +14,13 @@ namespace Core
         public PageController pageController;
         public PagesManager pagesManager;
         public DayDialogueManager dialogue;
-        public PageChoiceUI choiceUI;
         public FeatherAnim featherAnim;
 
         public UnityEvent onPagesEnded;
 
+        public WorldState worldState;
+        public ChoiceUI choiceUI;
+        public CardManager cardManager;
         enum PageState
         {
             Idle,
@@ -38,6 +41,8 @@ namespace Core
             pageController.OnPageLeft += OnPageLeft;
             dialogue.OnDialogueEnded += OnDialogueFinished;
             choiceUI.OnChoiceSelected += OnChoiceSelected;
+            cardManager.OnAnyChoiceResolved += FinishChoice;
+            choiceUI.OnEyeSelected += OnEyeSelected;
 
             if (featherAnim != null)
                 featherAnim.OnSignFinished += OnSignFinished;
@@ -53,7 +58,6 @@ namespace Core
         public void StartDocs()
         {
             dialogue.gameObject.SetActive(true);
-            Debug.Log("Docs Started");
             NextDoc();
         }
 
@@ -68,35 +72,55 @@ namespace Core
             }
 
             state = PageState.PageComing;
-            Debug.Log("SHOWPPPP");
             pageController.ShowPage();
+            cardManager.SetCurrData(currentPage.cardData);
         }
 
         void OnPageArrived()
         {
-            Debug.Log("STARTTTTTDDDDDD");
             if (state != PageState.PageComing) return;
 
             state = PageState.ShowingDialogue;
-            Debug.Log("STARTTTTTDDDDDD");
             dialogue.StartDialogue(currentPage.dialoguePages);
         }
 
         void OnDialogueFinished()
         {
-            Debug.Log("DIALFINNNNNNNNNNNNNNNNNNN");
             if (state != PageState.ShowingDialogue) return;
 
+            cardManager.wait_for_choice = true;
             state = PageState.WaitingForChoice;
-            choiceUI.Show(currentPage.LeftChoice, currentPage.RightChoice);
+
+            var left = currentPage.cardData.LeftChoice;
+            var right = currentPage.cardData.RightChoice;
+
+            bool left_availible = cardManager.CanChoose(left) == CardManager.ChoiceAvailability.Available;
+            bool right_availible = cardManager.CanChoose(right) == CardManager.ChoiceAvailability.Available;
+
+
+            choiceUI.SetChoiceAvailability(left_availible, right_availible);
+            //test
+
+
+            choiceUI.Show(
+                currentPage.cardData.LeftChoice,
+                currentPage.cardData.RightChoice
+            );
+
+            //choiceUI.OnChoiceSelected += OnChoiceSelected;
+
+            state = PageState.WaitingForChoice;
         }
 
-        void OnChoiceSelected(PageChoice choice)
+        void OnChoiceSelected(Choice choice)
         {
             if (state != PageState.WaitingForChoice) return;
 
             choiceUI.Hide();
             dialogue.Hide();
+
+            FinishChoice();
+            cardManager.ResolveChoice(choice);
 
             state = PageState.FeatherSigning;
             featherAnim.PlaySign();
@@ -110,6 +134,12 @@ namespace Core
             pageController.EndPage();
         }
 
+        void FinishChoice()
+        {
+            //choiceUI.OnChoiceSelected -= OnChoiceSelected;
+            choiceUI.Hide();
+        }
+
         void OnPageLeft()
         {
             if (state != PageState.PageLeaving) return;
@@ -120,6 +150,28 @@ namespace Core
         {
             state = PageState.End;
             onPagesEnded.Invoke();
+        }
+
+        void OnEyeSelected()
+        {
+            if (state != PageState.WaitingForChoice)
+                return;
+
+            choiceUI.Hide();
+
+            //inventoryUI.CancelDrag();
+
+            //cardManager.SkipCard();
+            cardManager.SkipCard();
+            dialogue.Hide();
+            FinishChoice();
+            state = PageState.PageLeaving;
+            pageController.EndPage();
+            /*worldState.ApplyEyePenalty();
+            FinishChoice();
+            cardManager.OnAnyChoiceResolved?.Invoke();
+            state = PageState.PageLeaving;
+            pageController.EndPage();*/
         }
     }
 }

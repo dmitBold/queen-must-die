@@ -48,6 +48,7 @@ namespace Cards
 
         void ApplyChoice(Choice choice)
         {
+            //Debug.Log("CHOICECHOICECHOICE");
             foreach (var effect in choice.effects)
             {
                 switch (effect.type)
@@ -88,8 +89,9 @@ namespace Cards
 
         public void ResolveChoice(Choice choice)
         {
+            
             if (!wait_for_choice) return;
-
+            //Debug.Log("CHOICECHOICECHOICE");
             //test  test    test
 
             //if(CanChoose(choice) != ChoiceAvailability.Available)
@@ -262,6 +264,12 @@ namespace Cards
             return ChoiceAvailability.Available;
         }
 
+        //test
+        public void SetCurrData(CardData card)
+        {
+            currData = card;
+        }
+        //test
 
     }
 }
