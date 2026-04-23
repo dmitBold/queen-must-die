@@ -26,5 +26,36 @@ namespace Core
             if (clip == null) return;
             AudioSource.PlayClipAtPoint(clip, position, volume);
         }
+
+        public AudioSource PlaySoundAtPoint_loop(AudioClip clip, Vector3 position, float volume = 1f, bool loop = false, float minDistance = 1f, float maxDistance = 20f)
+        {
+            if (clip == null) return null;
+
+            GameObject go = new GameObject("[Audio] " + clip.name);
+            go.transform.position = position;
+
+            AudioSource source = go.AddComponent<AudioSource>();
+
+            // Основные настройки
+            source.clip = clip;
+            source.volume = volume;
+            source.loop = loop;
+
+            source.spatialBlend = 1f;
+            source.minDistance = minDistance;
+            source.maxDistance = maxDistance;
+            source.rolloffMode = AudioRolloffMode.Linear;
+
+            source.Play();
+
+            if (!loop)
+            {
+                Destroy(go, clip.length);
+            }
+
+            return source;
+        }
+
+
     }
 }

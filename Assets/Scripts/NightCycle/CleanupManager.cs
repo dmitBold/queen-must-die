@@ -27,6 +27,7 @@ namespace NightCycle
         //test
         public AudioClip KnockSound;
         public GameObject door;
+        public AudioClip Reznya;
         private AudioService _audioService;
         //test
 
@@ -121,6 +122,10 @@ namespace NightCycle
                 case 2:
                     if (scene_light != null) scene_light.enabled = false;
                     StartCoroutine(CandlesRoutine());
+
+                    _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-3.86f, 10.51f, -102.38f), 1, true, 0.27f, 7.29f);
+
+                    _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-9.71f, 10.51f, -120.86f), 1, true, 0.27f, 7.29f);
                     break;
                 case 5:
                     _audioService.PlaySound(KnockSound);
