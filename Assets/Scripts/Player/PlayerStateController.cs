@@ -4,29 +4,7 @@ namespace NightCycle
 {
     public class PlayerStateController : MonoBehaviour
     {
-        public static PlayerStateController Instance { get; private set; }
-
-        public enum PlayerMode
-        {
-            FreeMovement,
-            //ItemSelection,
-            //Assembly,
-            DoorState,
-            Focused // ����� �����
-        }
-
         public PlayerMode CurrentMode { get; private set; } = PlayerMode.FreeMovement;
-
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            Instance = this;
-            //DontDestroyOnLoad(gameObject);
-        }
 
         public void SetMode(PlayerMode newMode)
         {

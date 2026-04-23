@@ -21,9 +21,10 @@ namespace NightCycle
         private AudioService _audioService;
 
         [Inject]
-        public void Constructor(AudioService audioService)
+        public void Constructor(AudioService audioService, PlayerStateController playerStateController)
         {
             _audioService = audioService;
+            _playerStateController = playerStateController;
         }
 
         void Start()
@@ -45,7 +46,7 @@ namespace NightCycle
         {
             NightDialogueManager.Instance.StartDialogue(null, dialoguePages);
 
-            _playerStateController.SetMode(PlayerStateController.PlayerMode.Focused);
+            _playerStateController.SetMode(PlayerMode.Focused);
         }
     }
 }

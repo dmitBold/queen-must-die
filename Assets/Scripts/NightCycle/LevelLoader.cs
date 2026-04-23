@@ -1,12 +1,22 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Core;
+using Zenject;
 
 namespace NightCycle
 {
     public class LevelLoader : MonoBehaviour
     {
-
+        [SerializeField] private GameScene targetScene;
+        
+        private ScenesManager _scenesManager;
+        
+        [Inject]
+        private void Construct(ScenesManager scenesManager)
+        {
+            _scenesManager = scenesManager;
+        }
         public Animator transition;
 
         void Update()
@@ -18,26 +28,7 @@ namespace NightCycle
         }
 
         public void LoadNext(){
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+            _scenesManager.LoadSingle(SceneNames.GetName(targetScene));
         }
-
-        IEnumerator LoadLevel(int LevelIndex)
-        {
-            transition.SetTrigger("Start");
-
-            yield return new WaitForSeconds(2);
-
-            SceneManager.LoadScene(LevelIndex);
-
-        }
-
-        //TEST
-        private void Awake()
-        {
-            Application.targetFrameRate = 60;
-        }
-        //TEST
-
     }
 }

@@ -5,47 +5,31 @@ using Zenject;
 
 namespace NightCycle
 {
-    //TODO развернуть зависимость
     public class PickupItem : MonoBehaviour
     {
-        [SerializeField] ItemData item;
-        [SerializeField] bool destroyOnPickup = true;
-        //[SerializeField] GameObject obj;
-        //[SerializeField] InventoryUI inventoryUI;
+        [SerializeField] private ItemData item;
+        [SerializeField] private bool destroyOnPickup = true;
 
         private InventoryManager _inventoryManager;
         private AudioService _audioService;
-        //TEST
-        [SerializeField] private GlobalAudioConfig _configReference;
-        private static GlobalAudioConfig sharedConfig;
-        //TEST
+        private GlobalAudioConfig _audioConfig;
 
         [Inject]
-        public void Constructor(InventoryManager inventoryManager, AudioService audioService)
+        public void Construct(InventoryManager inventoryManager, AudioService audioService, GlobalAudioConfig audioConfig)
         {
             _inventoryManager = inventoryManager;
             _audioService = audioService;
+            _audioConfig = audioConfig;
         }
-        //TEST
-        private void Awake()
-        {
-            if (_configReference != null)
-            {
-                sharedConfig = _configReference;
-            }
-        }
-        //TEST
+
         public void Pickup()
         {
-
             _inventoryManager.AddItem(item);
-            //test
-            _audioService.PlaySound(sharedConfig.pickupSound);
-            //inventoryUI.Open();
+            _audioService.PlaySound(_audioConfig.pickupSound);
+
             if (destroyOnPickup)
             {
                 gameObject.SetActive(false);
-                //obj.SetActive(false);
                 destroyOnPickup = false;
             }
         }

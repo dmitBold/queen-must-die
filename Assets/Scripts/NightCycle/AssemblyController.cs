@@ -1,57 +1,43 @@
+using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Inventory;
 using UnityEngine;
 using UnityEngine.Events;
-using static NightCycle.PlayerStateController;
 using Zenject;
+using Unity.Cinemachine;
 
 namespace NightCycle
 {
-    public class AssemblyController : MonoBehaviour, IFocusable
+    public class AssemblyController : MonoBehaviour, IDisposable
     {
-        [Header("References")]
-        [SerializeField] Camera assemblyCamera;
-        //TEST!!!!!!!!!!!!!!!!!!!!!!!!
-        [SerializeField] Camera MainCamera;
-        [SerializeField] Canvas AssemblyCanvas;
-        //TEST!!!!!!!!!!!!!!!!!!!!!!!!
-        [SerializeField] Transform assemblyRoot; // ������
-        [Inject] InventoryUI inventoryUI;
+        [Header("References")] [SerializeField]
+        private CinemachineCamera assemblyCamera;
 
-        [Header("Rotation")]
-        [SerializeField] float rotationSpeed = 80f;
+        [SerializeField] private Camera camera;
+        [SerializeField] private Canvas assemblyCanvas;
+        [SerializeField] private Transform spawnPoint;
+        [Inject] private InventoryUI inventoryUI;
 
-        //test
+        [Header("Rotation")] [SerializeField] private float rotationSpeed = 80f;
+
+        [Header("Sockets")] [SerializeField] private LayerMask socketLayer;
+
         public UnityEvent OnCompleted;
-        [SerializeField] LayerMask socketLayer;
-
-        AssemblySocket currentSocket;
-
-        public List<AssemblySocket> sockets;
-        //test
-
         public bool isActive;
 
-        //test
-        public void OnEnterFocus()
+        private AssemblyView currentView;
+        private IReadOnlyList<AssemblySocket> activeSockets;
+        private AssemblySocket currentSocket;
+        private PlayerStateController playerStateController;
+
+        [Inject]
+        private void Construct(PlayerStateController playerStateController)
         {
-            EnterAssembly(); 
-            HUDController.instance.EnableInteractionText("E ����� �����");
+            this.playerStateController = playerStateController;
         }
 
-        public void OnExitFocus()
-        {
-            ExitAssembly();
-            //test
-            Outline outline = GetComponent<Outline>();
-            outline.Rebuild();
-            outline.enabled = false;
-            outline.enabled = true;
-            //test
-        }
-        //test
-
-        void Awake()
+        private void Awake()
         {
             if (assemblyCamera)
                 assemblyCamera.gameObject.SetActive(false);
@@ -59,104 +45,109 @@ namespace NightCycle
             inventoryUI.OnSocketFilled += OnAssemblyCompleted;
         }
 
-        void Update()
+        private void Update()
         {
             if (!isActive)
                 return;
 
-
-            //test
             HandleSocketHover();
             HandleSocketClick();
             HandleRotation();
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Debug.Log("AAAAA");
-                //ExitAssembly();
-            }
         }
 
-        //test
-        bool checkSockets()
+        private void OnDestroy()
         {
-            foreach(var socket in sockets)
-            {
-                Debug.Log(socket.name);
-                if (!socket.IsFilled)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        void OnAssemblyCompleted()
-        {
-            if (!checkSockets())
-                return;
-            Debug.Log("ASSEMBLY_COMPLETED");
-            //TEST
-            OnCompleted?.Invoke();
             inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
-            //TEST
         }
-        //test
 
+        public void OnEnterFocus()
+        {
+            EnterAssembly();
+            HUDController.instance.EnableInteractionText("E выйти назад");
+        }
+
+        public void Dispose()
+        {
+            inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
+            activeSockets = null;
+            Destroy(currentView);
+        }
+
+        /// <summary>
+        /// Принимает вью-префаб, спавнит его и запускает режим сборки.
+        /// </summary>
+        public void InitializeAssembly(AssemblyView viewPrefab)
+        {
+            currentView = Instantiate(viewPrefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
+            activeSockets = currentView.Sockets;
+        }
 
         public void EnterAssembly()
         {
-            AssemblyCanvas.gameObject.SetActive(true);
-
             isActive = true;
-            //PlayerStateController.Instance.SetMode(PlayerMode.Assembly);
-            //test
-            inventoryUI.currentMode = InventoryUI.InventoryMode.AssemblyItemSelection;
-            //test
 
-            if (assemblyCamera)
-            {
-                assemblyCamera.gameObject.SetActive(true);
-                MainCamera.gameObject.SetActive(false);
-            }
+            assemblyCanvas.gameObject.SetActive(true);
+            HUDController.instance.DisableInteractionText();
 
-            Debug.Log("[Assembly] Enter");
+            inventoryUI.SetMode(InventoryUI.InventoryMode.AssemblyItemSelection);
+            playerStateController.SetMode(PlayerMode.Focused);
+
+            assemblyCamera.gameObject.SetActive(true);
+            assemblyCamera.Priority = 100;
         }
 
         public void ExitAssembly()
         {
-
-            AssemblyCanvas.gameObject.SetActive(false);
-
+            assemblyCanvas.gameObject.SetActive(false);
             isActive = false;
-            //test
             inventoryUI.ExitAssemblySelection();
-            //inventoryUI.currentAssemblySocket = null;
-            //inventoryUI.currentMode = InventoryUI.InventoryMode.Day;
-            //test
-            PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
+            playerStateController.SetMode(PlayerMode.FreeMovement);
 
-            if (assemblyCamera)
-            {
-                assemblyCamera.gameObject.SetActive(false);
-                MainCamera.gameObject.SetActive(true);
-            }
-            Debug.Log("[Assembly] Exit");
+            assemblyCamera.Priority = 0;
+            assemblyCamera.gameObject.SetActive(false);
         }
 
-        void HandleRotation()
+        private bool CheckSockets()
         {
+            if (activeSockets == null)
+                return false;
+
+            foreach (var socket in activeSockets)
+            {
+                if (!socket.IsFilled)
+                    return false;
+            }
+
+            return true;
+        }
+
+        private void OnAssemblyCompleted()
+        {
+            if (!CheckSockets())
+                return;
+
+            if (currentView != null)
+                currentView.onAssemblyCompleted?.Invoke();
+
+            OnCompleted?.Invoke();
+            inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
+        }
+
+        private void HandleRotation()
+        {
+            if (currentView == null || currentView.RotationRoot == null)
+                return;
+
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
 
-            assemblyRoot.Rotate(Vector3.up, -h * rotationSpeed * Time.deltaTime, /*Space.World*/ Space.Self);
-            assemblyRoot.Rotate(Vector3.right, v * rotationSpeed * Time.deltaTime, /*Space.World*/ Space.Self);
+            currentView.RotationRoot.Rotate(Vector3.up, -h * rotationSpeed * Time.deltaTime, Space.World);
+            currentView.RotationRoot.Rotate(camera.transform.right, v * rotationSpeed * Time.deltaTime, Space.World);
         }
 
-        //test
-        void HandleSocketHover()
+        private void HandleSocketHover()
         {
-            Ray ray = assemblyCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, socketLayer))
             {
@@ -174,7 +165,7 @@ namespace NightCycle
             }
         }
 
-        void ClearSocketHighlight()
+        private void ClearSocketHighlight()
         {
             if (currentSocket != null)
                 currentSocket.SetHighlight(false);
@@ -182,23 +173,15 @@ namespace NightCycle
             currentSocket = null;
         }
 
-        void HandleSocketClick()
+        private void HandleSocketClick()
         {
-            if (Input.GetMouseButtonDown(0) && currentSocket != null)
-            {
-                if (currentSocket.IsFilled)
-                    return;
-
+            if (Input.GetMouseButtonDown(0) && currentSocket != null && !currentSocket.IsFilled)
                 OpenInventoryForSocket(currentSocket);
-            }
         }
 
-        void OpenInventoryForSocket(AssemblySocket socket)
+        private void OpenInventoryForSocket(AssemblySocket socket)
         {
-            Debug.Log("Selected socket: " + socket.name);
             inventoryUI.OpenForAssemblySocket(socket);
         }
-
-        //test
     }
 }

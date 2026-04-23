@@ -11,39 +11,6 @@ namespace Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
-        [SerializeField] GameObject panel;
-        //[SerializeField] List<ItemSlot> slots;
-        [SerializeField] Transform slotsParent;
-        [SerializeField] ItemSlot slotPrefab;
-        [SerializeField] ItemTooltip tooltip;
-
-        InventoryManager inventory;
-        DayCycleController dayCycle;
-
-        [Inject]
-        public void Constructor(InventoryManager inventoryManager)
-        {
-            inventory = inventoryManager;
-        }
-
-        public bool isOpen;
-
-        //
-        [SerializeField] Canvas rootCanvas;
-        [SerializeField] Image dragIconPrefab;
-
-        //Image dragIcon;
-        ItemData draggedItem;
-
-        //test
-        DragIconController dragIcon;
-        //[SerializeField] Image canApplyIcon;
-        //[SerializeField] Image cannotApplyIcon;
-
-        //test
-        public CardManager cardManager;
-
-        //test
         public enum InventoryMode
         {
             Day,
@@ -51,30 +18,51 @@ namespace Inventory
             AssemblyItemSelection
         }
 
-        public InventoryMode currentMode;
-        ItemTarget currentTarget;
+        [Header("UI References")] [SerializeField]
+        private GameObject panel;
 
+        [SerializeField] private Transform slotsParent;
+        [SerializeField] private ItemSlot slotPrefab;
+        [SerializeField] private ItemTooltip tooltip;
+        [SerializeField] private Canvas rootCanvas;
+        [SerializeField] private Image dragIconPrefab;
 
-        //test
+        [Header("State")] public bool isOpen;
+        public CardManager cardManager;
         public AssemblySocket currentAssemblySocket;
+
+        private InventoryManager inventory;
+        private DayCycleController dayCycle;
+
+        private ItemData draggedItem;
+        private DragIconController dragIcon;
+        private ItemTarget currentTarget;
+        private InventoryMode currentMode;
+
         public event Action OnSocketFilled;
-        //test
+
+        [Inject]
+        public void Construct(InventoryManager inventoryManager)
+        {
+            inventory = inventoryManager;
+            inventory.OnInventoryChanged += Refresh;
+        }
+
+        private void OnDestroy()
+        {
+            if (inventory != null)
+                inventory.OnInventoryChanged -= Refresh;
+        }
 
         public void Init(DayCycleController dayCycle)
         {
             this.dayCycle = dayCycle;
-
-            //ItemSlot.SetTooltip(tooltip);
-
             Refresh();
             Close();
         }
 
-        void Update()
+        private void Update()
         {
-            Debug.Log("%%%%%" + currentMode + "%%%%%");
-            if(currentAssemblySocket != null)
-                Debug.Log("######" + currentAssemblySocket.name + "######");
             if (Input.GetKeyDown(KeyCode.I))
             {
                 Toggle();
@@ -86,25 +74,25 @@ namespace Inventory
             if (!CanOpen())
                 return;
 
-            if (isOpen) Close();
-            else Open();
+            if (isOpen)
+                Close();
+            else
+                Open();
         }
 
-        bool CanOpen()
+        private bool CanOpen()
         {
-            //return dayCycle.IsWaitingForChoice();
-            //test
             return true;
         }
 
-        void Open()
+        private void Open()
         {
             isOpen = true;
             panel.SetActive(true);
             Refresh();
         }
 
-        void Close()
+        private void Close()
         {
             isOpen = false;
             panel.SetActive(false);
@@ -112,7 +100,7 @@ namespace Inventory
             EndDrag();
         }
 
-        void Refresh()
+        private void Refresh()
         {
             foreach (Transform child in slotsParent)
             {
@@ -124,10 +112,6 @@ namespace Inventory
             foreach (var item in items)
             {
                 ItemSlot slot = Instantiate(slotPrefab, slotsParent);
-
-                //test
-                //bool canApply = currentMode == InventoryMode.Day
-                //      || currentTarget.CanApply(item) || (currentMode == InventoryMode.AssemblyItemSelection && currentAssemblySocket.CanAccept(item));
 
                 bool canApply = false;
                 if (currentMode == InventoryMode.Day)
@@ -142,32 +126,13 @@ namespace Inventory
                 {
                     canApply = currentAssemblySocket != null && currentAssemblySocket.CanAccept(item);
                 }
-                //test
 
                 slot.Set(item, this, canApply, tooltip);
             }
         }
 
-        //
-        /*public void BeginDrag(ItemData item, Sprite icon)
-    {
-        //test
-        //canApplyIcon.gameObject.SetActive(false);
-        //cannotApplyIcon.gameObject.SetActive(false);
-        //Debug.Log("BeginDrag");
-        draggedItem = item;
-        dragIcon = Instantiate(dragIconPrefab, rootCanvas.transform);
-        dragIcon.sprite = icon;
-
-        var cg = dragIcon.GetComponent<CanvasGroup>();
-        if (cg) cg.alpha = 0.6f;
-
-        dragIcon.raycastTarget = false;
-    }*/
-
         public void BeginDrag(ItemData item, Sprite icon)
         {
-            Debug.Log("BeginDrag");
             draggedItem = item;
 
             var obj = Instantiate(dragIconPrefab, rootCanvas.transform);
@@ -179,26 +144,12 @@ namespace Inventory
 
         public void UpdateDrag(Vector2 screenPos)
         {
-            Debug.Log("UpdateDrag");
             if (dragIcon)
                 dragIcon.transform.position = screenPos;
         }
 
-        /*public void EndDrag()
-    {
-        //Debug.Log("EndDrag");
-        if (dragIcon)
-            Destroy(dragIcon.gameObject);
-
-        canApplyIcon.gameObject.SetActive(false);
-        cannotApplyIcon.gameObject.SetActive(false);
-
-        draggedItem = null;
-    }*/
-
         public void EndDrag()
         {
-            Debug.Log("EndDrag");
             if (dragIcon)
                 Destroy(dragIcon.gameObject);
 
@@ -206,7 +157,6 @@ namespace Inventory
             draggedItem = null;
         }
 
-        //
         public ItemData GetDraggedItem()
         {
             return draggedItem;
@@ -224,27 +174,11 @@ namespace Inventory
             EndDrag();
         }
 
-        //test
-        /*public void UpdateDropIndicator(bool isOverDropZone)
-    {
-        if (draggedItem == null || !isOverDropZone)
-        {
-            canApplyIcon.gameObject.SetActive(false);
-            cannotApplyIcon.gameObject.SetActive(false);
-            return;
-        }
-
-        bool canApply = cardManager.CanApplyItem(draggedItem);
-
-        canApplyIcon.gameObject.SetActive(canApply);
-        cannotApplyIcon.gameObject.SetActive(!canApply);
-    }*/
-
         public void UpdateDropIndicator(bool isOverDropZone)
         {
             if (dragIcon == null)
                 return;
-            //test
+
             if (!isOverDropZone || draggedItem == null || !cardManager.wait_for_choice)
             {
                 dragIcon.SetResult(null);
@@ -255,66 +189,20 @@ namespace Inventory
             dragIcon.SetResult(canApply);
         }
 
-        //test
-
         public void OpenForItemTarget(ItemTarget target)
         {
             currentMode = InventoryMode.NightItemSelection;
             currentTarget = target;
-
             Open();
-            //PlayerStateController.Instance.SetMode(PlayerMode.ItemSelection);
         }
 
-        /*void Start()
-    {
-        if (InventoryManager.Instance == null)
+        public void OpenForAssemblySocket(AssemblySocket socket)
         {
-            Debug.LogError("InventoryManager.Instance is NULL");
-            return;
-        }
-        else 
-        {
-            inventory = InventoryManager.Instance;
-            Debug.Log("OKOKOK");
-            Debug.Log("InventoryUI instance: " + GetInstanceID());
-            Debug.Log("ITEMS COUNT: " + inventory.Items.Count);
-        }
-            
-        //inventory.OnInventoryChanged += Refresh;
-    }*/
-
-
-        void OnEnable()
-        {
-                inventory.OnInventoryChanged += Refresh;
+            currentMode = InventoryMode.AssemblyItemSelection;
+            currentAssemblySocket = socket;
+            Open();
         }
 
-        private void OnDisable()
-        {
-            if (inventory != null)
-                inventory.OnInventoryChanged -= Refresh;
-        }
-
-
-        //test
-        /*public void OnItemClicked(ItemData item)
-    {
-        if (currentMode != InventoryMode.NightItemSelection)
-            return;
-
-        if (!currentTarget.CanApply(item))
-            return;
-
-        currentTarget.Apply(item);
-        inventory.RemoveItem(item);
-
-        //ExitItemSelection();
-        //test
-        Refresh();
-        //test
-    }*/
-        //test
         public void OnItemClicked(ItemData item)
         {
             if (currentMode == InventoryMode.NightItemSelection)
@@ -334,32 +222,25 @@ namespace Inventory
                     return;
 
                 currentAssemblySocket.Apply(item);
-                //test
-                OnSocketFilled.Invoke();
+                OnSocketFilled?.Invoke();
                 inventory.RemoveItem(item);
                 Refresh();
                 return;
             }
         }
-        //test
+
         public void ExitItemSelection()
         {
-            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
             currentMode = InventoryMode.Day;
             currentTarget = null;
-
             Close();
-            //PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
         }
 
         public void ExitAssemblySelection()
         {
-            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
             currentMode = InventoryMode.Day;
             currentAssemblySocket = null;
-
             Close();
-            //PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
         }
 
         public bool IsDayMode()
@@ -367,18 +248,9 @@ namespace Inventory
             return currentMode == InventoryMode.Day;
         }
 
-        //test
-
-        //test
-        public void OpenForAssemblySocket(AssemblySocket socket)
+        public void SetMode(InventoryMode mode)
         {
-            currentMode = InventoryMode.AssemblyItemSelection;
-            currentAssemblySocket = socket;
-
-            Open();
-            //PlayerStateController.Instance.SetMode(PlayerMode.ItemSelection);
+            currentMode = mode;
         }
-        //test
-
     }
 }
