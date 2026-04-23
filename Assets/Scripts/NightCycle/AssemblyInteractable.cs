@@ -23,7 +23,14 @@ namespace NightCycle
 
         public void Interact()
         {
-            _assemblyService.OpenAssembly(viewPrefab, () => onAssemblyCompleted?.Invoke());
+            if (_assemblyService.IsActive)
+            {
+                _assemblyService.CloseAssembly();
+            }
+            else
+            {
+                _assemblyService.OpenAssembly(viewPrefab, () => onAssemblyCompleted?.Invoke());
+            }
         }
     }
 }

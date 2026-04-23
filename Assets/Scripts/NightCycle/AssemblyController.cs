@@ -9,7 +9,7 @@ using Unity.Cinemachine;
 
 namespace NightCycle
 {
-    public class AssemblyController : MonoBehaviour, IFocusable, IDisposable
+    public class AssemblyController : MonoBehaviour, IDisposable
     {
         [Header("References")] [SerializeField]
         private CinemachineCamera assemblyCamera;
@@ -66,16 +66,6 @@ namespace NightCycle
             HUDController.instance.EnableInteractionText("E выйти назад");
         }
 
-        public void OnExitFocus()
-        {
-            ExitAssembly();
-
-            var outline = GetComponent<Outline>();
-            outline.Rebuild();
-            outline.enabled = false;
-            outline.enabled = true;
-        }
-        
         public void Dispose()
         {
             inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
@@ -89,6 +79,7 @@ namespace NightCycle
         public void InitializeAssembly(AssemblyView viewPrefab)
         {
             currentView = Instantiate(viewPrefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
+            activeSockets = currentView.Sockets;
         }
 
         public void EnterAssembly()
