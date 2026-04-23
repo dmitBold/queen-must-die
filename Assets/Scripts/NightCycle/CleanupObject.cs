@@ -25,7 +25,7 @@ namespace NightCycle
 
         public void Clean()
         {
-            if (cleanupSound != null)
+            if (cleanupSound != null && _audioService != null)
             {
                 _audioService.PlaySound(cleanupSound);
             }
