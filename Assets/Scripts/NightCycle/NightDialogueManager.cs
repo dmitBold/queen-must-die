@@ -26,7 +26,7 @@ namespace NightCycle
         //test
 
         [Inject]
-        private void Construct(PlayerInteraction playerInteraction)
+        private void Construct([InjectOptional] PlayerInteraction playerInteraction)
         {
             this.playerInteraction = playerInteraction;
         }
