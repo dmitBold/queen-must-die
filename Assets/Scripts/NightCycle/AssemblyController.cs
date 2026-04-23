@@ -1,55 +1,40 @@
+using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Inventory;
 using UnityEngine;
 using UnityEngine.Events;
-using static NightCycle.PlayerStateController;
 using Zenject;
 using Unity.Cinemachine;
 
 namespace NightCycle
 {
-    /// <summary>
-    /// Управляет режимом сборки: принимает вью-объект извне, спавнит его,
-    /// переключает камеру, обрабатывает ввод для вращения и выбора сокетов.
-    /// </summary>
-    public class AssemblyController : MonoBehaviour, IFocusable
+    public class AssemblyController : MonoBehaviour, IFocusable, IDisposable
     {
-        [Header("References")]
-        [SerializeField] private CinemachineCamera assemblyCamera;
-        [SerializeField] private Camera  camera;
+        [Header("References")] [SerializeField]
+        private CinemachineCamera assemblyCamera;
+
+        [SerializeField] private Camera camera;
         [SerializeField] private Canvas assemblyCanvas;
         [SerializeField] private Transform spawnPoint;
         [Inject] private InventoryUI inventoryUI;
 
-        [Header("Rotation")]
-        [SerializeField] private float rotationSpeed = 80f;
+        [Header("Rotation")] [SerializeField] private float rotationSpeed = 80f;
 
-        [Header("Sockets")]
-        [SerializeField] private LayerMask socketLayer;
+        [Header("Sockets")] [SerializeField] private LayerMask socketLayer;
 
         public UnityEvent OnCompleted;
         public bool isActive;
 
         private AssemblyView currentView;
-        private GameObject spawnedInstance;
         private IReadOnlyList<AssemblySocket> activeSockets;
         private AssemblySocket currentSocket;
+        private PlayerStateController playerStateController;
 
-
-        public void OnEnterFocus()
+        [Inject]
+        private void Construct(PlayerStateController playerStateController)
         {
-            EnterAssembly();
-            HUDController.instance.EnableInteractionText("E выйти назад");
-        }
-
-        public void OnExitFocus()
-        {
-            ExitAssembly();
-
-            Outline outline = GetComponent<Outline>();
-            outline.Rebuild();
-            outline.enabled = false;
-            outline.enabled = true;
+            this.playerStateController = playerStateController;
         }
 
         private void Awake()
@@ -70,43 +55,54 @@ namespace NightCycle
             HandleRotation();
         }
 
+        private void OnDestroy()
+        {
+            inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
+        }
+
+        public void OnEnterFocus()
+        {
+            EnterAssembly();
+            HUDController.instance.EnableInteractionText("E выйти назад");
+        }
+
+        public void OnExitFocus()
+        {
+            ExitAssembly();
+
+            var outline = GetComponent<Outline>();
+            outline.Rebuild();
+            outline.enabled = false;
+            outline.enabled = true;
+        }
+        
+        public void Dispose()
+        {
+            inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
+            activeSockets = null;
+            Destroy(currentView);
+        }
+
         /// <summary>
         /// Принимает вью-префаб, спавнит его и запускает режим сборки.
         /// </summary>
-        public void StartAssembly(AssemblyView viewPrefab)
+        public void InitializeAssembly(AssemblyView viewPrefab)
         {
-            if (spawnedInstance != null)
-                Destroy(spawnedInstance);
-
-            spawnedInstance = Instantiate(viewPrefab.gameObject, spawnPoint.position, spawnPoint.rotation, spawnPoint);
-            currentView = spawnedInstance.GetComponent<AssemblyView>();
-
-            if (currentView == null)
-            {
-                Debug.LogError("[AssemblyController] Spawned prefab does not have AssemblyView component.");
-                return;
-            }
-
-            activeSockets = currentView.Sockets;
-            EnterAssembly();
+            currentView = Instantiate(viewPrefab, spawnPoint.position, spawnPoint.rotation, spawnPoint);
         }
 
         public void EnterAssembly()
         {
-            assemblyCanvas.gameObject.SetActive(true);
             isActive = true;
-            inventoryUI.currentMode = InventoryUI.InventoryMode.AssemblyItemSelection;
 
-            PlayerStateController.Instance.SetMode(PlayerMode.Focused);
-            
-            if (HUDController.instance != null)
-                HUDController.instance.DisableInteractionText();
+            assemblyCanvas.gameObject.SetActive(true);
+            HUDController.instance.DisableInteractionText();
 
-            if (assemblyCamera)
-            {
-                assemblyCamera.gameObject.SetActive(true);
-                assemblyCamera.Priority = 100;
-            }
+            inventoryUI.SetMode(InventoryUI.InventoryMode.AssemblyItemSelection);
+            playerStateController.SetMode(PlayerMode.Focused);
+
+            assemblyCamera.gameObject.SetActive(true);
+            assemblyCamera.Priority = 100;
         }
 
         public void ExitAssembly()
@@ -114,21 +110,10 @@ namespace NightCycle
             assemblyCanvas.gameObject.SetActive(false);
             isActive = false;
             inventoryUI.ExitAssemblySelection();
-            PlayerStateController.Instance.SetMode(PlayerMode.FreeMovement);
+            playerStateController.SetMode(PlayerMode.FreeMovement);
 
-            if (assemblyCamera)
-            {
-                assemblyCamera.Priority = 0;
-                assemblyCamera.gameObject.SetActive(false);
-            }
-
-            if (spawnedInstance != null)
-            {
-                Destroy(spawnedInstance);
-                spawnedInstance = null;
-                currentView = null;
-                activeSockets = null;
-            }
+            assemblyCamera.Priority = 0;
+            assemblyCamera.gameObject.SetActive(false);
         }
 
         private bool CheckSockets()
@@ -141,6 +126,7 @@ namespace NightCycle
                 if (!socket.IsFilled)
                     return false;
             }
+
             return true;
         }
 

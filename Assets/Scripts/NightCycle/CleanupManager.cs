@@ -119,7 +119,7 @@ namespace NightCycle
                 Debug.Log("1");
                 break;*/
                 case 2:
-                    scene_light.enabled = false;
+                    if (scene_light != null) scene_light.enabled = false;
                     StartCoroutine(CandlesRoutine());
                     break;
                 case 5:

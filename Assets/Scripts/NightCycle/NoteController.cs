@@ -1,5 +1,6 @@
 using Dialogue;
 using UnityEngine;
+using Zenject;
 
 namespace NightCycle
 {
@@ -11,7 +12,14 @@ namespace NightCycle
 
         private bool isActive = false;
         [SerializeField] PlayerInteraction playerInteraction;
+        private PlayerStateController playerStateController;
 
+        [Inject]
+        private void Construct(PlayerStateController playerStateController)
+        {
+            this.playerStateController = playerStateController;
+        }
+        
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -29,7 +37,7 @@ namespace NightCycle
 
             isActive = true;
 
-            PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
+            playerStateController.SetMode(PlayerMode.Focused);
 
             view.Show(note.noteImage, note.noteText);
 
@@ -43,7 +51,7 @@ namespace NightCycle
             isActive = false;
             view.Hide();
 
-            PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.FreeMovement);
+            playerStateController.SetMode(PlayerMode.FreeMovement);
         }
 
         private void Update()

@@ -37,39 +37,30 @@ namespace NightCycle
                 }
 
                 _scenesManager.SetActive(SceneNames.Assembly);
-                
+
                 // Подписываемся на завершение через лямбду, чтобы вызвать и коллбэк, и закрытие.
-                _controller.OnCompleted.AddListener(() => 
+                _controller.OnCompleted.AddListener(() =>
                 {
                     onCompleteCallback?.Invoke();
-                    CloseAssembly(true); // Полная выгрузка сцены при успешной сборке
+                    CloseAssembly();
                 });
-                
-                _controller.StartAssembly(viewPrefab);
+
+                _controller.InitializeAssembly(viewPrefab);
             });
         }
 
-        private void CloseAssembly(bool unloadScene)
+        public void CloseAssembly()
         {
-            if (_controller != null)
-            {
-                _controller.ExitAssembly(); // Гасим канвас, убираем модельку, отвязываем камеру, размораживаем игрока
-                _controller.OnCompleted.RemoveAllListeners();
-                _controller = null;
-            }
+            _controller.ExitAssembly();
+            _controller = null;
 
             if (!string.IsNullOrEmpty(_previousSceneName))
             {
                 _scenesManager.SetActive(_previousSceneName);
             }
-            
-            if (unloadScene)
-            {
-                _scenesManager.Unload(SceneNames.Assembly);
-            }
-        } 
+        }
 
-        private static AssemblyController FindController(UnityEngine.SceneManagement.Scene scene)
+        private static AssemblyController FindController(Scene scene)
         {
             foreach (var root in scene.GetRootGameObjects())
             {

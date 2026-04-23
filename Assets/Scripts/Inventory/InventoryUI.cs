@@ -18,26 +18,26 @@ namespace Inventory
             AssemblyItemSelection
         }
 
-        [Header("UI References")]
-        [SerializeField] private GameObject panel;
+        [Header("UI References")] [SerializeField]
+        private GameObject panel;
+
         [SerializeField] private Transform slotsParent;
         [SerializeField] private ItemSlot slotPrefab;
         [SerializeField] private ItemTooltip tooltip;
         [SerializeField] private Canvas rootCanvas;
         [SerializeField] private Image dragIconPrefab;
 
-        [Header("State")]
-        public bool isOpen;
-        public InventoryMode currentMode;
+        [Header("State")] public bool isOpen;
         public CardManager cardManager;
         public AssemblySocket currentAssemblySocket;
 
         private InventoryManager inventory;
         private DayCycleController dayCycle;
-        
+
         private ItemData draggedItem;
         private DragIconController dragIcon;
         private ItemTarget currentTarget;
+        private InventoryMode currentMode;
 
         public event Action OnSocketFilled;
 
@@ -74,9 +74,9 @@ namespace Inventory
             if (!CanOpen())
                 return;
 
-            if (isOpen) 
+            if (isOpen)
                 Close();
-            else 
+            else
                 Open();
         }
 
@@ -246,6 +246,11 @@ namespace Inventory
         public bool IsDayMode()
         {
             return currentMode == InventoryMode.Day;
+        }
+
+        public void SetMode(InventoryMode mode)
+        {
+            currentMode = mode;
         }
     }
 }

@@ -6,7 +6,6 @@ namespace NightCycle
 {
     public class DragDoor : MonoBehaviour
     {
-        [SerializeField] Camera cam;
         [SerializeField] LayerMask doorLayer;
         [SerializeField] Sprite HandImage;
         [SerializeField] Sprite DragImage;
@@ -15,11 +14,15 @@ namespace NightCycle
         [SerializeField] float motorForce = 1500f;
         [SerializeField] float speedMultiplier = 400f;
 
+        [SerializeField] private PlayerStateController playerStateController;
+
+
         Transform selectedDoor;
         HingeJoint joint;
         bool isDragging = false;
         float sideMultiplier = 1f;
         HUDController controller;
+        Camera cam;
 
         //TEST
         LockDoor Lock;
@@ -33,10 +36,12 @@ namespace NightCycle
             _audioService = audioService;
             controller = hudController;
         }
+
         //TEST
         void Start()
         {
             controller = HUDController.instance;
+            cam = Camera.main;
             //OgImage = HUDController.instance.CrosshairImage.sprite;
         }
 
@@ -89,7 +94,7 @@ namespace NightCycle
             {
                 isDragging = true;
                 joint.useMotor = true;
-                PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.DoorState);
+                playerStateController.SetMode(PlayerMode.DoorState);
 
                 Vector3 doorToCam = cam.transform.position - selectedDoor.position;
                 sideMultiplier = Mathf.Sign(Vector3.Dot(selectedDoor.forward, doorToCam));
@@ -106,7 +111,7 @@ namespace NightCycle
                 joint.useMotor = false;
                 joint = null;
                 selectedDoor = null;
-                PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.FreeMovement);
+                playerStateController.SetMode(PlayerMode.FreeMovement);
                 return;
             }
 

@@ -6,90 +6,94 @@ namespace NightCycle
 {
     public class FirstPersonController : MonoBehaviour
     {
-        [Header("Movement Speeds")]
-        [SerializeField] private float walkSpeed = 3.0f;
-        //[SerializeField] private float sprintMultiplier = 2.0f;
+        private const float GROUNDED_GRAVITY = -0.5f;
 
+        [Header("Movement Speeds")] [SerializeField]
+        private float walkSpeed = 3.0f;
 
-        [Header("Jump Parameters")]
-        [SerializeField] private float jumpForce = 5.0f;
+        [Header("Jump Parameters")] [SerializeField]
+        private float jumpForce = 5.0f;
+
         [SerializeField] private float gravityMultiplier = 1.0f;
 
+        [Header("Look Parameters")] [SerializeField]
+        private float mouseSensitivity = 0.1f;
 
-        [Header("Look Parameters")]
-        [SerializeField] private float mouseSensitivity = 0.1f;
         [SerializeField] private float upDownLookRange = 80f;
 
+        [Header("References")] [SerializeField]
+        private CharacterController characterController;
 
-        [Header("References")]
-        [SerializeField] private CharacterController characterController;
         [SerializeField] private CinemachineCamera mainCamera;
-        [Inject] private PlayerInputManager playerInputHandler;
+        [SerializeField] private PlayerStateController playerStateController;
+        
 
+        private PlayerInputManager playerInputHandler;
 
         private Vector3 currentMovement;
         private float verticalRotation;
         private float CurrentSpeed => walkSpeed;
 
+        [Inject]
+        private void Construct(PlayerInputManager playerInputHandler)
+        {
+            this.playerInputHandler = playerInputHandler;
+            this.playerStateController = playerStateController;
+        }
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
+        {
+            InitializeCursor();
+        }
+
+        private void InitializeCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
 
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            if (PlayerStateController.Instance == null)
+            if (!playerStateController.CanMove())
             {
-                Debug.Log("PlayerStateController IS NULL!");
-                return;
-            }
-
-            if (!PlayerStateController.Instance.CanMove())
-            {
-                //TEST
-                //HandleJumping();
                 HandleJumpingItemSelection();
                 return;
             }
 
             HandleMovement();
-            //TEST
-            if (!PlayerStateController.Instance.CanRotate())
+
+            if (playerStateController.CanRotate())
             {
-                return;
+                HandleRotation();
             }
-            //TEST
-            HandleRotation();
         }
 
-        //test
+
         private void HandleJumpingItemSelection()
+        {
+            ResetHorizontalMovement();
+            ApplyGravityOnly();
+            characterController.Move(currentMovement * Time.deltaTime);
+        }
+
+        private void ResetHorizontalMovement()
         {
             currentMovement.x = 0;
             currentMovement.z = 0;
+        }
 
+        private void ApplyGravityOnly()
+        {
             if (characterController.isGrounded)
             {
-                currentMovement.y = -0.5f;
-
-
-                /*if (playerInputHandler.JumpTriggered)
-            {
-                currentMovement.y = jumpForce;
-            }*/
+                currentMovement.y = GROUNDED_GRAVITY;
             }
             else
             {
                 currentMovement.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
             }
-            characterController.Move(currentMovement * Time.deltaTime);
         }
-        //test
 
         private Vector3 CalculateWorldDirection()
         {
@@ -98,13 +102,11 @@ namespace NightCycle
             return worldDirection.normalized;
         }
 
-
         private void HandleJumping()
         {
             if (characterController.isGrounded)
             {
-                currentMovement.y = -0.5f;
-
+                currentMovement.y = GROUNDED_GRAVITY;
 
                 if (playerInputHandler.JumpTriggered)
                 {
@@ -117,25 +119,24 @@ namespace NightCycle
             }
         }
 
-
         private void HandleMovement()
         {
             Vector3 worldDirection = CalculateWorldDirection();
-            currentMovement.x = worldDirection.x * CurrentSpeed;
-            currentMovement.z = worldDirection.z * CurrentSpeed;
-
-
+            SetHorizontalMovement(worldDirection);
             HandleJumping();
-            //TEST
             characterController.Move(currentMovement * Time.deltaTime);
         }
 
+        private void SetHorizontalMovement(Vector3 worldDirection)
+        {
+            currentMovement.x = worldDirection.x * CurrentSpeed;
+            currentMovement.z = worldDirection.z * CurrentSpeed;
+        }
 
         private void ApplyHorizontalRotation(float rotationAmount)
         {
             transform.Rotate(0, rotationAmount, 0);
         }
-
 
         private void ApplyVerticalRotation(float rotationAmount)
         {
@@ -143,12 +144,11 @@ namespace NightCycle
             mainCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
         }
 
-
         private void HandleRotation()
         {
-            float mouseXRotation = playerInputHandler.RotationInput.x * mouseSensitivity;
-            float mouseYRotation = playerInputHandler.RotationInput.y * mouseSensitivity;
-
+            Vector2 rotationInput = playerInputHandler.RotationInput;
+            float mouseXRotation = rotationInput.x * mouseSensitivity;
+            float mouseYRotation = rotationInput.y * mouseSensitivity;
 
             ApplyHorizontalRotation(mouseXRotation);
             ApplyVerticalRotation(mouseYRotation);

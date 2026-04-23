@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 281060584833038633}
   - component: {fileID: 8962173679195792689}
   - component: {fileID: 8411479665512441087}
+  - component: {fileID: 5086084161814094729}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 587563254775125431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.157, y: 2.125, z: 30.77}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -81,6 +82,7 @@ MonoBehaviour:
   upDownLookRange: 80
   characterController: {fileID: 1127454649717024361}
   mainCamera: {fileID: 4661916316352681474}
+  playerStateController: {fileID: 8411479665512441087}
 --- !u!114 &8962173679195792689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3adad74412334ec4aa90c47e8237825b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
-  PlayerReach: 3
+  playerReach: 3
+  playerStateController: {fileID: 8411479665512441087}
 --- !u!114 &8411479665512441087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +109,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8838f88e532c1745a7cc0ed5cfca2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStateController
+--- !u!114 &5086084161814094729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587563254775125431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b48403eedb1e848a442fdc7660c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerView
+  _playerInteraction: {fileID: 8962173679195792689}
+  _playerStateController: {fileID: 8411479665512441087}
+  _fpc: {fileID: 281060584833038633}
 --- !u!1 &3305109169647983864
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +439,7 @@ MonoBehaviour:
   og: {fileID: 0}
   motorForce: 1500
   speedMultiplier: 400
+  playerStateController: {fileID: 8411479665512441087}
   LockImage: {fileID: 0}
 --- !u!54 &2490825963777087437
 Rigidbody:
