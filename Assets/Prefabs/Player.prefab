@@ -57,9 +57,9 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.65
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.6
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonController
   walkSpeed: 8
   jumpForce: 5
-  gravityMultiplier: 1
+  gravityMultiplier: 10
   mouseSensitivity: 0.1
   upDownLookRange: 80
   characterController: {fileID: 1127454649717024361}
@@ -124,6 +124,7 @@ MonoBehaviour:
   _playerInteraction: {fileID: 8962173679195792689}
   _playerStateController: {fileID: 8411479665512441087}
   _fpc: {fileID: 281060584833038633}
+  _lantern: {fileID: 933663937137675621}
 --- !u!1 &3305109169647983864
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,9 +135,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8895487729252122857}
   - component: {fileID: 4661916316352681474}
+  - component: {fileID: 2544127867496622020}
   m_Layer: 0
   m_Name: Player Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,8 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
-    Enabled: 0
-    m_Value: 0
+    Enabled: 1
+    m_Value: 1
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -200,6 +202,14 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!81 &2544127867496622020
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305109169647983864}
+  m_Enabled: 1
 --- !u!1 &6951213798720070645
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +221,8 @@ GameObject:
   - component: {fileID: 8787732553685683864}
   - component: {fileID: 7374664904985201373}
   - component: {fileID: 6116049746037563484}
+  - component: {fileID: 4872183160668967902}
+  - component: {fileID: 2217049873432020002}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -327,6 +339,79 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!95 &4872183160668967902
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951213798720070645}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f28018dd7baf9947b9b152be9529809, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2217049873432020002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951213798720070645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c82bdd62d4ca784d83e14ac1c2fb74c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationEventDispatcher
+  onAnimationTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: StatueController, Assembly-CSharp
+        m_MethodName: advance_pose
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: StatueController, Assembly-CSharp
+        m_MethodName: advance_pose
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: StatueController, Assembly-CSharp
+        m_MethodName: advance_pose
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7358183692309942090
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,17 +515,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5fbf75f89117f84c9ba35f7feff94c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragDoor
-  cam: {fileID: 0}
   doorLayer:
     serializedVersion: 2
     m_Bits: 128
-  HandImage: {fileID: 21300000, guid: f32f6a2de684f8142947c9e93042a428, type: 3}
-  DragImage: {fileID: 21300000, guid: b4de0b300fad7c140b1711401e178c11, type: 3}
-  og: {fileID: 0}
+  HandImage: {fileID: 21300000, guid: 1845bbe1535319145b4e27d4d5e4ef41, type: 3}
+  DragImage: {fileID: 21300000, guid: f8c62efbee2243549a5c918e71f7925a, type: 3}
+  og: {fileID: 21300000, guid: dfd3cbca8fb482646b699e121c1e83e5, type: 3}
   motorForce: 1500
   speedMultiplier: 400
   playerStateController: {fileID: 8411479665512441087}
-  LockImage: {fileID: 0}
+  LockImage: {fileID: 21300000, guid: 380b7561b1dd23b4fa30bf5492c0da77, type: 3}
 --- !u!54 &2490825963777087437
 Rigidbody:
   m_ObjectHideFlags: 0

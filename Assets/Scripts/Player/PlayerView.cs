@@ -11,4 +11,12 @@ public class PlayerView : MonoBehaviour
 
     [SerializeField] private FirstPersonController _fpc;
     public FirstPersonController FirstPersonController => _fpc;
+
+    [SerializeField] private GameObject _lantern;
+    
+    
+    public void SetLanternActivity(bool value)
+    {
+        _lantern.SetActive(value);
+    }
 }

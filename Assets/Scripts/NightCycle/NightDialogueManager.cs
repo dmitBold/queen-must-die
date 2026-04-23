@@ -1,31 +1,38 @@
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
+using Zenject;
 
 namespace NightCycle
 {
     public class NightDialogueManager : MonoBehaviour
     {
         public static NightDialogueManager Instance;
-
-        [Header("UI ������")]
-        [SerializeField] private GameObject dialoguePanel;
+        
+        [Header("UI ������")] [SerializeField] private GameObject dialoguePanel;
         [SerializeField] private NightTypewriter typewriter;
-    
+
         private string[] currentPages;
         private int currentPageIndex;
         private NightDialogueInteractable currentNPC;
-        [SerializeField] PlayerInteraction playerInteraction;
+        private PlayerInteraction playerInteraction;
 
         private PlayableDirector currentDirector;
+
         //test
         public CinemachineBrain cameraBrain;
         //test
 
+        [Inject]
+        private void Construct(PlayerInteraction playerInteraction)
+        {
+            this.playerInteraction = playerInteraction;
+        }
+
         void Awake()
         {
-            Instance = this;
             dialoguePanel.SetActive(false);
+            Instance = this;
         }
 
         void Update()
@@ -59,7 +66,7 @@ namespace NightCycle
             else
             {
                 currentPageIndex++;
-            
+
                 if (currentPageIndex < currentPages.Length)
                 {
                     PlayCurrentPage();
@@ -112,9 +119,9 @@ namespace NightCycle
                 {
                     cameraBrain.enabled = true;
                 }
+
                 currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(1);
                 currentDirector = null;
-
             }
             else
             {
@@ -122,6 +129,7 @@ namespace NightCycle
                 {
                     playerInteraction.ForceExitFocus();
                 }
+
                 currentNPC = null;
             }
         }
@@ -151,12 +159,10 @@ namespace NightCycle
                     cameraBrain.enabled = false;
                 }
                 //TEST TEST
-
             }
 
             dialoguePanel.SetActive(true);
             PlayCurrentPage();
         }
-
     }
 }

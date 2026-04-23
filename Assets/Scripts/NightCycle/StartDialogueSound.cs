@@ -7,7 +7,6 @@ namespace NightCycle
 {
     public class StartDialogueSound : MonoBehaviour
     {
-
         public AudioClip StartSound;
 
         [Header(" ")]
@@ -19,12 +18,14 @@ namespace NightCycle
 
 
         private AudioService _audioService;
+        private NightDialogueManager _dialogueManager;
 
         [Inject]
-        public void Constructor(AudioService audioService, PlayerStateController playerStateController)
+        public void Constructor(AudioService audioService, PlayerStateController playerStateController, NightDialogueManager dialogueManager)
         {
             _audioService = audioService;
             _playerStateController = playerStateController;
+            _dialogueManager = dialogueManager;
         }
 
         void Start()
@@ -44,7 +45,7 @@ namespace NightCycle
 
         void OnSoundEnded()
         {
-            NightDialogueManager.Instance.StartDialogue(null, dialoguePages);
+            _dialogueManager.StartDialogue(null, dialoguePages);
 
             _playerStateController.SetMode(PlayerMode.Focused);
         }

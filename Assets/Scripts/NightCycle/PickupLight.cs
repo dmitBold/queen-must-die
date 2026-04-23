@@ -8,7 +8,7 @@ namespace NightCycle
         [SerializeField] PlayerFlashlight flashlight;
         public void Pickup()
         {
-            flashlight.Enable();
+            flashlight.TurnOn();
 
             if (destroyOnPickup)
             {

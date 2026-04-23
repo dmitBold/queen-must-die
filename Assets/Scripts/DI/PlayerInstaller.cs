@@ -7,6 +7,8 @@ namespace DI
     public class PlayerInstaller : MonoInstaller
     {
         [SerializeField] private Transform _spawnPoint;
+        [SerializeField] private bool _enableLantern;
+
 
         public override void InstallBindings()
         {
@@ -16,6 +18,7 @@ namespace DI
             Container.BindInstance(instance.FirstPersonController).AsSingle();
             Container.BindInstance(instance.PlayerInteraction).AsSingle();
             Container.BindInstance(instance.PlayerStateController).AsSingle();
+            instance.SetLanternActivity(_enableLantern);
         }
     }
 }
