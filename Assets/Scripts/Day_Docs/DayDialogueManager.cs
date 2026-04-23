@@ -25,6 +25,7 @@ namespace NightCycle
 
         public void StartDialogue(string[] pages)
         {
+            Debug.Log("AAAAAAAAAAAAAAAAAAA");
             if (pages == null || pages.Length == 0) return;
 
             currentPages = pages;
