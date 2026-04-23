@@ -123,9 +123,11 @@ namespace NightCycle
                     if (scene_light != null) scene_light.enabled = false;
                     StartCoroutine(CandlesRoutine());
 
-                    _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-3.86f, 10.51f, -102.38f), 1, true, 0.27f, 7.29f);
+                    break;
+                case 3:
+                    _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-3.86f, 10.51f, -102.38f), 1, true, 0.27f, 4.29f);
 
-                    _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-9.71f, 10.51f, -120.86f), 1, true, 0.27f, 7.29f);
+                    _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-9.71f, 10.51f, -120.86f), 1, true, 0.27f, 6.18f);
                     break;
                 case 5:
                     _audioService.PlaySound(KnockSound);
