@@ -38,7 +38,7 @@ namespace NightCycle
             _audioService = audioService;
         }
 
-        void Start()
+        private void Start()
         {
             foreach (var cylinder in cylinders)
             {
@@ -49,9 +49,7 @@ namespace NightCycle
 
         public void Enter()
         {
-            Debug.Log("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
             isFocused = true;
-            //HUDController.instance.EnableInteractionText("������ �� ������. E - �����");
             textArea.text = tutorialText;
         }
 
