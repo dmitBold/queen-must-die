@@ -1,3 +1,4 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -8,6 +9,7 @@ namespace NightCycle
     public class NightDialogueManager : MonoBehaviour
     {
         public static NightDialogueManager Instance;
+        public event  Action DialogEnded;
         
         [Header("UI ������")] [SerializeField] private GameObject dialoguePanel;
         [SerializeField] private NightTypewriter typewriter;
@@ -132,6 +134,8 @@ namespace NightCycle
 
                 currentNPC = null;
             }
+
+            DialogEnded?.Invoke();
         }
 
         public void ForceEndDialogue()
