@@ -17,8 +17,6 @@ namespace NightCycle
             instance = this;
             DefaultImage = CrosshairImage.sprite;
             SetDefaultImage();
-
-
         }
 
         public void EnableInteractionText(string text)
