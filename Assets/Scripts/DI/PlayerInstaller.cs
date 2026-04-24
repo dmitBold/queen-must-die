@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using Inventory;
+using NightCycle;
+using UnityEngine;
 using Zenject;
 using Zenject.SpaceFighter;
 
@@ -19,6 +22,19 @@ namespace DI
             Container.BindInstance(instance.PlayerInteraction).AsSingle();
             Container.BindInstance(instance.PlayerStateController).AsSingle();
             instance.SetLanternActivity(_enableLantern);
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            Container.Resolve<InventoryUI>().SetMode(InventoryUI.InventoryMode.Default);
+            HUDController.instance.SetCrosshairActivity(true);
+        }
+
+        private void OnDestroy()
+        {
+            HUDController.instance.SetCrosshairActivity(false);
+            Container.Resolve<InventoryUI>().SetMode(InventoryUI.InventoryMode.Disable);
         }
     }
 }

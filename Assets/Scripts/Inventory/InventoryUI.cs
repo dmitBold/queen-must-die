@@ -13,10 +13,10 @@ namespace Inventory
     {
         public enum InventoryMode
         {
-            Day,
+            Default,
             NightItemSelection,
             AssemblyItemSelection,
-            LockInteraction
+            Disable
         }
 
         [Header("UI References")] [SerializeField]
@@ -53,6 +53,11 @@ namespace Inventory
         {
             if (inventory != null)
                 inventory.OnInventoryChanged -= Refresh;
+        }
+
+        private void Start()
+        {
+            SetMode(InventoryMode.Disable);
         }
 
         public void Init(DayCycleController dayCycle)
@@ -115,7 +120,7 @@ namespace Inventory
                 ItemSlot slot = Instantiate(slotPrefab, slotsParent);
 
                 bool canApply = false;
-                if (currentMode == InventoryMode.Day)
+                if (currentMode == InventoryMode.Default)
                 {
                     canApply = true;
                 }
@@ -232,26 +237,27 @@ namespace Inventory
 
         public void ExitItemSelection()
         {
-            currentMode = InventoryMode.Day;
+            currentMode = InventoryMode.Default;
             currentTarget = null;
             Close();
         }
 
         public void ExitSelection()
         {
-            currentMode = InventoryMode.Day;
+            currentMode = InventoryMode.Default;
             currentAssemblySocket = null;
             Close();
         }
 
-        public bool IsDayMode()
+        public bool IsDefaultMode()
         {
-            return currentMode == InventoryMode.Day;
+            return currentMode == InventoryMode.Default;
         }
 
         public void SetMode(InventoryMode mode)
         {
             currentMode = mode;
+            rootCanvas.gameObject.SetActive(mode != InventoryMode.Disable);
         }
     }
 }

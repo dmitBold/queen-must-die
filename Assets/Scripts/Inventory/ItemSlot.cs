@@ -126,7 +126,7 @@ namespace Inventory
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (item == null || !inventoryUI.IsDayMode()) return;
+            if (item == null || !inventoryUI.IsDefaultMode()) return;
             inventoryUI.BeginDrag(item, icon.sprite);
         }
 
