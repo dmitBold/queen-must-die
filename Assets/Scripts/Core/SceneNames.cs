@@ -7,7 +7,9 @@ namespace Core
         HoM,
         Menu,
         Assembly,
-        IntroDialog
+        IntroDialog,
+        IntroDialogue2,
+        Throne
     }
 
     public static class SceneNames
@@ -18,6 +20,8 @@ namespace Core
         public const string HoM = "HoMScene";
         public const string Menu = "MenuScene";
         public const string IntroDialog = "IntroDialog";
+        public const string IntroDialogue2 = "IntroDialogue2";
+        public const string Throne = "Throne";
 
         public static string GetName(GameScene scene)
         {
@@ -29,6 +33,8 @@ namespace Core
                 case GameScene.Menu: return Menu;
                 case GameScene.Assembly: return Assembly;
                 case GameScene.IntroDialog: return IntroDialog;
+                case GameScene.IntroDialogue2: return IntroDialogue2;
+                case GameScene.Throne: return Throne;
                 default: return Night;
             }
         }
