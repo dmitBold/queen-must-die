@@ -62,6 +62,7 @@ namespace Inventory
 
         public void Init(DayCycleController dayCycle)
         {
+            SetMode(InventoryMode.Default);
             this.dayCycle = dayCycle;
             Refresh();
             Close();
