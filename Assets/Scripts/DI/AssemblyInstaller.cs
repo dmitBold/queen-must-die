@@ -14,11 +14,6 @@ namespace DI
         public override void InstallBindings()
         {
             Container
-                .Bind<ScenesManager>()
-                .AsSingle()
-                .WithArguments(this as MonoBehaviour);
-
-            Container
                 .Bind<AssemblyService>()
                 .AsSingle();
         }
