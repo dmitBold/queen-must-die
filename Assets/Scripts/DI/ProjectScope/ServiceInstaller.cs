@@ -13,6 +13,11 @@ namespace DI
         {
             Container.BindInstance(audioService).AsSingle();
             Container.Bind<InventoryManager>().AsSingle();
+            Container
+                .Bind<ScenesManager>()
+                .AsSingle()
+                .WithArguments(this as MonoBehaviour);
+
         }
     }
 }

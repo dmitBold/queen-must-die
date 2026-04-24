@@ -43,11 +43,20 @@ namespace NightCycle
         {
             _brain.DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.Cut, 0f);
             _brain.OutputCamera.cullingMask = LayerMask.GetMask("Assembly");
+            _brain.OutputCamera.clearFlags = CameraClearFlags.SolidColor;
+            _brain.OutputCamera.backgroundColor = new Color(0.102f, 0.102f, 0.098f);
         }
 
         private void SetupCameraForExit()
         {
             _brain.OutputCamera.cullingMask = -1;
+            _brain.OutputCamera.clearFlags = CameraClearFlags.Skybox;
+            Invoke(nameof(SetCameraBlendingModeToSmooth), 0.5f);
+        }
+
+        private void SetCameraBlendingModeToSmooth()
+        {
+            _brain.DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.EaseInOut, 2f);
         }
 
         private void OnAssemblyCompleted()
