@@ -263,6 +263,11 @@ namespace Core
 
         void Start()
         {
+            HUDController.instance.SetCrosshairActivity(false);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            HUDController.instance.DisableInteractionText();
+            
             visitor.OnVisitorArrived += OnVisitorArrived;
             visitor.OnVisitorLeft += OnVisitorLeft;
             cardManager.OnCardResolved += OnCardResolved;
