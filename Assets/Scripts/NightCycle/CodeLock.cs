@@ -24,11 +24,6 @@ namespace NightCycle
 
         //TEST
         public AudioClip unlockSound;
-        public Camera cam;
-        public string tutorialText;
-        string og_text;
-        public TextMeshProUGUI textArea;
-        //TEST
 
         private AudioService _audioService;
 
@@ -44,19 +39,16 @@ namespace NightCycle
             {
                 cylinder.OnValueChanged += CheckCombination;
             }
-            og_text = textArea.text;
         }
 
         public void Enter()
         {
             isFocused = true;
-            textArea.text = tutorialText;
         }
 
         public void Exit()
         {
             isFocused = false;
-            textArea.text = og_text;
         }
 
         void Update()
@@ -76,7 +68,7 @@ namespace NightCycle
 
         private void HandleClick()
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 10f, cylinderLayer))
             {
                 if (hit.collider.TryGetComponent<CodeLockCylinder>(out var cylinder))

@@ -15,7 +15,8 @@ namespace Inventory
         {
             Day,
             NightItemSelection,
-            AssemblyItemSelection
+            AssemblyItemSelection,
+            LockInteraction
         }
 
         [Header("UI References")] [SerializeField]
@@ -236,7 +237,7 @@ namespace Inventory
             Close();
         }
 
-        public void ExitAssemblySelection()
+        public void ExitSelection()
         {
             currentMode = InventoryMode.Day;
             currentAssemblySocket = null;

@@ -5144,6 +5144,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -582824486876439115, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
   m_PrefabInstance: {fileID: 211407743}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &149065648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 149065650}
+  - component: {fileID: 149065649}
+  m_Layer: 0
+  m_Name: AssemblyService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &149065649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149065648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec242ef88a548b64591a1eba398bdfd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DI.AssemblyInstaller
+--- !u!4 &149065650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149065648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1017896076}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &152356180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70333,7 +70377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec87004d03977934dbfdfb13e9c0b697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimHelper
-  animator: {fileID: 0}
+  animator: {fileID: 846177208}
   clip_name: 
   objects:
   - {fileID: 0}
@@ -78159,6 +78203,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 384771733}
   - {fileID: 902237176}
+  - {fileID: 149065649}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -78174,7 +78219,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _parentNewObjectsUnderSceneContext: 0
-  _contractNames: []
+  _contractNames:
+  - HoM
   _parentContractNames: []
 --- !u!4 &1017896076
 Transform:
@@ -78191,6 +78237,7 @@ Transform:
   m_Children:
   - {fileID: 384771734}
   - {fileID: 902237175}
+  - {fileID: 149065650}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1019654895
@@ -103286,9 +103333,9 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FocusObj, Assembly-CSharp
-        m_MethodName: OnEnterFocus
+      - m_Target: {fileID: 1783476972}
+        m_TargetAssemblyTypeName: NightCycle.AssemblyInteractable, Assembly-CSharp
+        m_MethodName: Interact
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -103355,8 +103402,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.AssemblyInteractable
   onAssemblyCompleted:
     m_PersistentCalls:
-      m_Calls: []
-  viewPrefab: {fileID: 0}
+      m_Calls:
+      - m_Target: {fileID: 1783476965}
+        m_TargetAssemblyTypeName: UnityEngine.BoxCollider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1783476970}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8420665358059431062}
+        m_TargetAssemblyTypeName: NightCycle.LockDoor, Assembly-CSharp
+        m_MethodName: Unlock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7593868965127938423}
+        m_TargetAssemblyTypeName: NightCycle.LockDoor, Assembly-CSharp
+        m_MethodName: Unlock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  viewPrefab: {fileID: 6373513641886436455, guid: 5645b172f9952ed4f8ef1f7a440b4587, type: 3}
 --- !u!43 &1785622554
 Mesh:
   m_ObjectHideFlags: 0
@@ -115593,6 +115688,7 @@ GameObject:
   - component: {fileID: 2047904700}
   - component: {fileID: 2047904699}
   - component: {fileID: 2047904698}
+  - component: {fileID: 2047904702}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -115750,6 +115846,24 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &2047904702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047904696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.ZenjectBinding
+  _components:
+  - {fileID: 2047904698}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 1017896075}
+  _bindType: 0
 --- !u!1 &2048661099
 GameObject:
   m_ObjectHideFlags: 0
@@ -129202,8 +129316,8 @@ GameObject:
   - component: {fileID: 5342616406713611029}
   - component: {fileID: 5342616406713611028}
   - component: {fileID: 5342616406713611027}
-  - component: {fileID: 5342616406713611026}
   - component: {fileID: 5342616406713611025}
+  - component: {fileID: 5342616406713611032}
   m_Layer: 0
   m_Name: GOLEM_RIGGED_BROKEN
   m_TagString: Interactable
@@ -129227,9 +129341,9 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5342616406713611025}
-        m_TargetAssemblyTypeName: Interactable, Assembly-CSharp
-        m_MethodName: Interact_Assembly
+      - m_Target: {fileID: 5342616406713611032}
+        m_TargetAssemblyTypeName: NightCycle.AssemblyInteractable, Assembly-CSharp
+        m_MethodName: Interact
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -129239,93 +129353,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  assemblyController: {fileID: 5342616406713611026}
+  assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
---- !u!114 &5342616406713611026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5342616406713611024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 800bbd5a2c67260478517feb53b2d02d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AssemblyController
-  assemblyCamera: {fileID: 0}
-  camera: {fileID: 0}
-  assemblyCanvas: {fileID: 0}
-  spawnPoint: {fileID: 0}
-  rotationSpeed: 80
-  socketLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  OnCompleted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 533772798}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 5342616406713611024}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 101856107}
-        m_TargetAssemblyTypeName: AG_Manager, Assembly-CSharp
-        m_MethodName: TurnOffFIRE
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 80359104}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  isActive: 0
 --- !u!114 &5342616406713611027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129528,6 +129558,70 @@ MonoBehaviour:
   - {fileID: 6563122017416920073}
   - {fileID: 6926881068585100566}
   - {fileID: 7881412515885380473}
+--- !u!114 &5342616406713611032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5342616406713611024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c72aeb565ffd0439edf38782fda3e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.AssemblyInteractable
+  onAssemblyCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 533772798}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5342616406713611024}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 101856107}
+        m_TargetAssemblyTypeName: AG_Manager, Assembly-CSharp
+        m_MethodName: TurnOffFIRE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 80359104}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  viewPrefab: {fileID: 1526973361532908333, guid: cd37342313919cd4daa296c93c4bc479, type: 3}
 --- !u!4 &5343788110622615426
 Transform:
   m_ObjectHideFlags: 0
