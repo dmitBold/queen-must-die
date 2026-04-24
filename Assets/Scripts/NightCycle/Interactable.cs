@@ -33,18 +33,18 @@ namespace NightCycle
         void Start()
         {
             outline = GetComponent<Outline>();
-            outline.enabled = false;
+            DisableOutline();
         }
 
         public void DisableOutline()
         {
-            outline.enabled = false;
+            if (outline != null) outline.enabled = false;
         }
 
         public void EnableOutline()
         {
             //outline.Rebuild();
-            outline.enabled = true;
+            if (outline != null) outline.enabled = true;
         }
 
         public void Interact()
@@ -70,24 +70,7 @@ namespace NightCycle
 
         public void Interact_Assembly()
         {
-            if (!assemblyController.isActive)
-            {
-                assemblyController.EnterAssembly();
-                HUDController.instance.EnableInteractionText("E ����� �����");
-            }
-            else
-            {
-                //outline = null;
-                //outline = GetComponent<Outline>();
-                /*outline.enabled = false;
-            outline.OutlineColor = outline.OutlineColor;
-            outline.enabled = true;*/
-                outline.Rebuild();
-                outline.enabled = false;
-                outline.enabled = true;
-                assemblyController.ExitAssembly();
-            
-            }
+           
         }
 
     }

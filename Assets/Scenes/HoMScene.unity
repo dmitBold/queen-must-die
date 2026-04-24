@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.5
+  m_AmbientIntensity: 0.49
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -15733,6 +15733,50 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 178230, guid: bfb5063a60f6ab946b7818053c46d9d2, type: 3}
   m_PrefabInstance: {fileID: 519184704}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1042832329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1042832331}
+  - component: {fileID: 1042832330}
+  m_Layer: 0
+  m_Name: AssembleInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1042832330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042832329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec242ef88a548b64591a1eba398bdfd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DI.AssemblyInstaller
+--- !u!4 &1042832331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042832329}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2146122120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1049404893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -331508,6 +331552,7 @@ GameObject:
   - component: {fileID: 2095540551}
   - component: {fileID: 2095540550}
   - component: {fileID: 2095540552}
+  - component: {fileID: 2095540553}
   m_Layer: 0
   m_Name: CinemachineBrain
   m_TagString: MainCamera
@@ -331665,6 +331710,24 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095540547}
   m_Enabled: 1
+--- !u!114 &2095540553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095540547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Zenject::Zenject.ZenjectBinding
+  _components:
+  - {fileID: 2095540548}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 2146122119}
+  _bindType: 0
 --- !u!1001 &2101465719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -332780,6 +332843,7 @@ MonoBehaviour:
   - {fileID: 857299769}
   - {fileID: 151245357}
   - {fileID: 1876488952}
+  - {fileID: 1042832330}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -332814,6 +332878,7 @@ Transform:
   - {fileID: 857299770}
   - {fileID: 151245358}
   - {fileID: 1876488953}
+  - {fileID: 1042832331}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807

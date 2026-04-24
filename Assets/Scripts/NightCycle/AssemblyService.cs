@@ -1,4 +1,5 @@
 using Core;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,29 +13,30 @@ namespace NightCycle
     public class AssemblyService
     {
         public bool IsActive => _isInitialized && _controller != null && _controller.isActive;
-        
+
         private readonly ScenesManager _scenesManager;
         private string _previousSceneName;
         private AssemblyController _controller;
         private bool _isInitialized; // Флаг, что сцена загружена и контроллер инициализирован
+        private System.Action _pendingOnComplete;
 
-        public AssemblyService(ScenesManager scenesManager)
+        public AssemblyService(ScenesManager scenesManager, CinemachineBrain cinemachineBrain)
         {
             _scenesManager = scenesManager;
         }
 
-        public void OpenAssembly(AssemblyView viewPrefab, System.Action onCompleteCallback = null)
+        public void OpenAssembly(InteractableView viewPrefab, System.Action onCompleteCallback = null)
         {
             _previousSceneName = SceneManager.GetActiveScene().name;
 
-            // Если сцена уже загружена и инициализирована - просто активируем Enter
             if (_isInitialized && _controller != null)
             {
+                _scenesManager.SetActive(SceneNames.Assembly);
+                _controller.InitializeAssembly(viewPrefab);
                 ActivateAssemblyMode(onCompleteCallback);
                 return;
             }
 
-            // Иначе загружаем сцену и инициализируем
             _scenesManager.LoadAdditive(SceneNames.Assembly, scene =>
             {
                 _controller = FindController(scene);
@@ -45,30 +47,27 @@ namespace NightCycle
                     return;
                 }
 
-                // Инициализация на старте (создание вью, настройка сокетов)
                 _controller.InitializeAssembly(viewPrefab);
                 _isInitialized = true;
-                
+
                 _scenesManager.SetActive(SceneNames.Assembly);
-                
-                // После инициализации активируем режим сборки
                 ActivateAssemblyMode(onCompleteCallback);
             });
         }
-        
+
         private void ActivateAssemblyMode(System.Action onCompleteCallback)
         {
-            if (_controller == null) return;
-            
-            // Подписываемся на завершение
-            _controller.OnCompleted.AddListener(() =>
-            {
-                onCompleteCallback?.Invoke();
-                CloseAssembly();
-            });
-            
-            // Активируем режим сборки (Enter)
-            _controller.OnEnterFocus();
+            _controller.OnCompleted.RemoveListener(OnControllerCompleted);
+            _pendingOnComplete = onCompleteCallback;
+            _controller.OnCompleted.AddListener(OnControllerCompleted);
+
+            _controller.EnterAssembly();
+        }
+
+        private void OnControllerCompleted()
+        {
+            _pendingOnComplete?.Invoke();
+            CloseAssembly();
         }
 
         public void CloseAssembly()
@@ -77,9 +76,6 @@ namespace NightCycle
             {
                 _controller.ExitAssembly();
             }
-            
-            _controller = null;
-            _isInitialized = false;
 
             if (!string.IsNullOrEmpty(_previousSceneName))
             {
