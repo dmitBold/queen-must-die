@@ -36,6 +36,11 @@ namespace NightCycle
         {
             CrosshairImage.sprite = sprite;
         }
+        
+        public void SetCrosshairActivity(bool isActive)
+        {
+            CrosshairImage.gameObject.SetActive(isActive);
+        }
 
         private void Start()
         {

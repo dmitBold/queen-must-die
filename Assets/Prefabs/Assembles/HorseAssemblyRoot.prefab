@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6687574160680125014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7048249830630471653}
+  m_Layer: 6
+  m_Name: RotationRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7048249830630471653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687574160680125014}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7331030080777798644}
+  m_Father: {fileID: 5481974973708117278}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7679120335630139501
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,11 +58,11 @@ Transform:
   m_GameObject: {fileID: 7679120335630139501}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.95068, y: 3.5242605, z: -20.107243}
+  m_LocalPosition: {x: 0, y: 0.59, z: -1.348}
   m_LocalScale: {x: 0.175, y: 0.175, z: 0.175}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 7331030080777798644}
+  - {fileID: 7048249830630471653}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7731635846444126161
@@ -45,7 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4448d9bb5bbe7c4fbc6033efdb5a849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.AssemblyView
-  rotationRoot: {fileID: 5481974973708117278}
+  rotationRoot: {fileID: 7048249830630471653}
+  HintText: 
+  onInteractionCompleted:
+    m_PersistentCalls:
+      m_Calls: []
   sockets:
   - {fileID: 4558610959145548299}
   - {fileID: 7521599805075609911}
@@ -58,7 +94,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5481974973708117278}
+    m_TransformParent: {fileID: 7048249830630471653}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a8428882ec6a66b49a9012e8236d2a13, type: 3}
       propertyPath: m_LocalScale.x
@@ -78,11 +114,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8428882ec6a66b49a9012e8236d2a13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.77
+      value: -4.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8428882ec6a66b49a9012e8236d2a13, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.52571434
+      value: -0.52570885
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8428882ec6a66b49a9012e8236d2a13, type: 3}
       propertyPath: m_LocalRotation.w

@@ -35,6 +35,8 @@ namespace NightCycle
         {
             dialoguePanel.SetActive(false);
             Instance = this;
+            
+            HUDController.instance.SetCrosshairActivity(true);
         }
 
         void Update()

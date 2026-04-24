@@ -20,7 +20,7 @@ namespace NightCycle
         private bool _isInitialized; // Флаг, что сцена загружена и контроллер инициализирован
         private System.Action _pendingOnComplete;
 
-        public AssemblyService(ScenesManager scenesManager, CinemachineBrain cinemachineBrain)
+        public AssemblyService(ScenesManager scenesManager)
         {
             _scenesManager = scenesManager;
         }
@@ -57,6 +57,7 @@ namespace NightCycle
 
         private void ActivateAssemblyMode(System.Action onCompleteCallback)
         {
+            HUDController.instance.SetCrosshairActivity(false);
             _controller.OnCompleted.RemoveListener(OnControllerCompleted);
             _pendingOnComplete = onCompleteCallback;
             _controller.OnCompleted.AddListener(OnControllerCompleted);
@@ -81,6 +82,8 @@ namespace NightCycle
             {
                 _scenesManager.SetActive(_previousSceneName);
             }
+            
+            HUDController.instance.SetCrosshairActivity(true);
         }
 
         private static AssemblyController FindController(Scene scene)

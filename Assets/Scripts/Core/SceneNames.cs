@@ -13,7 +13,7 @@ namespace Core
     public static class SceneNames
     {
         public const string Assembly = "AssemblyScene";
-        public const string Night = "NightScene";
+        public const string Night = "NightCycle";
         public const string Day = "DayCycle";
         public const string HoM = "HoMScene";
         public const string Menu = "MenuScene";
