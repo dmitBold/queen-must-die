@@ -147,7 +147,8 @@ namespace NightCycle
             assemblyCanvas.gameObject.SetActive(true);
             HUDController.instance.DisableInteractionText();
 
-            // Вызываем OnEnterFocus для текущего объекта
+            // Вызываем OnEnterFocus для текущего объекта\
+            currentView?.gameObject.SetActive(true);
             currentView?.OnEnterFocus();
 
             // Настраиваем режим в зависимости от типа объекта
@@ -158,7 +159,7 @@ namespace NightCycle
             else if (currentLockView != null)
             {
                 // Для замков не нужен режим выбора предметов из инвентаря
-                inventoryUI.SetMode(InventoryUI.InventoryMode.LockInteraction);
+                inventoryUI.SetMode(InventoryUI.InventoryMode.Disable);
             }
 
             playerStateController.SetMode(PlayerMode.Focused);
@@ -171,6 +172,8 @@ namespace NightCycle
         {
             // Вызываем OnExitFocus для текущего объекта
             currentView?.OnExitFocus();
+            currentView?.gameObject.SetActive(false);
+            
 
             assemblyCanvas.gameObject.SetActive(false);
             isActive = false;

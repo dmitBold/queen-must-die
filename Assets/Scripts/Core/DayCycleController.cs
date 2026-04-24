@@ -263,7 +263,6 @@ namespace Core
 
         void Start()
         {
-            HUDController.instance.SetCrosshairActivity(false);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             HUDController.instance.DisableInteractionText();
