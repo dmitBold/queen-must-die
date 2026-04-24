@@ -1,11 +1,12 @@
 using UnityEngine;
+using Zenject;
 
 namespace NightCycle
 {
     public class PickupLight : MonoBehaviour
     {
         [SerializeField] bool destroyOnPickup = true;
-        [SerializeField] PlayerFlashlight flashlight;
+        [Inject] PlayerFlashlight flashlight;
         public void Pickup()
         {
             flashlight.TurnOn();

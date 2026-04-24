@@ -13,6 +13,11 @@ public class PlayerView : MonoBehaviour
     public FirstPersonController FirstPersonController => _fpc;
 
     [SerializeField] private GameObject _lantern;
+
+    [SerializeField] private PlayerFlashlight _flashlight;
+    public PlayerFlashlight Flashlight => _flashlight;
+    
+    
     
     
     public void SetLanternActivity(bool value)
