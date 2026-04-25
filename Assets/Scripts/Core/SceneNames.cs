@@ -5,7 +5,7 @@ namespace Core
         Night,
         Day,
         HoM,
-        Menu,
+        MainMenu,
         Assembly,
         IntroDialog,
         IntroDialogue2,
@@ -18,7 +18,7 @@ namespace Core
         public const string Night = "NightCycle";
         public const string Day = "DayCycle";
         public const string HoM = "HoMScene";
-        public const string Menu = "MenuScene";
+        public const string MainMenu = "MainMenu";
         public const string IntroDialog = "IntroDialog";
         public const string IntroDialogue2 = "IntroDialogue2";
         public const string Throne = "Throne";
@@ -30,7 +30,7 @@ namespace Core
                 case GameScene.Night: return Night;
                 case GameScene.Day: return Day;
                 case GameScene.HoM: return HoM;
-                case GameScene.Menu: return Menu;
+                case GameScene.MainMenu: return MainMenu;
                 case GameScene.Assembly: return Assembly;
                 case GameScene.IntroDialog: return IntroDialog;
                 case GameScene.IntroDialogue2: return IntroDialogue2;

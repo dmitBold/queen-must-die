@@ -217,6 +217,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: cefbb95f4617418798e0b828cfb0593e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3744279}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: cefbb95f4617418798e0b828cfb0593e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3744283}
   m_SourcePrefab: {fileID: 100100000, guid: cefbb95f4617418798e0b828cfb0593e, type: 3}
 --- !u!1 &3744278 stripped
 GameObject:
@@ -320,6 +323,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: cefbb95f4617418798e0b828cfb0593e, type: 3}
   m_PrefabInstance: {fileID: 3744277}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &3744283
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744278}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.15597486, y: 0.09038211, z: 0.5486613}
+  m_Center: {x: -0.033724308, y: 0.046711545, z: -0.000000029802322}
 --- !u!4 &4859329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6925456644000073795, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
@@ -77651,6 +77675,7 @@ GameObject:
   - component: {fileID: 973088261}
   - component: {fileID: 973088262}
   - component: {fileID: 973088263}
+  - component: {fileID: 973088264}
   m_Layer: 0
   m_Name: Ghost_Timeline
   m_TagString: Untagged
@@ -77734,6 +77759,8 @@ PlayableDirector:
     value: {fileID: 868456226}
   - key: {fileID: 7945322852165931894, guid: 793f73118c8bb924fae416e4638fd54f, type: 2}
     value: {fileID: 1961481264}
+  - key: {fileID: 2253409561991725424, guid: 793f73118c8bb924fae416e4638fd54f, type: 2}
+    value: {fileID: 973088264}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &973088263
@@ -77743,7 +77770,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973088260}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8dfad6c4dbcaa7439e01652c865ec44, type: 3}
   m_Name: 
@@ -77829,6 +77856,36 @@ MonoBehaviour:
   CinemaCamera: {fileID: 0}
   pos: {x: 0, y: 0, z: 0}
   player_pos: {x: 0, y: 0, z: 0}
+--- !u!114 &973088264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973088260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.SignalReceiver
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 2e103303584e17f4a997718ee746b860, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1604092748}
+          m_TargetAssemblyTypeName: NightCycle.LevelLoader, Assembly-CSharp
+          m_MethodName: LoadNext
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &974486586
 GameObject:
   m_ObjectHideFlags: 0
@@ -99368,11 +99425,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: targetScene
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+--- !u!114 &1604092748 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+  m_PrefabInstance: {fileID: 1604092747}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248b43a4380e86a4b96140b0b456851d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1604979360
 GameObject:
   m_ObjectHideFlags: 0
