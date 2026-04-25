@@ -16,7 +16,9 @@ namespace NightCycle
         public InteractionType interactionType = InteractionType.Instant;
         public float holdDuration = 1.0f;
         //test
+        [SerializeField] private Outline[] additiveOutlines;
 
+        
         //TEST
         //public AudioClip interact_sound;
         //bool play_once = true;
@@ -39,12 +41,20 @@ namespace NightCycle
         public void DisableOutline()
         {
             if (outline != null) outline.enabled = false;
+            foreach (var additiveOutline in additiveOutlines)
+            {
+                additiveOutline.enabled = false;
+            }
         }
 
         public void EnableOutline()
         {
             //outline.Rebuild();
             if (outline != null) outline.enabled = true;
+            foreach (var additiveOutline in additiveOutlines)
+            {
+                additiveOutline.enabled = true;
+            }
         }
 
         public void Interact()
