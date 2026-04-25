@@ -42,5 +42,18 @@ namespace NightCycle
             //flashlight.enabled = true;
             this.gameObject.SetActive(true);
         }
+
+
+        public void StatueChase()
+        {
+            StatueController[] Statues = Object.FindObjectsByType<StatueController>(FindObjectsSortMode.None);
+
+            foreach (StatueController statue in Statues)
+            {
+                statue.advance_pose();
+            }
+
+        }
+
     }
 }

@@ -16,5 +16,11 @@ namespace NightCycle
             flashlight.flashlight.gameObject.SetActive(false);
         }
 
+        /*public void ttest()
+        {
+            flashlight.test();
+        }*/
+
+
     }
 }
