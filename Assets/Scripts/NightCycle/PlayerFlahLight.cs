@@ -4,7 +4,8 @@ namespace NightCycle
 {
     public class PlayerFlashlight : MonoBehaviour
     {
-        [SerializeField] Light flashlight;
+        //[SerializeField] Light flashlight;
+        public Light flashlight;
         float baseIntensity = 1.0f;
 
         [SerializeField] float swayAmount = 0.04f;
@@ -38,7 +39,8 @@ namespace NightCycle
 
         public void TurnOn()
         {
-            flashlight.enabled = true;
+            //flashlight.enabled = true;
+            this.gameObject.SetActive(true);
         }
     }
 }
