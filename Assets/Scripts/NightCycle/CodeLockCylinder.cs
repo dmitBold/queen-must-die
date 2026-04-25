@@ -8,18 +8,20 @@ namespace NightCycle
         public int CurrentValue { get; private set; } = 1;
 
         [SerializeField] float rotationDuration = 0.3f;
+        [SerializeField] private int segmentsCount = 3;
+
         private bool isRotating = false;
+
 
         // �������, ������� ���������� ��� ��������
         public System.Action OnValueChanged;
 
-        private const float stepAngle = 120;
 
         public void Rotate()
         {
             if (isRotating) return;
 
-            CurrentValue = (CurrentValue + 1) % 3;
+            CurrentValue = (CurrentValue + 1) % segmentsCount;
             StartCoroutine(RotateRoutine());
         }
 
@@ -29,7 +31,7 @@ namespace NightCycle
 
             Quaternion startRotation = transform.localRotation;
 
-            Quaternion endRotation = startRotation * Quaternion.Euler(0f, stepAngle, 0f);
+            Quaternion endRotation = startRotation * Quaternion.Euler(0f, 360f / segmentsCount, 0f);
             float elapsed = 0;
             while (elapsed < rotationDuration)
             {
