@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9807204e2707b0b43bb944d8121405b4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.7071068
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9807204e2707b0b43bb944d8121405b4, type: 3}
       propertyPath: m_LocalRotation.x
@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9807204e2707b0b43bb944d8121405b4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9807204e2707b0b43bb944d8121405b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9807204e2707b0b43bb944d8121405b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 270
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9807204e2707b0b43bb944d8121405b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CodeLockCylinder
   rotationDuration: 0.3
+  segmentsCount: 5
 --- !u!65 &1450289677450592629
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -170,7 +171,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.020000007, y: 0.020000001, z: 0.02000001}
-  m_Center: {x: 0.00000011920929, y: -9.313224e-10, z: 0.021520007}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5752927731093365580 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9807204e2707b0b43bb944d8121405b4, type: 3}
@@ -188,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee9b2257c5887147bdbc86a06158871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CodeLock
-  correctCombination: 000000000100000002000000
+  correctCombination: 040000000300000000000000
   cylinderLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -261,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CodeLockCylinder
   rotationDuration: 0.3
+  segmentsCount: 5
 --- !u!65 &6775094893922160221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -281,7 +283,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.020000007, y: 0.020000001, z: 0.020000013}
-  m_Center: {x: 0.00000011920929, y: -0.0000000013969835, z: 0.04304002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8191699185864953885 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5568371526223589888, guid: 9807204e2707b0b43bb944d8121405b4, type: 3}
@@ -300,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CodeLockCylinder
   rotationDuration: 0.3
+  segmentsCount: 5
 --- !u!65 &6547069127607786300
 BoxCollider:
   m_ObjectHideFlags: 0
