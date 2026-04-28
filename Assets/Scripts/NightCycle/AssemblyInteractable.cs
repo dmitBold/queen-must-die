@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
 using UnityEngine.Events;
@@ -15,14 +13,12 @@ namespace NightCycle
         public UnityEvent onAssemblyCompleted;
         [SerializeField] private InteractableView viewPrefab;
 
-        private CinemachineBrain _brain;
         private AssemblyService _assemblyService;
 
         [Inject]
-        public void Construct(AssemblyService assemblyService, CinemachineBrain brain)
+        public void Construct(AssemblyService assemblyService)
         {
             _assemblyService = assemblyService;
-            _brain = brain;
         }
 
         public void Interact()
@@ -30,40 +26,16 @@ namespace NightCycle
             if (_assemblyService.IsActive)
             {
                 _assemblyService.CloseAssembly();
-                SetupCameraForExit();
             }
             else
             {
-                SetupCameraForEntry();
                 _assemblyService.OpenAssembly(viewPrefab, OnAssemblyCompleted);
             }
         }
 
-        private void SetupCameraForEntry()
-        {
-            _brain.DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.Cut, 0f);
-            _brain.OutputCamera.cullingMask = LayerMask.GetMask("Assembly");
-            _brain.OutputCamera.clearFlags = CameraClearFlags.SolidColor;
-            _brain.OutputCamera.backgroundColor = new Color(0.102f, 0.102f, 0.098f);
-        }
-
-        private void SetupCameraForExit()
-        {
-            _brain.OutputCamera.cullingMask = -1;
-            _brain.OutputCamera.clearFlags = CameraClearFlags.Skybox;
-            Invoke(nameof(SetCameraBlendingModeToSmooth), 0.5f);
-        }
-
-        private void SetCameraBlendingModeToSmooth()
-        {
-            _brain.DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.EaseInOut, 2f);
-        }
-
         private void OnAssemblyCompleted()
         {
-            // Гарантируем восстановление настроек камеры при завершении сборки
             onAssemblyCompleted?.Invoke();
-            SetupCameraForExit();
         }
     }
 }

@@ -1,3 +1,4 @@
+﻿using System.Threading.Tasks;
 using Core;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -15,14 +16,18 @@ namespace NightCycle
         public bool IsActive => _isInitialized && _controller != null && _controller.isActive;
 
         private readonly ScenesManager _scenesManager;
+        private readonly CinemachineBrain _brain;
+        private readonly CinemachineBlendDefinition _defaultCameraMode;
         private string _previousSceneName;
         private AssemblyController _controller;
         private bool _isInitialized; // Флаг, что сцена загружена и контроллер инициализирован
         private System.Action _pendingOnComplete;
 
-        public AssemblyService(ScenesManager scenesManager)
+        public AssemblyService(ScenesManager scenesManager, CinemachineBrain brain)
         {
             _scenesManager = scenesManager;
+            _brain = brain;
+            _defaultCameraMode = _brain.DefaultBlend;
         }
 
         public void OpenAssembly(InteractableView viewPrefab, System.Action onCompleteCallback = null)
@@ -58,6 +63,7 @@ namespace NightCycle
         private void ActivateAssemblyMode(System.Action onCompleteCallback)
         {
             HUDController.instance.SetCrosshairActivity(false);
+            SetupCameraForEntry();
             _controller.OnCompleted.RemoveListener(OnControllerCompleted);
             _pendingOnComplete = onCompleteCallback;
             _controller.OnCompleted.AddListener(OnControllerCompleted);
@@ -73,6 +79,8 @@ namespace NightCycle
 
         public void CloseAssembly()
         {
+            SetupCameraForExit();
+
             if (_controller != null)
             {
                 _controller.ExitAssembly();
@@ -82,7 +90,7 @@ namespace NightCycle
             {
                 _scenesManager.SetActive(_previousSceneName);
             }
-            
+
             HUDController.instance.SetCrosshairActivity(true);
         }
 
@@ -94,7 +102,24 @@ namespace NightCycle
                 if (controller != null)
                     return controller;
             }
+
             return null;
+        }
+
+        private void SetupCameraForEntry()
+        {
+            _brain.DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.Cut, 0f);
+            _brain.OutputCamera.cullingMask = LayerMask.GetMask("Assembly");
+            _brain.OutputCamera.clearFlags = CameraClearFlags.SolidColor;
+            _brain.OutputCamera.backgroundColor = new Color(0.102f, 0.102f, 0.098f);
+        }
+
+        private async void SetupCameraForExit()
+        {
+            _brain.OutputCamera.cullingMask = -1;
+            _brain.OutputCamera.clearFlags = CameraClearFlags.Skybox;
+            await Task.Delay(100);
+            _brain.DefaultBlend = _defaultCameraMode;
         }
     }
 }
