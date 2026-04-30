@@ -31,7 +31,7 @@ namespace NightCycle
             this.playerInteraction = playerInteraction;
         }
 
-        void Start()
+        void Awake()
         {
             dialoguePanel.SetActive(false);
             Instance = this;
