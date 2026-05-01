@@ -14945,6 +14945,8 @@ PlayableDirector:
     value: {fileID: 996424429}
   - key: {fileID: 7277729657460370066, guid: 36b8872ceb8f8c04082edc0231ba22ba, type: 2}
     value: {fileID: 1421549904}
+  - key: {fileID: 7566447356241759580, guid: 36b8872ceb8f8c04082edc0231ba22ba, type: 2}
+    value: {fileID: 7052463969035372145}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1421549904
@@ -14966,9 +14968,45 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4699299510370926103}
-          m_TargetAssemblyTypeName: NightCycle.AnimationEventDispatcher, Assembly-CSharp
-          m_MethodName: set_trigger_condition
+        - m_Target: {fileID: 7052463969035372145}
+          m_TargetAssemblyTypeName: FadeController, Assembly-CSharp
+          m_MethodName: FadeToClear_simple
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1310531830}
+          m_TargetAssemblyTypeName: Core.DocsController, Assembly-CSharp
+          m_MethodName: StartDocs
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1465156499}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3623966976858477683}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -14977,18 +15015,6 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 4574421165066012158}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: fadeIN
-            m_BoolArgument: 0
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls: []
@@ -17595,6 +17621,18 @@ MonoBehaviour:
   onDayEnded:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 7052463969035372145}
+        m_TargetAssemblyTypeName: FadeController, Assembly-CSharp
+        m_MethodName: FadeToBlack_simple
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 9193070513254959959}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -17641,18 +17679,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 4574421165066012158}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: fadeOUT
           m_BoolArgument: 1
         m_CallState: 2
   currentSlotIndex: 0
@@ -26504,7 +26530,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4699299510370926102}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d4bdb340d7102af409ed826985865cd7, type: 2}
   m_CullingMode: 0
@@ -26721,6 +26747,7 @@ GameObject:
   - component: {fileID: 227334864192080115}
   - component: {fileID: 5724486005664173101}
   - component: {fileID: 4999802819532023832}
+  - component: {fileID: 7052463969035372145}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -26728,6 +26755,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7052463969035372145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7052463969035372144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c35168e081fb1489acbc2214bc08d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadeController
 --- !u!4 &7497138440936800760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7497138440365778387, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
