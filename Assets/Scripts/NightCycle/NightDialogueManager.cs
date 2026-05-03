@@ -1,3 +1,4 @@
+using Core;
 using System;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -23,6 +24,13 @@ namespace NightCycle
 
         //test
         public CinemachineBrain cameraBrain;
+        private AudioService _audioService;
+
+        [Inject]
+        public void Constructor(AudioService audioService)
+        {
+            _audioService = audioService;
+        }
         //test
 
         [Inject]
@@ -77,12 +85,26 @@ namespace NightCycle
                 {
                     EndDialogue();
                     //playerInteraction.ForceExitFocus();
+                    //
+                    if (currentNPC != null)
+                    {
+                        currentNPC.dialogue_sounds_index = 0;
+                    }
+                    //
                 }
             }
         }
 
         private void PlayCurrentPage()
         {
+            //
+            if (currentNPC.dialogue_sounds_index < currentNPC.dialogue_sounds.Count && currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index] != null)
+            {
+                _audioService.PlaySound(currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index]);
+            }
+            currentNPC.dialogue_sounds_index += 1;
+            //
+
             typewriter.TypeText(currentPages[currentPageIndex]);
         }
 

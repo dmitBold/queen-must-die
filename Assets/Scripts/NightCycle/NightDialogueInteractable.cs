@@ -1,4 +1,5 @@
 using Core;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,9 @@ namespace NightCycle
         //TEST
         public AudioClip interact_sound;
         bool play_once = true;
+
+        public List<AudioClip> dialogue_sounds;
+        public int dialogue_sounds_index = 0;
         //TEST
 
         private AudioService _audioService;
