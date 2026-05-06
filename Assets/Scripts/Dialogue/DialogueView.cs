@@ -14,14 +14,11 @@ namespace Dialogue
         public void Show() => root.SetActive(true);
         public void Hide() => root.SetActive(false);
 
-        public void PlayText(string content)
+        public void PlayText(string[] contentPages)
         {
             skipButton.SetActive(false);
             backButton.SetActive(false);
-            //test
-            typewriter.chunks.Clear();
-            //test
-            typewriter.Play(text, content);
+            typewriter.Play(text, contentPages);
         }
 
         public void SetSkipVisible(bool visible)
@@ -40,8 +37,5 @@ namespace Dialogue
         }
 
         public bool IsFinished => typewriter.IsFinished;
-
-        //
-        //public bool TypeFinished => typewriter.TypeFinished;
     }
 }

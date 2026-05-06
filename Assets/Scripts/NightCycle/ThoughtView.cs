@@ -1,4 +1,4 @@
-using Dialogue;
+/*using Dialogue;
 using TMPro;
 using UnityEngine;
 
@@ -52,4 +52,4 @@ namespace NightCycle
             if (nextButton) nextButton.SetActive(true);
         }
     }
-}
+}*/

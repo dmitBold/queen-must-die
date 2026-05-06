@@ -6,10 +6,10 @@ public class DayNoteDialogue : MonoBehaviour
 {
     [SerializeField] DialogueView view;
 
-    public void Show(string text)
+    public void Show(string[] pages)
     {
         view.Show();
-        view.PlayText(text);
+        view.PlayText(pages);
         view.SetSkipVisible(true);
         view.SetBackVisible(view.typewriter.CanGoBack);
     }
@@ -56,5 +56,4 @@ public class DayNoteDialogue : MonoBehaviour
     {
         view.SetSkipVisible(true);
     }
-
 }

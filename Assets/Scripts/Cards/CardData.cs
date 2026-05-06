@@ -28,11 +28,14 @@ namespace Cards
         public List<string> addFlags;
         public List<string> removeFlags;
 
-        [TextArea]
-        public string reactionText;
+        //[TextArea]
+        //public string reactionText;
+        [TextArea(3, 5)]
+        public string[] reactionText;
 
         //test
         public ItemData rewardItem;
+        public DayNoteData rewardNote;
         public int rewardAmount = 1;
     }
 
@@ -46,17 +49,24 @@ namespace Cards
         public List<string> addFlags;
         public List<string> removeFlags;
 
-        [TextArea]
-        public string reactionText;
+        [TextArea(3, 5)]
+        public string[] reactionText;
     }
 
-
+    [System.Serializable]
+    public class IntermediateChoice
+    {
+        public int triggerAfterPage;
+        public Choice leftChoice;
+        public Choice rightChoice;
+    }
 
 
     [CreateAssetMenu(fileName = "CardData", menuName = "Scriptable Objects/CardData")]
     public class CardData : ScriptableObject
     {
-        public string CardText;
+        [TextArea(3, 5)]
+        public string[] CardPages;
         public Choice LeftChoice;
         public Choice RightChoice;
 
@@ -72,6 +82,7 @@ namespace Cards
 
         //test
         public List<ItemReaction> itemReactions;
+        public List<IntermediateChoice> intermediateChoices;
 
         //test
 

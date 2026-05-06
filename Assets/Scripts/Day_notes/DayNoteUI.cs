@@ -134,7 +134,7 @@ public class DayNoteUI : MonoBehaviour
             Debug.Log("G&G&G&G&G&G&GG&77777777777");
         }
 
-        dialogueManager.Show(note.NotePages[0]);
+        dialogueManager.Show(note.NotePages);
     }
 
     private void Refresh()

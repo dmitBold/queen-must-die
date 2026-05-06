@@ -12,7 +12,7 @@ namespace NightCycle
         //test
         [SerializeField] public GameObject Tintroot;
         bool show_tint;
-        string tint_text;
+        string[] tint_text;
         //test
         [SerializeField] Image noteImageDisplay;
         [SerializeField] TextMeshProUGUI textComponent;
@@ -22,7 +22,7 @@ namespace NightCycle
         [SerializeField] GameObject nextButton;
         [SerializeField] GameObject backButton;
 
-        public void Show(Sprite image, string content)
+        public void Show(Sprite image, string[] content)
         {
             root.SetActive(true);
             //test
@@ -74,7 +74,7 @@ namespace NightCycle
                 if (show_tint)
                 {
                     Tintroot.SetActive(true);
-                    typewriter.chunks.Clear();
+                    //typewriter.chunks.Clear();
                     typewriter.Play(textComponent, tint_text);
 
                     UpdateButtonsState();

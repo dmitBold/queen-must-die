@@ -3,9 +3,10 @@ using Choices;
 using Dialogue;
 using Inventory;
 using NightCycle;
+using System.Collections.Generic;
 using UnityEngine;
-using Visitors;
 using UnityEngine.Events;
+using Visitors;
 using static Cards.CardManager;
 
 namespace Core
@@ -26,6 +27,11 @@ namespace Core
         public LevelLoader LevelLoader;
         public WarningManager warningManager;
         public UnityEvent onDayEnded;
+        //test
+
+        //test
+        private HashSet<int> resolvedIntermediatePages = new HashSet<int>();
+        private int currentIntermediatePage = -1;
         //test
 
         enum DayState
@@ -148,17 +154,14 @@ namespace Core
         void OnVisitorArrived()
         {
             if (state != DayState.VisitorComing) return;
-            //if (state != DayState.ShowingDialogue) return;
 
-
-            //cardManager.ShowCard(visitor.currentCard);
-            //deckManager.NotifyCardShown(visitor.currentCard);
-
-            //state = DayState.WaitingForChoice;
+            resolvedIntermediatePages.Clear();
+            //
+            currentIntermediatePage = -1;
+            //
             state = DayState.ShowingDialogue;
-
-            dialogue.Show(visitor.currentCard.CardText);
-
+            
+            dialogue.Show(visitor.currentCard.CardPages); 
         }
 
         void OnVisitorLeft()
@@ -272,6 +275,7 @@ namespace Core
             cardManager.OnCardResolved += OnCardResolved;
 
             dialogue.OnTextFinished += OnDialogueFinished;
+            dialogue.OnPageFinished += HandlePageFinished;
 
             //test
             choiceUI.OnEyeSelected += OnEyeSelected;
@@ -305,11 +309,56 @@ namespace Core
             if (state != DayState.WaitingForChoice)
                 return;
 
+            //SUPER TEST
+            if (currentIntermediatePage != -1) return;
+            //
+
             choiceUI.Hide();
 
             inventoryUI.CancelDrag();
 
             cardManager.SkipCard();
+        }
+
+        void HandlePageFinished(int pageIndex)
+        {
+            if (state != DayState.ShowingDialogue) return;
+
+            if (resolvedIntermediatePages.Contains(pageIndex)) return;
+            var interChoice = visitor.currentCard.intermediateChoices?.Find(c => c.triggerAfterPage == pageIndex);
+
+            if (interChoice != null)
+            {
+                state = DayState.WaitingForChoice;
+                currentIntermediatePage = pageIndex;
+
+                dialogue.SetNavigationInteractable(false);
+
+                bool left_availible = cardManager.CanChoose(interChoice.leftChoice) == CardManager.ChoiceAvailability.Available;
+                bool right_availible = cardManager.CanChoose(interChoice.rightChoice) == CardManager.ChoiceAvailability.Available;
+
+                choiceUI.SetChoiceAvailability(left_availible, right_availible);
+
+                choiceUI.Show(interChoice.leftChoice, interChoice.rightChoice);
+                choiceUI.OnChoiceSelected += OnIntermediateChoiceSelected;
+            }
+        }
+
+        void OnIntermediateChoiceSelected(Choice choice)
+        {
+            if (cardManager.CanChoose(choice) != ChoiceAvailability.Available) return;
+
+            choiceUI.OnChoiceSelected -= OnIntermediateChoiceSelected;
+            choiceUI.Hide();
+
+            resolvedIntermediatePages.Add(currentIntermediatePage);
+            //
+            currentIntermediatePage = -1;
+            //
+            cardManager.ResolveIntermediateChoice(choice);
+
+            state = DayState.ShowingDialogue;
+            dialogue.SetNavigationInteractable(true);
         }
 
     }
