@@ -23,6 +23,11 @@ namespace DI
             Container.BindInstance(instance.PlayerInteraction).AsSingle();
             Container.BindInstance(instance.PlayerStateController).AsSingle();
             instance.SetLanternActivity(_enableLantern);
+            //TEST
+            var rb = instance.GetComponentInChildren<Rigidbody>();
+            var mr = instance.GetComponentInChildren<MeshRenderer>();
+            Container.Bind<Player>().AsSingle().WithArguments(rb, mr);
+            //TEST
         }
 
         public override void Start()
