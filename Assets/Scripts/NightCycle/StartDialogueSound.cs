@@ -30,8 +30,11 @@ namespace NightCycle
 
         void Start()
         {
-            _audioService.PlaySound(StartSound);
-            StartCoroutine(WaitAndExecute(delay));
+            if (StartSound != null)
+            {
+                _audioService.PlaySound(StartSound);
+                StartCoroutine(WaitAndExecute(delay));
+            }
             //NightDialogueManager.Instance.StartDialogue(null, dialoguePages);
 
             //PlayerStateController.Instance.SetMode(PlayerStateController.PlayerMode.Focused);
@@ -44,6 +47,13 @@ namespace NightCycle
         }
 
         void OnSoundEnded()
+        {
+            _dialogueManager.StartDialogue(null, dialoguePages);
+
+            _playerStateController.SetMode(PlayerMode.Focused);
+        }
+
+        public void StartDialogue()
         {
             _dialogueManager.StartDialogue(null, dialoguePages);
 

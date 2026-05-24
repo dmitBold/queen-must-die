@@ -1,6 +1,7 @@
 using Core;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 namespace NightCycle
@@ -20,6 +21,13 @@ namespace NightCycle
         public int dialogue_sounds_index = 0;
         //TEST
 
+        //test
+        [Header("События после диалога")]
+        public UnityEvent onDialogueCompleted;
+        public bool triggerEventOnlyOnce = true;
+        private bool hasTriggeredEvent = false;
+        //test
+
         private AudioService _audioService;
 
         [Inject]
@@ -31,7 +39,14 @@ namespace NightCycle
         public void OnEnterFocus()
         {
             PlayIneractionSound();
-            NightDialogueManager.Instance.StartDialogue(this, dialoguePages);
+
+            NightDialogueManager.Instance.StartDialogue(this, dialoguePages, () =>
+            {
+                if (triggerEventOnlyOnce && hasTriggeredEvent) return;
+
+                onDialogueCompleted?.Invoke();
+                hasTriggeredEvent = true;
+            });
         }
 
         public void OnExitFocus()

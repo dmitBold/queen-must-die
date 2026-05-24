@@ -26,6 +26,10 @@ namespace NightCycle
         public CinemachineBrain cameraBrain;
         private AudioService _audioService;
 
+        //Test
+        private Action currentDialogueCallback;
+        //Test
+
         [Inject]
         public void Constructor(AudioService audioService)
         {
@@ -53,7 +57,7 @@ namespace NightCycle
             }
         }
 
-        public void StartDialogue(NightDialogueInteractable npc, string[] pages)
+        public void StartDialogue(NightDialogueInteractable npc, string[] pages, Action onComplete = null)
         {
             if (pages == null || pages.Length == 0) return;
 
@@ -62,6 +66,8 @@ namespace NightCycle
             currentPageIndex = 0;
 
             currentDirector = null;
+
+            currentDialogueCallback = onComplete;
 
             dialoguePanel.SetActive(true);
             PlayCurrentPage();
@@ -97,12 +103,15 @@ namespace NightCycle
 
         private void PlayCurrentPage()
         {
-            //
-            if (currentNPC.dialogue_sounds_index < currentNPC.dialogue_sounds.Count && currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index] != null)
+            if (currentNPC != null)
             {
-                _audioService.PlaySound(currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index]);
+                //
+                if (currentNPC.dialogue_sounds_index < currentNPC.dialogue_sounds.Count && currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index] != null)
+                {
+                    _audioService.PlaySound(currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index]);
+                }
+                currentNPC.dialogue_sounds_index += 1;
             }
-            currentNPC.dialogue_sounds_index += 1;
             //
 
             typewriter.TypeText(currentPages[currentPageIndex]);
@@ -158,6 +167,9 @@ namespace NightCycle
             }
 
             DialogEnded?.Invoke();
+
+            currentDialogueCallback?.Invoke();
+            currentDialogueCallback = null;
         }
 
         public void ForceEndDialogue()
