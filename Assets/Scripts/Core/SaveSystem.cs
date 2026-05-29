@@ -1,34 +1,46 @@
 using UnityEngine;
 using System.IO;
-
+using System.Collections.Generic;
 public class SaveSystem
 {
-    private readonly SaveManager _saveManager;
-    private static SaveManager.SaveData _savedData = new SaveManager.SaveData();
+    public SaveManager.SaveData CurrentData { get; private set; }
+    public bool HasLoadedData { get; private set; }
 
-    public SaveSystem(SaveManager saveManager)
+    public HashSet<string> SessionTriggeredEvents { get; private set; } = new HashSet<string>();
+
+    private readonly string _saveFilePath;
+
+    public SaveSystem()
     {
-        _saveManager = saveManager;
+        _saveFilePath = Application.persistentDataPath + "/save.json";
     }
 
-    public string SaveFileName()
+    public void Save(SaveManager.SaveData data)
     {
-        string saveFile = Application.persistentDataPath + "/save.txt";
-        return saveFile;
+        CurrentData = data;
+        File.WriteAllText(_saveFilePath, JsonUtility.ToJson(CurrentData, true));
     }
 
-    public void Save()
+    public bool Load()
     {
-        _saveManager.Save(ref _savedData);
-        File.WriteAllText(SaveFileName(), JsonUtility.ToJson(_savedData, true));
+        if (!File.Exists(_saveFilePath)) return false;
+
+        string saveContent = File.ReadAllText(_saveFilePath);
+        CurrentData = JsonUtility.FromJson<SaveManager.SaveData>(saveContent);
+
+        SessionTriggeredEvents = new HashSet<string>(CurrentData.triggeredWorldEvents ?? new List<string>());
+
+        HasLoadedData = true;
+        return true;
     }
 
-    public void Load()
+    public void ClearLoadedFlag()
     {
-        string saveContent = File.ReadAllText(SaveFileName());
-
-        _savedData = JsonUtility.FromJson<SaveManager.SaveData>(saveContent);
-        _saveManager.Load(_savedData);
+        HasLoadedData = false;
     }
 
+    public void RegisterEvent(string eventId)
+    {
+        SessionTriggeredEvents.Add(eventId);
+    }
 }

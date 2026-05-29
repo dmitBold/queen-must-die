@@ -21,6 +21,7 @@ namespace DI
             //TEST
             Container.Bind<SaveManager>().FromInstance(saveManager).AsSingle();
             Container.Bind<SaveSystem>().AsSingle();
+            Container.Bind<IPlayerProvider>().To<PlayerProvider>().AsSingle();
             //TEST
         }
     }

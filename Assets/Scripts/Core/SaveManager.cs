@@ -1,25 +1,23 @@
+using Core;
+using DI;
+using Inventory;
 using NightCycle;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Zenject;
 using Zenject.SpaceFighter;
-using UnityEngine.SceneManagement;
-using Core;
-using UnityEngine.InputSystem;
-using System.Collections.Generic;
-using Inventory;
 
 public class SaveManager : MonoBehaviour
 {
-
-    //[Inject] Player player;
-    [Inject] private DiContainer _container;
+    //[Inject] private DiContainer _container;
+    [Inject] private IPlayerProvider _playerProvider;
     [Inject] private ScenesManager _scenesManager;
     [Inject] private SaveSystem _saveSystem;
     [Inject] private InventoryManager _inventoryManager;
 
     [System.Serializable]
-
     public struct SaveData
     {
         public float posX;
@@ -27,6 +25,11 @@ public class SaveManager : MonoBehaviour
         public float posZ;
         public string currentSceneName;
         public List<SavedItem> savedInventory;
+        public List<string> triggeredWorldEvents;
+        public float rotX;
+        public float rotY;
+        public float rotZ;
+        public float rotW;
     }
 
     [System.Serializable]
@@ -42,49 +45,63 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void Save(ref SaveData data)
+    private void Update()
     {
-        SaveScene(ref data);
-        SavePlayer(ref data);
-        SaveItems(ref data);
+        if (Keyboard.current.numpad1Key.wasPressedThisFrame)
+        {
+            Debug.Log("SAVE");
+            SaveGame();
+        }
+        if (Keyboard.current.numpad0Key.wasPressedThisFrame)
+        {
+            Debug.Log("LOAD");
+            LoadGame();
+        }
     }
 
-    public void Load(SaveData data)
+    public void SaveGame()
     {
-        LoadScene(data);
-        LoadPlpayer(data);
-        LoadItems(data);
-    }
+        SaveData data = new SaveData();
 
-    public void SavePlayer(ref SaveData data)
-    {
-        var player = _container.TryResolve<Player>();
-
+        //var player = _container.TryResolve<Player>();
+        var player = _playerProvider.CurrentPlayer;
         if (player != null)
         {
             data.posX = player.Position.x;
             data.posY = player.Position.y;
             data.posZ = player.Position.z;
+            data.rotX = player.Rotation.x;
+            data.rotY = player.Rotation.y;
+            data.rotZ = player.Rotation.z;
+            data.rotW = player.Rotation.w;
+            Debug.Log(data.posX + " " + data.posY + " " + data.posZ);
         }
-    }
-
-    public void LoadPlpayer(SaveData data)
-    {
-        var player = _container.TryResolve<Player>();
-
-        if (player != null)
+        else
         {
-            player.Position = new Vector3(data.posX, data.posY, data.posZ);
+            Debug.Log("PLAYER_SAVE_IS_NULL");
         }
+
+        string unitySceneName = SceneManager.GetActiveScene().name;
+        GameScene currentScene = GetGameSceneEnum(unitySceneName);
+        data.currentSceneName = SceneNames.GetName(currentScene);
+
+        data.savedInventory = _inventoryManager.GetInventorySaveData();
+
+        data.triggeredWorldEvents = new List<string>(_saveSystem.SessionTriggeredEvents);
+
+        _saveSystem.Save(data);
     }
 
-    public void SaveScene(ref SaveData data)
+    public void LoadGame()
     {
-        string unitySceneName = SceneManager.GetActiveScene().name;
-
-        GameScene currentScene = GetGameSceneEnum(unitySceneName);
-
-        data.currentSceneName = SceneNames.GetName(currentScene);
+        if (_saveSystem.Load())
+        {
+            _scenesManager.LoadSingle(_saveSystem.CurrentData.currentSceneName);
+        }
+        else
+        {
+            Debug.LogWarning("Save file not found!");
+        }
     }
 
     private GameScene GetGameSceneEnum(string sceneName)
@@ -102,34 +119,4 @@ public class SaveManager : MonoBehaviour
             default: return GameScene.Night;
         }
     }
-
-    public void LoadScene(SaveData data)
-    {
-        _scenesManager.LoadSingle(data.currentSceneName);
-    }
-
-    private void Update()
-    {
-        if (Keyboard.current.numpad1Key.wasPressedThisFrame)
-        {
-            Debug.Log("SAVE");
-            _saveSystem.Save();
-        }
-        if (Keyboard.current.numpad0Key.wasPressedThisFrame)
-        {
-            Debug.Log("LOAD");
-            _saveSystem.Load();
-        }
-    }
-
-    public void SaveItems(ref SaveData data)
-    {
-        data.savedInventory = _inventoryManager.GetInventorySaveData();
-    }
-
-    public void LoadItems(SaveData data)
-    {
-        _inventoryManager.LoadInventoryData(data.savedInventory);
-    }
-
 }
