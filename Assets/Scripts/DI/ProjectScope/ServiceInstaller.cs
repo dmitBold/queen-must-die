@@ -8,6 +8,7 @@ namespace DI
     public class ServiceInstaller : MonoInstaller
     {
         [SerializeField] private AudioService audioService;
+        [SerializeField] private SaveManager saveManager;
 
         public override void InstallBindings()
         {
@@ -17,7 +18,10 @@ namespace DI
                 .Bind<ScenesManager>()
                 .AsSingle()
                 .WithArguments(this as MonoBehaviour);
-
+            //TEST
+            Container.Bind<SaveManager>().FromInstance(saveManager).AsSingle();
+            Container.Bind<SaveSystem>().AsSingle();
+            //TEST
         }
     }
 }
