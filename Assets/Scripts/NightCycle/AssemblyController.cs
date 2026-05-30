@@ -40,11 +40,19 @@ namespace NightCycle
 
         private readonly Dictionary<InteractableView, InteractableView> _prefabInstances = new();
 
+        //test
+        private AssemblyService _assemblyService;
+        //test
+
         [Inject]
-        private void Construct(PlayerStateController playerStateController, DiContainer container)
+        private void Construct(PlayerStateController playerStateController, DiContainer container, AssemblyService assemblyService)
         {
             this.playerStateController = playerStateController;
             this.container = container;
+
+            //test
+            _assemblyService = assemblyService;
+            //test
         }
 
         private void Awake()
@@ -70,6 +78,13 @@ namespace NightCycle
             {
                 HandleSocketHover();
                 HandleSocketClick();
+
+                //Test
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    _assemblyService.CloseAssembly();
+                }
+                //Test
             }
 
             HandleRotation();
