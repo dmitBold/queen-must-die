@@ -8,8 +8,9 @@ namespace NightCycle
     {
         private const float GROUNDED_GRAVITY = -0.5f;
 
-        [Header("Movement Speeds")] [SerializeField]
-        private float walkSpeed = 3.0f;
+        [Header("Movement Speeds")] 
+        [SerializeField] private float walkSpeed = 3.0f;
+        [SerializeField] private float sprintMultiplier = 2.0f;
 
         [Header("Jump Parameters")] [SerializeField]
         private float jumpForce = 5.0f;
@@ -32,7 +33,8 @@ namespace NightCycle
 
         private Vector3 currentMovement;
         private float verticalRotation;
-        private float CurrentSpeed => walkSpeed;
+        //private float CurrentSpeed => walkSpeed;
+        private float CurrentSpeed => walkSpeed * (playerInputHandler.SprintTriggered ? sprintMultiplier : 1);
 
         [Inject]
         private void Construct(PlayerInputManager playerInputHandler)
