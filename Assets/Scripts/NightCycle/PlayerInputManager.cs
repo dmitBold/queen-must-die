@@ -17,19 +17,19 @@ namespace NightCycle
         [SerializeField] private string movement = "Movement";
         [SerializeField] private string rotation = "Rotation";
         [SerializeField] private string jump = "Jump";
-        [SerializeField] private string sprint = "Sprint";
+        //[SerializeField] private string sprint = "Sprint";
 
 
         private InputAction movementAction;
         private InputAction rotationAction;
         private InputAction jumpAction;
-        private InputAction sprintAction;
+        //private InputAction sprintAction;
 
 
         public Vector2 MovementInput { get; private set; }
         public Vector2 RotationInput { get; private set; }
         public bool JumpTriggered { get; private set; }
-        public bool SprintTriggered { get; private set; }
+        //public bool SprintTriggered { get; private set; }
 
 
         private void Awake()
@@ -40,7 +40,7 @@ namespace NightCycle
             movementAction = mapReference.FindAction(movement);
             rotationAction = mapReference.FindAction(rotation);
             jumpAction = mapReference.FindAction(jump);
-            sprintAction = mapReference.FindAction(sprint);
+            //sprintAction = mapReference.FindAction(sprint);
 
 
             SubscribeActionValuesToInputEvents();
@@ -61,8 +61,8 @@ namespace NightCycle
             jumpAction.canceled += inputInfo => JumpTriggered = false;
 
 
-            sprintAction.performed += inputInfo => SprintTriggered = true;
-            sprintAction.canceled += inputInfo => SprintTriggered = false;
+            //sprintAction.performed += inputInfo => SprintTriggered = true;
+            //sprintAction.canceled += inputInfo => SprintTriggered = false;
         }
 
 

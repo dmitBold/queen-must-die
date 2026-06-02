@@ -7,15 +7,11 @@ public class AssetProviderSOInstaller : ScriptableObjectInstaller<AssetProviderS
 {
     [SerializeField] private GlobalAudioConfig globalAudioConfig;
     [SerializeField] private PlayerView _playerPrefab;
-    //TEST
-    [SerializeField] private ItemDatabase _itemDatabase;
-    //TEST
-
+    
 
     public override void InstallBindings()
     {
         Container.BindInstance(globalAudioConfig).IfNotBound();
         Container.BindInstance(_playerPrefab).AsSingle();
-        Container.BindInstance(_itemDatabase).AsSingle();   
     }
 }

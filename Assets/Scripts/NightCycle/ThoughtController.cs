@@ -1,4 +1,4 @@
-/*using Dialogue;
+using Dialogue;
 using UnityEngine;
 using Zenject;
 
@@ -92,4 +92,4 @@ namespace NightCycle
             view.Back();
         }
     }
-}*/
+}

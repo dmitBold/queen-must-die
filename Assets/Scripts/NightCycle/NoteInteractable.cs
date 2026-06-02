@@ -7,7 +7,7 @@ namespace NightCycle
         public Sprite noteImage;
 
         [TextArea(5, 20)]
-        public string[] noteText;
+        public string noteText; // ����� �������
 
         public void OnEnterFocus()
         {

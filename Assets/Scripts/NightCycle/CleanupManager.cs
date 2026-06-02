@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Core;
 using UnityEngine;
-using UnityEngine.Events;
 using Zenject;
 
 
@@ -31,7 +30,6 @@ namespace NightCycle
         public AudioClip Reznya;
         private AudioService _audioService;
         //test
-        public UnityEvent ON_Cleanup_Completed;
 
         [Inject]
         public void Constructor(AudioService audioService)
@@ -132,9 +130,8 @@ namespace NightCycle
                     _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-9.71f, 10.51f, -120.86f), 1, true, 0.27f, 6.18f);
                     break;
                 case 5:
-                    ON_Cleanup_Completed?.Invoke();
                     _audioService.PlaySound(KnockSound);
-                    //door.GetComponent<Interactable>().enabled = true;
+                    door.GetComponent<Interactable>().enabled = true;
                     break;
 
                 default:

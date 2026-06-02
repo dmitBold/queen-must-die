@@ -63,10 +63,5 @@ namespace Zenject.SpaceFighter
         {
             _rigidBody.AddForce(force);
         }
-
-        public void SetVisibility(bool isVisible)
-        {
-            _renderer.enabled = isVisible;
-        }
     }
 }

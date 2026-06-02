@@ -1,30 +1,29 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using EasyTextEffects;
 
 namespace Dialogue
 {
     public class TypewriterEffect : MonoBehaviour
     {
         [SerializeField] float delay = 0.03f;
-
-        public TextEffect textEffectComponent;
+        [SerializeField] int maxLines = 3;
 
         TextMeshProUGUI field;
-        string[] pages;
-        int pageIndex;
-        int maxPageIndexSeen = -1;
+        string fullText;
+        int charIndex;
+        int chunkIndex;
 
-        int currentVisibleCharacters;
         Coroutine routine;
         bool isTyping;
 
-        public bool IsFinished => !isTyping && (pages == null || pageIndex >= pages.Length - 1);
-        public bool CanGoBack => pageIndex > 0;
+        public List<string> chunks = new List<string>();
+
+        public bool IsFinished => string.IsNullOrEmpty(fullText) || (chunkIndex == chunks.Count - 1 && charIndex >= fullText.Length);
+        public bool CanGoBack => chunkIndex > 0;
 
         public event System.Action OnDialogueFinished;
-        public event System.Action<int> OnPageFinished;
         public event System.Action OnDialogueBack;
 
         public enum SkipResult
@@ -34,98 +33,89 @@ namespace Dialogue
             DialogueFinished
         }
 
-        public void Play(TextMeshProUGUI text, string[] contentPages)
+        public void Play(TextMeshProUGUI text, string content)
         {
             if (routine != null) StopCoroutine(routine);
 
             field = text;
-            pages = contentPages;
-            pageIndex = 0;
-            maxPageIndexSeen = -1;
+            fullText = content;
+            charIndex = 0;
+            chunkIndex = -1;
+            chunks.Clear();
 
-            ShowCurrentPage();
+            ShowNextChunk();
         }
 
-        void ShowCurrentPage()
+        void ShowNextChunk()
         {
-            if (pages == null || pages.Length == 0) return;
+            if (chunkIndex + 1 >= chunks.Count)
+            {
+                if (charIndex >= fullText.Length) return;
+                chunks.Add(BuildChunk());
+            }
 
-            if (routine != null) StopCoroutine(routine);
+            chunkIndex++;
+            routine = StartCoroutine(Type(chunks[chunkIndex]));
+        }
 
-            field.text = pages[pageIndex];
-            field.maxVisibleCharacters = 99999;
+        string BuildChunk()
+        {
+            string remainingText = fullText.Substring(charIndex);
+            field.text = remainingText;
             field.ForceMeshUpdate();
 
-            if (textEffectComponent != null) textEffectComponent.Refresh();
-
-            int totalCharacters = field.textInfo.characterCount;
-
-            if (delay <= 0f || pageIndex <= maxPageIndexSeen)
+            if (field.textInfo.lineCount <= maxLines)
             {
-                currentVisibleCharacters = totalCharacters;
-                isTyping = false;
-                UpdateVertexVisibility();
-
-                if (IsFinished)
-                {
-                    OnDialogueFinished?.Invoke();
-                }
-                else
-                {
-                    OnPageFinished?.Invoke(pageIndex);
-                }
-
+                charIndex = fullText.Length;
+                return remainingText;
             }
-            else
+
+            int visibleOverflowIndex = field.textInfo.lineInfo[maxLines].firstCharacterIndex;
+            int rawOverflowIndex = field.textInfo.characterInfo[visibleOverflowIndex].index;
+
+            string chunk = remainingText.Substring(0, rawOverflowIndex);
+            int consumedLength = rawOverflowIndex;
+
+            if (chunk.EndsWith("\n"))
             {
-                maxPageIndexSeen = pageIndex;
-                currentVisibleCharacters = 0;
-                isTyping = true;
-                UpdateVertexVisibility();
-                routine = StartCoroutine(TypeRoutine());
+                chunk = chunk.Substring(0, chunk.Length - 1) + " ";
             }
+            else if (chunk.EndsWith("\r\n"))
+            {
+                chunk = chunk.Substring(0, chunk.Length - 2) + "  ";
+            }
+
+            charIndex += consumedLength;
+            return chunk;
         }
 
-        IEnumerator TypeRoutine()
+        IEnumerator Type(string chunk)
         {
-            int totalCharacters = field.textInfo.characterCount;
-
-            while (currentVisibleCharacters < totalCharacters)
-            {
-                currentVisibleCharacters++;
-                yield return new WaitForSeconds(delay);
-            }
-
+            isTyping = true;
+            field.text = "";
+            yield return new WaitForSeconds(delay);
+            field.text = chunk;
             isTyping = false;
 
             if (IsFinished)
             {
                 OnDialogueFinished?.Invoke();
             }
-            else
-            {
-                OnPageFinished?.Invoke(pageIndex);
-            }
         }
 
         public SkipResult Skip()
         {
-            if (pages == null || pages.Length == 0) return SkipResult.None;
+            if (string.IsNullOrEmpty(fullText)) return SkipResult.None;
 
             if (isTyping)
             {
                 if (routine != null) StopCoroutine(routine);
-                currentVisibleCharacters = field.textInfo.characterCount;
+                field.text = chunks[chunkIndex];
                 isTyping = false;
-                UpdateVertexVisibility();
 
                 if (IsFinished)
                 {
                     OnDialogueFinished?.Invoke();
-                }
-                else
-                {
-                    OnPageFinished?.Invoke(pageIndex);
                 }
 
                 return SkipResult.PageFinished;
@@ -133,8 +123,7 @@ namespace Dialogue
 
             if (!IsFinished)
             {
-                pageIndex++;
-                ShowCurrentPage();
+                ShowNextChunk();
                 return SkipResult.PageFinished;
             }
 
@@ -149,47 +138,11 @@ namespace Dialogue
                 isTyping = false;
             }
 
-            if (pageIndex <= 0) return;
+            if (chunkIndex <= 0) return;
 
-            pageIndex--;
-            ShowCurrentPage();
+            chunkIndex--;
+            field.text = chunks[chunkIndex];
             OnDialogueBack?.Invoke();
-        }
-
-        private void LateUpdate()
-        {
-            if (isTyping)
-            {
-                UpdateVertexVisibility();
-            }
-        }
-
-        private void UpdateVertexVisibility()
-        {
-            if (field == null || field.textInfo == null || field.textInfo.characterCount == 0) return;
-
-            if (currentVisibleCharacters >= field.textInfo.characterCount && !isTyping) return;
-
-            TMP_TextInfo textInfo = field.textInfo;
-
-            for (int i = currentVisibleCharacters; i < textInfo.characterCount; i++)
-            {
-                TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
-
-                if (!charInfo.isVisible) continue;
-
-                int materialIndex = charInfo.materialReferenceIndex;
-                int vertexIndex = charInfo.vertexIndex;
-
-                Color32[] vertexColors = textInfo.meshInfo[materialIndex].colors32;
-
-                vertexColors[vertexIndex + 0].a = 0;
-                vertexColors[vertexIndex + 1].a = 0;
-                vertexColors[vertexIndex + 2].a = 0;
-                vertexColors[vertexIndex + 3].a = 0;
-            }
-
-            field.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
         }
     }
 }

@@ -10,7 +10,6 @@ namespace NightCycle
         [SerializeField] private string targetTag = "Player";
         [SerializeField] private UnityEvent onTriggerEnter;
         public AudioClip triggerSound;
-        public bool disable;
         
         
         private AudioService _audioService;
@@ -30,10 +29,7 @@ namespace NightCycle
                     _audioService.PlaySound(triggerSound);
                 }
                 onTriggerEnter?.Invoke();
-                if (disable)
-                {
-                    gameObject.SetActive(false);
-                }
+                gameObject.SetActive(false);
             }
         }
     }

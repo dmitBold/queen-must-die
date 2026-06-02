@@ -1,4 +1,3 @@
-using Core;
 using System;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -24,17 +23,6 @@ namespace NightCycle
 
         //test
         public CinemachineBrain cameraBrain;
-        private AudioService _audioService;
-
-        //Test
-        private Action currentDialogueCallback;
-        //Test
-
-        [Inject]
-        public void Constructor(AudioService audioService)
-        {
-            _audioService = audioService;
-        }
         //test
 
         [Inject]
@@ -57,7 +45,7 @@ namespace NightCycle
             }
         }
 
-        public void StartDialogue(NightDialogueInteractable npc, string[] pages, Action onComplete = null)
+        public void StartDialogue(NightDialogueInteractable npc, string[] pages)
         {
             if (pages == null || pages.Length == 0) return;
 
@@ -66,8 +54,6 @@ namespace NightCycle
             currentPageIndex = 0;
 
             currentDirector = null;
-
-            currentDialogueCallback = onComplete;
 
             dialoguePanel.SetActive(true);
             PlayCurrentPage();
@@ -91,29 +77,12 @@ namespace NightCycle
                 {
                     EndDialogue();
                     //playerInteraction.ForceExitFocus();
-                    //
-                    if (currentNPC != null)
-                    {
-                        currentNPC.dialogue_sounds_index = 0;
-                    }
-                    //
                 }
             }
         }
 
         private void PlayCurrentPage()
         {
-            if (currentNPC != null)
-            {
-                //
-                if (currentNPC.dialogue_sounds_index < currentNPC.dialogue_sounds.Count && currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index] != null)
-                {
-                    _audioService.PlaySound(currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index]);
-                }
-                currentNPC.dialogue_sounds_index += 1;
-            }
-            //
-
             typewriter.TypeText(currentPages[currentPageIndex]);
         }
 
@@ -167,9 +136,6 @@ namespace NightCycle
             }
 
             DialogEnded?.Invoke();
-
-            currentDialogueCallback?.Invoke();
-            currentDialogueCallback = null;
         }
 
         public void ForceEndDialogue()

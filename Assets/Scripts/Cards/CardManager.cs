@@ -1,8 +1,6 @@
-using Choices;
 using Core;
 using Dialogue;
 using Inventory;
-using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -22,7 +20,6 @@ namespace Cards
 
         //test
         private InventoryManager inventory;
-        [SerializeField] private DayNoteManager noteInventory;
 
         [Inject]
         public void Constructor(InventoryManager inventoryManager)
@@ -45,8 +42,8 @@ namespace Cards
         {
             currData = card;
             wait_for_choice = true;
-            //Debug.Log(card.CardText);
-            //Debug.Log(card.LeftChoice.text + " | " +  card.RightChoice.text);
+            Debug.Log(card.CardText);
+            Debug.Log(card.LeftChoice.text + " | " +  card.RightChoice.text);
         }
 
         void ApplyChoice(Choice choice)
@@ -114,12 +111,7 @@ namespace Cards
                 inventory.AddItem(choice.rewardItem, choice.rewardAmount);
             }
 
-            if (choice.rewardNote != null)
-            {
-                noteInventory.AddNote(choice.rewardNote);
-            }
-
-            if (choice.reactionText != null)
+            if (!string.IsNullOrEmpty(choice.reactionText))
             {
                 dialogue.ShowReaction(choice.reactionText, EndCard);
             }
@@ -130,21 +122,6 @@ namespace Cards
 
             //test
             OnAnyChoiceResolved?.Invoke();
-        }
-
-        public void ResolveIntermediateChoice(Choice choice)
-        {
-            ApplyChoice(choice);
-
-            if (choice.rewardItem != null)
-            {
-                inventory.AddItem(choice.rewardItem, choice.rewardAmount);
-            }
-
-            if (choice.rewardNote != null)
-            {
-                noteInventory.AddNote(choice.rewardNote);
-            }
         }
 
         void EndCard()
@@ -212,7 +189,7 @@ namespace Cards
 
             ApplyItemReaction(reaction);
 
-            if (reaction.reactionText != null)
+            if (!string.IsNullOrEmpty(reaction.reactionText))
             {
                 dialogue.ShowReaction(reaction.reactionText, EndCard);
             }

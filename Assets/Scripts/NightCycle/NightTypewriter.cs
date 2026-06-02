@@ -10,7 +10,7 @@ namespace NightCycle
     public class NightTypewriter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI dialogueText;
-        [SerializeField] private float typingDelay = 0;
+        [SerializeField] private float typingDelay = 0.05f;
         [SerializeField] private AudioClip typeSound;
         public TextEffect textEffectComponent;
 

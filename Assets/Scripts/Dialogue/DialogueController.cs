@@ -6,49 +6,70 @@ namespace Dialogue
     public class DialogueController : MonoBehaviour
     {
         public event Action OnTextFinished;
-        public event Action<int> OnPageFinished;
 
         [SerializeField] DialogueView view;
-
-        private bool isNavigationLocked = false;
 
         enum Mode { Normal, Reaction }
         Mode mode;
 
         Action onReactionClosed;
 
-        public void Show(string[] pages)
+        public void Show(string text)
         {
-            isNavigationLocked = false;
             mode = Mode.Normal;
             view.Show();
-            view.PlayText(pages);
+            view.PlayText(text);
             view.SetSkipVisible(true);
             view.SetBackVisible(view.typewriter.CanGoBack);
         }
 
-        public void ShowReaction(string[] text, Action onClosed)
+        public void ShowReaction(string text, Action onClosed)
         {
-            isNavigationLocked = false;
             mode = Mode.Reaction;
             onReactionClosed = onClosed;
             view.Show();
-
             view.PlayText(text);
-
             view.SetSkipVisible(true);
-            view.SetBackVisible(false);
         }
+
+        /*public void OnSkipPressed()
+    {
+        var result = view.Skip();
+
+        if (mode == Mode.Normal)
+        {
+            if (result == TypewriterEffect.SkipResult.DialogueFinished)
+            {
+                view.SetSkipVisible(false);
+                OnTextFinished?.Invoke();
+            }
+        }
+        else
+        {
+            if (result == TypewriterEffect.SkipResult.DialogueFinished)
+            {
+                view.Hide();
+                onReactionClosed?.Invoke();
+            }
+        }
+    }*/
 
         public void OnSkipPressed()
         {
             var result = view.Skip();
 
-            if (!isNavigationLocked)
+            view.SetBackVisible(view.typewriter.CanGoBack);
+
+            if (mode == Mode.Normal)
             {
-                view.SetBackVisible(view.typewriter.CanGoBack);
+                if (view.IsFinished)
+                {
+                    view.SetSkipVisible(false);
+                    OnTextFinished?.Invoke();
+                }
+
+                return;
             }
-            if (mode == Mode.Normal) return;
 
             if (mode == Mode.Reaction && result == TypewriterEffect.SkipResult.DialogueFinished)
             {
@@ -57,11 +78,14 @@ namespace Dialogue
             }
         }
 
+        //test
         public void OnBackPressed()
         {
             view.typewriter.back();
             view.SetBackVisible(view.typewriter.CanGoBack);
         }
+        //test
+
 
         public void Hide()
         {
@@ -71,32 +95,15 @@ namespace Dialogue
         public void Start()
         {
             view.Hide();
+            //
             view.typewriter.OnDialogueFinished += HandleTypewriterFinished;
+
+            //test
             view.typewriter.OnDialogueBack += HandleTypewriterBack;
-            view.typewriter.OnPageFinished += HandlePageFinished;
+            //test
         }
 
-        void HandlePageFinished(int page)
-        {
-            if (mode == Mode.Normal)
-                OnPageFinished?.Invoke(page);
-        }
-
-        public void SetNavigationInteractable(bool interactable)
-        {
-            isNavigationLocked = !interactable;
-            if (interactable)
-            {
-                view.SetSkipVisible(true);
-                view.SetBackVisible(view.typewriter.CanGoBack);
-            }
-            else
-            {
-                view.SetSkipVisible(false);
-                view.SetBackVisible(false);
-            }
-        }
-
+        //
         void HandleTypewriterFinished()
         {
             if (mode != Mode.Normal)
@@ -106,9 +113,12 @@ namespace Dialogue
             OnTextFinished?.Invoke();
         }
 
+        //test
         void HandleTypewriterBack()
         {
             view.SetSkipVisible(true);
         }
+        //test
+
     }
 }

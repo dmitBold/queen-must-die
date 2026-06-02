@@ -1,16 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Zenject;
-using static SaveManager;
 
 namespace Inventory
 {
     public class InventoryManager
     {
-        //test
-        [Inject] private ItemDatabase _itemDatabase;
-        //test
-
         Dictionary<ItemData, int> items = new();
 
         public event Action OnInventoryChanged;
@@ -68,41 +62,5 @@ namespace Inventory
 
             return result;
         }
-
-        //test
-        public List<SavedItem> GetInventorySaveData()
-        {
-            List<SavedItem> savedList = new List<SavedItem>();
-
-            foreach (var pair in items)
-            {
-                if (pair.Key != null && !string.IsNullOrEmpty(pair.Key.id))
-                {
-                    savedList.Add(new SavedItem(pair.Key.id, pair.Value));
-                }
-            }
-
-            return savedList;
-        }
-
-        public void LoadInventoryData(List<SavedItem> savedInventory)
-        {
-            items.Clear();
-
-            if (savedInventory == null) return;
-
-            foreach (var savedItem in savedInventory)
-            {
-                ItemData originalItem = _itemDatabase.GetItemById(savedItem.itemId);
-
-                if (originalItem != null)
-                {
-                    AddItem(originalItem, savedItem.amount);
-                }
-            }
-
-            OnInventoryChanged?.Invoke();
-        }
-        //test
     }
 }
