@@ -260,5 +260,15 @@ namespace Inventory
             currentMode = mode;
             rootCanvas.gameObject.SetActive(mode != InventoryMode.Disable);
         }
+
+        public void DisableRootCanvas()
+        {
+            rootCanvas.gameObject.SetActive(false);
+        }
+
+        public void EnableRootCanvas()
+        {
+            rootCanvas.gameObject.SetActive(true);
+        }
     }
 }
