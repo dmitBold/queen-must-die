@@ -119,7 +119,7 @@ namespace Cards
                 noteInventory.AddNote(choice.rewardNote);
             }
 
-            if (choice.reactionText != null)
+            if (choice.reactionText != null && choice.reactionText.Length > 0)
             {
                 dialogue.ShowReaction(choice.reactionText, EndCard);
             }
