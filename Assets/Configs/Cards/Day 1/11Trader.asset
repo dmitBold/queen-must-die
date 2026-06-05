@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c7e4b39926d0b42b78e88af0359330, type: 3}
+  m_Name: 11Trader
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  CardPages:
+  - "\u041C\u043E\u0439 \u043F\u043B\u0435\u043C\u044F\u043D\u043D\u0438\u043A \u0432\u0447\u0435\u0440\u0430
+    \u043D\u0430 \u043F\u0438\u0440\u0443 \u043D\u0430\u0437\u0432\u0430\u043B \u0432\u0430\u0441...
+    \u0431\u0430\u0441\u0442\u0430\u0440\u0434\u043E\u043C!"
+  - "\u0415\u0433\u043E \u043D\u0443\u0436\u043D\u043E \u043A\u0430\u0437\u043D\u0438\u0442\u044C
+    \u043F\u043E \u0437\u0430\u043A\u043E\u043D\u0443 \u0438\u043C\u043F\u0435\u0440\u0438\u0438! "
+  - "\u042F \u0432\u0435\u0440\u0435\u043D \u043A\u043E\u0440\u043E\u043D\u0435 \u0431\u043E\u043B\u044C\u0448\u0435,
+    \u0447\u0435\u043C \u0441\u0432\u043E\u0435\u0439 \u0440\u043E\u0434\u043D\u0435!"
+  LeftChoice:
+    text: "\u041A\u0430\u0437\u043D\u0438\u0442\u044C \u0435\u0433\u043E"
+    effects:
+    - type: 0
+      stat: 4
+      value: 30
+    addFlags: []
+    removeFlags: []
+    reactionText: []
+    rewardItem: {fileID: 0}
+    rewardNote: {fileID: 0}
+    rewardAmount: 1
+  RightChoice:
+    text: "\u041F\u043E\u043C\u0438\u043B\u043E\u0432\u0430\u0442\u044C"
+    effects:
+    - type: 0
+      stat: 4
+      value: -30
+    addFlags: []
+    removeFlags: []
+    reactionText:
+    - "\u041B\u044E\u0434\u0438 \u043F\u0435\u0440\u0435\u0441\u0442\u0430\u043D\u0443\u0442
+      \u0432\u0430\u0441 \u0431\u043E\u044F\u0442\u044C\u0441\u044F, \u0435\u0441\u043B\u0438
+      \u0432\u044B \u043D\u0435 \u0431\u0443\u0434\u0435\u0442\u0435 \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0442\u044C
+      \u0441\u0438\u043B\u0443."
+    rewardItem: {fileID: 0}
+    rewardNote: {fileID: 0}
+    rewardAmount: 1
+  RequiredFlags:
+  - 1.10
+  BlockedFlags:
+  - 1.5
+  MinWeek: 0
+  MaxWeek: 0
+  weight: 10
+  cooldown: 0
+  visitor: {fileID: 11400000, guid: d211f0213e49cd84ea113d5a7f792190, type: 2}
+  itemReactions: []
+  intermediateChoices:
+  - triggerAfterPage: 0
+    leftChoice:
+      text: "\u042F \u0438 \u0435\u0441\u0442\u044C \u0431\u0430\u0441\u0442\u0430\u0440\u0434"
+      effects: []
+      addFlags: []
+      removeFlags: []
+      reactionText: []
+      rewardItem: {fileID: 0}
+      rewardNote: {fileID: 0}
+      rewardAmount: 0
+    rightChoice:
+      text: "\u0415\u0433\u043E \u043D\u0443\u0436\u043D\u043E \u043D\u0430\u043A\u0430\u0437\u0430\u0442\u044C"
+      effects: []
+      addFlags: []
+      removeFlags: []
+      reactionText: []
+      rewardItem: {fileID: 0}
+      rewardNote: {fileID: 0}
+      rewardAmount: 0
+  - triggerAfterPage: 1
+    leftChoice:
+      text: "\u0425\u043E\u0447\u0435\u0448\u044C \u043F\u043E\u0434\u0441\u0438\u0434\u0435\u0442\u044C
+        \u0435\u0433\u043E?"
+      effects: []
+      addFlags: []
+      removeFlags: []
+      reactionText: []
+      rewardItem: {fileID: 0}
+      rewardNote: {fileID: 0}
+      rewardAmount: 0
+    rightChoice:
+      text: "\u041E\u043D \u0432\u0435\u0434\u044C \u0432\u0430\u0448\u0430 \u0441\u0435\u043C\u044C\u044F!"
+      effects: []
+      addFlags: []
+      removeFlags: []
+      reactionText: []
+      rewardItem: {fileID: 0}
+      rewardNote: {fileID: 0}
+      rewardAmount: 0
+  IsMandatory: 1
+  IsRandom: 0
