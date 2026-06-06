@@ -16,6 +16,7 @@ public class SaveManager : MonoBehaviour
     [Inject] private ScenesManager _scenesManager;
     [Inject] private SaveSystem _saveSystem;
     [Inject] private InventoryManager _inventoryManager;
+    //[Inject] private PlayerFlashlight _flashlight;
 
     [System.Serializable]
     public struct SaveData
@@ -30,6 +31,7 @@ public class SaveManager : MonoBehaviour
         public float rotY;
         public float rotZ;
         public float rotW;
+        //public bool isLightOn;
     }
 
     [System.Serializable]
@@ -80,6 +82,15 @@ public class SaveManager : MonoBehaviour
         {
             Debug.Log("PLAYER_SAVE_IS_NULL");
         }
+
+        /*if(_flashlight != null)
+        {
+            data.isLightOn = _flashlight.IsActive();
+        }
+        else
+        {
+            Debug.Log("FLASHLIGHT_SAVE_IS_NULL");
+        }*/
 
         string unitySceneName = SceneManager.GetActiveScene().name;
         GameScene currentScene = GetGameSceneEnum(unitySceneName);

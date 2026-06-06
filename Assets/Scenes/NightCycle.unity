@@ -90256,6 +90256,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4962638914751441b43c9e643ed6c3b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1002319310}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4962638914751441b43c9e643ed6c3b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1002319313}
   m_SourcePrefab: {fileID: 100100000, guid: b4962638914751441b43c9e643ed6c3b, type: 3}
 --- !u!1 &1002319308 stripped
 GameObject:
@@ -90324,6 +90327,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1002319313}
+        m_TargetAssemblyTypeName: NightCycle.WorldEventSaver, Assembly-CSharp
+        m_MethodName: SaveEventState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -90345,6 +90360,46 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &1002319313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002319308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ae4df52642e6e4db21ec3c5344329f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.WorldEventSaver
+  _uniqueId: 3d93ccbe-bc8d-4361-a12a-e47ae662f66b
+  onStateRestored:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1002319310}
+        m_TargetAssemblyTypeName: NightCycle.PickupLight, Assembly-CSharp
+        m_MethodName: Pickup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1002319308}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1005026912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130354,6 +130409,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2077500504834543847, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
+      propertyPath: m_fontSize
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2077500504834543847, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 54
+      objectReference: {fileID: 0}
     - target: {fileID: 4901871637801878396, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
       propertyPath: cameraBrain
       value: 
@@ -143767,7 +143830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1973421451
 Transform:
   m_ObjectHideFlags: 0
@@ -145970,8 +146033,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047904696}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.04490486, y: 0.032451104, z: -0.0030732492, w: -0.99845934}
-  m_LocalPosition: {x: -79.99963, y: -0.47085106, z: 83.03725}
+  m_LocalRotation: {x: 0.0635113, y: -0.009382778, z: 0.00059714465, w: 0.99793684}
+  m_LocalPosition: {x: 0.084, y: 0.465, z: -0.051}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -513072,6 +513135,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+    - target: {fileID: 2258007198531029671, guid: 8960e215060df404da69b35f5cf7f779, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3209031065477419809, guid: 8960e215060df404da69b35f5cf7f779, type: 3}
       propertyPath: m_Name
       value: NoteController

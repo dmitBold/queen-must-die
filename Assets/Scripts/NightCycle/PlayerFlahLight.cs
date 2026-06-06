@@ -1,12 +1,17 @@
 using UnityEngine;
+using Zenject;
 
 namespace NightCycle
 {
     public class PlayerFlashlight : MonoBehaviour
     {
+
+        //test
+        //[Inject] private SaveSystem _saveSystem;
+        //test
         //[SerializeField] Light flashlight;
         public Light flashlight;
-        float baseIntensity = 1.0f;
+        [SerializeField] float baseIntensity = 1.0f;
 
         [SerializeField] float swayAmount = 0.04f;
         [SerializeField] float swaySmooth = 8f;
@@ -18,6 +23,15 @@ namespace NightCycle
         {
             initialLocalPos = transform.localPosition;
             baseIntensity = flashlight.intensity;
+            /*if (_saveSystem.HasLoadedData)
+            {
+                var data = _saveSystem.CurrentData;
+                if (data.isLightOn)
+                {
+                    TurnOn();
+                }
+                TurnOFF();
+            }*/
         }
         
         private void Update()
@@ -39,10 +53,18 @@ namespace NightCycle
 
         public void TurnOn()
         {
-            //flashlight.enabled = true;
             this.gameObject.SetActive(true);
         }
 
+        public void TurnOFF()
+        {
+            this.gameObject.SetActive(false);
+        }
+
+        public bool IsActive()
+        {
+            return this.gameObject.activeSelf;
+        }
 
         public void StatueChase()
         {
