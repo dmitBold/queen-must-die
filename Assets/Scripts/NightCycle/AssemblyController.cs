@@ -174,6 +174,7 @@ namespace NightCycle
             else if (currentLockView != null)
             {
                 // Для замков не нужен режим выбора предметов из инвентаря
+                //Debug.Log("IUI DISABLE");
                 inventoryUI.SetMode(InventoryUI.InventoryMode.Disable);
             }
 
@@ -199,6 +200,7 @@ namespace NightCycle
             }
             else if (currentLockView != null)
             {
+                //Debug.Log("IUI ENABLE");
                 inventoryUI.ExitSelection();
             }
 

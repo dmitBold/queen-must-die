@@ -235,17 +235,19 @@ namespace Inventory
                 return;
             }
         }
-
+        // тут был баг с тем что когда выходим из замка то блять пропадает inventoryRoot
         public void ExitItemSelection()
         {
-            currentMode = InventoryMode.Default;
+            //currentMode = InventoryMode.Default;
+            SetMode(InventoryMode.Default);
             currentTarget = null;
             Close();
         }
 
         public void ExitSelection()
         {
-            currentMode = InventoryMode.Default;
+            //currentMode = InventoryMode.Default;
+            SetMode(InventoryMode.Default);
             currentAssemblySocket = null;
             Close();
         }
@@ -257,6 +259,7 @@ namespace Inventory
 
         public void SetMode(InventoryMode mode)
         {
+            //Debug.Log(mode);
             currentMode = mode;
             rootCanvas.gameObject.SetActive(mode != InventoryMode.Disable);
         }

@@ -35,6 +35,7 @@ namespace NightCycle
 
         public void startDialogue()
         {
+            Debug.Log("SSDD");
             _playerStateController.SetMode(PlayerMode.Focused);
 
             NightDialogueManager.Instance.StartDialogue(null, dialoguePages, () =>
