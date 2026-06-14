@@ -339778,8 +339778,8 @@ GameObject:
   - component: {fileID: 2095540548}
   - component: {fileID: 2095540551}
   - component: {fileID: 2095540550}
-  - component: {fileID: 2095540552}
   - component: {fileID: 2095540553}
+  - component: {fileID: 2095540554}
   m_Layer: 0
   m_Name: CinemachineBrain
   m_TagString: MainCamera
@@ -339929,14 +339929,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2095540552
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095540547}
-  m_Enabled: 1
 --- !u!114 &2095540553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339955,6 +339947,37 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 2146122119}
   _bindType: 0
+--- !u!114 &2095540554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095540547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 2012190441
+      Data2: 1223385622
+      Data3: -968471363
+      Data4: 692575539
+    Path: event:/FS_Wood
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &2101465719
 PrefabInstance:
   m_ObjectHideFlags: 0
