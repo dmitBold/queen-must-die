@@ -1,6 +1,8 @@
 using UnityEngine;
 using Zenject;
 using Unity.Cinemachine;
+using Core; // Подключаем пространство имен с AudioService
+using FMODUnity; // Для EventReference
 
 namespace NightCycle
 {
@@ -8,44 +10,67 @@ namespace NightCycle
     {
         private const float GROUNDED_GRAVITY = -0.5f;
 
-        [Header("Movement Speeds")] 
+        [Header("Movement Speeds")]
         [SerializeField] private float walkSpeed = 3.0f;
         [SerializeField] private float sprintMultiplier = 2.0f;
 
-        [Header("Jump Parameters")] [SerializeField]
-        private float jumpForce = 5.0f;
-
+        [Header("Jump Parameters")]
+        [SerializeField] private float jumpForce = 5.0f;
         [SerializeField] private float gravityMultiplier = 1.0f;
 
-        [Header("Look Parameters")] [SerializeField]
-        private float mouseSensitivity = 0.1f;
-
+        [Header("Look Parameters")]
+        [SerializeField] private float mouseSensitivity = 0.1f;
         [SerializeField] private float upDownLookRange = 80f;
 
-        [Header("References")] [SerializeField]
-        private CharacterController characterController;
+        [Header("Head Bobbing (Perlin Noise)")]
+        [SerializeField] private float noiseTransitionSpeed = 5f;
+        [SerializeField] private float idleAmplitude = 0.1f;
+        [SerializeField] private float idleFrequency = 0.5f;
+        [SerializeField] private float walkAmplitude = 0.5f;
+        [SerializeField] private float walkFrequency = 1.5f;
+        [SerializeField] private float sprintAmplitude = 1.0f;
+        [SerializeField] private float sprintFrequency = 2.5f;
 
+        // --- НОВЫЕ ПАРАМЕТРЫ ШАГОВ ---
+        [Header("Footsteps (FMOD)")]
+        [SerializeField] private EventReference footstepEvent; // Позволит выбрать ивент через UI
+        [SerializeField] private float walkStepInterval = 0.5f; // Секунд между шагами при ходьбе
+        [SerializeField] private float sprintStepInterval = 0.3f; // Секунд между шагами при беге
+
+        private float stepTimer; // Внутренний таймер
+        // ------------------------------
+        private bool wasMoving;
+
+        [Header("References")]
+        [SerializeField] private CharacterController characterController;
         [SerializeField] private CinemachineCamera mainCamera;
         [SerializeField] private PlayerStateController playerStateController;
-        
 
         private PlayerInputManager playerInputHandler;
+        private AudioService audioService; // Ссылка на наш сервис звуков
+
+        [SerializeField] private CinemachineBasicMultiChannelPerlin cameraNoise;
 
         private Vector3 currentMovement;
         private float verticalRotation;
-        //private float CurrentSpeed => walkSpeed;
+
         private float CurrentSpeed => walkSpeed * (playerInputHandler.SprintTriggered ? sprintMultiplier : 1);
 
         [Inject]
-        private void Construct(PlayerInputManager playerInputHandler)
+        private void Construct(PlayerInputManager playerInputHandler, AudioService audioService)
         {
             this.playerInputHandler = playerInputHandler;
             this.playerStateController = playerStateController;
+            this.audioService = audioService;
         }
 
         private void Start()
         {
             InitializeCursor();
+
+            // Сбрасываем таймер шагов в начале
+            stepTimer = 0f;
+            wasMoving = false;
         }
 
         private void InitializeCursor()
@@ -54,12 +79,12 @@ namespace NightCycle
             Cursor.visible = false;
         }
 
-
         private void Update()
         {
             if (!playerStateController.CanMove())
             {
                 HandleJumpingItemSelection();
+                HandleCameraBobbing(isMoving: false);
                 return;
             }
 
@@ -69,8 +94,82 @@ namespace NightCycle
             {
                 HandleRotation();
             }
+
+            bool isMoving = characterController.isGrounded && playerInputHandler.MovementInput.sqrMagnitude > 0.01f;
+            HandleCameraBobbing(isMoving);
+            HandleFootsteps(isMoving); // Вызов логики шагов
         }
 
+        // --- ЛОГИКА ШАГОВ ---
+        private void HandleFootsteps(bool isMoving)
+        {
+            if (!isMoving)
+            {
+                wasMoving = false;
+
+                // Время кулдауна продолжает уменьшаться, даже когда игрок стоит.
+                // Это предотвращает мгновенный повторный щелчок звука, если игрок спамит WASD.
+                if (stepTimer > 0)
+                {
+                    stepTimer -= Time.deltaTime;
+                }
+                return;
+            }
+
+            // Если игрок только что начал движение и кулдаун с прошлого шага завершен
+            if (!wasMoving && stepTimer <= 0f)
+            {
+                PlayFootstepSound();
+                stepTimer = playerInputHandler.SprintTriggered ? sprintStepInterval : walkStepInterval;
+            }
+            else
+            {
+                stepTimer -= Time.deltaTime;
+
+                if (stepTimer <= 0f)
+                {
+                    PlayFootstepSound();
+                    stepTimer = playerInputHandler.SprintTriggered ? sprintStepInterval : walkStepInterval;
+                }
+            }
+
+            wasMoving = true;
+        }
+
+        private void PlayFootstepSound()
+        {
+            if (audioService != null)
+            {
+                // Передаем координаты игрока для 3D звука
+                audioService.PlayFMODEvent(footstepEvent, transform.position);
+            }
+        }
+        // --------------------
+
+        private void HandleCameraBobbing(bool isMoving)
+        {
+            if (cameraNoise == null) return;
+
+            float targetAmplitude = idleAmplitude;
+            float targetFrequency = idleFrequency;
+
+            if (isMoving)
+            {
+                if (playerInputHandler.SprintTriggered)
+                {
+                    targetAmplitude = sprintAmplitude;
+                    targetFrequency = sprintFrequency;
+                }
+                else
+                {
+                    targetAmplitude = walkAmplitude;
+                    targetFrequency = walkFrequency;
+                }
+            }
+
+            cameraNoise.AmplitudeGain = Mathf.Lerp(cameraNoise.AmplitudeGain, targetAmplitude, Time.deltaTime * noiseTransitionSpeed);
+            cameraNoise.FrequencyGain = Mathf.Lerp(cameraNoise.FrequencyGain, targetFrequency, Time.deltaTime * noiseTransitionSpeed);
+        }
 
         private void HandleJumpingItemSelection()
         {

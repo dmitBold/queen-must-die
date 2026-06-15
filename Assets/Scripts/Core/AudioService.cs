@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 namespace Core
 {
@@ -56,6 +57,20 @@ namespace Core
             return source;
         }
 
+        //для FMOD
 
+        // Воспроизведение через EventReference (самый удобный способ для инспектора)
+        public void PlayFMODEvent(EventReference eventReference, Vector3 position = default)
+        {
+            if (eventReference.IsNull) return;
+            RuntimeManager.PlayOneShot(eventReference, position);
+        }
+
+        // Воспроизведение через строковый путь (например: "event:/FS_Wood")
+        public void PlayFMODEvent(string eventPath, Vector3 position = default)
+        {
+            if (string.IsNullOrEmpty(eventPath)) return;
+            RuntimeManager.PlayOneShot(eventPath, position);
+        }
     }
 }

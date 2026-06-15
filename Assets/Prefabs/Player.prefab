@@ -75,15 +75,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f530bae654645b469fc37e1ec1262dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonController
-  walkSpeed: 5
+  walkSpeed: 4.85
   sprintMultiplier: 1.5
   jumpForce: 16
   gravityMultiplier: 7
   mouseSensitivity: 0.1
   upDownLookRange: 80
+  noiseTransitionSpeed: 5
+  idleAmplitude: 0.3
+  idleFrequency: 0.5
+  walkAmplitude: 1.5
+  walkFrequency: 1.5
+  sprintAmplitude: 4.5
+  sprintFrequency: 2.5
+  footstepEvent:
+    Guid:
+      Data1: 2012190441
+      Data2: 1223385622
+      Data3: -968471363
+      Data4: 692575539
+    Path: event:/FS_Wood
+  walkStepInterval: 0.45
+  sprintStepInterval: 0.25
   characterController: {fileID: 1127454649717024361}
   mainCamera: {fileID: 4661916316352681474}
   playerStateController: {fileID: 8411479665512441087}
+  cameraNoise: {fileID: 2931145278583831260}
 --- !u!114 &8962173679195792689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +361,7 @@ GameObject:
   - component: {fileID: 8895487729252122857}
   - component: {fileID: 4661916316352681474}
   - component: {fileID: 2544127867496622020}
+  - component: {fileID: 2931145278583831260}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -418,6 +436,23 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3305109169647983864}
   m_Enabled: 1
+--- !u!114 &2931145278583831260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305109169647983864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBasicMultiChannelPerlin
+  NoiseProfile: {fileID: 11400000, guid: 415363919447f2443b248a078eba7e7d, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 1
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 144.31558, y: 177.7731, z: -989.47595}
 --- !u!1 &6951213798720070645
 GameObject:
   m_ObjectHideFlags: 0
