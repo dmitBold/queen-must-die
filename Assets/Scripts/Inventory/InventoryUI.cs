@@ -60,6 +60,16 @@ namespace Inventory
             SetMode(InventoryMode.Disable);
         }
 
+        public void DisableRootCanvas()
+        {
+            rootCanvas.gameObject.SetActive(false);
+        }
+
+        public void EnableRootCanvas()
+        {
+            rootCanvas.gameObject.SetActive(true);
+        }
+
         public void Init(DayCycleController dayCycle)
         {
             SetMode(InventoryMode.Default);
