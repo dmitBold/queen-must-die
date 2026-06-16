@@ -121,6 +121,7 @@ public class SaveManager : MonoBehaviour
         {
             case SceneNames.Night: return GameScene.Night;
             case SceneNames.Day: return GameScene.Day;
+            case SceneNames.Memories1: return GameScene.Memories1;
             case SceneNames.HoM: return GameScene.HoM;
             case SceneNames.MainMenu: return GameScene.MainMenu;
             case SceneNames.Assembly: return GameScene.Assembly;

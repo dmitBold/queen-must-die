@@ -4,6 +4,7 @@ namespace Core
     {
         Night,
         Day,
+        Memories1,
         HoM,
         MainMenu,
         Assembly,
@@ -17,6 +18,7 @@ namespace Core
         public const string Assembly = "AssemblyScene";
         public const string Night = "NightCycle";
         public const string Day = "DayCycle";
+        public const string Memories1 = "Memories1";
         public const string HoM = "HoMScene";
         public const string MainMenu = "MainMenu";
         public const string IntroDialog = "IntroDialog";
@@ -29,6 +31,7 @@ namespace Core
             {
                 case GameScene.Night: return Night;
                 case GameScene.Day: return Day;
+                case GameScene.Memories1: return Memories1;
                 case GameScene.HoM: return HoM;
                 case GameScene.MainMenu: return MainMenu;
                 case GameScene.Assembly: return Assembly;
