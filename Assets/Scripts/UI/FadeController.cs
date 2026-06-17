@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 //[RequireComponent(typeof(CanvasGroup))]
 public class FadeController : MonoBehaviour
 {
     public static FadeController Instance { get; private set; }
     private CanvasGroup canvasGroup;
+    /*public UnityEvent onfadedIN;
+    public UnityEvent onfadedOUT;*/
+
 
     void Awake()
     {
@@ -54,8 +58,15 @@ public class FadeController : MonoBehaviour
 
         canvasGroup.alpha = endAlpha;
         canvasGroup.blocksRaycasts = endAlpha > 0;
-
-        onComplete?.Invoke();
+        /*if (endAlpha == 0f)
+        {
+            onfadedOUT?.Invoke();
+        }
+        else if (endAlpha == 1f)
+        {
+            onfadedIN?.Invoke();
+        }*/
+            onComplete?.Invoke();
     }
 
     public void SetAlphaDirectly(float alpha)

@@ -102,31 +102,40 @@ namespace NightCycle
         {
             Debug.Log("MOVE");
             var player = _playerProvider.CurrentPlayer;
-
-            // Получаем Rigidbody из класса Player
             var rb = player.Rigidbody;
             CharacterController controller = null;
 
             if (rb != null)
             {
-                // Ищем CharacterController на том же GameObject, где висит Rigidbody
-                controller = rb.gameObject.GetComponent<CharacterController>();
+                controller = rb.gameObject.GetComponentInParent<CharacterController>();
 
-                // Отключаем контроллер перед перемещением
-                if (controller != null) controller.enabled = false;
+                if (controller != null)
+                {
+                    Debug.Log("aaa");
+                    controller.enabled = false;
+                }
 
-                // Обнуляем скорость физического тела
-                rb.linearVelocity = Vector3.zero; // В Unity 2023+ используется linearVelocity вместо velocity
+                rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
             }
 
-            // Перемещаем игрока
-            player.Position = point.position;
+            // ИЗМЕНЕНИЕ ЗДЕСЬ: Если нашли родительский контроллер, двигаем ЕГО трансформ
+            if (controller != null)
+            {
+                controller.transform.position = point.position;
+
+                // Дополнительно разворачиваем игрока в сторону точки, если нужно
+                controller.transform.rotation = point.rotation;
+            }
+            else
+            {
+                // Если контроллера вдруг нет, двигаем как раньше через Rigidbody
+                player.Position = point.position;
+            }
 
             // Синхронизируем координаты в движке
             Physics.SyncTransforms();
 
-            // Включаем контроллер обратно
             if (controller != null)
             {
                 controller.enabled = true;
