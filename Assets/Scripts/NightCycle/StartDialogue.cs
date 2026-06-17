@@ -42,7 +42,11 @@ namespace NightCycle
             {
 
 
-                if (triggerEventOnlyOnce && hasTriggeredEvent) return;
+                if (triggerEventOnlyOnce && hasTriggeredEvent)
+                {
+                    Debug.Log("trigger dialogue end once");
+                    return;
+                }
 
                 onDialogueCompleted?.Invoke();
                 hasTriggeredEvent = true;

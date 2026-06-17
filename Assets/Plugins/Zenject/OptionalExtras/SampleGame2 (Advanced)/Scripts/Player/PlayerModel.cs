@@ -68,5 +68,10 @@ namespace Zenject.SpaceFighter
         {
             _renderer.enabled = isVisible;
         }
+
+        public Rigidbody Rigidbody
+        {
+            get { return _rigidBody; }
+        }
     }
 }

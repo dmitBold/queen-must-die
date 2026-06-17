@@ -19,6 +19,8 @@ namespace Inventory
             Disable
         }
 
+        public bool set_active_on_start = false;
+
         [Header("UI References")] [SerializeField]
         private GameObject panel;
 
@@ -58,6 +60,10 @@ namespace Inventory
         private void Start()
         {
             SetMode(InventoryMode.Disable);
+            if (set_active_on_start)
+            {
+                SetMode(InventoryMode.Default);
+            }
         }
 
         public void DisableRootCanvas()

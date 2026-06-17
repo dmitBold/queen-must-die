@@ -1,3 +1,4 @@
+using DI;
 using Inventory;
 using UnityEngine;
 using Zenject;
@@ -9,13 +10,16 @@ namespace NightCycle
         private PlayerStateController _playerStateController;
         private InventoryUI _inventoryUI;
         private HUDController _hudController;
+        private IPlayerProvider _playerProvider;
 
         [Inject]
         public void Construct(
             [Inject(Optional = true)] PlayerStateController playerStateController,
             [Inject(Optional = true)] InventoryUI inventoryUI,
-            [Inject(Optional = true)] HUDController hudController)
+            [Inject(Optional = true)] HUDController hudController,
+            [Inject] IPlayerProvider playerProvider)
         {
+            _playerProvider = playerProvider;
             _playerStateController = playerStateController;
             _inventoryUI = inventoryUI;
             _hudController = hudController;
@@ -64,6 +68,16 @@ namespace NightCycle
             if (_hudController != null) _hudController.SetCrosshairActivity(false);
         }
 
+        public void DiasableHUDtext()
+        {
+            if (_hudController != null) _hudController.DisableInteractionText();
+        }
+
+        /*public void EnableHUDtext()
+        {
+            if (_hudController != null) _hudController.EnableInteractionText();
+        }*/
+
         public void EnableHUD()
         {
             if (_hudController != null) _hudController.SetCrosshairActivity(true);
@@ -75,6 +89,48 @@ namespace NightCycle
             DisableInventoryUI();
             DisableHUD();
             Debug.Log("[PlayerStateBridge] Игрок подготовлен к смерти");
+        }
+
+        /*public void MovePlayer(Transform point)
+        {
+            Debug.Log("MOVE");
+            var player = _playerProvider.CurrentPlayer;
+            player.Position = new Vector3(point.position.x, point.position.y, point.position.z);
+        }*/
+
+        public void MovePlayer(Transform point)
+        {
+            Debug.Log("MOVE");
+            var player = _playerProvider.CurrentPlayer;
+
+            // Получаем Rigidbody из класса Player
+            var rb = player.Rigidbody;
+            CharacterController controller = null;
+
+            if (rb != null)
+            {
+                // Ищем CharacterController на том же GameObject, где висит Rigidbody
+                controller = rb.gameObject.GetComponent<CharacterController>();
+
+                // Отключаем контроллер перед перемещением
+                if (controller != null) controller.enabled = false;
+
+                // Обнуляем скорость физического тела
+                rb.linearVelocity = Vector3.zero; // В Unity 2023+ используется linearVelocity вместо velocity
+                rb.angularVelocity = Vector3.zero;
+            }
+
+            // Перемещаем игрока
+            player.Position = point.position;
+
+            // Синхронизируем координаты в движке
+            Physics.SyncTransforms();
+
+            // Включаем контроллер обратно
+            if (controller != null)
+            {
+                controller.enabled = true;
+            }
         }
 
     }
