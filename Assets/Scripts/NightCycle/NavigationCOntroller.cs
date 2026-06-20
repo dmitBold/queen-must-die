@@ -1,31 +1,78 @@
-using NightCycle;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
 using Zenject;
 using Zenject.SpaceFighter;
 
-public class NavigationCOntroller : MonoBehaviour
+public class NavigationController : MonoBehaviour
 {
-    public Transform position;
-
     public NavMeshAgent agent;
+    public float updateRate = 0.2f;
 
-    [Inject] Player _player;
+    private Coroutine routine;
+    private Transform targetTransform;
+    private Vector3 targetPosition;
+    private bool isFollowingTransform;
 
-    public void StartMove()
+    [Inject]
+    private Player _player;
+
+    // Движение за движущейся целью (трансформом)
+    public void StartMove(Transform target)
     {
-        agent.SetDestination(position.position);
+        if (target == null) return;
+
+        ResetMovement();
+        targetTransform = target;
+        isFollowingTransform = true;
+        agent.isStopped = false;
+
+        routine = StartCoroutine(UpdatePathRoutine());
     }
 
-    private void Update()
+    // Движение за игроком
+    public void MovePlayer()
     {
         if (_player != null && !_player.IsDead && agent.isOnNavMesh)
         {
-            agent.SetDestination(_player.Position);
+            StartMove(_player.Rigidbody.transform); // Используем общий метод следования
         }
     }
 
+    // Остановка агента
+    public void StopMove()
+    {
+        ResetMovement();
+        if (agent.isOnNavMesh)
+        {
+            agent.isStopped = true; // Принудительно тормозим агента
+            agent.ResetPath();      // Сбрасываем старый путь
+        }
+    }
 
+    private void ResetMovement()
+    {
+        if (routine != null)
+        {
+            StopCoroutine(routine);
+            routine = null;
+        }
+        isFollowingTransform = false;
+        targetTransform = null;
+    }
 
+    IEnumerator UpdatePathRoutine()
+    {
+        while (true)
+        {
+            if (agent.isOnNavMesh)
+            {
+                // Если следим за объектом — берем его живую позицию
+                // Иначе — агент идет в последнюю известную точку
+                Vector3 currentTarget = isFollowingTransform ? targetTransform.position : targetPosition;
+                agent.SetDestination(currentTarget);
+            }
+            yield return new WaitForSeconds(updateRate);
+        }
+    }
 }
