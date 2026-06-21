@@ -17,5 +17,8 @@ namespace Inventory
 
         public bool CanApplyDay = true;
         public bool CanApplyNight = true;
+
+        [Header("Audio")]
+        public FMODUnity.EventReference pickupSound;
     }
 }

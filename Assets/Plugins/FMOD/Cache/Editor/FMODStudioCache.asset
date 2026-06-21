@@ -84,6 +84,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-2557231903040348504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PickUpHorseLeg2
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/PickUpHorseLeg2
+  Guid:
+    Data1: -103569678
+    Data2: 1265735441
+    Data3: 2045417871
+    Data4: -764381129
+  Banks:
+  - {fileID: 7248862640309129202}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 640
 --- !u!114 &-2189440636774923607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,10 +126,10 @@ MonoBehaviour:
   Path: Assets/Audio/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639170845500000000
+  lastModified: 639176805000000000
   FileSizes:
   - Name: 
-    Value: 1346
+    Value: 1472
   Exists: 1
 --- !u!114 &-1898730963268350172
 MonoBehaviour:
@@ -175,6 +202,7 @@ MonoBehaviour:
   - {fileID: 9126004422003036050}
   - {fileID: 6623376351366721512}
   - {fileID: -9009780724659447739}
+  - {fileID: 7248862640309129202}
   EditorEvents:
   - {fileID: 357204216916896248}
   - {fileID: -1898730963268350172}
@@ -182,13 +210,15 @@ MonoBehaviour:
   - {fileID: 4710117025230107091}
   - {fileID: 7993461632734362404}
   - {fileID: 204431189933114681}
+  - {fileID: 1041311434216822872}
+  - {fileID: -2557231903040348504}
   EditorParameters: []
   MasterBanks:
   - {fileID: 6623376351366721512}
   StringsBanks:
   - {fileID: -2189440636774923607}
   cacheVersion: 131859
-  cacheTime: 639170845500000000
+  cacheTime: 639176805000000000
   SerializableEventsDict:
   - key: event:/Statues
     index: 0
@@ -202,6 +232,10 @@ MonoBehaviour:
     index: 4
   - key: event:/TextAnimation
     index: 5
+  - key: event:/PickUpHorseLeg1
+    index: 6
+  - key: event:/PickUpHorseLeg2
+    index: 7
 --- !u!114 &204431189933114681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +291,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7000
+--- !u!114 &1041311434216822872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PickUpHorseLeg1
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/PickUpHorseLeg1
+  Guid:
+    Data1: -193756239
+    Data2: 1317020344
+    Data3: -2030914432
+    Data4: 1742868425
+  Banks:
+  - {fileID: 7248862640309129202}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 640
 --- !u!114 &1758443529393197609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +427,7 @@ MonoBehaviour:
   Path: Assets/Audio/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639170845500000000
+  lastModified: 639176805000000000
   FileSizes: []
   Exists: 1
 --- !u!114 &7093276940861521851
@@ -397,6 +458,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 279
+--- !u!114 &7248862640309129202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Items.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: Assets/Audio/Desktop/Items.bank
+  Name: Items
+  StudioPath: bank:/Items
+  lastModified: 639176805000000000
+  FileSizes: []
+  Exists: 1
 --- !u!114 &7993461632734362404
 MonoBehaviour:
   m_ObjectHideFlags: 0

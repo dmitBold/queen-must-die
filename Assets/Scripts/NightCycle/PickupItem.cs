@@ -2,6 +2,7 @@ using Core;
 using Inventory;
 using UnityEngine;
 using Zenject;
+using FMODUnity;
 
 namespace NightCycle
 {
@@ -25,7 +26,12 @@ namespace NightCycle
         public void Pickup()
         {
             _inventoryManager.AddItem(item);
-            _audioService.PlaySound(_audioConfig.pickupSound);
+            //_audioService.PlaySound(_audioConfig.pickupSound);
+            if (item != null && !item.pickupSound.IsNull)
+            {
+                FMODUnity.RuntimeManager.PlayOneShotAttached(item.pickupSound, gameObject);
+            }
+
 
             if (destroyOnPickup)
             {
