@@ -36,6 +36,11 @@ namespace Dialogue
             return typewriter.Skip();
         }
 
+        public bool canSkip()
+        {
+            return skipButton.activeSelf;
+        }
+
         public bool IsFinished => typewriter.IsFinished;
     }
 }

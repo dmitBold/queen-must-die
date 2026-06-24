@@ -110,5 +110,19 @@ namespace Dialogue
         {
             view.SetSkipVisible(true);
         }
+
+        //TEST!!!!
+        void Update()
+        {
+            HandleClick();
+        }
+
+        private void HandleClick()
+        {
+            if (Input.GetMouseButtonDown(0) && view.canSkip())
+            {
+                OnSkipPressed();
+            }
+        }
     }
 }
