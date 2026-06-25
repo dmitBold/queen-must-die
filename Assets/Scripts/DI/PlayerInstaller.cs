@@ -10,6 +10,7 @@ namespace DI
     {
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private bool _enableLantern;
+        [SerializeField] private bool _enableInventory;
 
         [Inject] private SaveSystem _saveSystem;
         //TEST
@@ -50,8 +51,19 @@ namespace DI
         public override void Start()
         {
             base.Start();
-            Container.Resolve<InventoryUI>().SetMode(InventoryUI.InventoryMode.Default);
-            HUDController.instance.SetCrosshairActivity(true);
+            //Container.Resolve<InventoryUI>().SetMode(InventoryUI.InventoryMode.Default);
+
+            var inventoryUI = Container.Resolve<InventoryUI>();
+            if (!_enableInventory)
+            {
+                inventoryUI.DisableRootCanvas();
+            }
+            else
+            {
+                inventoryUI.SetMode(InventoryUI.InventoryMode.Default);
+            }
+
+                HUDController.instance.SetCrosshairActivity(true);
 
             //TEST
             var player = Container.Resolve<Player>();
