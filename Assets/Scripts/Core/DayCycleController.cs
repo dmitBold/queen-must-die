@@ -161,7 +161,7 @@ namespace Core
             //
             state = DayState.ShowingDialogue;
             
-            dialogue.Show(visitor.currentCard.CardPages); 
+            dialogue.Show(visitor.currentCard.CardPages, visitor.currentCard.Card_name); 
         }
 
         void OnVisitorLeft()

@@ -17,11 +17,12 @@ namespace Dialogue
 
         Action onReactionClosed;
 
-        public void Show(string[] pages)
+        public void Show(string[] pages, string card_name)
         {
             isNavigationLocked = false;
             mode = Mode.Normal;
             view.Show();
+            view.set_name(card_name);
             view.PlayText(pages);
             view.SetSkipVisible(true);
             view.SetBackVisible(view.typewriter.CanGoBack);

@@ -7,6 +7,7 @@ namespace Dialogue
     {
         [SerializeField] GameObject root;
         [SerializeField] TextMeshProUGUI text;
+        [SerializeField] TextMeshProUGUI name_text;
         [SerializeField] public TypewriterEffect typewriter;
         [SerializeField] GameObject skipButton;
         [SerializeField] GameObject backButton;
@@ -39,6 +40,11 @@ namespace Dialogue
         public bool canSkip()
         {
             return skipButton.activeSelf;
+        }
+
+        public void set_name(string name)
+        {
+            name_text.text = name;
         }
 
         public bool IsFinished => typewriter.IsFinished;

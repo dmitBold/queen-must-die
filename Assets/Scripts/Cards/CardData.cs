@@ -67,6 +67,7 @@ namespace Cards
     {
         [TextArea(3, 5)]
         public string[] CardPages;
+        public string Card_name;
         public Choice LeftChoice;
         public Choice RightChoice;
 
