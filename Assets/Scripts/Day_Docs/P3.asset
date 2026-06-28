@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c7e4b39926d0b42b78e88af0359330, type: 3}
   m_Name: P3
   m_EditorClassIdentifier: Assembly-CSharp::Cards.CardData
-  CardText: 
+  CardPages: []
+  Card_name: 
   LeftChoice:
-    text: "\u0423\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044C"
+    text: Approve
     effects:
     - type: 0
       stat: 0
@@ -33,16 +34,18 @@ MonoBehaviour:
       value: 5
     addFlags: []
     removeFlags: []
-    reactionText: 
+    reactionText: []
     rewardItem: {fileID: 0}
+    rewardNote: {fileID: 0}
     rewardAmount: 1
   RightChoice:
-    text: "\u041E\u0442\u043A\u043B\u043E\u043D\u0438\u0442\u044C"
+    text: Decline
     effects: []
     addFlags: []
     removeFlags: []
-    reactionText: 
+    reactionText: []
     rewardItem: {fileID: 0}
+    rewardNote: {fileID: 0}
     rewardAmount: 1
   RequiredFlags: []
   BlockedFlags: []
@@ -52,5 +55,6 @@ MonoBehaviour:
   cooldown: 0
   visitor: {fileID: 0}
   itemReactions: []
+  intermediateChoices: []
   IsMandatory: 0
   IsRandom: 0
