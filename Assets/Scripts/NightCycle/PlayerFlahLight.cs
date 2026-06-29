@@ -49,6 +49,18 @@ namespace NightCycle
                 Vector3.Lerp(transform.localPosition, targetPos, Time.deltaTime * swaySmooth);
 
             flashlight.intensity = baseIntensity + Mathf.Sin(Time.time * 2f) * 0.5f*baseIntensity;
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (IsActiveLight())
+                {
+                    TurnOFFLight();
+                }
+                else
+                {
+                    TurnOnLight();
+                }
+            }
         }
 
         public void TurnOn()
@@ -64,6 +76,21 @@ namespace NightCycle
         public bool IsActive()
         {
             return this.gameObject.activeSelf;
+        }
+
+        public void TurnOnLight()
+        {
+            flashlight.gameObject.SetActive(true);
+        }
+
+        public void TurnOFFLight()
+        {
+            flashlight.gameObject.SetActive(false);
+        }
+
+        public bool IsActiveLight()
+        {
+            return flashlight.gameObject.activeSelf;
         }
 
         public void StatueChase()
