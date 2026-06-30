@@ -1383,6 +1383,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1902742622}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &87522449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1561,6 +1565,10 @@ MonoBehaviour:
   cleanObject: {fileID: 149849806}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &104950317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2819,6 +2827,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &189045484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2849,7 +2861,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &189045485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3846,7 +3858,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &260172056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3863,6 +3875,10 @@ MonoBehaviour:
   cleanObject: {fileID: 945707720}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 416719513}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &260172057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5728,6 +5744,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &479797020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5758,7 +5778,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &479797021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6161,8 +6181,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 529028580}
-        m_TargetAssemblyTypeName: CleanupObject, Assembly-CSharp
-        m_MethodName: Clean
+        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
+        m_MethodName: Clean_with_anim
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6174,7 +6194,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &529028580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6191,6 +6211,15 @@ MonoBehaviour:
   cleanObject: {fileID: 189944978}
   parentStage: {fileID: 1005071717}
   clear_GROUP: {fileID: 1442964354}
+  anim: {fileID: 1442964356}
+  trig: clean
+  this_inter: {fileID: 0}
+  other_inter:
+  - {fileID: 1875331829}
+  - {fileID: 1504177554}
+  - {fileID: 529028579}
+  - {fileID: 668776515}
+  - {fileID: 2082822231}
 --- !u!1001 &535886974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7551,7 +7580,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &606162492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7568,6 +7597,10 @@ MonoBehaviour:
   cleanObject: {fileID: 945707720}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 416719513}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &606162493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7607,6 +7640,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &608401592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7637,7 +7674,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &608401593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7880,6 +7917,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &651786052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7910,7 +7951,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &651786053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8894,9 +8935,9 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 668776516}
-        m_TargetAssemblyTypeName: CleanupObject, Assembly-CSharp
-        m_MethodName: Clean
+      - m_Target: {fileID: 529028580}
+        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
+        m_MethodName: Clean_with_anim
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8908,7 +8949,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &668776516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8925,6 +8966,15 @@ MonoBehaviour:
   cleanObject: {fileID: 189944978}
   parentStage: {fileID: 1005071717}
   clear_GROUP: {fileID: 1442964354}
+  anim: {fileID: 1442964356}
+  trig: clean
+  this_inter: {fileID: 0}
+  other_inter:
+  - {fileID: 1875331829}
+  - {fileID: 1504177554}
+  - {fileID: 529028579}
+  - {fileID: 668776515}
+  - {fileID: 2082822231}
 --- !u!65 &668776517
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9053,6 +9103,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &671387787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9083,7 +9137,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &671387788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9692,6 +9746,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &759889493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9722,7 +9780,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &759889494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9941,6 +9999,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1604787845}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!4 &777331131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 415942, guid: 772c5503a0affe04892290cca42ad9a7, type: 3}
@@ -10385,6 +10447,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1099558399}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &847307733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10492,6 +10558,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &847307736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10522,7 +10592,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &847307737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16158,7 +16228,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &883142262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16175,6 +16245,10 @@ MonoBehaviour:
   cleanObject: {fileID: 945707720}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 416719513}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &883142263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17454,6 +17528,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &915898161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17484,7 +17562,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &915898162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20108,6 +20186,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1038007048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20138,7 +20220,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1038007049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20339,6 +20421,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1049404896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20369,7 +20455,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1049404897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21882,6 +21968,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1151136666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21912,7 +22002,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1151136667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22641,6 +22731,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1213496023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22671,7 +22765,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1213496024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22866,6 +22960,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1225692398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22896,7 +22994,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1225692399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23248,7 +23346,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1252318647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23265,6 +23363,10 @@ MonoBehaviour:
   cleanObject: {fileID: 945707720}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 416719513}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1252318648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25380,6 +25482,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1936360209}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1420487654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26641,9 +26747,9 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1504177555}
-        m_TargetAssemblyTypeName: CleanupObject, Assembly-CSharp
-        m_MethodName: Clean
+      - m_Target: {fileID: 529028580}
+        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
+        m_MethodName: Clean_with_anim
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26655,7 +26761,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1504177555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26672,6 +26778,15 @@ MonoBehaviour:
   cleanObject: {fileID: 189944978}
   parentStage: {fileID: 1005071717}
   clear_GROUP: {fileID: 1442964354}
+  anim: {fileID: 1442964356}
+  trig: clean
+  this_inter: {fileID: 0}
+  other_inter:
+  - {fileID: 1875331829}
+  - {fileID: 1504177554}
+  - {fileID: 529028579}
+  - {fileID: 668776515}
+  - {fileID: 2082822231}
 --- !u!4 &1516026984 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 415942, guid: 772c5503a0affe04892290cca42ad9a7, type: 3}
@@ -26763,6 +26878,10 @@ MonoBehaviour:
   cleanObject: {fileID: 178897731}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &1516060730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27933,6 +28052,10 @@ MonoBehaviour:
   cleanObject: {fileID: 692587366}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &1638469145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28810,6 +28933,10 @@ MonoBehaviour:
   cleanObject: {fileID: 375239756}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1676454140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336237,6 +336364,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1314717174}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1774016969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336472,6 +336603,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1789776485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336502,7 +336637,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1789776486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336660,6 +336795,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1812403062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336690,7 +336829,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1812403063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336735,6 +336874,10 @@ MonoBehaviour:
   cleanObject: {fileID: 912080186}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1823526754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336973,6 +337116,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1396399703}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!43 &1841775815
 Mesh:
   m_ObjectHideFlags: 0
@@ -337317,7 +337464,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1853845133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337334,6 +337481,10 @@ MonoBehaviour:
   cleanObject: {fileID: 945707720}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 416719513}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1853845134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337766,6 +337917,10 @@ MonoBehaviour:
   cleanObject: {fileID: 545792496}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &1875331826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -337887,9 +338042,9 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1875331830}
-        m_TargetAssemblyTypeName: CleanupObject, Assembly-CSharp
-        m_MethodName: Clean
+      - m_Target: {fileID: 529028580}
+        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
+        m_MethodName: Clean_with_anim
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -337901,7 +338056,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1875331830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337918,6 +338073,15 @@ MonoBehaviour:
   cleanObject: {fileID: 189944978}
   parentStage: {fileID: 1005071717}
   clear_GROUP: {fileID: 1442964354}
+  anim: {fileID: 1442964356}
+  trig: clean
+  this_inter: {fileID: 0}
+  other_inter:
+  - {fileID: 1875331829}
+  - {fileID: 1504177554}
+  - {fileID: 529028579}
+  - {fileID: 668776515}
+  - {fileID: 2082822231}
 --- !u!1001 &1876098153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -338195,6 +338359,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1666680986}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!4 &1897116706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 425266, guid: 374b0997db81407ca6f741e55d078c80, type: 3}
@@ -338389,6 +338557,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1516060732}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &1915517344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -339075,7 +339247,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &1993062410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339092,6 +339264,10 @@ MonoBehaviour:
   cleanObject: {fileID: 945707720}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 416719513}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1993062411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339244,6 +339420,10 @@ MonoBehaviour:
   cleanObject: {fileID: 595794882}
   parentStage: {fileID: 662716513}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &1993557686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339674,6 +339854,10 @@ MonoBehaviour:
   cleanObject: {fileID: 2143579697}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &2043487212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -339838,6 +340022,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &2046773158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339868,7 +340056,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &2046773159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340079,9 +340267,9 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2082822232}
-        m_TargetAssemblyTypeName: CleanupObject, Assembly-CSharp
-        m_MethodName: Clean
+      - m_Target: {fileID: 529028580}
+        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
+        m_MethodName: Clean_with_anim
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -340093,7 +340281,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &2082822232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340110,6 +340298,15 @@ MonoBehaviour:
   cleanObject: {fileID: 189944978}
   parentStage: {fileID: 1005071717}
   clear_GROUP: {fileID: 1442964354}
+  anim: {fileID: 1442964356}
+  trig: clean
+  this_inter: {fileID: 0}
+  other_inter:
+  - {fileID: 1875331829}
+  - {fileID: 1504177554}
+  - {fileID: 529028579}
+  - {fileID: 668776515}
+  - {fileID: 2082822231}
 --- !u!65 &2082822233
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -340708,6 +340905,10 @@ MonoBehaviour:
   cleanObject: {fileID: 656469114}
   parentStage: {fileID: 881887109}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &2104750709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -340815,6 +341016,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &2104750712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340845,7 +341050,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &2104750713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341310,6 +341515,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1417023045}
   parentStage: {fileID: 1252140727}
   clear_GROUP: {fileID: 363142093}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &2138011724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341340,7 +341549,7 @@ MonoBehaviour:
         m_CallState: 2
   assemblyController: {fileID: 0}
   interactionType: 1
-  holdDuration: 5
+  holdDuration: 4
 --- !u!114 &2138011725
 MonoBehaviour:
   m_ObjectHideFlags: 0

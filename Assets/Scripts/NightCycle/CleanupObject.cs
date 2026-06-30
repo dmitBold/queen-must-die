@@ -1,4 +1,5 @@
 using Core;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,11 @@ namespace NightCycle
         [SerializeField] CleanupStage parentStage;
 
         [SerializeField] private GameObject clear_GROUP;
+        //new
+        [SerializeField] private Animator anim;
+        [SerializeField] private string trig;
+        [SerializeField] private Interactable this_inter;
+        [SerializeField] private List<Interactable> other_inter;
 
         private AudioService _audioService;
 
@@ -47,5 +53,32 @@ namespace NightCycle
             }
             cleanObject.SetActive(true);
         }
+
+        public void Clean_with_anim()
+        {
+            if (cleanupSound != null && _audioService != null)
+            {
+                _audioService.PlaySound(cleanupSound);
+            }
+
+            if (this_inter != null) { this_inter.enabled = false; }
+
+            anim.SetTrigger(trig);
+
+            if (other_inter.Count > 0)
+            {
+                foreach(Interactable interactable in other_inter)
+                {
+                    interactable.enabled = false;
+                }
+            }
+
+            if (parentStage != null)
+            {
+                parentStage.OnObjectCleaned();
+            }
+
+        }
+
     }
 }
