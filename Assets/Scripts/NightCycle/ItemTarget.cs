@@ -14,12 +14,12 @@ namespace NightCycle
         public void OnEnterFocus()
         {
             // ������ ��������� ����������� PlayerMode, �� ������ ������� UI: "�������� ��� ����"
-            inventoryUI.OpenForItemTarget(this);
+            //inventoryUI.OpenForItemTarget(this);
         }
 
         public void OnExitFocus()
         {
-            inventoryUI.ExitItemSelection();
+            //inventoryUI.ExitItemSelection();
         }
 
         void Awake()

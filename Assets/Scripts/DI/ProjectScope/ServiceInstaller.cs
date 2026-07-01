@@ -1,7 +1,7 @@
 using Core;
 using UnityEngine;
 using Zenject;
-using Inventory; 
+using Inventory;
 
 namespace DI
 {
@@ -18,6 +18,7 @@ namespace DI
                 .Bind<ScenesManager>()
                 .AsSingle()
                 .WithArguments(this as MonoBehaviour);
+
             //TEST
             Container.Bind<SaveManager>().FromInstance(saveManager).AsSingle();
             Container.Bind<SaveSystem>().AsSingle();

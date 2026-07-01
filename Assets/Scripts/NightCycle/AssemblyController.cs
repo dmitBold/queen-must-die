@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Inventory;
 using TMPro;
 using UnityEngine;
@@ -12,24 +11,25 @@ namespace NightCycle
 {
     public class AssemblyController : MonoBehaviour, IDisposable
     {
-        [Header("References")] [SerializeField]
-        private CinemachineCamera assemblyCamera;
-
+        [Header("References")]
+        [SerializeField] private CinemachineCamera assemblyCamera;
         [SerializeField] private TextMeshProUGUI _hintText;
-
         [SerializeField] private Canvas assemblyCanvas;
         [SerializeField] private Transform spawnPoint;
+
         [Inject] private InventoryUI inventoryUI;
 
-        [Header("Rotation")] [SerializeField] private float rotationSpeed = 80f;
+        [Header("Rotation")]
+        [SerializeField] private float rotationSpeed = 80f;
 
-        [Header("Sockets")] [SerializeField] private LayerMask socketLayer;
+        [Header("Sockets")]
+        [SerializeField] private LayerMask socketLayer;
 
         public UnityEvent OnCompleted;
         public bool isActive;
 
         private InteractableView currentView;
-        private Camera camera;
+        private Camera mainCamera;
         private AssemblyView currentAssemblyView;
         private LockView currentLockView;
         private IReadOnlyList<AssemblySocket> activeSockets;
@@ -39,30 +39,22 @@ namespace NightCycle
         private InteractableView _subscribedView;
 
         private readonly Dictionary<InteractableView, InteractableView> _prefabInstances = new();
-
-        //test
         private AssemblyService _assemblyService;
-        //test
 
         [Inject]
-        private void Construct(PlayerStateController playerStateController, DiContainer container, AssemblyService assemblyService)
+        private void Construct([InjectOptional] PlayerStateController playerStateController, DiContainer container, AssemblyService assemblyService)
         {
             this.playerStateController = playerStateController;
             this.container = container;
-
-            //test
-            _assemblyService = assemblyService;
-            //test
+            this._assemblyService = assemblyService;
         }
 
         private void Awake()
         {
-            camera = Camera.main;
+            mainCamera = Camera.main;
 
             if (assemblyCamera)
                 assemblyCamera.gameObject.SetActive(false);
-
-            inventoryUI.OnSocketFilled += OnAssemblyCompleted;
         }
 
         private void Update()
@@ -70,21 +62,17 @@ namespace NightCycle
             if (!isActive)
                 return;
 
-            // Обновляем состояние объекта в фокусе
             currentView?.UpdateFocusState();
 
-            // Обрабатываем только если это сборочный объект
             if (currentAssemblyView != null)
             {
                 HandleSocketHover();
                 HandleSocketClick();
 
-                //Test
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     _assemblyService.CloseAssembly();
                 }
-                //Test
             }
 
             HandleRotation();
@@ -92,14 +80,12 @@ namespace NightCycle
 
         private void OnDestroy()
         {
-            inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
             if (_subscribedView != null)
                 _subscribedView.onInteractionCompleted.RemoveListener(HandleViewInteractionCompleted);
         }
 
         public void Dispose()
         {
-            inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
             activeSockets = null;
             foreach (var instance in _prefabInstances.Values)
             {
@@ -108,15 +94,14 @@ namespace NightCycle
             }
 
             _prefabInstances.Clear();
+
             if (_subscribedView != null)
                 _subscribedView.onInteractionCompleted.RemoveListener(HandleViewInteractionCompleted);
+
             currentView = null;
             _subscribedView = null;
         }
 
-        /// <summary>
-        /// Принимает префаб интерактивного объекта, спавнит его и запускает режим взаимодействия.
-        /// </summary>
         public void InitializeAssembly(InteractableView viewPrefab)
         {
             if (currentView != null)
@@ -130,6 +115,11 @@ namespace NightCycle
 
             if (!_prefabInstances.TryGetValue(viewPrefab, out var viewInstance))
             {
+                /*if (container == null) Debug.LogError("container is NULL!");
+                if (viewPrefab == null) Debug.LogError("viewPrefab is NULL!");
+                if (spawnPoint == null) Debug.LogError("spawnPoint is NULL!");
+                else if (spawnPoint.transform == null) Debug.LogError("spawnPoint.transform is NULL!");*/
+
                 viewInstance = container.InstantiatePrefabForComponent<InteractableView>(viewPrefab, spawnPoint.transform);
                 _prefabInstances[viewPrefab] = viewInstance;
             }
@@ -140,7 +130,6 @@ namespace NightCycle
             _subscribedView.onInteractionCompleted.AddListener(HandleViewInteractionCompleted);
             SetHintText(currentView.HintText);
 
-            // Определяем тип объекта и настраиваем соответствующим образом
             if (currentView is AssemblyView assemblyView)
             {
                 currentAssemblyView = assemblyView;
@@ -151,7 +140,7 @@ namespace NightCycle
             {
                 currentLockView = lockView;
                 currentAssemblyView = null;
-                activeSockets = null; // У замков нет сокетов
+                activeSockets = null;
             }
         }
 
@@ -162,23 +151,13 @@ namespace NightCycle
             assemblyCanvas.gameObject.SetActive(true);
             HUDController.instance.DisableInteractionText();
 
-            // Вызываем OnEnterFocus для текущего объекта\
             currentView?.gameObject.SetActive(true);
             currentView?.OnEnterFocus();
 
-            // Настраиваем режим в зависимости от типа объекта
-            if (currentAssemblyView != null)
+            if (playerStateController != null)
             {
-                inventoryUI.SetMode(InventoryUI.InventoryMode.AssemblyItemSelection);
+                playerStateController.SetMode(PlayerMode.Focused);
             }
-            else if (currentLockView != null)
-            {
-                // Для замков не нужен режим выбора предметов из инвентаря
-                //Debug.Log("IUI DISABLE");
-                inventoryUI.SetMode(InventoryUI.InventoryMode.Disable);
-            }
-
-            playerStateController.SetMode(PlayerMode.Focused);
 
             assemblyCamera.gameObject.SetActive(true);
             assemblyCamera.Priority = 100;
@@ -186,25 +165,22 @@ namespace NightCycle
 
         public void ExitAssembly()
         {
-            // Вызываем OnExitFocus для текущего объекта
             currentView?.OnExitFocus();
             currentView?.gameObject.SetActive(false);
-            
 
             assemblyCanvas.gameObject.SetActive(false);
             isActive = false;
 
-            if (currentAssemblyView != null)
+            // Вызываем очистку мини-инвентаря, если он был открыт
+            if (inventoryUI != null)
             {
-                inventoryUI.ExitSelection();
-            }
-            else if (currentLockView != null)
-            {
-                //Debug.Log("IUI ENABLE");
-                inventoryUI.ExitSelection();
+                inventoryUI.CloseMiniPartsPanel();
             }
 
-            playerStateController.SetMode(PlayerMode.FreeMovement);
+            if (playerStateController != null)
+            {
+                playerStateController.SetMode(PlayerMode.FreeMovement);
+            }
 
             assemblyCamera.Priority = 0;
             assemblyCamera.gameObject.SetActive(false);
@@ -214,13 +190,6 @@ namespace NightCycle
         {
             if (!string.IsNullOrEmpty(text))
                 _hintText.text = text;
-        }
-
-        private void OnAssemblyCompleted()
-        {
-            // Проверяем завершение только для сборочных объектов
-            if (currentAssemblyView != null && !currentAssemblyView.CheckSocketsCompletion())
-                return;
         }
 
         private void HandleViewInteractionCompleted()
@@ -237,12 +206,12 @@ namespace NightCycle
             float v = Input.GetAxis("Vertical");
 
             currentView.RotationRoot.Rotate(Vector3.up, -h * rotationSpeed * Time.deltaTime, Space.World);
-            currentView.RotationRoot.Rotate(camera.transform.right, v * rotationSpeed * Time.deltaTime, Space.World);
+            currentView.RotationRoot.Rotate(mainCamera.transform.right, v * rotationSpeed * Time.deltaTime, Space.World);
         }
 
         private void HandleSocketHover()
         {
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, socketLayer))
             {
@@ -271,12 +240,12 @@ namespace NightCycle
         private void HandleSocketClick()
         {
             if (Input.GetMouseButtonDown(0) && currentSocket != null && !currentSocket.IsFilled)
-                OpenInventoryForSocket(currentSocket);
-        }
-
-        private void OpenInventoryForSocket(AssemblySocket socket)
-        {
-            inventoryUI.OpenForAssemblySocket(socket);
+            {
+                if (inventoryUI != null)
+                {
+                    inventoryUI.OpenPartsMenuForSocket(currentSocket, currentAssemblyView);
+                }
+            }
         }
     }
 }

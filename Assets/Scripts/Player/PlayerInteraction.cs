@@ -102,7 +102,7 @@ namespace NightCycle
         {
             HUDController.instance.EnableInteractionText(INTERACTION_KEY_TEXT);
             isInItemSelection = true;
-            inventoryUI.OpenForItemTarget(currentItemTarget);
+            //inventoryUI.OpenForItemTarget(currentItemTarget);
         }
 
         private void CheckInteraction()

@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -53,14 +53,14 @@ namespace Inventory
             //icon.
             //test
 
-        }
+        }*/
 
         /*public static void SetTooltip(ItemTooltip instance)
     {
         tooltip = instance;
     }*/
 
-        public void Clear()
+        /*public void Clear()
         {
             item = null;
             tooltip.Hide();
@@ -87,10 +87,10 @@ namespace Inventory
 
         IEnumerator HoverDelay()
         {
-            yield return new WaitForSeconds(hoverDelay);
+            yield return new WaitForSeconds(hoverDelay);*/
 
-            if (!isDragging && item != null /*&& inventoryUI.isOpen*/)
-            {
+           // if (!isDragging && item != null /*&& inventoryUI.isOpen*/)
+            /*{
                 Debug.Log("T O O L T I P S H O W @@@!");
                 //test
                 //if (tooltip == null)
@@ -149,7 +149,7 @@ namespace Inventory
         inventoryUI.OnItemClicked(item);
     }*/
 
-        void OnDisable()
+        /*void OnDisable()
         {
             //StopAllCoroutines();
             StopHover();
@@ -162,4 +162,4 @@ namespace Inventory
         //test
 
     }
-}
+}*/

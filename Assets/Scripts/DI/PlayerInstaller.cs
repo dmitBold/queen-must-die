@@ -56,11 +56,11 @@ namespace DI
             var inventoryUI = Container.Resolve<InventoryUI>();
             if (!_enableInventory)
             {
-                inventoryUI.DisableRootCanvas();
+                //inventoryUI.DisableRootCanvas();
             }
             else
             {
-                inventoryUI.SetMode(InventoryUI.InventoryMode.Default);
+                //inventoryUI.SetMode(InventoryUI.InventoryMode.Default);
             }
 
                 HUDController.instance.SetCrosshairActivity(true);
@@ -79,7 +79,7 @@ namespace DI
         private void OnDestroy()
         {
             HUDController.instance.SetCrosshairActivity(false);
-            Container.Resolve<InventoryUI>().SetMode(InventoryUI.InventoryMode.Disable);
+            //Container.Resolve<InventoryUI>().SetMode(InventoryUI.InventoryMode.Disable);
 
             //TEST
             if (_playerProvider != null)

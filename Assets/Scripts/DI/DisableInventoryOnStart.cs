@@ -11,7 +11,7 @@ public class DisableInventoryOnStart : MonoBehaviour
         if (_inventoryUI != null)
         {
             // Отключаем полностью весь UI инвентаря
-            _inventoryUI.DisableRootCanvas();
+            //_inventoryUI.DisableRootCanvas();
             // Или используйте ваш метод:
             //_inventoryUI.SetMode(InventoryUI.InventoryMode.Disable);
         }

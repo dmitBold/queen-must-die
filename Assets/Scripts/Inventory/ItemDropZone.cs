@@ -15,8 +15,8 @@ namespace Inventory
         public void OnDrop(PointerEventData eventData)
         {
             Debug.Log("DROP CALLED");
-            inventoryUI.UpdateDropIndicator(false);
-            ItemData item = inventoryUI.GetDraggedItem();
+            //inventoryUI.UpdateDropIndicator(false);
+            ItemData item = null;// inventoryUI.GetDraggedItem();
             if (item == null)
                 return;
 
@@ -24,23 +24,23 @@ namespace Inventory
 
             if (applied)
             {
-                inventoryUI.ConsumeDraggedItem();
+               // inventoryUI.ConsumeDraggedItem();
             }
             else
             {
-                inventoryUI.CancelDrag();
+                //inventoryUI.CancelDrag();
             }
         }
 
         //test
         public void OnPointerEnter(PointerEventData eventData)
         {
-            inventoryUI.UpdateDropIndicator(true);
+           // inventoryUI.UpdateDropIndicator(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            inventoryUI.UpdateDropIndicator(false);
+           // inventoryUI.UpdateDropIndicator(false);
         }
 
     }

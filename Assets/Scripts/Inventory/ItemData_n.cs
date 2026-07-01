@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 namespace Inventory
 {
@@ -18,4 +18,4 @@ namespace Inventory
         public bool CanApplyDay = true;
         public bool CanApplyNight = true;
     }
-}
+}*/

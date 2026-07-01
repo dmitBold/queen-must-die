@@ -1,5 +1,6 @@
 using Core;
 using NightCycle;
+using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,10 @@ namespace DI
     {
         public override void InstallBindings()
         {
+            //test
+            //Container.Bind<CinemachineBrain>().FromComponentInHierarchy().AsSingle();
+            //test
+
             Container
                 .Bind<AssemblyService>()
                 .AsSingle();
