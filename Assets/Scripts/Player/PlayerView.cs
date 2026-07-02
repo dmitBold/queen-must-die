@@ -22,5 +22,6 @@ public class PlayerView : MonoBehaviour
     public void SetLanternActivity(bool value)
     {
         _lantern.SetActive(value);
+        _flashlight.light_active = value;
     }
 }
