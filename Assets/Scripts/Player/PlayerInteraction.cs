@@ -30,6 +30,7 @@ namespace NightCycle
         private IFocusable activeFocus;
         private float currentHoldTimer = 0f;
         private bool isInteractionProcessed = false;
+        private bool isHolding = false;
 
         #endregion
 
@@ -216,6 +217,7 @@ namespace NightCycle
                 {
                     UpdateHoldProgress();
                 }
+                currentInteractable.InteractStartHOLD();
             }
             else
             {
@@ -225,12 +227,20 @@ namespace NightCycle
 
         private void UpdateHoldProgress()
         {
+            if (!isHolding)
+            {
+                isHolding = true;
+                currentInteractable.InteractStartHOLD();
+                Debug.Log("更更更更更更更更");
+            }
+
             currentHoldTimer += Time.deltaTime;
             float progress = currentHoldTimer / currentInteractable.holdDuration;
             HUDController.instance.UpdateProgress(progress);
 
             if (currentHoldTimer >= currentInteractable.holdDuration)
             {
+                isHolding = false;
                 ToggleInteraction();
                 isInteractionProcessed = true;
                 HUDController.instance.HideProgress();
@@ -239,6 +249,12 @@ namespace NightCycle
 
         private void ResetHoldProgress()
         {
+
+            if (isHolding && !isInteractionProcessed)
+            {
+                Debug.Log("&*&*&*&*&");
+            }
+            isHolding = false;
             currentHoldTimer = 0f;
             isInteractionProcessed = false;
             HUDController.instance.HideProgress();
