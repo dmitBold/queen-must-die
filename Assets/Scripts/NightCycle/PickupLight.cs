@@ -10,6 +10,7 @@ namespace NightCycle
         public void Pickup()
         {
             flashlight.TurnOn();
+            flashlight.light_active = true;
 
             if (destroyOnPickup)
             {
