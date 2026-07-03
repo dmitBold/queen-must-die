@@ -43,7 +43,7 @@ namespace NightCycle
 
         private void Update()
         {
-            Debug.Log(flashlight.intensity);
+            //Debug.Log(flashlight.intensity);
             if (!flashlight.enabled) return;
 
             float mouseX = Input.GetAxis("Mouse X");

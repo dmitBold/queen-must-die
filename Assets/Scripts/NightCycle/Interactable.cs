@@ -10,6 +10,9 @@ namespace NightCycle
         Outline outline;
         public string message;
         public UnityEvent onInteraction;
+
+        public UnityEvent startHOLD;
+        public UnityEvent resetHOLD;
         //test
         [SerializeField] AssemblyController assemblyController;
         public enum InteractionType { Instant, Hold }
@@ -17,7 +20,7 @@ namespace NightCycle
         public float holdDuration = 1.0f;
         //test
 
-        
+
         //TEST
         //public AudioClip interact_sound;
         //bool play_once = true;
@@ -47,12 +50,22 @@ namespace NightCycle
         {
             //outline.Rebuild();
             if (outline != null) outline.enabled = true;
-       
+
         }
 
         public void Interact()
         {
             onInteraction.Invoke();
+        }
+
+        public void InteractStartHOLD()
+        {
+            startHOLD.Invoke();
+        }
+
+        public void InteractResestHOLD()
+        {
+            resetHOLD.Invoke();
         }
 
         /*public void PlayIneractionSound()
@@ -73,7 +86,7 @@ namespace NightCycle
 
         public void Interact_Assembly()
         {
-           
+
         }
 
     }
