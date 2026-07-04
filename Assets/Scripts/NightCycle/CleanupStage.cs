@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 namespace NightCycle
@@ -7,7 +8,7 @@ namespace NightCycle
     {
         [SerializeField] int objectsToCleanup = 0;
         private int currentlyCleaned = 0;
-
+        public UnityEvent Stage_Completed;
         private CleanupManager _cleanupManager;
 
         [Inject]
@@ -27,6 +28,7 @@ namespace NightCycle
             if (currentlyCleaned >= objectsToCleanup)
             {
                 _cleanupManager.AdvanceStage();
+                Stage_Completed?.Invoke();
             }
         }
     }
