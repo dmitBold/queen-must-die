@@ -11,10 +11,17 @@ namespace NightCycle
         //test
         //[SerializeField] Light flashlight;
         public Light flashlight;
+        private bool can_shimmer = false;
         [SerializeField] float baseIntensity = 1.0f;
 
         [SerializeField] float swayAmount = 0.04f;
         [SerializeField] float swaySmooth = 8f;
+
+        [SerializeField] Animator anim;
+        [SerializeField] string trig_on;
+        [SerializeField] string trig_off;
+
+        public bool light_active = false;
 
         Vector3 initialLocalPos;
 
@@ -33,34 +40,63 @@ namespace NightCycle
                 TurnOFF();
             }*/
         }
-        
+
         private void Update()
         {
+            //Debug.Log(flashlight.intensity);
             if (!flashlight.enabled) return;
 
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
 
             //model.transform.localPosition = initialLocalPos;
-            Vector3 targetPos = initialLocalPos +
+            /*Vector3 targetPos = initialLocalPos +
                                 new Vector3(-mouseX * swayAmount, -mouseY * swayAmount, 0f);
 
             transform.localPosition =
-                Vector3.Lerp(transform.localPosition, targetPos, Time.deltaTime * swaySmooth);
+                Vector3.Lerp(transform.localPosition, targetPos, Time.deltaTime * swaySmooth);*/
 
-            flashlight.intensity = baseIntensity + Mathf.Sin(Time.time * 2f) * 0.5f*baseIntensity;
+            //flashlight.intensity = baseIntensity + Mathf.Sin(Time.time * 2f) * 0.5f*baseIntensity;
+
+            //if (can_shimmer)
+            //{
+
+            //flashlight.intensity = baseIntensity + Mathf.Sin(Time.time * 2f) * 0.5f * baseIntensity;
+            //}
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if (IsActiveLight())
+                //if (IsActiveLight())
+                if (light_active)
                 {
-                    TurnOFFLight();
+
+                    //TurnOFFLight();
+                    //Debug.Log("dis");
+                    play_disable();
+                    //can_shimmer = false;
+                    light_active = false;
                 }
                 else
                 {
-                    TurnOnLight();
+                    //TurnOnLight();
+                    //Debug.Log("en");
+                    play_enable();
+                    //can_shimmer = true;
+                    light_active = true;
                 }
             }
+        }
+
+        private void play_enable()
+        {
+            anim.ResetTrigger(trig_off);
+            anim.SetTrigger(trig_on);
+        }
+
+        private void play_disable()
+        {
+            anim.ResetTrigger(trig_on);
+            anim.SetTrigger(trig_off);
         }
 
         public void TurnOn()
