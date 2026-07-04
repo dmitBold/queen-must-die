@@ -10,7 +10,8 @@ namespace Core
         Assembly,
         IntroDialog,
         IntroDialogue2,
-        Throne
+        Throne,
+        Night1_final
     }
 
     public static class SceneNames
@@ -24,6 +25,7 @@ namespace Core
         public const string IntroDialog = "IntroDialog";
         public const string IntroDialogue2 = "IntroDialogue2";
         public const string Throne = "Throne";
+        public const string Night1_final = "Night1_Final";
 
         public static string GetName(GameScene scene)
         {
@@ -38,6 +40,7 @@ namespace Core
                 case GameScene.IntroDialog: return IntroDialog;
                 case GameScene.IntroDialogue2: return IntroDialogue2;
                 case GameScene.Throne: return Throne;
+                case GameScene.Night1_final: return Night1_final;
                 default: return Night;
             }
         }
