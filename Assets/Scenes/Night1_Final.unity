@@ -35210,7 +35210,19 @@ MonoBehaviour:
   targetTag: Player
   onTriggerEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1695945396}
+        m_TargetAssemblyTypeName: NightCycle.DoorCloser, Assembly-CSharp
+        m_MethodName: CloseDoorEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   triggerSound: {fileID: 0}
   disable: 0
 --- !u!1001 &306497086
@@ -74270,6 +74282,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3894221576263150666, guid: cc1e35ccd909c74468c168714c3de7a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -35.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894221576263150666, guid: cc1e35ccd909c74468c168714c3de7a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.85
+      objectReference: {fileID: 0}
     - target: {fileID: 4027172582449766057, guid: cc1e35ccd909c74468c168714c3de7a0, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -74488,7 +74508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4647374918109905703, guid: cc1e35ccd909c74468c168714c3de7a0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4665939761358417328, guid: cc1e35ccd909c74468c168714c3de7a0, type: 3}
       propertyPath: m_Layer
@@ -74944,11 +74964,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6348616984574731843, guid: cc1e35ccd909c74468c168714c3de7a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 39.784
+      value: 39.8443
       objectReference: {fileID: 0}
     - target: {fileID: 6348616984574731843, guid: cc1e35ccd909c74468c168714c3de7a0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 165.7
+      value: 165.64
       objectReference: {fileID: 0}
     - target: {fileID: 6348616984574731843, guid: cc1e35ccd909c74468c168714c3de7a0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -75740,7 +75760,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2623265931311342926, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1695945396}
   m_SourcePrefab: {fileID: 100100000, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
 --- !u!4 &841546262 stripped
 Transform:
@@ -81238,7 +81261,7 @@ Transform:
   m_GameObject: {fileID: 945234778}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.7, y: 3.25, z: 4.6}
+  m_LocalPosition: {x: -29.17, y: -14.38, z: 4.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -160967,7 +160990,19 @@ MonoBehaviour:
   targetTag: Player
   onTriggerEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091607909}
+        m_TargetAssemblyTypeName: NightCycle.DoorCloser, Assembly-CSharp
+        m_MethodName: CloseDoorEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   triggerSound: {fileID: 0}
   disable: 0
 --- !u!65 &1430909919
@@ -170941,6 +170976,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abc00000000012469911222922900173, type: 3}
+--- !u!1 &1589600327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2623265931311342926, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
+  m_PrefabInstance: {fileID: 2091607903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1592048758 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1032815221, guid: abc00000000016180720385396287627, type: 3}
@@ -177100,7 +177140,7 @@ Transform:
   m_GameObject: {fileID: 1692916036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.7, y: 3.25, z: 4.6}
+  m_LocalPosition: {x: -29.17, y: -14.38, z: 4.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -177121,7 +177161,19 @@ MonoBehaviour:
   targetTag: Player
   onTriggerEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2091607909}
+        m_TargetAssemblyTypeName: NightCycle.DoorCloser, Assembly-CSharp
+        m_MethodName: de_lock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   triggerSound: {fileID: 0}
   disable: 0
 --- !u!65 &1692916039
@@ -177939,6 +177991,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3802654285107226080, guid: fc5f7e35987b3934fb6a40f529bfa2a5, type: 3}
   m_PrefabInstance: {fileID: 1694046034}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1695945391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2623265931311342926, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
+  m_PrefabInstance: {fileID: 841546261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1695945396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695945391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34aca5cbb296414690cebc978bec9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.DoorCloser
+  closeSpeed: 5
 --- !u!1 &1696980274
 GameObject:
   m_ObjectHideFlags: 0
@@ -210774,6 +210844,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 2623265931311342926, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3279745968160597216, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -212927,7 +213001,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1651496146301593535, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2623265931311342926, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Name
@@ -212935,27 +213009,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2623265931311342926, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2623265931311342926, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3279745968160597216, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3281765552824259895, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5082949656541142889, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6079805255854790997, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6125333377670305317, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -212999,22 +213073,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6350780833945864841, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8011093116455865827, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2623265931311342926, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2091607909}
   m_SourcePrefab: {fileID: 100100000, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
 --- !u!4 &2091607904 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6125333377670305317, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
   m_PrefabInstance: {fileID: 2091607903}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2091607909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589600327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34aca5cbb296414690cebc978bec9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.DoorCloser
+  closeSpeed: 5
 --- !u!1 &2095669791
 GameObject:
   m_ObjectHideFlags: 0
