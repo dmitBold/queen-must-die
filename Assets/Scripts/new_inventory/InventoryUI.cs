@@ -15,7 +15,7 @@ namespace Inventory
     public class InventoryUI : MonoBehaviour
     {
         [Header("UI References")]
-        [SerializeField] private GameObject panel;
+        [SerializeField] private Image panel;
         [SerializeField] private Canvas rootCanvas;
         [SerializeField] private TextMeshProUGUI descriptionText;
 
@@ -93,7 +93,7 @@ namespace Inventory
         {
             isOpen = true;
             rootCanvas.enabled = true;
-            panel.SetActive(true);
+            panel.gameObject.SetActive(true);
             miniPartsPanel.SetActive(false);
 
             UpdateFilteredItems();
@@ -102,6 +102,7 @@ namespace Inventory
             {
                 currentScrollIndex = Mathf.Max(0, filteredMainItems.Count - 3);
                 SelectItem(filteredMainItems.Last());
+                panel.enabled = false;
             }
             else
             {
