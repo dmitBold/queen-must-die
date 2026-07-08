@@ -5,9 +5,9 @@ namespace Inventory
     public enum ItemType
     {
         Normal,
-        StaticBase,   // Не трогаем, для ночных уровней
-        PortableBase, // Каркас, который можно крутить в инвентаре
-        Part          // Деталь для сборки
+        StaticBase,
+        PortableBase,
+        Part
     }
 
     [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Objects/Item")]
@@ -20,8 +20,15 @@ namespace Inventory
         [TextArea]
         public string description;
 
+        // Оставляем иконку на случай, если где-то еще она нужна, но для слотов теперь юзаем 3D
         [Header("Visual")]
         public Sprite icon;
+
+        [Header("3D UI Preview (Новое)")]
+        [Tooltip("Префаб, который будет крутиться в инвентаре")]
+        public GameObject uiModelPrefab;
+        [Tooltip("Настройка масштаба модели специально для слота инвентаря")]
+        public Vector3 uiModelScale = Vector3.one;
 
         [Header("New Mechanics")]
         public ItemType itemType;
