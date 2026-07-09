@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7402177268206265193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/NightSycle/Ambience/Placeholder
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/NightSycle/Ambience/Placeholder
+  Guid:
+    Data1: -1669767983
+    Data2: 1276241177
+    Data3: -1902645095
+    Data4: -1877378167
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 131520
 --- !u!114 &-4548252348506558157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,11 +42,38 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639186295555084779
+  lastModified: 639190365386697462
   FileSizes:
   - Name: Desktop
-    Value: 95168
+    Value: 1985088
   Exists: 1
+--- !u!114 &-3425617969210589484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Test
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Test
+  Guid:
+    Data1: 1492886305
+    Data2: 1198772906
+    Data3: -204546144
+    Data4: -1756812114
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 375
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,16 +91,28 @@ MonoBehaviour:
   - {fileID: -4548252348506558157}
   EditorEvents:
   - {fileID: 4951401739023756142}
+  - {fileID: 8293087449597447812}
+  - {fileID: -3425617969210589484}
+  - {fileID: 8449666237729740577}
+  - {fileID: -7402177268206265193}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4548252348506558157}
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639186295555095170
+  cacheTime: 639190365386707597
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
+  - key: event:/Scenes/NightSycle/Torch
+    index: 1
+  - key: event:/Test
+    index: 2
+  - key: event:/Scenes/NightSycle/Statue/Breath
+    index: 3
+  - key: event:/Scenes/NightSycle/Ambience/Placeholder
+    index: 4
 --- !u!114 &4951401739023756142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,8 +155,62 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639186295555095170
+  lastModified: 639190365386707597
   FileSizes:
   - Name: Desktop
-    Value: 804
+    Value: 1012
   Exists: 1
+--- !u!114 &8293087449597447812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/NightSycle/Torch
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/NightSycle/Torch
+  Guid:
+    Data1: 1059178881
+    Data2: 1139591707
+    Data3: -1523548239
+    Data4: -1067781560
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 20
+  Length: 21052
+--- !u!114 &8449666237729740577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/NightSycle/Statue/Breath
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/NightSycle/Statue/Breath
+  Guid:
+    Data1: -2106917240
+    Data2: 1276417561
+    Data3: -1526175586
+    Data4: 1602093400
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 45
+  Length: 2899
