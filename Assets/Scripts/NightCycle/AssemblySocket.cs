@@ -7,7 +7,9 @@ namespace NightCycle
     {
         [Header("Setup")]
         [SerializeField] ItemData requiredItem;
-        [SerializeField] GameObject visualPart; 
+        [SerializeField] GameObject visualPart;
+        [SerializeField] Animator anim;
+        [SerializeField] string trig;
         Outline outline;
 
         bool isFilled;
@@ -40,6 +42,10 @@ namespace NightCycle
             if (visualPart != null)
             {
                 visualPart.SetActive(true);
+                if (anim != null)
+                {
+                    anim.SetTrigger(trig);
+                }
             }
 
             SetHighlight(false);
