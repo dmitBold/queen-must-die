@@ -90,12 +90,12 @@ MonoBehaviour:
   sprintFrequency: 2.5
   footstepEvent:
     Guid:
-      Data1: 2012190441
-      Data2: 1223385622
-      Data3: -968471363
-      Data4: 692575539
-    Path: event:/FS_Wood
-  walkStepInterval: 0.45
+      Data1: 1622595066
+      Data2: 1079371059
+      Data3: 1394477487
+      Data4: -2026680994
+    Path: event:/Characters/Main/Footsteps/Footsteps_scene1
+  walkStepInterval: 0.55
   sprintStepInterval: 0.25
   characterController: {fileID: 1127454649717024361}
   mainCamera: {fileID: 4661916316352681474}
@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 4661916316352681474}
   - component: {fileID: 2544127867496622020}
   - component: {fileID: 2931145278583831260}
+  - component: {fileID: 3313499309760999473}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: MainCamera
@@ -453,6 +454,20 @@ MonoBehaviour:
   AmplitudeGain: 1
   FrequencyGain: 1
   m_NoiseOffsets: {x: 144.31558, y: 177.7731, z: -989.47595}
+--- !u!114 &3313499309760999473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305109169647983864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &6951213798720070645
 GameObject:
   m_ObjectHideFlags: 0
