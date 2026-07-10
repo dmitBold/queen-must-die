@@ -8,7 +8,6 @@ public class StatueBreath : MonoBehaviour
 {
     private AudioService _audioService;
     public AudioClip breatheSound;
-    public FMODUnity.EventReference MoveSoundEvent;
     public UnityEvent BreathCompleted;
     [SerializeField] private float delay;
 
@@ -28,7 +27,6 @@ public class StatueBreath : MonoBehaviour
         if (breatheSound != null)
         {
             _audioService.PlaySound(breatheSound);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Test");
         }
         yield return new WaitForSeconds(delay);
         BreathCompleted?.Invoke();

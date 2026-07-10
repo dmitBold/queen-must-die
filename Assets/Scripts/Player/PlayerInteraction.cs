@@ -1,4 +1,4 @@
-锘縰sing Inventory;
+using Inventory;
 using UnityEngine;
 using static NightCycle.PlayerStateController;
 using Zenject;
@@ -231,7 +231,7 @@ namespace NightCycle
             {
                 isHolding = true;
                 currentInteractable.InteractStartHOLD();
-                Debug.Log("^)^)^)^)^)^)^)^)^)");
+                Debug.Log("构构构构构构构构");
             }
 
             currentHoldTimer += Time.deltaTime;
@@ -252,7 +252,6 @@ namespace NightCycle
 
             if (isHolding && !isInteractionProcessed)
             {
-                currentInteractable.InteractResestHOLD();
                 Debug.Log("&*&*&*&*&");
             }
             isHolding = false;

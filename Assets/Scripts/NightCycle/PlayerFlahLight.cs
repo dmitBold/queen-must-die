@@ -40,10 +40,10 @@ namespace NightCycle
                 TurnOFF();
             }*/
         }
-
+        
         private void Update()
         {
-            //Debug.Log(flashlight.intensity);
+            Debug.Log(flashlight.intensity);
             if (!flashlight.enabled) return;
 
             float mouseX = Input.GetAxis("Mouse X");
@@ -60,16 +60,16 @@ namespace NightCycle
 
             //if (can_shimmer)
             //{
-
+                
             //flashlight.intensity = baseIntensity + Mathf.Sin(Time.time * 2f) * 0.5f * baseIntensity;
             //}
 
             if (Input.GetKeyDown(KeyCode.F))
             {
                 //if (IsActiveLight())
-                if (light_active)
+                if(light_active)
                 {
-
+                    
                     //TurnOFFLight();
                     //Debug.Log("dis");
                     play_disable();

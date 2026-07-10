@@ -9,8 +9,7 @@ namespace NightCycle
 
         public List<GameObject> poses;
         public AudioClip MoveSound;
-        public FMODUnity.EventReference MoveSoundEvent;
-
+        
         int curr_pose_index = 0;
 
         private AudioService _audioService;
@@ -34,8 +33,7 @@ namespace NightCycle
         {
             if (curr_pose_index < poses.Count - 1)
             {
-               // FMODUnity.RuntimeManager.PlayOneShot("event:/Test");
-               // _audioService.PlaySound(MoveSound);
+                _audioService.PlaySound(MoveSound);
                 poses[curr_pose_index].SetActive(false);
                 curr_pose_index++;
                 poses[curr_pose_index].SetActive(true);

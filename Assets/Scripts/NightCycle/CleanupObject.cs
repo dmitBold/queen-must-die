@@ -54,24 +54,6 @@ namespace NightCycle
             cleanObject.SetActive(true);
         }
 
-        public void Clean_ForAnim()
-        {
-            if (cleanupSound != null && _audioService != null)
-            {
-                _audioService.PlaySound(cleanupSound);
-            }
-
-            if (parentStage != null)
-            {
-                parentStage.OnObjectCleaned();
-            }
-
-            if (clear_GROUP != null)
-            {
-                clear_GROUP.SetActive(false);
-            }
-        }
-
         public void Clean_with_anim()
         {
             if (cleanupSound != null && _audioService != null)

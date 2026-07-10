@@ -20,7 +20,7 @@ namespace NightCycle
         public float holdDuration = 1.0f;
         //test
 
-
+        
         //TEST
         //public AudioClip interact_sound;
         //bool play_once = true;
@@ -50,7 +50,7 @@ namespace NightCycle
         {
             //outline.Rebuild();
             if (outline != null) outline.enabled = true;
-
+       
         }
 
         public void Interact()
@@ -86,7 +86,7 @@ namespace NightCycle
 
         public void Interact_Assembly()
         {
-
+           
         }
 
     }
