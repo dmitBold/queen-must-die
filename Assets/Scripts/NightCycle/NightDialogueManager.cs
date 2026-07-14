@@ -1,5 +1,6 @@
 using Core;
 using System;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -12,7 +13,9 @@ namespace NightCycle
         public static NightDialogueManager Instance;
         public event  Action DialogEnded;
         
-        [Header("UI ������")] [SerializeField] private GameObject dialoguePanel;
+        [Header("UI ������")]
+        [SerializeField] private TextMeshProUGUI dialogueName;
+        [SerializeField] private GameObject dialoguePanel;
         [SerializeField] private NightTypewriter typewriter;
 
         private string[] currentPages;
@@ -60,6 +63,26 @@ namespace NightCycle
         public void StartDialogue(NightDialogueInteractable npc, string[] pages, Action onComplete = null)
         {
             if (pages == null || pages.Length == 0) return;
+
+            currentNPC = npc;
+            currentPages = pages;
+            currentPageIndex = 0;
+
+            currentDirector = null;
+
+            currentDialogueCallback = onComplete;
+
+            dialoguePanel.SetActive(true);
+            PlayCurrentPage();
+        }
+
+        public void StartDialogue(NightDialogueInteractable npc, string[] pages, string dialName, Action onComplete = null)
+        {
+            if (pages == null || pages.Length == 0) return;
+            if (dialName != null && dialName.Length > 0) { 
+                dialogueName.text = dialName;
+                dialogueName.ForceMeshUpdate();
+            }
 
             currentNPC = npc;
             currentPages = pages;
@@ -144,7 +167,8 @@ namespace NightCycle
         public void EndDialogue()
         {
             dialoguePanel.SetActive(false);
-
+            //dialogueName.ClearMesh();
+            dialogueName.text = "";
             if (currentDirector != null)
             {
                 //playerInteraction.ForceExitFocus();
