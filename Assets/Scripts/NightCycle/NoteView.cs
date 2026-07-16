@@ -36,10 +36,12 @@ namespace NightCycle
             }
 
             tint_text = content;
-            //typewriter.chunks.Clear();
-            //typewriter.Play(textComponent, content);
-
-            //UpdateButtonsState();
+            //реяр!!! врнаш рейяр гюохяйх ндмнбпелеммн бйкчвюкяъ я йюпрхмйни. пюмэье щрнцн акнйю йндю ме ашкн!!
+            Tintroot.SetActive(true);
+            typewriter.Play(textComponent, tint_text);
+            UpdateButtonsState();
+            show_tint = false;
+            //реяр!!! врнаш рейяр гюохяйх ндмнбпелеммн бйкчвюкяъ я йюпрхмйни. пюмэье щрнцн акнйю йндю ме ашкн!!
         }
 
         public void Hide()

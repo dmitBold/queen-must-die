@@ -41,6 +41,7 @@ namespace NightCycle
 
             view.Show(note.noteImage, note.noteText);
 
+
             HUDController.instance.DisableInteractionText();
         }
 

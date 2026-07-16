@@ -3,11 +3,13 @@ using UnityEngine;
 using Zenject;
 using UnityEngine.Events;
 using System.Collections;
+using FMODUnity;
 
 public class StatueBreath : MonoBehaviour
 {
     private AudioService _audioService;
-    public AudioClip breatheSound;
+    //public AudioClip breatheSound;
+    public EventReference breatheEvent;
     public UnityEvent BreathCompleted;
     [SerializeField] private float delay;
 
@@ -24,10 +26,11 @@ public class StatueBreath : MonoBehaviour
 
     IEnumerator BreatheRoutine()
     {
-        if (breatheSound != null)
+        /*if (breatheSound != null)
         {
             _audioService.PlaySound(breatheSound);
-        }
+        }*/
+        _audioService.PlayFMODEvent(breatheEvent, transform.position);
         yield return new WaitForSeconds(delay);
         BreathCompleted?.Invoke();
     }
