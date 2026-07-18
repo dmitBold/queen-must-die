@@ -48,10 +48,29 @@ namespace NightCycle
             }
 
             gameObject.SetActive(false);
-            if(clear_GROUP != null){
+            if (clear_GROUP != null)
+            {
                 clear_GROUP.SetActive(false);
             }
             cleanObject.SetActive(true);
+        }
+
+        public void Clean_ForAnim()
+        {
+            if (cleanupSound != null && _audioService != null)
+            {
+                _audioService.PlaySound(cleanupSound);
+            }
+
+            if (parentStage != null)
+            {
+                parentStage.OnObjectCleaned();
+            }
+
+            if (clear_GROUP != null)
+            {
+                clear_GROUP.SetActive(false);
+            }
         }
 
         public void Clean_with_anim()
@@ -67,7 +86,7 @@ namespace NightCycle
 
             if (other_inter.Count > 0)
             {
-                foreach(Interactable interactable in other_inter)
+                foreach (Interactable interactable in other_inter)
                 {
                     interactable.enabled = false;
                 }
