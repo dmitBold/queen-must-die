@@ -81,6 +81,7 @@ namespace NightCycle
 
         public void AdvanceStage()
         {
+            Debug.Log("120120120120");
             currentStageIndex++;
             UpdateMusic();
             apply_stage_effect();

@@ -12,6 +12,7 @@ namespace NightCycle
         //public NightDialogueManager manager;
 
         [Header("Настройки текста")]
+        public string dialogueName;
         [TextArea(3, 5)]
         public string[] dialoguePages;
         public float delay;
@@ -38,7 +39,7 @@ namespace NightCycle
             Debug.Log("SSDD");
             _playerStateController.SetMode(PlayerMode.Focused);
 
-            NightDialogueManager.Instance.StartDialogue(null, dialoguePages, () =>
+            NightDialogueManager.Instance.StartDialogue(null, dialoguePages, dialogueName, () =>
             {
 
 
