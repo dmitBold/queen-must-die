@@ -30,7 +30,7 @@ public class StatueBreath : MonoBehaviour
         {
             _audioService.PlaySound(breatheSound);
         }*/
-        _audioService.PlayFMODEvent(breatheEvent, transform.position);
+        _audioService.PlayFMODEvent(breatheEvent, gameObject.transform.position);
         yield return new WaitForSeconds(delay);
         BreathCompleted?.Invoke();
     }
