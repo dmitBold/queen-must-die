@@ -8,17 +8,23 @@ namespace NightCycle
     {
         [Header("Settings")]
         [Tooltip("—корость автоматического закрыти€ двери")]
+        [SerializeField] private float custom_rotation_open = 90f;
+
         [SerializeField] private float closeSpeed = 5f;
+        [SerializeField] private float openSpeed = 5f;
 
         private Quaternion _closedRotation;
+        private Quaternion _openRotation;
         private Rigidbody _rb;
         private HingeJoint _hinge;
         private bool _isClosing = false;
+        private bool _isOpening = false;
 
         private void Awake()
         {
             // Ќа старте запоминаем текущую ротацию как "закрытое положение"
             _closedRotation = transform.rotation;
+            _openRotation = _closedRotation * Quaternion.Euler(0f, custom_rotation_open, 0f);
             _rb = GetComponent<Rigidbody>();
             _hinge = GetComponent<HingeJoint>();
         }
@@ -28,6 +34,14 @@ namespace NightCycle
             if (!_isClosing)
             {
                 StartCoroutine(CloseRoutine());
+            }
+        }
+
+        public void OpenDoorEvent()
+        {
+            if (!_isOpening)
+            {
+                StartCoroutine(OpenRoutine());
             }
         }
 
@@ -87,6 +101,29 @@ namespace NightCycle
             {
                 lockDoor.enabled = true;
             }*/
+        }
+
+        private IEnumerator OpenRoutine()
+        {
+            _isOpening = true;
+
+            if (_hinge != null)
+            {
+                _hinge.useMotor = false;
+                _hinge.useSpring = false;
+            }
+
+
+            _rb.isKinematic = true;
+
+            while (Quaternion.Angle(transform.rotation, _openRotation) > 0.5f)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, _openRotation, Time.deltaTime * openSpeed);
+                yield return null;
+            }
+
+            transform.rotation = _openRotation;
+
         }
     }
 }
