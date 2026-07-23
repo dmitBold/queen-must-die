@@ -252,6 +252,7 @@ namespace NightCycle
 
             if (isHolding && !isInteractionProcessed)
             {
+                currentInteractable.InteractResestHOLD();
                 Debug.Log("&*&*&*&*&");
             }
             isHolding = false;

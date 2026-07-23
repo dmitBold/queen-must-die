@@ -46,12 +46,17 @@ namespace NightCycle
             //UpdateMusic();
             foreach (CandleController candle in OrderedCandles)
             {
-                candle.SetCandleState(false);
+                if (candle != null)
+                {
+                    candle.SetCandleState(false);
+                }
             }
             foreach (CandleController candle in ImmediateCandles)
             {
-
-                candle.SetCandleState(false);
+                if (candle != null)
+                {
+                    candle.SetCandleState(false);
+                }
             }
         }
 

@@ -28,6 +28,7 @@ public class AnimRewind : MonoBehaviour
 
     public void TriggerRewind()
     {
+        Debug.Log("Anim_rewind");
         if (animator == null) return;
 
         animator.SetFloat("AnimSpeed", rewindSpeed);

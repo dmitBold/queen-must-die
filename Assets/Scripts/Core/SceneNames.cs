@@ -23,8 +23,8 @@ namespace Core
         public const string Memories1 = "Memories1";
         public const string HoM = "HoMScene";
         public const string MainMenu = "MainMenu";
-        public const string IntroDialog = "IntroDialog";
-        public const string IntroDialogue2 = "IntroDialogue2";
+        public const string IntroDialog = "IntroHoM";
+        public const string IntroDialogue2 = "IntroMemories";
         public const string Throne = "Throne";
         public const string Night1_final = "Night1_Final";
         public const string Night1_outro = "Night1_outro";

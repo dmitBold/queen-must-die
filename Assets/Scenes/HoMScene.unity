@@ -8439,6 +8439,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CleanupStage
   objectsToCleanup: 1
+  Stage_Completed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &662838905
 GameObject:
   m_ObjectHideFlags: 0
@@ -16493,6 +16496,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CleanupStage
   objectsToCleanup: 1
+  Stage_Completed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &883142256 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 494322, guid: bfb5063a60f6ab946b7818053c46d9d2, type: 3}
@@ -17687,6 +17693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ee0dafac975764fa01df6ab9383f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.StartDialogue
+  dialogueName: 
   dialoguePages:
   - "\u0442\u0435\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433"
   - "\u042F \u0435\u0431\u0430\u043B \u0441\u043B\u043E\u043D\u0430"
@@ -19668,6 +19675,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 908488846}
+        m_TargetAssemblyTypeName: NavigationController, Assembly-CSharp
+        m_MethodName: MovePlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onAnimationTrigger_additional:
     m_PersistentCalls:
       m_Calls: []
@@ -19928,6 +19947,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CleanupStage
   objectsToCleanup: 1
+  Stage_Completed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1008105876
 GameObject:
   m_ObjectHideFlags: 0
@@ -23491,6 +23513,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CleanupStage
   objectsToCleanup: 1
+  Stage_Completed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1252140728
 Transform:
   m_ObjectHideFlags: 0
@@ -24142,6 +24167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ee0dafac975764fa01df6ab9383f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.StartDialogue
+  dialogueName: 
   dialoguePages:
   - "\u041F\u0440\u0438\u0448\u043B\u043E \u0432\u0440\u0435\u043C\u044F \u0432\u0441\u0442\u0440\u0435\u0442\u0438\u0442\u044C\u0441\u044F
     \u0441 \u0441\u0443\u0434\u044C\u0431\u043E\u0439."
@@ -26225,7 +26251,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: return
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   assemblyController: {fileID: 0}
@@ -28241,6 +28267,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 151245358}
     m_Modifications:
+    - target: {fileID: 1594223333150207593, guid: 8960e215060df404da69b35f5cf7f779, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1878310192861571492, guid: 8960e215060df404da69b35f5cf7f779, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -28282,6 +28312,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2258007198531029671, guid: 8960e215060df404da69b35f5cf7f779, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 2258007198531029671, guid: 8960e215060df404da69b35f5cf7f779, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
@@ -28289,9 +28323,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoteController
       objectReference: {fileID: 0}
+    - target: {fileID: 4884541729833591894, guid: 8960e215060df404da69b35f5cf7f779, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5027712976603374930, guid: 8960e215060df404da69b35f5cf7f779, type: 3}
       propertyPath: playerInteraction
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172982539337615472, guid: 8960e215060df404da69b35f5cf7f779, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -338670,7 +338712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DI.PlayerInstaller
   _spawnPoint: {fileID: 577271232}
-  _enableLantern: 1
+  _enableLantern: 0
   _enableInventory: 1
 --- !u!4 &1876488953
 Transform:
@@ -339338,6 +339380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ee0dafac975764fa01df6ab9383f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.StartDialogue
+  dialogueName: 
   dialoguePages:
   - "\u0412\u044B\u0445\u043E\u0434\u0438, \u0434\u0435\u0432\u043E\u0447\u043A\u0430."
   - "\u041F\u043E\u0440\u0430 \u0442\u0435\u0431\u0435 \u043F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u0438\u0442\u044C\u0441\u044F
@@ -341648,7 +341691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2125224643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341677,7 +341720,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.14999999
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: a03d8701cf363da4caeb75f251d2f850, type: 2}
   m_BuildHeightMesh: 0
