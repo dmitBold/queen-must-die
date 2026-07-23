@@ -142,5 +142,49 @@ namespace NightCycle
             }
         }
 
+        public void MovePlayerDelay(Transform point, float Delay)
+        {
+            Debug.Log("MOVE");
+            var player = _playerProvider.CurrentPlayer;
+            var rb = player.Rigidbody;
+            CharacterController controller = null;
+
+            if (rb != null)
+            {
+                controller = rb.gameObject.GetComponentInParent<CharacterController>();
+
+                if (controller != null)
+                {
+                    Debug.Log("aaa");
+                    controller.enabled = false;
+                }
+
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+
+            // ИЗМЕНЕНИЕ ЗДЕСЬ: Если нашли родительский контроллер, двигаем ЕГО трансформ
+            if (controller != null)
+            {
+                controller.transform.position = point.position;
+
+                // Дополнительно разворачиваем игрока в сторону точки, если нужно
+                controller.transform.rotation = point.rotation;
+            }
+            else
+            {
+                // Если контроллера вдруг нет, двигаем как раньше через Rigidbody
+                player.Position = point.position;
+            }
+
+            // Синхронизируем координаты в движке
+            Physics.SyncTransforms();
+
+            if (controller != null)
+            {
+                controller.enabled = true;
+            }
+        }
+
     }
 }
