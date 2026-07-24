@@ -13,22 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 10
---- !u!114 &-4266415388615572984
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 12
-  hdPluginSubTargetMaterialVersions:
-    m_Keys: []
-    m_Values: 
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -36,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Metal_A
-  m_Shader: {fileID: -6465566751694194690, guid: f0eedf947b3325c4c93e7b6cb0bc8c16, type: 3}
+  m_Name: M_Prop_Cabinet_B 1
+  m_Shader: {fileID: -6465566751694194690, guid: fae51ec4cede8fc49a4caab70eb5bac6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -51,6 +35,7 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2225
   stringTagMap:
+    MotionVector: User
     RenderType: Opaque
   disabledShaderPasses:
   - TransparentDepthPrepass
@@ -58,7 +43,7 @@ Material:
   - TransparentBackface
   - RayTracingPrepass
   - MOTIONVECTORS
-  m_LockedProperties: 
+  m_LockedProperties: _Metallic
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -67,11 +52,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: abc00000000008344859330128442661, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: abc00000000008344859330128442661, type: 3}
+        m_Texture: {fileID: 2800000, guid: abc00000000009522935644413322830, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -119,15 +104,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: abc00000000008344859330128442661, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: abc00000000008045477095654636628, type: 3}
+        m_Texture: {fileID: 2800000, guid: abc00000000007341421636303680213, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: abc00000000009459363618194373870, type: 3}
+        m_Texture: {fileID: 2800000, guid: abc00000000008378801872654956019, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
@@ -135,7 +120,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: abc00000000004252582006712127289, type: 3}
+        m_Texture: {fileID: 2800000, guid: abc00000000008530563816676863530, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OpacityMap:
@@ -147,7 +132,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RAM:
-        m_Texture: {fileID: 2800000, guid: abc00000000008045477095654636628, type: 3}
+        m_Texture: {fileID: 2800000, guid: abc00000000007341421636303680213, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -178,6 +163,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _UV2_DirtMask:
+        m_Texture: {fileID: 2800000, guid: abc00000000015170094553393789837, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -192,6 +181,27 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _00_B_BlendContrast: 1
+    - _00_B_BlendIntensity: 1
+    - _00_B_MaskIntensity: 1
+    - _00_G_BlendContrast: 1
+    - _00_G_BlendIntensity: 1
+    - _00_G_MaskIntensity: 1
+    - _00_R_BlendContrast: 1
+    - _00_R_BlendIntensity: 1
+    - _00_R_MaskIntensity: 1
+    - _02_B_Brightness: 1
+    - _02_B_Contrast: 0
+    - _02_B_Saturation: 1
+    - _02_BaseDiffuse_Brightness: 1
+    - _02_BaseDiffuse_Contrast: 1
+    - _02_BaseDiffuse_Saturation: 1
+    - _02_G_Brightness: 1
+    - _02_G_Contrast: 1
+    - _02_G_Saturation: 1
+    - _02_R_Brightness: 1
+    - _02_R_Contrast: 1
+    - _02_R_Saturation: 1
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -260,7 +270,7 @@ Material:
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
-    - _Metallic: 1
+    - _Metallic: 0
     - _MetallicRemapMax: 0
     - _MetallicRemapMin: 0
     - _NormalMapSpace: 0
@@ -281,7 +291,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Roughness: 1.3
+    - _Roughness: 5
     - _Saturation: 1
     - _Smoothness: 1
     - _SmoothnessRemapMax: 1
@@ -320,6 +330,9 @@ Material:
     - _UVDetail: 0
     - _UVEmissive: 0
     - _UVSec: 0
+    - _Use2Blend: 1
+    - _Use3Blend: 0
+    - _Use4Blend: 0
     - _UseEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseOpacity: 0
@@ -332,8 +345,13 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
+    - _02_B_Tint: {r: 1, g: 1, b: 1, a: 0}
+    - _02_BaseDiffuse_Tint: {r: 1, g: 1, b: 1, a: 0}
+    - _02_G_Tint: {r: 1, g: 1, b: 1, a: 0}
+    - _02_R_Tint: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseTiling: {r: 1, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
@@ -354,3 +372,19 @@ Material:
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!114 &7129346067151140428
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 12
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
