@@ -11691,6 +11691,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 173735253}
+  - component: {fileID: 173735254}
   m_Layer: 0
   m_Name: POSE_B
   m_TagString: Untagged
@@ -11717,6 +11718,37 @@ Transform:
   - {fileID: 611770357591324356}
   m_Father: {fileID: 1059854582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &173735254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173735252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2106917240
+      Data2: 1276417561
+      Data3: -1526175586
+      Data4: 1602093400
+    Path: event:/Scenes/NightSycle/Statue/Breath
+  Event: 
+  EventPlayTrigger: 11
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 7.4
+  OverrideMaxDistance: 30
 --- !u!1001 &175142976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31756,11 +31788,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1225739184
-      Data2: 1215965747
-      Data3: -436603485
-      Data4: 599255031
-    Path: event:/Scenes/NightSycle/Statue/Breath_loop
+      Data1: 1612455376
+      Data2: 1103673397
+      Data3: 343184013
+      Data4: 1789556169
+    Path: event:/Scenes/NightSycle/Statue/Activate
   Event: 
   EventPlayTrigger: 11
   EventStopTrigger: 0
@@ -31771,7 +31803,7 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMaxDistance: 35
 --- !u!114 &418130474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32934,7 +32966,7 @@ MonoBehaviour:
   - {fileID: 1183309694}
   - {fileID: 1508999055}
   - {fileID: 1599520825}
-  MoveSound: {fileID: 8300000, guid: e07e1ea6831257e45ba20c8653cfaaac, type: 3}
+  MoveSound: {fileID: 0}
 --- !u!895512359 &444869488 stripped
 AimConstraint:
   m_CorrespondingSourceObject: {fileID: 7096514730260836221, guid: ca626bbc84254aa4c9c814f61b8b9d85, type: 3}
@@ -39916,6 +39948,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 551274860}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 551274864}
   m_SourcePrefab: {fileID: 100100000, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
 --- !u!4 &551274813 stripped
 Transform:
@@ -40275,6 +40310,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &551274864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551274859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2106917240
+      Data2: 1276417561
+      Data3: -1526175586
+      Data4: 1602093400
+    Path: event:/Scenes/NightSycle/Statue/Breath
+  Event: 
+  EventPlayTrigger: 11
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 7.4
+  OverrideMaxDistance: 30
 --- !u!1001 &551464198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42921,7 +42987,7 @@ MonoBehaviour:
   - {fileID: 992398158}
   - {fileID: 1305170738}
   - {fileID: 120127996}
-  MoveSound: {fileID: 8300000, guid: e07e1ea6831257e45ba20c8653cfaaac, type: 3}
+  MoveSound: {fileID: 0}
 --- !u!4 &606183443
 Transform:
   m_ObjectHideFlags: 0
@@ -44305,6 +44371,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 627935462}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 627935466}
   m_SourcePrefab: {fileID: 100100000, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
 --- !u!4 &627935415 stripped
 Transform:
@@ -44664,6 +44733,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &627935466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627935461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2106917240
+      Data2: 1276417561
+      Data3: -1526175586
+      Data4: 1602093400
+    Path: event:/Scenes/NightSycle/Statue/Breath
+  Event: 
+  EventPlayTrigger: 11
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 7.4
+  OverrideMaxDistance: 30
 --- !u!1001 &629404296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123276,7 +123376,7 @@ MonoBehaviour:
   - {fileID: 1315927019}
   - {fileID: 1644737721}
   - {fileID: 2049702747}
-  MoveSound: {fileID: 8300000, guid: e07e1ea6831257e45ba20c8653cfaaac, type: 3}
+  MoveSound: {fileID: 0}
 --- !u!1 &1059954990
 GameObject:
   m_ObjectHideFlags: 0
@@ -127626,6 +127726,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1107321928}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1107321932}
   m_SourcePrefab: {fileID: 100100000, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
 --- !u!4 &1107321882 stripped
 Transform:
@@ -127980,6 +128083,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1107321932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107321927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2106917240
+      Data2: 1276417561
+      Data3: -1526175586
+      Data4: 1602093400
+    Path: event:/Scenes/NightSycle/Statue/Breath
+  Event: 
+  EventPlayTrigger: 11
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 7.4
+  OverrideMaxDistance: 30
 --- !u!1 &1107463964
 GameObject:
   m_ObjectHideFlags: 0
@@ -132657,11 +132791,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatueBreath
   breatheEvent:
     Guid:
-      Data1: -2106917240
-      Data2: 1276417561
-      Data3: -1526175586
-      Data4: 1602093400
-    Path: event:/Scenes/NightSycle/Statue/Breath
+      Data1: 1612455376
+      Data2: 1103673397
+      Data3: 343184013
+      Data4: 1789556169
+    Path: event:/Scenes/NightSycle/Statue/Activate
   BreathCompleted:
     m_PersistentCalls:
       m_Calls:
@@ -143440,6 +143574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1315927020}
+  - component: {fileID: 1315927021}
   m_Layer: 0
   m_Name: POSE_C
   m_TagString: Untagged
@@ -143466,6 +143601,37 @@ Transform:
   - {fileID: 1055757100}
   m_Father: {fileID: 1059854582}
   m_LocalEulerAnglesHint: {x: 0, y: -127.048, z: 0}
+--- !u!114 &1315927021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315927019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2106917240
+      Data2: 1276417561
+      Data3: -1526175586
+      Data4: 1602093400
+    Path: event:/Scenes/NightSycle/Statue/Breath
+  Event: 
+  EventPlayTrigger: 11
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 7.4
+  OverrideMaxDistance: 30
 --- !u!1 &1316072419
 GameObject:
   m_ObjectHideFlags: 0
@@ -167818,6 +167984,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6184c24ba7d01fa4b9158fc5d75de447, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1536889799}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6184c24ba7d01fa4b9158fc5d75de447, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1536889801}
   m_SourcePrefab: {fileID: 100100000, guid: 6184c24ba7d01fa4b9158fc5d75de447, type: 3}
 --- !u!4 &1536889791 stripped
 Transform:
@@ -167936,11 +168105,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1225739184
-      Data2: 1215965747
-      Data3: -436603485
-      Data4: 599255031
-    Path: event:/Scenes/NightSycle/Statue/Breath_loop
+      Data1: 1612455376
+      Data2: 1103673397
+      Data3: 343184013
+      Data4: 1789556169
+    Path: event:/Scenes/NightSycle/Statue/Activate
   Event: 
   EventPlayTrigger: 11
   EventStopTrigger: 0
@@ -167951,7 +168120,7 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMaxDistance: 35
 --- !u!114 &1536889800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167985,6 +168154,37 @@ MonoBehaviour:
       Data3: -1984411776
       Data4: -580299571
     Path: event:/Scenes/NightSycle/Statue/Head
+--- !u!114 &1536889801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536889792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1225739184
+      Data2: 1215965747
+      Data3: -436603485
+      Data4: 599255031
+    Path: event:/Scenes/NightSycle/Statue/Breath_loop
+  Event: 
+  EventPlayTrigger: 11
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1539202415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192153,11 +192353,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatueBreath
   breatheEvent:
     Guid:
-      Data1: -2106917240
-      Data2: 1276417561
-      Data3: -1526175586
-      Data4: 1602093400
-    Path: event:/Scenes/NightSycle/Statue/Breath
+      Data1: 1612455376
+      Data2: 1103673397
+      Data3: 343184013
+      Data4: 1789556169
+    Path: event:/Scenes/NightSycle/Statue/Activate
   BreathCompleted:
     m_PersistentCalls:
       m_Calls:
@@ -234963,11 +235163,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1225739184
-      Data2: 1215965747
-      Data3: -436603485
-      Data4: 599255031
-    Path: event:/Scenes/NightSycle/Statue/Breath_loop
+      Data1: 1612455376
+      Data2: 1103673397
+      Data3: 343184013
+      Data4: 1789556169
+    Path: event:/Scenes/NightSycle/Statue/Activate
   Event: 
   EventPlayTrigger: 11
   EventStopTrigger: 0
@@ -234978,7 +235178,7 @@ MonoBehaviour:
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMaxDistance: 35
 --- !u!114 &2144743705
 MonoBehaviour:
   m_ObjectHideFlags: 0
