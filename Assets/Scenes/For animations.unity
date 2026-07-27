@@ -2071,6 +2071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DI.PlayerInstaller
   _spawnPoint: {fileID: 56297412}
   _enableLantern: 0
+  _enableInventory: 0
 --- !u!1001 &1219284462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3181,8 +3182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b3120801e629a47bc023f71affff30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NavigationCOntroller
-  position: {fileID: 56297412}
   agent: {fileID: 1753457670}
+  updateRate: 0.2
 --- !u!114 &1753457674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3281,6 +3282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ee0dafac975764fa01df6ab9383f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.StartDialogue
+  dialogueName: 
   dialoguePages: []
   delay: 0
   onDialogueCompleted:
@@ -4220,7 +4222,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.14999999
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 0df1b8f2f35bead49964b39609f1d3e1, type: 2}
   m_BuildHeightMesh: 0

@@ -248,6 +248,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -282,36 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteInteractable
   noteImage: {fileID: 21300000, guid: c07c8e21dc55ec6409ecd7d091291272, type: 3}
-  noteText: "\u0420\u043E\u0434 \u041F\u0442\u043E\u043B\u0435\u043C\u0435\u0435\u0432\r\n\u0421\u0438\u043B\u0430:
-    \u0418\u0445 \u0437\u043E\u043B\u043E\u0442\u043E \u0432 \u043A\u0430\u0436\u0434\u043E\u0439
-    \u0447\u0430\u0441\u0442\u0438 \u0438\u043C\u043F\u0435\u0440\u0438\u0438. \u041C\u0430\u043D\u0443\u0444\u0430\u043A\u0442\u0443\u0440\u044B,
-    \u0434\u043E\u0431\u044B\u0447\u0430, \u0437\u0435\u043C\u043B\u0435\u0434\u0435\u043B\u0438\u0435.
-    \u041E\u043D\u0438 \u0432\u0435\u0437\u0434\u0435. \r\n\u0420\u0435\u0448\u0435\u043D\u0438\u0435:
-    \u041C\u0435\u0434\u043B\u0435\u043D\u043D\u043E\u0435 \u043F\u0435\u0440\u0435\u0440\u0430\u0441\u043F\u0440\u0435\u0434\u0435\u043B\u0435\u043D\u0438\u0435
-    \u0438\u0445 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432. \u041E\u043D\u0438
-    \u043D\u0435 \u0434\u043E\u043B\u0436\u043D\u044B \u0437\u0430\u043C\u0435\u0442\u0438\u0442\u044C
-    \u044D\u0442\u043E\u0442 \u043F\u0440\u043E\u0446\u0435\u0441\u0441. \r\n\u0421\u043B\u0430\u0431\u043E\u0441\u0442\u044C:
-    \u0412\u044B\u0440\u043E\u0436\u0434\u0435\u043D\u0438\u0435. \u0421\u0442\u043E\u043B\u0435\u0442\u0438\u044F\u043C\u0438
-    \u0437\u0430\u043A\u043B\u044E\u0447\u0430\u044E\u0442 \u0431\u0440\u0430\u043A\u0438
-    \u0432\u043D\u0443\u0442\u0440\u0438 \u0441\u0435\u043C\u044C\u0438. \u0421\u043B\u0435\u0434\u0441\u0442\u0432\u0438\u0435
-    \u2014 \u0444\u0438\u0437\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0441\u043B\u0430\u0431\u043E\u0441\u0442\u044C
-    \u0438 \u0431\u0435\u0437\u0443\u043C\u0438\u0435. \u041E\u0441\u043E\u0431\u0435\u043D\u043D\u043E
-    \u0431\u0435\u0441\u043F\u043E\u043A\u043E\u0438\u0442 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0435
-    \u043F\u043E\u043A\u043E\u043B\u0435\u043D\u0438\u0435 \r\n\u041F\u0440\u0438\u043C\u0435\u0447\u0430\u043D\u0438\u0435:
-    \u042D\u0442\u0443 \u0448\u043A\u0430\u0442\u0443\u043B\u043A\u0443 \u044F \u043F\u043E\u0434\u043E\u0431\u0440\u0430\u043B
-    \u0441 \u0442\u0440\u0443\u043F\u0430 \u0441\u0442\u0430\u0440\u0448\u0435\u0433\u043E
-    \u0431\u0440\u0430\u0442\u0430 \u0421\u043E\u0442\u0435\u0440\u0430. \u041D\u0435
-    \u0437\u043D\u0430\u044E \u0447\u0442\u043E \u0442\u0430\u043C, \u043D\u043E
-    \u043E\u043D\u043E \u0431\u044B\u043B\u043E \u043D\u0430\u0441\u0442\u043E\u043B\u044C\u043A\u043E
-    \u0446\u0435\u043D\u043D\u043E, \u0447\u0442\u043E \u0432\u043B\u0430\u0434\u0435\u043B\u0435\u0446
-    \u043F\u0440\u0435\u0434\u043F\u043E\u0447\u0435\u043B \u0443\u043C\u0435\u0440\u0435\u0442\u044C,
-    \u043D\u043E \u043D\u0435 \u043E\u0442\u0434\u0430\u0432\u0430\u0442\u044C \u0435\u0451.
-    \u0415\u0451 \u043D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E \u0432\u0441\u043A\u0440\u044B\u0442\u044C,
-    \u0437\u043D\u0430\u0447\u0438\u0442 \u0432\u0435\u0449\u044C \u0437\u0430\u0447\u0430\u0440\u043E\u0432\u0430\u043D\u043D\u0430\u044F.
-    \u0417\u043D\u0430\u0447\u0438\u0442 \u0434\u0440\u0435\u0432\u043D\u044F\u044F.
-    \u0410 \u0433\u0434\u0435-\u0442\u043E \u0432 \u043F\u043E\u043C\u0435\u0441\u0442\u044C\u0435
-    \u041F\u0442\u043E\u043B\u0435\u043C\u0435\u0435\u0432 \u0435\u0441\u0442\u044C
-    \u043A\u043B\u044E\u0447 \u043E\u0442 \u043D\u0435\u0451."
+  noteText: []
 --- !u!4 &3744282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: cefbb95f4617418798e0b828cfb0593e, type: 3}
@@ -3084,6 +3061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CodeLockCylinder
   rotationDuration: 0.3
+  segmentsCount: 3
 --- !u!65 &79764527
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7791,7 +7769,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: f508ebde105cc0b4398352baa1cef1e1, type: 2}
   visualPart: {fileID: 421339747}
-  MainPart: {fileID: 9033387858489535007}
 --- !u!65 &234594005
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7923,7 +7900,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: 6fdcf629841c56346ab1cd529570f2ac, type: 2}
   visualPart: {fileID: 3939176089322962985}
-  MainPart: {fileID: 7214712762678232893}
 --- !u!114 &234594012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7938,7 +7914,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: 1f66394c00d0dd142878c2d661239280, type: 2}
   visualPart: {fileID: 2686540663669589111}
-  MainPart: {fileID: 5572661767158213179}
 --- !u!4 &234775945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2711915310968884314, guid: 6e6718b48408fe14bbaf4553645cdbd7, type: 3}
@@ -9123,7 +9098,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: 4a0088bf4fb170e43b3ad066a5b58e2e, type: 2}
   visualPart: {fileID: 1516122059}
-  MainPart: {fileID: 0}
 --- !u!114 &286277987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9138,7 +9112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: f0fee9c85bf56e3478fcec193f6d7862, type: 2}
   visualPart: {fileID: 1516122060}
-  MainPart: {fileID: 0}
 --- !u!114 &286277991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59030,17 +59003,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AssemblyController
   assemblyCamera: {fileID: 0}
-  MainCamera: {fileID: 0}
-  AssemblyCanvas: {fileID: 0}
-  assemblyRoot: {fileID: 0}
+  _hintText: {fileID: 0}
+  assemblyCanvas: {fileID: 0}
+  spawnPoint: {fileID: 0}
   rotationSpeed: 80
-  OnCompleted:
-    m_PersistentCalls:
-      m_Calls: []
   socketLayer:
     serializedVersion: 2
     m_Bits: 64
-  sockets: []
+  OnCompleted:
+    m_PersistentCalls:
+      m_Calls: []
   isActive: 0
 --- !u!4 &438186209
 Transform:
@@ -60993,6 +60965,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -61009,38 +60987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteInteractable
   noteImage: {fileID: 21300000, guid: b515018bdac114443b62aa6bd2959107, type: 3}
-  noteText: "\u0412\u043E\u0441\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u044F
-    \u043A\u043E\u0440\u043E\u043B\u044F \u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\u0430
-    \u041F\u0435\u0440\u0432\u043E\u0433\u043E \u043E \u0432\u043E\u0439\u043D\u0435
-    \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u044F\n\n\u041A\u0430\u0436\u0434\u044B\u0439
-    \u0436\u0438\u0442\u0435\u043B\u044C \u043C\u043E\u0435\u0439 \u043D\u043E\u0432\u043E\u0439
-    \u0438\u043C\u043F\u0435\u0440\u0438\u0438 \u0437\u043D\u0430\u0435\u0442 \u0432
-    \u043A\u0430\u043A\u043E\u043C \u043F\u043E\u0440\u044F\u0434\u043A\u0435 \u043F\u0440\u0435\u0434\u043E
-    \u043C\u043D\u043E\u0439 \u043F\u0440\u0435\u043A\u043B\u043E\u043D\u0438\u043B\u0438
-    \u043A\u043E\u043B\u0435\u043D\u0438 \u043D\u0435\u043B\u044E\u0434\u0438. \u041F\u0435\u0440\u0432\u044B\u043C\u0438
-    \u0441\u0434\u0430\u043B\u0438\u0441\u044C \u043E\u0441\u044B. \u041F\u0440\u043E\u0442\u0438\u0432\u043D\u0438\u043A,
-    \u043A\u043E\u0442\u043E\u0440\u043E\u0433\u043E \u043C\u043E\u0438 \u043F\u0440\u0435\u0434\u043A\u0438
-    \u0441\u0447\u0438\u0442\u0430\u043B\u0438 \u043E\u0434\u043D\u0438\u043C \u0438\u0437
-    \u0441\u0430\u043C\u044B\u0445 \u043E\u043F\u0430\u0441\u043D\u044B\u0445, \u043E\u043A\u0430\u0437\u0430\u043B\u0441\u044F
-    \u043D\u0430 \u0441\u0430\u043C\u043E\u043C \u0434\u0435\u043B\u0435 \u0441\u0430\u043C\u044B\u043C
-    \u043F\u0430\u0441\u0441\u0438\u0432\u043D\u044B\u043C \u0432 \u0432\u043E\u0439\u043D\u0435,
-    \u0447\u0442\u043E \u0438 \u0441\u0433\u0443\u0431\u0438\u043B\u043E \u0435\u0433\u043E.
-    \u0412\u0442\u043E\u0440\u044B\u043C\u0438 \u043F\u0430\u043B\u0438 \u0437\u043C\u0435\u0438.
-    \u0414\u0435\u043D\u044C \u0438 \u043D\u043E\u0447\u044C \u043C\u044B \u0437\u0430\u043B\u0438\u0432\u0430\u043B\u0438
-    \u0432\u043E\u0434\u043E\u0439, \u0437\u0430\u0434\u044B\u043C\u043B\u044F\u043B\u0438
-    \u0438 \u0437\u0430\u0432\u0430\u043B\u0438\u0432\u0430\u043B\u0438 \u0438\u0445
-    \u043F\u043E\u0434\u0437\u0435\u043C\u0435\u043B\u044C\u044F. \u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435
-    \u0441\u0434\u0430\u043B\u0438\u0441\u044C \u043F\u0430\u0443\u043A\u0438. \u041A\u0442\u043E
-    \u0431\u044B \u043C\u043E\u0433 \u043F\u043E\u0434\u0443\u043C\u0430\u0442\u044C,
-    \u0447\u0442\u043E \u043A\u0430\u043A\u0438\u0435-\u0442\u043E \u0441\u0442\u0438\u0445\u043E\u043F\u043B\u0435\u0442\u044B
-    \u0431\u0443\u0434\u0443\u0442 \u0431\u0440\u043E\u0441\u0430\u0442\u044C\u0441\u044F
-    \u043D\u0430 \u043D\u0430\u0441, \u043D\u0435 \u0437\u043D\u0430\u044F \u0441\u0442\u0440\u0430\u0445\u0430?\n\n\u041A\u0430\u043A
-    \u0436\u0435 \u044D\u0442\u043E \u0431\u0435\u0437\u0434\u0430\u0440\u043D\u043E.
-    \u041B\u0443\u0447\u0448\u0435 \u043E\u0441\u0442\u0430\u0432\u0438\u0442\u044C
-    \u044D\u0442\u0438 \u043D\u0438\u043A\u0447\u0435\u043C\u043D\u044B\u0435 \u043F\u043E\u043F\u044B\u0442\u043A\u0438.
-    \u041F\u0443\u0441\u0442\u044C \u043C\u043D\u043E\u0433\u043E\u0433\u043B\u0430\u0437\u044B\u0435
-    \u043F\u043E\u0440\u0442\u044F\u0442 \u0441\u0435\u0431\u0435 \u0437\u0440\u0435\u043D\u0438\u0435
-    \u0438 \u0440\u0430\u0441\u0445\u043E\u0434\u0443\u044E\u0442 \u0447\u0435\u0440\u043D\u0438\u043B\u0430."
+  noteText: []
 --- !u!114 &496403562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61191,29 +61138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteInteractable
   noteImage: {fileID: 21300000, guid: c07c8e21dc55ec6409ecd7d091291272, type: 3}
-  noteText: "\u0414\u043E\u0447\u044C \u043C\u043E\u044F, \u0435\u0441\u043B\u0438
-    \u0431\u044B \u043D\u0435 \u0442\u0432\u043E\u044F \u043C\u0430\u0442\u044C,
-    \u043C\u044B \u043C\u043E\u0433\u043B\u0438 \u0431\u044B \u0432\u0441\u0442\u0440\u0435\u0442\u0438\u0442\u044C\u0441\u044F
-    \u0433\u043E\u0440\u0430\u0437\u0434\u043E \u0440\u0430\u043D\u044C\u0448\u0435.
-    \u042F \u0431\u044B \u043D\u0430\u0443\u0447\u0438\u043B \u0442\u0435\u0431\u044F
-    \u0431\u043E\u043B\u044C\u0448\u0435\u043C\u0443. \u041D\u043E \u0441\u0435\u0439\u0447\u0430\u0441,
-    \u043A\u043E\u0433\u0434\u0430 \u044F \u043F\u0438\u0448\u0443 \u044D\u0442\u043E
-    \u043F\u043E\u0441\u043B\u0430\u043D\u0438\u0435, \u044F \u0447\u0435\u0442\u043A\u043E
-    \u0432\u0438\u0436\u0443, \u0447\u0442\u043E \u0436\u0438\u0442\u044C \u043C\u043D\u0435
-    \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C \u043D\u0435 \u0434\u043E\u043B\u0433\u043E.\r\n\r\n\u042D\u0442\u043E\u0442
-    \u0437\u0430\u043C\u043E\u043A \u0445\u043E\u0447\u0435\u0442 \u0443\u0431\u0438\u0442\u044C
-    \u043C\u0435\u043D\u044F. \u0418 \u044F \u043D\u0435 \u0433\u043E\u0432\u043E\u0440\u044E
-    \u043F\u0440\u043E \u0447\u0435\u043B\u043E\u0432\u0435\u0447\u0435\u0441\u043A\u0438\u0445
-    \u043F\u0440\u0438\u0445\u043B\u0435\u0431\u0430\u0442\u0435\u043B\u0435\u0439.
-    \u042F \u043D\u0435 \u0433\u043E\u0432\u043E\u0440\u044E \u043F\u0440\u043E \u043D\u0435\u043B\u044E\u0434\u0435\u0439,
-    \u0447\u0442\u043E \u0441\u043A\u0440\u044B\u0432\u0430\u044E\u0442 \u0436\u0430\u0436\u0434\u0443
-    \u043A \u043C\u0449\u0435\u043D\u0438\u044E. \u042F \u0433\u043E\u0432\u043E\u0440\u044E
-    \u043F\u0440\u043E \u0441\u0430\u043C\u043E \u0437\u0434\u0430\u043D\u0438\u0435.
-    \r\n\r\n\u0422\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0448\u044C \u044D\u0442\u043E
-    \u043F\u0438\u0441\u044C\u043C\u043E \u043F\u043E\u0441\u043B\u0435 \u043C\u043E\u0435\u0439
-    \u0441\u043C\u0435\u0440\u0442\u0438. \u0412\u043E\u0442 \u043C\u043E\u0435 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0435
-    \u043D\u0430\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435 - \u043D\u0435
-    \u0442\u0435\u0440\u044F\u0439 \u0431\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C."
+  noteText: []
 --- !u!114 &500318619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61242,6 +61167,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -63867,7 +63798,7 @@ GameObject:
   m_Component:
   - component: {fileID: 584608707}
   m_Layer: 0
-  m_Name: "\u043B\u043E\u0449\u0443\u043A\u043F\u043C\u0438_hint"
+  m_Name: loshchukpmi_hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64958,9 +64889,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8ceb81999fe5d4fab36cb0a5356519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightDialogueManager
+  dialogueName: {fileID: 0}
   dialoguePanel: {fileID: 1666692680}
   typewriter: {fileID: 1434103244}
-  playerInteraction: {fileID: 3035959646467428304}
   cameraBrain: {fileID: 2047904698}
 --- !u!1 &623819903 stripped
 GameObject:
@@ -66717,24 +66648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteInteractable
   noteImage: {fileID: 21300000, guid: c07c8e21dc55ec6409ecd7d091291272, type: 3}
-  noteText: "\u0415\u0441\u043B\u0438 \u044D\u0442\u043E \u0447\u0438\u0442\u0430\u0435\u0442
-    \u0413\u0435\u0444\u0435\u0441\u0442\u0438\u043E\u043D \u0410\u043C\u0438\u043D\u0442\u043E\u0440,
-    \u0442\u043E \u0437\u043D\u0430\u0439, \u0447\u0442\u043E \u0432 \u044D\u0442\u043E\u043C
-    \u043C\u0435\u0441\u0442\u0435 \u0445\u0440\u0430\u043D\u0438\u0442\u0441\u044F
-    \u0447\u0430\u0441\u0442\u044C \u0440\u0435\u0430\u0433\u0435\u043D\u0442\u043E\u0432
-    \u0434\u043B\u044F \u043C\u0443\u0442\u0430\u0433\u0435\u043D\u0430. \u041F\u043E
-    \u0437\u0430\u043C\u043A\u0443 \u0438 \u0438\u043C\u043F\u0435\u0440\u0438\u0438
-    \u0440\u0430\u0437\u0431\u0440\u043E\u0441\u0430\u043D\u044B \u0434\u0440\u0443\u0433\u0438\u0435
-    \u043B\u0430\u0431\u043E\u0440\u0430\u0442\u043E\u0440\u0438\u0438. \u0415\u0441\u043B\u0438
-    \u0441\u043E\u0431\u0440\u0430\u0442\u044C \u0440\u0435\u0430\u0433\u0435\u043D\u0442\u044B
-    \u0432\u043C\u0435\u0441\u0442\u0435, \u0442\u043E \u043C\u044B \u043D\u0430\u043A\u043E\u043D\u0435\u0446
-    \u0441\u043C\u043E\u0436\u0435\u043C \u0434\u043E\u0441\u0442\u0438\u0447\u044C
-    \u0442\u043E\u0433\u043E, \u043D\u0430\u0434 \u0447\u0435\u043C \u0440\u0430\u0431\u043E\u0442\u0430\u043B\u0438
-    \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u0433\u043E\u0434\u044B.\r\n\u0415\u0441\u043B\u0438
-    \u0436\u0435 \u044D\u0442\u043E \u0447\u0438\u0442\u0430\u0435\u0442 \u043F\u043E\u0441\u0442\u043E\u0440\u043E\u043D\u043D\u0438\u0439,
-    \u0442\u043E \u0437\u043D\u0430\u0439 \u2013 \u0442\u044B \u0432\u0441\u0435
-    \u0440\u0430\u0432\u043D\u043E \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435
-    \u043F\u043E\u0439\u043C\u0435\u0448\u044C."
+  noteText: []
 --- !u!114 &658634005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66803,6 +66717,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -70078,6 +69998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CodeLockCylinder
   rotationDuration: 0.3
+  segmentsCount: 3
 --- !u!114 &715030798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70091,6 +70012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CodeLockCylinder
   rotationDuration: 0.3
+  segmentsCount: 3
 --- !u!114 &715030799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70104,6 +70026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CodeLockCylinder
   rotationDuration: 0.3
+  segmentsCount: 3
 --- !u!65 &715030800
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73090,10 +73013,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.NightDialogueInteractable
   dialoguePages:
-  - "\u0411\u044B\u043B \u0443\u0431\u0438\u0442 \u0437\u0430\u0433\u043E\u0432\u043E\u0440\u0449\u0438\u043A\u0430\u043C\u0438,
-    \u043D\u043E \u0432\u0435\u0440\u043D\u0443\u043B\u0441\u044F \u0438\u0437 \u043C\u0435\u0440\u0442\u0432\u044B\u0445
-    \u0432 \u041D\u043E\u0447\u044C \u0422\u0430\u0439\u043D."
+  - He was killed by conspirators, but returned from the dead on the Night of Secrets.
   interact_sound: {fileID: 0}
+  dialogue_sounds: []
+  dialogue_sounds_index: 0
+  onDialogueCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEventOnlyOnce: 1
 --- !u!114 &817466299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73106,7 +73033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u041A\u043B\u0430\u0432\u0434\u0438\u0439 V"
+  message: Claudius V
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -73122,6 +73049,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -73258,10 +73191,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightDialogueInteractable
   dialoguePages:
-  - "\u0418\u0441\u0442\u0440\u0435\u0431\u0438\u043B \u0440\u0430\u0441\u0443 \u0442\u0438\u0440\u0430\u043D\u043E\u0432,
-    \u043F\u043E\u043B\u0443\u0440\u0430\u0437\u0443\u043C\u043D\u044B\u0445 \u0436\u0443\u043A\u043E\u0432
-    \u0441 \u0432\u0435\u0447\u043D\u044B\u043C \u0433\u043E\u043B\u043E\u0434\u043E\u043C."
+  - He exterminated a race of tyrants, semi-intelligent beetles with eternal hunger.
   interact_sound: {fileID: 0}
+  dialogue_sounds: []
+  dialogue_sounds_index: 0
+  onDialogueCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEventOnlyOnce: 1
 --- !u!114 &818759037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73292,7 +73229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0422\u0438\u0442\u0443\u0441 IV"
+  message: Titus IV
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -73308,6 +73245,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -73975,12 +73918,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightDialogueInteractable
   dialoguePages:
-  - "\u042D\u0442\u0430 \u0434\u0432\u0435\u0440\u044C \u0442\u0435\u0431\u0435 \u043D\u0435
-    \u043F\u043E \u0441\u0438\u043B\u0430\u043C. \u041D\u0430\u0439\u0434\u0438 \u043A\u043E\u0433\u043E-\u0442\u043E,
-    \u043A\u0442\u043E \u0441\u043C\u043E\u0436\u0435\u0442 \u0435\u0451 \u043E\u0442\u043A\u0440\u044B\u0442\u044C."
-  - "\u0422\u043E\u0440\u043E\u043F\u0438\u0441\u044C. \u041E\u043D\u043E \u0432\u0441\u0435
-    \u0441\u0438\u043B\u044C\u043D\u0435\u0435."
+  - This door is beyond your strength. Find someone who can open it.
+  - Hurry. It's getting stronger.
   interact_sound: {fileID: 8300000, guid: d13f4aea2e93e0c4eab32a38b4acf776, type: 3}
+  dialogue_sounds: []
+  dialogue_sounds_index: 0
+  onDialogueCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEventOnlyOnce: 1
 --- !u!114 &846177210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73993,7 +73939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041E\u0422\u041A\u0420\u042B\u0422\u042C"
+  message: OPEN
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -74009,6 +73955,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -78030,29 +77982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoteInteractable
   noteImage: {fileID: 21300000, guid: c07c8e21dc55ec6409ecd7d091291272, type: 3}
-  noteText: "\u0414\u043E\u0447\u044C \u043C\u043E\u044F, \u0435\u0441\u043B\u0438
-    \u0431\u044B \u043D\u0435 \u0442\u0432\u043E\u044F \u043C\u0430\u0442\u044C,
-    \u043C\u044B \u043C\u043E\u0433\u043B\u0438 \u0431\u044B \u0432\u0441\u0442\u0440\u0435\u0442\u0438\u0442\u044C\u0441\u044F
-    \u0433\u043E\u0440\u0430\u0437\u0434\u043E \u0440\u0430\u043D\u044C\u0448\u0435.
-    \u042F \u0431\u044B \u043D\u0430\u0443\u0447\u0438\u043B \u0442\u0435\u0431\u044F
-    \u0431\u043E\u043B\u044C\u0448\u0435\u043C\u0443. \u041D\u043E \u0441\u0435\u0439\u0447\u0430\u0441,
-    \u043A\u043E\u0433\u0434\u0430 \u044F \u043F\u0438\u0448\u0443 \u044D\u0442\u043E
-    \u043F\u043E\u0441\u043B\u0430\u043D\u0438\u0435, \u044F \u0447\u0435\u0442\u043A\u043E
-    \u0432\u0438\u0436\u0443, \u0447\u0442\u043E \u0436\u0438\u0442\u044C \u043C\u043D\u0435
-    \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C \u043D\u0435 \u0434\u043E\u043B\u0433\u043E.\r\n\r\n\u042D\u0442\u043E\u0442
-    \u0437\u0430\u043C\u043E\u043A \u0445\u043E\u0447\u0435\u0442 \u0443\u0431\u0438\u0442\u044C
-    \u043C\u0435\u043D\u044F. \u0418 \u044F \u043D\u0435 \u0433\u043E\u0432\u043E\u0440\u044E
-    \u043F\u0440\u043E \u0447\u0435\u043B\u043E\u0432\u0435\u0447\u0435\u0441\u043A\u0438\u0445
-    \u043F\u0440\u0438\u0445\u043B\u0435\u0431\u0430\u0442\u0435\u043B\u0435\u0439.
-    \u042F \u043D\u0435 \u0433\u043E\u0432\u043E\u0440\u044E \u043F\u0440\u043E \u043D\u0435\u043B\u044E\u0434\u0435\u0439,
-    \u0447\u0442\u043E \u0441\u043A\u0440\u044B\u0432\u0430\u044E\u0442 \u0436\u0430\u0436\u0434\u0443
-    \u043A \u043C\u0449\u0435\u043D\u0438\u044E. \u042F \u0433\u043E\u0432\u043E\u0440\u044E
-    \u043F\u0440\u043E \u0441\u0430\u043C\u043E \u0437\u0434\u0430\u043D\u0438\u0435.
-    \r\n\r\n\u0422\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u0448\u044C \u044D\u0442\u043E
-    \u043F\u0438\u0441\u044C\u043C\u043E \u043F\u043E\u0441\u043B\u0435 \u043C\u043E\u0435\u0439
-    \u0441\u043C\u0435\u0440\u0442\u0438. \u0412\u043E\u0442 \u043C\u043E\u0435 \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0435
-    \u043D\u0430\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435 - \u043D\u0435
-    \u0442\u0435\u0440\u044F\u0439 \u0431\u0434\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C."
+  noteText: []
 --- !u!114 &906626699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78081,6 +78011,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -80932,7 +80868,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupLight
   destroyOnPickup: 1
-  flashlight: {fileID: 6215508775597419234}
 --- !u!114 &1002319311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80945,7 +80880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u043E\u0434\u043E\u0431\u0440\u0430\u0442\u044C?"
+  message: Pick up?
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -80961,6 +80896,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -81126,7 +81067,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: ba81df994afb04b47a7efceb3e45d309, type: 2}
   visualPart: {fileID: 1878520541847566908}
-  MainPart: {fileID: 1418774108396556064}
 --- !u!1001 &1013293200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83223,7 +83163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1063271004}
   m_Layer: 0
-  m_Name: "\u043B\u043E\u0449\u0443\u043A\u043F\u043C\u0438_target"
+  m_Name: loshchukpmi_target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86027,11 +85967,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.NightDialogueInteractable
   dialoguePages:
-  - "\u0418\u0441\u0442\u0440\u0435\u0431\u0438\u043B \u0441\u0435\u043D\u0430\u0442
-    \u0438 \u043F\u0440\u043E\u0432\u043E\u0437\u0433\u043B\u0430\u0441\u0438\u043B
-    \u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043C\u043E\u0435\u0433\u043E
-    \u0440\u043E\u0434\u0430."
+  - He exterminated the senate and proclaimed the rule of my family.
   interact_sound: {fileID: 0}
+  dialogue_sounds: []
+  dialogue_sounds_index: 0
+  onDialogueCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEventOnlyOnce: 1
 --- !u!114 &1152771757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86044,7 +85987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u041F\u0430\u0442\u0440\u043E\u043A\u043B II"
+  message: Patroclus II
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -86060,6 +86003,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -87735,6 +87684,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -87765,6 +87720,10 @@ MonoBehaviour:
           m_StringArgument: open
           m_BoolArgument: 0
         m_CallState: 2
+  onAnimationTrigger_additional:
+    m_PersistentCalls:
+      m_Calls: []
+  can_trigger: 0
 --- !u!1 &1209272278
 GameObject:
   m_ObjectHideFlags: 0
@@ -89805,6 +89764,10 @@ MonoBehaviour:
           m_StringArgument: enterStatue
           m_BoolArgument: 0
         m_CallState: 2
+  onAnimationTrigger_additional:
+    m_PersistentCalls:
+      m_Calls: []
+  can_trigger: 0
 --- !u!1 &1242441627
 GameObject:
   m_ObjectHideFlags: 0
@@ -90880,6 +90843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CodeLockCylinder
   rotationDuration: 0.3
+  segmentsCount: 3
 --- !u!65 &1286867016
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -91007,13 +90971,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StartDialogueSound
   StartSound: {fileID: 8300000, guid: 0bcc1858269cdfc43801d3fb3982f184, type: 3}
   dialoguePages:
-  - "\u042D\u0442\u043E \u043E\u043D! \u042D\u0442\u043E \u043E\u043D!"
-  - "\u042D\u0422\u041E \u041E\u041D!"
-  - "\u041D\u0435\u043B\u044C\u0437\u044F, \u0447\u0442\u043E\u0431\u044B \u043E\u043D
-    \u0443\u0432\u0438\u0434\u0435\u043B \u0431\u0435\u0441\u043F\u043E\u0440\u044F\u0434\u043E\u043A
-    \u0432 \u0434\u043E\u043C\u0435."
-  - "\u041D\u0435\u043B\u044C\u0437\u044F."
-  - "\u041D\u0415\u041B\u042C\u0417\u042F!"
+  - It's him! It's him!
+  - THIS IS HIM!
+  - We can't let him see the mess in the house.
+  - It is forbidden.
+  - IT IS FORBIDDEN!
   delay: 3
   _playerStateController: {fileID: 165506930}
 --- !u!4 &1294019266
@@ -92714,7 +92676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u041E\u0414\u041E\u0411\u0420\u0410\u0422\u042C?"
+  message: PICK UP?
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -92742,6 +92704,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -97126,9 +97094,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "WASD - \u0432\u0440\u0430\u0449\u0435\u043D\u0438\u0435\r\n\u041B\u0435\u0432\u0430\u044F
-    \u043A\u043D\u043E\u043F\u043A\u0430 \u043C\u044B\u0448\u0438 - \u0432\u044B\u0431\u043E\u0440
-    \u043C\u0435\u0441\u0442\u0430 \u0434\u043B\u044F \u0434\u0435\u0442\u0430\u043B\u0438"
+  m_text: "WASD - rotation \n Left mouse button - select a location for the part"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -98377,6 +98343,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -98540,21 +98512,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AssemblyController
   assemblyCamera: {fileID: 0}
-  MainCamera: {fileID: 0}
-  AssemblyCanvas: {fileID: 0}
-  assemblyRoot: {fileID: 127371627}
+  _hintText: {fileID: 0}
+  assemblyCanvas: {fileID: 0}
+  spawnPoint: {fileID: 0}
   rotationSpeed: 80
-  OnCompleted:
-    m_PersistentCalls:
-      m_Calls: []
   socketLayer:
     serializedVersion: 2
     m_Bits: 64
-  sockets:
-  - {fileID: 234594012}
-  - {fileID: 234594011}
-  - {fileID: 1013157168}
-  - {fileID: 234594004}
+  OnCompleted:
+    m_PersistentCalls:
+      m_Calls: []
   isActive: 0
 --- !u!114 &1496598792
 MonoBehaviour:
@@ -98568,7 +98535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0421\u0411\u041E\u0420\u041A\u0410"
+  message: ASSEMBLY
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -98584,6 +98551,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 1496598791}
   interactionType: 0
   holdDuration: 1
@@ -99011,6 +98984,10 @@ MonoBehaviour:
           m_StringArgument: enter2
           m_BoolArgument: 0
         m_CallState: 2
+  onAnimationTrigger_additional:
+    m_PersistentCalls:
+      m_Calls: []
+  can_trigger: 0
 --- !u!1001 &1499883041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102059,7 +102036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u041E\u0414\u041E\u0411\u0420\u0410\u0422\u042C?"
+  message: PICK UP?
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -102087,6 +102064,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -104200,6 +104183,7 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   triggerSound: {fileID: 8300000, guid: c6af0afde8855084883cf83226922d2a, type: 3}
+  disable: 0
 --- !u!65 &1637582616
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106635,7 +106619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u041E\u0414\u041E\u0411\u0420\u0410\u0422\u042C?"
+  message: PICK UP?
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -106663,6 +106647,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -109648,7 +109638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0412\u0412\u0415\u0421\u0422\u0418 \u041A\u041E\u041C\u0411\u0418\u041D\u0410\u0426\u0418\u042E"
+  message: ENTER COMBINATION
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -109664,6 +109654,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -111738,6 +111734,12 @@ MonoBehaviour:
           m_StringArgument: push
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -111786,6 +111788,10 @@ MonoBehaviour:
           m_StringArgument: statueEnter
           m_BoolArgument: 0
         m_CallState: 2
+  onAnimationTrigger_additional:
+    m_PersistentCalls:
+      m_Calls: []
+  can_trigger: 0
 --- !u!1001 &1853320724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112820,6 +112826,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -114338,7 +114350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u041E\u0414\u041E\u0411\u0420\u0410\u0422\u042C?"
+  message: PICK UP?
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -114354,6 +114366,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -125001,12 +125019,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightDialogueInteractable
   dialoguePages:
-  - "\u0412\u044B\u0432\u0435\u0437\u0435\u043D\u043E \u0438\u0437 \u0437\u0435\u043C\u0435\u043B\u044C
-    \u043E\u0441. \u0412\u043E\u043A\u0440\u0443\u0433 \u043D\u0435\u0451 \u043E\u043D\u0438
-    \u043D\u0435 \u0440\u0430\u0441\u0442\u0438\u043B\u0438 \u0441\u0432\u043E\u0438
-    \u0446\u0432\u0435\u0442\u044B. \u041F\u0440\u0438\u0447\u0438\u043D\u0443 \u043E\u043D\u0438
-    \u0442\u0430\u043A \u0438 \u043D\u0435 \u0440\u0430\u0441\u043A\u0440\u044B\u043B\u0438."
+  - Removed from the wasps' lands. They didn't grow their flowers around it. They
+    never discovered the reason.
   interact_sound: {fileID: 0}
+  dialogue_sounds: []
+  dialogue_sounds_index: 0
+  onDialogueCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEventOnlyOnce: 1
 --- !u!114 &2074333336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125035,6 +125056,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -125365,8 +125392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TypewriterEffect
   delay: 0.03
-  maxLines: 3
-  chunks: []
+  textEffectComponent: {fileID: 0}
 --- !u!224 &2090325879
 RectTransform:
   m_ObjectHideFlags: 0
@@ -126220,7 +126246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0412\u0412\u0415\u0421\u0422\u0418 \u041A\u041E\u041C\u0411\u0418\u041D\u0410\u0426\u0418\u042E"
+  message: ENTER COMBINATION
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -126236,6 +126262,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -126332,10 +126364,6 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   unlockSound: {fileID: 8300000, guid: 947b7f137cf554143b5bbc2a8fb17645, type: 3}
-  cam: {fileID: 0}
-  tutorialText: "\u041F\u043E\u0432\u043E\u0440\u043E\u0442 \u0446\u0438\u043B\u0438\u043D\u0434\u0440\u0430
-    - \u041B\u041A\u041C"
-  textArea: {fileID: 1457336761}
 --- !u!114 &2103521739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126349,6 +126377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CodeLockCylinder
   rotationDuration: 0.3
+  segmentsCount: 3
 --- !u!65 &2103521740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -142509,7 +142538,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5017972635240778708 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5644102506851172502, guid: fc611f1f5d751e047925ab851ec35f7a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5642024014168484282, guid: fc611f1f5d751e047925ab851ec35f7a, type: 3}
   m_PrefabInstance: {fileID: 5017972635240778703}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &5017972635240778712
@@ -142549,6 +142578,12 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls: []
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -142565,8 +142600,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.NightDialogueInteractable
   dialoguePages:
-  - "\u041C\u043E\u0439 \u043E\u0442\u0435\u0446."
+  - My father.
   interact_sound: {fileID: 0}
+  dialogue_sounds: []
+  dialogue_sounds_index: 0
+  onDialogueCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerEventOnlyOnce: 1
 --- !u!114 &5017972635240778715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142579,7 +142620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440 I \u041E\u0431\u044A\u0435\u0434\u0438\u043D\u0438\u0442\u0435\u043B\u044C"
+  message: Alexander I the Unifier
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -142595,6 +142636,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
@@ -143610,7 +143657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0421\u0411\u041E\u0420\u041A\u0410"
+  message: ASSEMBLY
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -143626,6 +143673,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 5342616406713611026}
   interactionType: 0
   holdDuration: 1
@@ -143642,10 +143695,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AssemblyController
   assemblyCamera: {fileID: 0}
-  MainCamera: {fileID: 0}
-  AssemblyCanvas: {fileID: 887112812}
-  assemblyRoot: {fileID: 127371627}
+  _hintText: {fileID: 0}
+  assemblyCanvas: {fileID: 0}
+  spawnPoint: {fileID: 0}
   rotationSpeed: 80
+  socketLayer:
+    serializedVersion: 2
+    m_Bits: 64
   OnCompleted:
     m_PersistentCalls:
       m_Calls:
@@ -143709,14 +143765,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  socketLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  sockets:
-  - {fileID: 234594012}
-  - {fileID: 234594011}
-  - {fileID: 1013157168}
-  - {fileID: 234594004}
   isActive: 0
 --- !u!114 &5342616406713611027
 MonoBehaviour:
@@ -146604,17 +146652,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6215508775597419239}
   m_SourcePrefab: {fileID: 100100000, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
---- !u!114 &6215508775597419234 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2415808917215794675, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
-  m_PrefabInstance: {fileID: 6215508775597419233}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6215508775597419237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8dc4f7a4e3cfdc4bba66c0f53312fe3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerFlashlight
 --- !u!1 &6215508775597419235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 587563254775125431, guid: 1d4d6a994c1715c4ab441164b3e207d5, type: 3}
@@ -146703,6 +146740,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onAnimationTrigger_additional:
+    m_PersistentCalls:
+      m_Calls: []
+  can_trigger: 0
 --- !u!4 &6225698178217248252
 Transform:
   m_ObjectHideFlags: 0
