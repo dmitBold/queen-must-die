@@ -102,5 +102,10 @@ namespace NightCycle
         {
             _currentLoopCount = 0;
         }
+
+        public void SetLoopNumber(int loopNumber)
+        {
+            _currentLoopCount = loopNumber;
+        }
     }
 }

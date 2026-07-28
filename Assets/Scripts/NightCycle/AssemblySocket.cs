@@ -1,5 +1,8 @@
+using Core;
+using FMODUnity;
 using Inventory;
 using UnityEngine;
+using Zenject;
 
 namespace NightCycle
 {
@@ -7,13 +10,21 @@ namespace NightCycle
     {
         [Header("Setup")]
         [SerializeField] ItemData requiredItem;
-        [SerializeField] GameObject visualPart; 
+        [SerializeField] GameObject visualPart;
+        public EventReference SocketFillEvent;
+        private AudioService _audioService;
         Outline outline;
 
         bool isFilled;
 
         public bool IsFilled => isFilled;
         public ItemData RequiredItem => requiredItem;
+
+        [Inject]
+        public void Constructor(AudioService audioService)
+        {
+            _audioService = audioService;
+        }
 
         void Awake()
         {
@@ -43,6 +54,13 @@ namespace NightCycle
             }
 
             SetHighlight(false);
+
+            //test
+            if (!SocketFillEvent.IsNull)
+            {
+                _audioService.PlayFMODEvent(SocketFillEvent, gameObject.transform.position);
+            }
+            //test
         }
 
         public void SetHighlight(bool state)
