@@ -12,6 +12,7 @@ namespace NightCycle
         [Header("��������� �������")]
         [TextArea(3, 5)]
         public string[] dialoguePages;
+        public string[] dialogueNames;
 
         //TEST
         public AudioClip interact_sound;
@@ -40,7 +41,7 @@ namespace NightCycle
         {
             PlayIneractionSound();
 
-            NightDialogueManager.Instance.StartDialogue(this, dialoguePages, () =>
+            NightDialogueManager.Instance.StartDialogue(this, dialoguePages, dialogueNames, () =>
             {
                 if (triggerEventOnlyOnce && hasTriggeredEvent) return;
 
