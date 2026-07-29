@@ -9,6 +9,7 @@ namespace NightCycle
         [Header("��������� �������")]
         [TextArea(3, 5)]
         public string[] dialoguePages;
+        public string[] dialogueNames;
 
         [Tooltip("���������� �� ��������, ���� ���� ������?")]
         public bool pauseTimeline = true;
@@ -19,6 +20,7 @@ namespace NightCycle
             var behaviour = playable.GetBehaviour();
 
             behaviour.dialoguePages = dialoguePages;
+            behaviour.dialogueNames = dialogueNames;
             behaviour.pauseTimeline = pauseTimeline;
 
             return playable;

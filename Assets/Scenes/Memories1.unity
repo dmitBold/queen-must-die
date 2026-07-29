@@ -3662,6 +3662,14 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 54
       objectReference: {fileID: 0}
+    - target: {fileID: 4064246465945167086, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9bcae8bac28bae43aac9128c39582ea, type: 3}
+    - target: {fileID: 4064246465945167086, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4901871637801878396, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
       propertyPath: cameraBrain
       value: 
@@ -3669,6 +3677,10 @@ PrefabInstance:
     - target: {fileID: 5084789305350809574, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
       propertyPath: typingDelay
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124956530588925875, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7493048067513781368, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
       propertyPath: m_Name
@@ -23115,7 +23127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ee0dafac975764fa01df6ab9383f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.StartDialogue
-  dialogueName: 
   dialoguePages:
   - "\u0421\u043B\u0435\u0434\u0438 \u0437\u0430 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u043A\u043E\u0439
     \u0432\u0441\u0435\u0445 \u043D\u0430\u0440\u043E\u0434\u043E\u0432. \u041D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u0430\u044F
@@ -23130,6 +23141,7 @@ MonoBehaviour:
     \u0441\u0442\u0430\u043D\u0443\u0442 \u043D\u0435\u0437\u0430\u0432\u0438\u0441\u0438\u043C\u044B\u043C\u0438,
     \u0442\u043E \u043E\u0442 \u0438\u043C\u043F\u0435\u0440\u0438\u0438 \u043D\u0438\u0447\u0435\u0433\u043E
     \u043D\u0435 \u043E\u0441\u0442\u0430\u043D\u0435\u0442\u0441\u044F."
+  dialogueNames: []
   delay: 0
   onDialogueCompleted:
     m_PersistentCalls:
@@ -29426,13 +29438,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ee0dafac975764fa01df6ab9383f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.StartDialogue
-  dialogueName: 
   dialoguePages:
   - "<i>\u041E\u0442\u0435\u0446!</i>"
   - "<i>\u042F \u0432\u044B\u0437\u043E\u0432\u0443 \u043F\u043E\u043C\u043E\u0449\u044C</i>"
   - "<i>\u041E\u0442\u0435\u0446?</i>"
   - "<i>\u041E \u043D\u0435\u0442... </i>"
   - "<i>\u0422\u0435\u043F\u0435\u0440\u044C \u044F \u043E\u0434\u043D\u0430</i>"
+  dialogueNames: []
   delay: 0
   onDialogueCompleted:
     m_PersistentCalls:
@@ -43738,7 +43750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ee0dafac975764fa01df6ab9383f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.StartDialogue
-  dialogueName: 
   dialoguePages:
   - "\u041D\u0430\u0448\u0443 \u0438\u043C\u043F\u0435\u0440\u0438\u044E \u043D\u0430\u0441\u0435\u043B\u044F\u044E\u0442
     \u0447\u0435\u0442\u044B\u0440\u0435 \u043D\u0430\u0440\u043E\u0434\u0430. \u0417\u043C\u0435\u0438
@@ -43752,6 +43763,7 @@ MonoBehaviour:
   - "\u042D\u0442\u043E \u0437\u0440\u0435\u043B\u0438\u0449\u0435 \u043D\u0435 \u0434\u043B\u044F
     \u0434\u0435\u0442\u0441\u043A\u0438\u0445 \u0433\u043B\u0430\u0437. \u0412\u0441\u0435\u043C\u0443
     \u0441\u0432\u043E\u0451 \u0432\u0440\u0435\u043C\u044F."
+  dialogueNames: []
   delay: 0
   onDialogueCompleted:
     m_PersistentCalls:
@@ -49713,7 +49725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ee0dafac975764fa01df6ab9383f1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.StartDialogue
-  dialogueName: 
   dialoguePages:
   - "\u041A\u0430\u0437\u043D\u0430 \u0438 \u0430\u0440\u043C\u0438\u044F \u2013
     \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0439 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A
@@ -49722,6 +49733,7 @@ MonoBehaviour:
     \u0440\u0435\u0437\u0435\u0440\u0432 \u043D\u0430 \u0441\u043B\u0443\u0447\u0430\u0439
     \u043D\u0435\u043F\u0440\u0435\u0434\u0432\u0438\u0434\u0435\u043D\u043D\u044B\u0445
     \u0441\u0438\u0442\u0443\u0430\u0446\u0438\u0439."
+  dialogueNames: []
   delay: 0
   onDialogueCompleted:
     m_PersistentCalls:

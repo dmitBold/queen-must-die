@@ -5,6 +5,7 @@ namespace NightCycle
     public class DialogueBehaviour : PlayableBehaviour
     {
         public string[] dialoguePages;
+        public string[] dialogueNames;
         public bool pauseTimeline;
         private bool hasTriggered = false;
 
@@ -14,7 +15,7 @@ namespace NightCycle
             {
                 PlayableDirector director = playable.GetGraph().GetResolver() as PlayableDirector;
 
-                NightDialogueManager.Instance.StartTimelineDialogue(dialoguePages, director, pauseTimeline);
+                NightDialogueManager.Instance.StartTimelineDialogue(dialoguePages, dialogueNames, director, pauseTimeline);
 
                 hasTriggered = true;
             }

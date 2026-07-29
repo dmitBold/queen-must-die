@@ -248,5 +248,31 @@ namespace NightCycle
             dialoguePanel.SetActive(true);
             PlayCurrentPage();
         }
+
+        public void StartTimelineDialogue(string[] pages, string[] dialNames, PlayableDirector director, bool pauseTimeline)
+        {
+            if (pages == null || pages.Length == 0) return;
+
+            currentNPC = null;
+            currentPages = pages;
+            currentNames = dialNames;
+            currentPageIndex = 0;
+
+            if (pauseTimeline && director != null)
+            {
+                currentDirector = director;
+                //currentDirector.Pause();
+                currentDirector.playableGraph.GetRootPlayable(0).SetSpeed(0);
+                //TEST TEST
+                if (cameraBrain != null)
+                {
+                    cameraBrain.enabled = false;
+                }
+                //TEST TEST
+            }
+
+            dialoguePanel.SetActive(true);
+            PlayCurrentPage();
+        }
     }
 }
