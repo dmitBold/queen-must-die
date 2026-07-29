@@ -19,6 +19,8 @@ namespace NightCycle
         [SerializeField] private NightTypewriter typewriter;
 
         private string[] currentPages;
+        private string[] currentNames;
+        private string defaultName = " ";
         private int currentPageIndex;
         private NightDialogueInteractable currentNPC;
         private PlayerInteraction playerInteraction;
@@ -66,6 +68,7 @@ namespace NightCycle
 
             currentNPC = npc;
             currentPages = pages;
+            currentNames = null;
             currentPageIndex = 0;
 
             currentDirector = null;
@@ -76,16 +79,17 @@ namespace NightCycle
             PlayCurrentPage();
         }
 
-        public void StartDialogue(NightDialogueInteractable npc, string[] pages, string dialName, Action onComplete = null)
+        public void StartDialogue(NightDialogueInteractable npc, string[] pages, string[] dialNames, Action onComplete = null)
         {
             if (pages == null || pages.Length == 0) return;
-            if (dialName != null && dialName.Length > 0) { 
-                dialogueName.text = dialName;
+            /*if (dialNames[currentPageIndex] != null && dialNames.Length > 0) { 
+                dialogueName.text = dialNames[currentPageIndex];
                 dialogueName.ForceMeshUpdate();
-            }
+            }*/
 
             currentNPC = npc;
             currentPages = pages;
+            currentNames = dialNames;
             currentPageIndex = 0;
 
             currentDirector = null;
@@ -93,6 +97,7 @@ namespace NightCycle
             currentDialogueCallback = onComplete;
 
             dialoguePanel.SetActive(true);
+
             PlayCurrentPage();
         }
 
@@ -126,6 +131,22 @@ namespace NightCycle
 
         private void PlayCurrentPage()
         {
+            string resolvedName = defaultName;
+
+            //TEST
+            if (currentNames != null && currentPageIndex < currentNames.Length && !string.IsNullOrEmpty(currentNames[currentPageIndex]))
+            {
+                resolvedName = currentNames[currentPageIndex];
+            }
+
+            // Выводим имя в UI
+            if (dialogueName != null)
+            {
+                dialogueName.text = resolvedName;
+                dialogueName.ForceMeshUpdate();
+            }
+            //TEST
+
             if (currentNPC != null)
             {
                 //
@@ -208,6 +229,7 @@ namespace NightCycle
 
             currentNPC = null;
             currentPages = pages;
+            currentNames = null;
             currentPageIndex = 0;
 
             if (pauseTimeline && director != null)

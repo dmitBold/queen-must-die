@@ -125,9 +125,16 @@ namespace Inventory
 
         private void Refresh()
         {
-            foreach (Transform child in slotsParent)
+            if (slotsParent == null) return;
+
+            /*foreach (Transform child in slotsParent)
             {
                 Destroy(child.gameObject);
+            }*/
+
+            for (int i = slotsParent.childCount - 1; i >= 0; i--)
+            {
+                Destroy(slotsParent.GetChild(i).gameObject);
             }
 
             var items = inventory.GetAllItems();
