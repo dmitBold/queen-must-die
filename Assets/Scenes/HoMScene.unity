@@ -2016,7 +2016,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135064545}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 520995ae440c4af489e92c3bafbea772, type: 3}
   m_Name: 
@@ -4873,9 +4873,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2abb2975bdff1f4ca07bfd3d3a46307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimRewind
-  animator: {fileID: 0}
+  animator: {fileID: 296022441}
   rewindSpeed: -5
-  cleanStateName: Boxes
+  cleanStateName: Kitchen_new
   idleStateName: idle
 --- !u!114 &296022439
 MonoBehaviour:
@@ -26487,7 +26487,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252140726}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 520995ae440c4af489e92c3bafbea772, type: 3}
   m_Name: 
@@ -26660,9 +26660,6 @@ MonoBehaviour:
   - {fileID: 1005071715}
   - {fileID: 881887107}
   - {fileID: 662716511}
-  - {fileID: 1252140726}
-  - {fileID: 135064545}
-  - {fileID: 1145515377}
   musicTracks:
   - {fileID: 8300000, guid: 50753cb699baafd4399083204313f622, type: 3}
   - {fileID: 8300000, guid: 5f33bde84fa9a754c9045c3276f60100, type: 3}
@@ -26671,7 +26668,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 812f0b0d212d4854a9ba1ea0ff6f6b95, type: 3}
   scene_light: {fileID: 54125004}
   OrderedCandles:
-  - {fileID: 1139221877}
   - {fileID: 1066903439}
   - {fileID: 187832516}
   - {fileID: 42125827}
@@ -26686,6 +26682,7 @@ MonoBehaviour:
   - {fileID: 2121076619}
   - {fileID: 1757049020}
   - {fileID: 188668613}
+  - {fileID: 1139221877}
   ImmediateCandles:
   - {fileID: 1229420194}
   - {fileID: 599579891}
@@ -26697,13 +26694,91 @@ MonoBehaviour:
   - {fileID: 948830537}
   - {fileID: 2094339794}
   - {fileID: 170123748}
-  - {fileID: 0}
   - {fileID: 668300480}
   - {fileID: 396983305}
   CandleTime: 0.5
   FirstDelay: 3
   candleSound: {fileID: 8300000, guid: c8ad8c6810a05f24e967d7e0721c2575, type: 3}
   TinderSound: {fileID: 8300000, guid: d9df1de16f283e94b996ef63f16cf152, type: 3}
+  _events:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6666937435617227463}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8081539327059591953}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8081539327059591953}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6666937435617227463}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6666937435617227463}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3287237122224021049}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   KnockSound: {fileID: 8300000, guid: f5a9b2bd410c113428cccc25ad4ee178, type: 3}
   door: {fileID: 61008721}
   Reznya: {fileID: 8300000, guid: 81713f53ae227ba48b89bd64db9e6b2c, type: 3}
@@ -26960,7 +27035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimRewind
   animator: {fileID: 1266194726}
   rewindSpeed: -5
-  cleanStateName: Boxes
+  cleanStateName: Boxes_new
   idleStateName: idle
 --- !u!114 &1266194729
 MonoBehaviour:
@@ -28403,7 +28478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimRewind
   animator: {fileID: 1371133145}
   rewindSpeed: -5
-  cleanStateName: Boxes
+  cleanStateName: Books_new
   idleStateName: idle
 --- !u!114 &1371133143
 MonoBehaviour:
@@ -369984,18 +370059,6 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2251303385931416482}
-        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
-        m_MethodName: Clean_ForAnim
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2251303385931416480}
         m_TargetAssemblyTypeName: NightCycle.Interactable, Assembly-CSharp
         m_MethodName: set_enabled
@@ -370067,7 +370130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimRewind
   animator: {fileID: 2251303385931416484}
   rewindSpeed: -5
-  cleanStateName: Boxes
+  cleanStateName: Garbage_new
   idleStateName: idle
 --- !u!114 &2251303385931416482
 MonoBehaviour:
@@ -401978,18 +402041,6 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5340723240769209240}
-        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
-        m_MethodName: Clean_ForAnim
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 5340723240769209238}
         m_TargetAssemblyTypeName: NightCycle.Interactable, Assembly-CSharp
         m_MethodName: set_enabled
@@ -402061,7 +402112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimRewind
   animator: {fileID: 5340723240769209242}
   rewindSpeed: -5
-  cleanStateName: Boxes
+  cleanStateName: Stone_new
   idleStateName: idle
 --- !u!114 &5340723240769209240
 MonoBehaviour:

@@ -23,6 +23,8 @@ namespace NightCycle
         public float FirstDelay;
         public AudioClip candleSound;
         public AudioClip TinderSound;
+        [SerializeField]
+        private List<UnityEvent> _events = new List<UnityEvent>();
         //test
 
         //test
@@ -121,23 +123,27 @@ namespace NightCycle
 
         public void apply_stage_effect()
         {
+            if (_events != null && currentStageIndex >= 0 && currentStageIndex < _events.Count)
+            {
+                _events[currentStageIndex]?.Invoke();
+            }
             switch (currentStageIndex)
             {
                 /*case 1:
                 scene_light.enabled = false;
                 Debug.Log("1");
                 break;*/
-                case 2:
+                case 1:
                     if (scene_light != null) scene_light.enabled = false;
                     StartCoroutine(CandlesRoutine());
 
                     break;
-                case 3:
+                case 2:
                     _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-3.86f, 10.51f, -102.38f), 1, true, 0.27f, 4.29f);
 
                     _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-9.71f, 10.51f, -120.86f), 1, true, 0.27f, 6.18f);
                     break;
-                case 5:
+                case 3:
                     ON_Cleanup_Completed?.Invoke();
                     _audioService.PlaySound(KnockSound);
                     //door.GetComponent<Interactable>().enabled = true;
