@@ -15,9 +15,10 @@ namespace NightCycle
         private PlayerStateController playerStateController;
 
         [Inject]
-        private void Construct(PlayerStateController playerStateController)
+        private void Construct(PlayerStateController playerStateController, PlayerInteraction playerInteraction)
         {
             this.playerStateController = playerStateController;
+            this.playerInteraction = playerInteraction;
         }
         
         private void Awake()
@@ -86,8 +87,17 @@ namespace NightCycle
 
             if (result == TypewriterEffect.SkipResult.DialogueFinished)
             {
-                if (playerInteraction != null) playerInteraction.ForceExitFocus();
-                else CloseNote();
+
+                if (playerInteraction != null)
+                {
+                    Debug.Log("NOTE FINISHED111");
+                    playerInteraction.ForceExitFocus();
+                }
+                else
+                {
+                    CloseNote();
+                    Debug.Log("NOTE FINISHED222");
+                }
             }
         }
 
