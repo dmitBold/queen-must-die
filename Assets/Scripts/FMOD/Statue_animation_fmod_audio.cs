@@ -6,7 +6,7 @@ public class Statue_animation_fmod_audio : MonoBehaviour
     
 {
     public FMODUnity.EventReference StatueFootstepEvent;
-    FMOD.Studio.EventInstance Footstep;
+    
     public FMODUnity.EventReference StatueSwordEvent;
     public FMODUnity.EventReference StatueHeadEvent;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
