@@ -207,6 +207,7 @@ namespace NightCycle
         {
             foreach (Light light in AllLight)
             {
+                _originalIntensities[light] = light.intensity;
                 ChangeLightIntensity(light, 0f, turnOFF_time);
             }
         }

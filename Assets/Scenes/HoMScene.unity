@@ -11709,7 +11709,19 @@ MonoBehaviour:
   objectsToCleanup: 1
   Stage_Completed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 765484276}
+        m_TargetAssemblyTypeName: LightController, Assembly-CSharp
+        m_MethodName: TurnOffAllLight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &662838905
 GameObject:
   m_ObjectHideFlags: 0
@@ -13283,6 +13295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 748115800}
+  - component: {fileID: 748115801}
   m_Layer: 0
   m_Name: Horse Quest
   m_TagString: Untagged
@@ -13309,6 +13322,22 @@ Transform:
   - {fileID: 625352167}
   m_Father: {fileID: 1372687080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &748115801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748115799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e52e839b7efcc49ae3babbc44018a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightController
+  turnOFF_time: 3
+  turnON_time: 0
+  AllLight:
+  - {fileID: 625352169}
 --- !u!4 &751693102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 420982, guid: bc5187e58fabe484389c4fcd74a3036b, type: 3}
@@ -13674,6 +13703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 765484275}
+  - component: {fileID: 765484276}
   m_Layer: 0
   m_Name: KitchenClean
   m_TagString: Untagged
@@ -13711,6 +13741,25 @@ Transform:
   - {fileID: 237914548}
   m_Father: {fileID: 296022436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &765484276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765484274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e52e839b7efcc49ae3babbc44018a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightController
+  turnOFF_time: 3
+  turnON_time: 0
+  AllLight:
+  - {fileID: 110072352}
+  - {fileID: 382662898}
+  - {fileID: 2122095440}
+  - {fileID: 237914550}
 --- !u!1 &769498049 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4362701171811087270, guid: fd7526115934ed34586d1ab2d983c678, type: 3}
@@ -20690,7 +20739,19 @@ MonoBehaviour:
   objectsToCleanup: 1
   Stage_Completed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1702711564}
+        m_TargetAssemblyTypeName: LightController, Assembly-CSharp
+        m_MethodName: TurnOffAllLight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &883142256 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 494322, guid: bfb5063a60f6ab946b7818053c46d9d2, type: 3}
@@ -24975,7 +25036,19 @@ MonoBehaviour:
   objectsToCleanup: 1
   Stage_Completed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1425313264}
+        m_TargetAssemblyTypeName: LightController, Assembly-CSharp
+        m_MethodName: TurnOffAllLight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1008105876
 GameObject:
   m_ObjectHideFlags: 0
@@ -27586,6 +27659,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 748115801}
+        m_TargetAssemblyTypeName: LightController, Assembly-CSharp
+        m_MethodName: TurnOffAllLight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   viewPrefab: {fileID: 7731635846444126161, guid: 5a1c8429ebd83154095efa24cad8fe7f, type: 3}
 --- !u!1001 &1148965162
 PrefabInstance:
@@ -29027,7 +29112,19 @@ MonoBehaviour:
   objectsToCleanup: 1
   Stage_Completed:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 765484276}
+        m_TargetAssemblyTypeName: LightController, Assembly-CSharp
+        m_MethodName: TurnOffAllLight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1252140728
 Transform:
   m_ObjectHideFlags: 0
@@ -32792,6 +32889,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1425313263}
+  - component: {fileID: 1425313264}
   m_Layer: 0
   m_Name: BoxBagsClean
   m_TagString: Untagged
@@ -32818,6 +32916,22 @@ Transform:
   - {fileID: 1120165133}
   m_Father: {fileID: 1266194724}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1425313264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425313262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e52e839b7efcc49ae3babbc44018a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightController
+  turnOFF_time: 3
+  turnON_time: 0
+  AllLight:
+  - {fileID: 1120165135}
 --- !u!1001 &1426559478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38102,6 +38216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1702711563}
+  - component: {fileID: 1702711564}
   m_Layer: 0
   m_Name: BooksClean
   m_TagString: Untagged
@@ -38130,6 +38245,22 @@ Transform:
   - {fileID: 333781229}
   m_Father: {fileID: 1371133140}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1702711564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702711562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e52e839b7efcc49ae3babbc44018a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightController
+  turnOFF_time: 3
+  turnON_time: 0
+  AllLight:
+  - {fileID: 333781231}
 --- !u!1001 &1703389797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -403896,6 +404027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle_Fire_FX_02
       objectReference: {fileID: 0}
+    - target: {fileID: 115328, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 452624, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -403939,6 +404074,14 @@ PrefabInstance:
     - target: {fileID: 452624, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19829256, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19829256, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 19920112, guid: 3d0e1c5473aa4ab39e49c88bd3d0b08f, type: 3}
       propertyPath: m_Materials.Array.size
@@ -413267,7 +413410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &6120338621708708495
 PrefabInstance:
   m_ObjectHideFlags: 0
