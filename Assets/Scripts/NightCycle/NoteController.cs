@@ -90,13 +90,11 @@ namespace NightCycle
 
                 if (playerInteraction != null)
                 {
-                    Debug.Log("NOTE FINISHED111");
                     playerInteraction.ForceExitFocus();
                 }
                 else
                 {
                     CloseNote();
-                    Debug.Log("NOTE FINISHED222");
                 }
             }
         }
