@@ -60,6 +60,9 @@
 		<property name="maxVoices">
 			<value>1</value>
 		</property>
+		<property name="minimumDistance">
+			<value>2.5</value>
+		</property>
 	</object>
 	<object class="MarkerTrack" id="{7d9b4166-1e57-4126-a825-2071302c4073}" />
 	<object class="GroupTrack" id="{b9dff236-29c7-45a2-8f9e-c555650d7f06}">
@@ -121,7 +124,7 @@
 	<object class="MixerBusEffectChain" id="{f0adfd80-49f0-4173-98ca-0b1d469f1b64}">
 		<relationship name="effects">
 			<destination>{12a8ff3c-1609-4407-987c-4c1e38e4bc22}</destination>
-			<destination>{66e97ada-48e9-4f17-8f6b-f71e73f92a1f}</destination>
+			<destination>{1c361406-c66f-4493-91d1-72434dd654f1}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{15ec6367-62c3-4526-b3bd-9f2f17c258b6}" />
@@ -149,6 +152,13 @@
 	</object>
 	<object class="MixerBusPanner" id="{5e620705-5d9f-4b84-956e-44557caa9629}" />
 	<object class="MixerBusFader" id="{12a8ff3c-1609-4407-987c-4c1e38e4bc22}" />
-	<object class="SpatialiserEffect" id="{66e97ada-48e9-4f17-8f6b-f71e73f92a1f}" />
+	<object class="SpatialiserEffect" id="{1c361406-c66f-4493-91d1-72434dd654f1}">
+		<property name="soundSize">
+			<value>0.0500000007</value>
+		</property>
+		<property name="minimumExtent">
+			<value>90</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{6682d897-9d01-4275-ade7-ef77c89e0ae4}" />
 </objects>
