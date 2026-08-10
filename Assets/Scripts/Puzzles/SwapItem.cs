@@ -27,6 +27,7 @@ namespace NightCycle.Puzzles
         {
             transform.localPosition = newPos;
             originalLocalPos = newPos;
+
         }
     }
 }

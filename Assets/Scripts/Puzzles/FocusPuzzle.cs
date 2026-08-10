@@ -8,6 +8,8 @@ namespace NightCycle.Puzzles
     {
         [Header("Focus Settings")]
         [SerializeField] protected CinemachineCamera puzzleCamera; // Камера паззла
+        protected HUDController controller;
+
 
         protected bool isFocused;
 
@@ -16,6 +18,11 @@ namespace NightCycle.Puzzles
             isFocused = true;
             puzzleCamera.gameObject.SetActive(true); // Cinemachine сделает плавный blend
 
+            if (controller != null)
+            {
+                controller.DisableInteractionText();
+                controller.SetCrosshairActivity(false);
+            }
             // Включаем курсор
             //Cursor.lockState = CursorLockMode.None;
             //Cursor.visible = true;
@@ -27,6 +34,10 @@ namespace NightCycle.Puzzles
             isFocused = false;
             puzzleCamera.gameObject.SetActive(false);
 
+            if (controller != null)
+            {
+                controller.SetCrosshairActivity(true);
+            }
             // Выключаем курсор
             //Cursor.lockState = CursorLockMode.Locked;
             //Cursor.visible = false;

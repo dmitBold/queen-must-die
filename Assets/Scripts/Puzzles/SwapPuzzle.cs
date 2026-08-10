@@ -18,6 +18,10 @@ namespace NightCycle.Puzzles
         private void Start()
         {
             LoadPuzzleState();
+            if (HUDController.instance != null)
+            {
+                controller = HUDController.instance;
+            }
         }
 
         private void Update()
@@ -164,5 +168,11 @@ namespace NightCycle.Puzzles
         {
             // «десь будет логика загрузки индексов массива
         }
+
+        public void exitPuzzle()
+        {
+            OnExitFocus();
+        }
+
     }
 }
