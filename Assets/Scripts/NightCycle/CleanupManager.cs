@@ -46,6 +46,8 @@ namespace NightCycle
         private Dictionary<Light, float> _originalIntensities = new Dictionary<Light, float>();
         //
 
+        [SerializeField] MusicController musicController;
+
         [Inject]
         public void Constructor(AudioService audioService)
         {
@@ -98,16 +100,16 @@ namespace NightCycle
         public void StartCleanup()
         {
             _audioService.PlaySound(TinderSound);
-            if (isMusicStarted) return;
+            //if (isMusicStarted) return;
 
-            isMusicStarted = true;
+            //isMusicStarted = true;
         }
 
         public void AdvanceStage()
         {
             Debug.Log("120120120120");
             currentStageIndex++;
-            UpdateMusic();
+            //UpdateMusic();
             apply_stage_effect();
 
             if (currentStageIndex < stages.Count)
@@ -147,15 +149,24 @@ namespace NightCycle
             switch (currentStageIndex)
             {
                 case 2:
+                    if (musicController != null)
+                    {
+                        musicController.PlayTrack(1);
+                    }
                     TurnOffAllLight();
                     if (scene_light != null) scene_light.enabled = false;
                     StartCoroutine(CandlesRoutine());
                     break;
                 case 3:
+                    if (musicController != null)
+                    {
+                        musicController.PlayTrack(2);
+                    }
                     _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-3.86f, 10.51f, -102.38f), 1, true, 0.27f, 4.29f);
                     _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-9.71f, 10.51f, -120.86f), 1, true, 0.27f, 6.18f);
                     break;
                 case 4:
+                    //musicController.PlayTrack(3);
                     ON_Cleanup_Completed?.Invoke();
                     _audioService.PlaySound(KnockSound);
                     break;

@@ -26,7 +26,7 @@ namespace NightCycle
         {
             yield return new WaitForSeconds(duration);
             _cleanupManager.StartCleanup();
-            _cleanupManager.UpdateMusic();
+            //_cleanupManager.UpdateMusic();
         }
     }
 }
