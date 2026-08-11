@@ -12,6 +12,7 @@ namespace NightCycle.Puzzles
         [SerializeField] private float pullOutDistance = 0.5f; // Насколько предмет выдвигается
         [SerializeField] private float animationSpeed = 3f;
 
+        private SwapItem hoverItem = null;
         private SwapItem firstSelectedItem = null;
         private bool isAnimating = false;
 
@@ -28,6 +29,7 @@ namespace NightCycle.Puzzles
         {
             if (!isFocused || isAnimating || isSolved) return;
 
+            HandleMouseHover();
             // Обработка клика мыши
             if (Input.GetMouseButtonDown(0))
             {
@@ -49,19 +51,61 @@ namespace NightCycle.Puzzles
             }
         }
 
+        private void HandleMouseHover()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                SwapItem HoverItem = hit.collider.GetComponent<SwapItem>();
+
+                if (HoverItem != null && items.Contains(HoverItem))
+                {
+                    if (hoverItem == null)
+                    {
+                        if (HoverItem != firstSelectedItem)
+                        {
+                            hoverItem = HoverItem;
+                            HoverItem.SetOutline(true);
+                        }
+                        else
+                        {
+                            hoverItem = null;
+                        }
+                    }
+                    else
+                    {
+                        if (HoverItem != hoverItem && HoverItem != firstSelectedItem)
+                        {
+                            hoverItem.SetOutline(false);
+                            hoverItem = HoverItem;
+                            HoverItem.SetOutline(true);
+                        }
+                    }
+                }
+                else
+                {
+                    if (hoverItem != null)
+                    {
+                        hoverItem.SetOutline(false);
+                    }
+                    hoverItem = null;
+                }
+            }
+        }
+
         private void SelectOrSwapItem(SwapItem item)
         {
             if (firstSelectedItem == null)
             {
                 // Выделяем первый предмет
                 firstSelectedItem = item;
-                firstSelectedItem.SetOutline(true);
+                firstSelectedItem.SetOutline(false);
                 StartCoroutine(PullOutRoutine(firstSelectedItem, true));
             }
             else if (firstSelectedItem == item)
             {
                 // Снимаем выделение
-                firstSelectedItem.SetOutline(false);
+                //firstSelectedItem.SetOutline(false);
                 StartCoroutine(PullOutRoutine(firstSelectedItem, false));
                 firstSelectedItem = null;
             }
@@ -69,8 +113,8 @@ namespace NightCycle.Puzzles
             {
                 // Второй предмет выбран - меняем местами
                 SwapItem secondSelectedItem = item;
-                secondSelectedItem.SetOutline(true);
-                firstSelectedItem.SetOutline(false);
+                //secondSelectedItem.SetOutline(true);
+                //firstSelectedItem.SetOutline(false);
                 secondSelectedItem.SetOutline(false);
 
                 StartCoroutine(SwapAnimationRoutine(firstSelectedItem, secondSelectedItem));
@@ -171,7 +215,10 @@ namespace NightCycle.Puzzles
 
         public void exitPuzzle()
         {
-            OnExitFocus();
+            if (playerInteraction != null)
+            {
+                playerInteraction.ForceExitFocus();
+            }
         }
 
     }
