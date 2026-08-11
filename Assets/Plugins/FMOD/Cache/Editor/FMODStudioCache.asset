@@ -177,10 +177,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639215581550740140
+  lastModified: 639220455578382761
   FileSizes:
   - Name: Desktop
-    Value: 4904000
+    Value: 5486240
   Exists: 1
 --- !u!114 &-4029956871787623766
 MonoBehaviour:
@@ -209,6 +209,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1500
+--- !u!114 &-3512040079603510296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/Hom/MusicBox/Music1
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/Hom/MusicBox/Music1
+  Guid:
+    Data1: 171726138
+    Data2: 1255712134
+    Data3: -829983043
+    Data4: 1848696194
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13714
 --- !u!114 &-3425617969210589484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +290,33 @@ MonoBehaviour:
   MinDistance: 2.5
   MaxDistance: 20
   Length: 1375
+--- !u!114 &-1485184081104999706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/Hom/MusicBox/Music2
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/Hom/MusicBox/Music2
+  Guid:
+    Data1: 1179541019
+    Data2: 1304639090
+    Data3: 880673961
+    Data4: 784783750
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13714
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,13 +355,17 @@ MonoBehaviour:
   - {fileID: 4344672008431369007}
   - {fileID: 8503659304102850927}
   - {fileID: 2898275927786066180}
+  - {fileID: -1485184081104999706}
+  - {fileID: -3512040079603510296}
+  - {fileID: 8597994373032338506}
+  - {fileID: 8929571478374914542}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4548252348506558157}
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639215581550740140
+  cacheTime: 639220455578392848
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
@@ -353,6 +411,14 @@ MonoBehaviour:
     index: 20
   - key: event:/Scenes/Hom/Cleaning/Crate_2
     index: 21
+  - key: event:/Scenes/Hom/MusicBox/Music2
+    index: 22
+  - key: event:/Scenes/Hom/MusicBox/Music1
+    index: 23
+  - key: event:/Scenes/Hom/MusicBox/Music3
+    index: 24
+  - key: event:/Scenes/Hom/MusicBox/Interactive Music
+    index: 25
 --- !u!114 &52534761935187065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +527,30 @@ MonoBehaviour:
   MinDistance: 2.5
   MaxDistance: 20
   Length: 2500
+--- !u!114 &3471908741439231644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Interactive Music/TrackIndex
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: TrackIndex
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3886461460
+    data2: 2608001279
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &3549540970612164342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,10 +674,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639215581550740140
+  lastModified: 639220455578392848
   FileSizes:
   - Name: Desktop
-    Value: 1756
+    Value: 1990
   Exists: 1
 --- !u!114 &6713093496099956156
 MonoBehaviour:
@@ -724,3 +814,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1500
+--- !u!114 &8597994373032338506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/Hom/MusicBox/Music3
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/Hom/MusicBox/Music3
+  Guid:
+    Data1: 1811729224
+    Data2: 1310354623
+    Data3: 1845049236
+    Data4: 1650093618
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13714
+--- !u!114 &8929571478374914542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/Hom/MusicBox/Interactive Music
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/Hom/MusicBox/Interactive Music
+  Guid:
+    Data1: -1513061606
+    Data2: 1273055062
+    Data3: 184253339
+    Data4: -1528368415
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 3471908741439231644}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 45714

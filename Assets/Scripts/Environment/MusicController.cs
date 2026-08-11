@@ -57,6 +57,7 @@ namespace Core
             if (!currentMusicInstance.isValid())
             {
                 currentMusicInstance = RuntimeManager.CreateInstance(musicEventParameterDriven);
+                RuntimeManager.AttachInstanceToGameObject(currentMusicInstance, transform);
                 currentMusicInstance.start();
                 currentMusicInstance.release();
             }
@@ -78,6 +79,7 @@ namespace Core
 
             // Запускаем новый отдельный ивент
             currentMusicInstance = RuntimeManager.CreateInstance(musicTracks[index]);
+            //RuntimeManager.AttachInstanceToGameObject(currentMusicInstance, transform);
             currentMusicInstance.start();
             currentMusicInstance.release();
         }

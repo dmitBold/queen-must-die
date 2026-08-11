@@ -350147,6 +350147,80 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &1867262500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1867262502}
+  - component: {fileID: 1867262501}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1867262501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867262500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e55d0c2c39004d409812f3b60f78809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core.MusicController
+  useParameterApproach: 1
+  musicEventParameterDriven:
+    Guid:
+      Data1: -1513061606
+      Data2: 1273055062
+      Data3: 184253339
+      Data4: -1528368415
+    Path: event:/Scenes/Hom/MusicBox/Interactive Music
+  trackParameterName: TrackIndex
+  musicTracks:
+  - Guid:
+      Data1: 171726138
+      Data2: 1255712134
+      Data3: -829983043
+      Data4: 1848696194
+    Path: event:/Scenes/Hom/MusicBox/Music1
+  - Guid:
+      Data1: 1179541019
+      Data2: 1304639090
+      Data3: 880673961
+      Data4: 784783750
+    Path: event:/Scenes/Hom/MusicBox/Music2
+  - Guid:
+      Data1: 1811729224
+      Data2: 1310354623
+      Data3: 1845049236
+      Data4: 1650093618
+    Path: event:/Scenes/Hom/MusicBox/Music3
+  playOnStart: 1
+  startIndex: 0
+--- !u!4 &1867262502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867262500}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -70.878, y: 1.153, z: -62.406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1868733365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -447732,6 +447806,7 @@ SceneRoots:
   - {fileID: 1438714456}
   - {fileID: 1017896077}
   - {fileID: 2095540549}
+  - {fileID: 1867262502}
   - {fileID: 1034428713}
   - {fileID: 54125005}
   - {fileID: 1432080778}
