@@ -91,6 +91,21 @@ namespace NightCycle
             Debug.Log("[PlayerStateBridge] Игрок подготовлен к смерти");
         }
 
+        public void SetupToCutscene()
+        {
+            FreezePlayer();
+            DisableInventoryUI();
+            DisableHUD();
+            DiasableHUDtext();
+        }
+
+        public void SetupFromCutscene()
+        {
+            UnfreezePlayer();
+            EnableInventoryUI();
+            EnableHUD();
+        }
+
         /*public void MovePlayer(Transform point)
         {
             Debug.Log("MOVE");
