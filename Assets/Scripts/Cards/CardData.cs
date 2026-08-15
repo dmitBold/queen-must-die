@@ -35,6 +35,7 @@ namespace Cards
 
         //test
         public ItemData rewardItem;
+        public Quest quest;
         public DayNoteData rewardNote;
         public int rewardAmount = 1;
     }

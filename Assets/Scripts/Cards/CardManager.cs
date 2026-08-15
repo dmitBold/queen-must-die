@@ -22,11 +22,13 @@ namespace Cards
 
         //test
         private InventoryManager inventory;
+        private QuestManager questManager;
         [SerializeField] private DayNoteManager noteInventory;
 
         [Inject]
-        public void Constructor(InventoryManager inventoryManager)
+        public void Constructor(InventoryManager inventoryManager, QuestManager _questManager)
         {
+            this.questManager = _questManager;
             this.inventory = inventoryManager;
         }
         public System.Action OnAnyChoiceResolved;
@@ -112,6 +114,11 @@ namespace Cards
             if (choice.rewardItem != null)
             {
                 inventory.AddItem(choice.rewardItem, choice.rewardAmount);
+            }
+
+            if (choice.quest != null)
+            {
+                questManager.AddQuest(choice.quest);
             }
 
             if (choice.rewardNote != null)

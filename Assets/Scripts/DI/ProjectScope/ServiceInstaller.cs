@@ -14,6 +14,7 @@ namespace DI
         {
             Container.BindInstance(audioService).AsSingle();
             Container.Bind<InventoryManager>().AsSingle();
+            Container.Bind<QuestManager>().AsSingle();
             Container
                 .Bind<ScenesManager>()
                 .AsSingle()
