@@ -1,10 +1,5 @@
-using Inventory;
-using System.Collections;
 using TMPro;
-using UI;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class QuestSlot : MonoBehaviour
 {
@@ -12,16 +7,16 @@ public class QuestSlot : MonoBehaviour
     [SerializeField] TextMeshProUGUI Description;
 
     private QuestUI questUI;
+    private QuestProgress questProgress;
 
-    Quest quest;
-
-    public void Set(Quest _quest, QuestUI _questUI)
+    public void Set(QuestProgress _questProgress, QuestUI _questUI)
     {
         questUI = _questUI;
-        quest = _quest;
+        questProgress = _questProgress;
 
-        Name.text = _quest.name;
-        Description.text = quest.currentStage.StageDescription;
+        Name.text = questProgress.Quest.QuestName;
+
+        var currentStage = questProgress.GetCurrentStage();
+        Description.text = currentStage != null ? currentStage.StageDescription : " вест выполнен";
     }
-
 }

@@ -88,13 +88,12 @@ public class QuestUI : MonoBehaviour
             Destroy(slotsParent.GetChild(i).gameObject);
         }
 
-        var quests = questManager.GetQuests();
+        var activeQuests = questManager.GetActiveQuests();
 
-        foreach (var quest in quests)
+        foreach (var questProgress in activeQuests)
         {
             QuestSlot slot = Instantiate(slotPrefab, slotsParent);
-
-            slot.Set(quest, this);
+            slot.Set(questProgress, this);
         }
     }
 }
