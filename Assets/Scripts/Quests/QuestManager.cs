@@ -29,6 +29,8 @@ public class QuestManager
 {
     public event Action OnQuestPoolChanged;
 
+    public event Action<Quest> OnQuestAdded;
+
     // C#-события для архитектурной отвязки от сцены
     public event Action<Quest, int> OnQuestStageFinished;
     public event Action<Quest> OnQuestFinished;
@@ -46,6 +48,7 @@ public class QuestManager
         {
             activeQuests.Add(new QuestProgress(quest));
             OnQuestPoolChanged?.Invoke();
+            OnQuestAdded?.Invoke(quest);
         }
     }
 
@@ -69,7 +72,7 @@ public class QuestManager
         return activeQuests.Find(q => q.Quest == quest);
     }
 
-    // Главный метод для продвижения по квесту (вызывай его из триггеров/диалогов)
+    // Главный метод для продвижения по квесту
     public void AdvanceQuest(Quest quest)
     {
         var progress = GetQuestProgress(quest);

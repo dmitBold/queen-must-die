@@ -1,11 +1,15 @@
+using Core;
 using Inventory;
 using NightCycle;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UI;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using static Inventory.InventoryUI;
 
 public class QuestUI : MonoBehaviour
 {
@@ -14,6 +18,9 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private Transform slotsParent;
     [SerializeField] private QuestSlot slotPrefab;
     [SerializeField] private Canvas rootCanvas;
+
+
+    private Coroutine typingCoroutine;
 
     [Header("State")] public bool isOpen = false;
 
@@ -29,7 +36,9 @@ public class QuestUI : MonoBehaviour
     private void OnDestroy()
     {
         if (questManager != null)
+        {
             questManager.OnQuestPoolChanged -= Refresh;
+        }
     }
 
     public void DisableRootCanvas()
@@ -96,4 +105,5 @@ public class QuestUI : MonoBehaviour
             slot.Set(questProgress, this);
         }
     }
+
 }
