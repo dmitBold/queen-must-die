@@ -1,6 +1,7 @@
-using UnityEngine;
-using Zenject;
 using Inventory;
+using UnityEngine;
+using UnityEngine.Rendering;
+using Zenject;
 
 namespace NightCycle
 {
@@ -10,6 +11,7 @@ namespace NightCycle
         [SerializeField] InventoryUI inventoryUI;
         [SerializeField] HUDController hUDController;
         [SerializeField] QuestUI questUI;
+        [SerializeField] SettingsMenu settingsMenu;
 
         public override void InstallBindings()
         {
@@ -17,6 +19,8 @@ namespace NightCycle
             Container.Bind<InventoryUI>().FromComponentInNewPrefab(inventoryUI).AsSingle().NonLazy();
             Container.Bind<HUDController>().FromComponentInNewPrefab(hUDController).AsSingle().NonLazy();
             Container.Bind<QuestUI>().FromComponentInNewPrefab(questUI).AsSingle().NonLazy();
+            //Container.Bind<Volume>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<SettingsMenu>().FromComponentInNewPrefab(settingsMenu).AsSingle().NonLazy();
         }
     }
 }

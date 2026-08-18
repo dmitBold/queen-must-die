@@ -1,7 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
+using Zenject;
 
 public class BrightnessSettings : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BrightnessSettings : MonoBehaviour
 
     [Header("Post Processing")]
     public Volume globalVolume;
+    //[Inject]
+    //private Volume globalVolume;
 
     private ColorAdjustments colorAdjustments;
     private const string BrightnessKey = "GameExposure"; // Ключ для сохранения
