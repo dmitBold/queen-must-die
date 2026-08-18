@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 using Core;
+using FMOD;
 
 namespace NightCycle
 {
@@ -31,6 +32,7 @@ namespace NightCycle
         [Inject]
         public void Constructor(AudioService audioService)
         {
+           
             _audioService = audioService;
         }
 
@@ -55,16 +57,17 @@ namespace NightCycle
 
         public void Interact()
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Scenes/Hom/Curtains", transform.position);
             onInteraction.Invoke();
         }
 
         public void InteractStartHOLD()
-        {
+        {          
             startHOLD.Invoke();
         }
 
         public void InteractResestHOLD()
-        {
+        { 
             resetHOLD.Invoke();
         }
 
