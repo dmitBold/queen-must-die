@@ -247,6 +247,9 @@ namespace NightCycle
 
         private void HandleRotation()
         {
+            if (Time.timeScale == 0f)
+                return;
+
             Vector2 rotationInput = playerInputHandler.RotationInput;
             float mouseXRotation = rotationInput.x * mouseSensitivity;
             float mouseYRotation = rotationInput.y * mouseSensitivity;
@@ -254,5 +257,24 @@ namespace NightCycle
             ApplyHorizontalRotation(mouseXRotation);
             ApplyVerticalRotation(mouseYRotation);
         }
+
+        //test
+        private void OnEnable()
+        {
+            SettingsMenu.OnSensitivityChanged += UpdateSensitivity;
+
+            mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1f);
+        }
+
+        private void OnDisable()
+        {
+            SettingsMenu.OnSensitivityChanged -= UpdateSensitivity;
+        }
+
+        private void UpdateSensitivity(float newSensitivity)
+        {
+            mouseSensitivity = newSensitivity;
+        }
+        //test
     }
 }

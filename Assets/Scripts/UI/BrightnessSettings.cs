@@ -12,6 +12,10 @@ public class BrightnessSettings : MonoBehaviour
 
     [Header("Post Processing")]
     public Volume globalVolume;
+
+    [Header("Canvas Settings")]
+    public Canvas brightnessCanvas;
+    public Camera BrightnessCamera;
     //[Inject]
     //private Volume globalVolume;
 
@@ -22,6 +26,9 @@ public class BrightnessSettings : MonoBehaviour
 
     void Start()
     {
+        //Debug.Log("SET_CAMERA");
+        brightnessCanvas.worldCamera = BrightnessCamera;
+
         // ѕытаемс€ получить доступ к Color Adjustments внутри профил€
         if (globalVolume.profile.TryGet(out colorAdjustments))
         {
