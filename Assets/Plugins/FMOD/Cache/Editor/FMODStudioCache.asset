@@ -48,7 +48,7 @@ MonoBehaviour:
     data1: 3886461460
     data2: 2608001279
   Type: 0
-  IsGlobal: 0
+  IsGlobal: 1
   Labels: []
   Exists: 1
 --- !u!114 &-8294556767446969489
@@ -256,10 +256,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639230262265496991
+  lastModified: 639230308757125179
   FileSizes:
   - Name: Desktop
-    Value: 6756448
+    Value: 6758016
   Exists: 1
 --- !u!114 &-4029956871787623766
 MonoBehaviour:
@@ -469,13 +469,14 @@ MonoBehaviour:
   - {fileID: -7329575337743277253}
   - {fileID: 4220321109266987824}
   - {fileID: -3370766970595164140}
-  EditorParameters: []
+  EditorParameters:
+  - {fileID: 4742735435840111238}
   MasterBanks:
   - {fileID: -4548252348506558157}
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639230262265507006
+  cacheTime: 639230308757145318
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
@@ -666,7 +667,7 @@ MonoBehaviour:
     data1: 3886461460
     data2: 2608001279
   Type: 0
-  IsGlobal: 0
+  IsGlobal: 1
   Labels: []
   Exists: 1
 --- !u!114 &3549540970612164342
@@ -717,7 +718,7 @@ MonoBehaviour:
     data1: 3886461460
     data2: 2608001279
   Type: 0
-  IsGlobal: 0
+  IsGlobal: 1
   Labels: []
   Exists: 1
 --- !u!114 &4220321109266987824
@@ -775,6 +776,30 @@ MonoBehaviour:
   MinDistance: 6.2000003
   MaxDistance: 76
   Length: 1375
+--- !u!114 &4742735435840111238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TrackIndex
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: TrackIndex
+  StudioPath: parameter:/TrackIndex
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3886461460
+    data2: 2608001279
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &4951401739023756142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,7 +869,7 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639230262265507006
+  lastModified: 639230308757145318
   FileSizes:
   - Name: Desktop
     Value: 2166

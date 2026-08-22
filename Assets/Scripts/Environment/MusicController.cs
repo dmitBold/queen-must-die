@@ -59,17 +59,14 @@ namespace Core
             if (!currentMusicInstance.isValid())
             {
                 currentMusicInstance = RuntimeManager.CreateInstance(musicEventParameterDriven);
-                currentAmbienceInstance = RuntimeManager.CreateInstance(AmbienceEventParameterDriven);
                 RuntimeManager.AttachInstanceToGameObject(currentMusicInstance, transform);
                 currentMusicInstance.start();
-                currentAmbienceInstance.start();
                 currentMusicInstance.release();
-                currentAmbienceInstance.release();
             }
 
             // переключение через параметр
-            currentMusicInstance.setParameterByName(trackParameterName, index);
-            currentAmbienceInstance.setParameterByName(trackParameterName, index);
+            //  currentMusicInstance.setParameterByName(trackParameterName, index);
+            RuntimeManager.StudioSystem.setParameterByName(trackParameterName, index);
         }
 
         private void PlayTrackViaSeparateEvents(int index)
