@@ -11,6 +11,7 @@ namespace Core
 
         [Header("Управление через параметр")]
         [SerializeField] private EventReference musicEventParameterDriven;
+        [SerializeField] private EventReference AmbienceEventParameterDriven;
         [SerializeField] private string trackParameterName = "TrackIndex";
 
         [Header("Способ 2: Отдельные ивенты")]
@@ -24,6 +25,7 @@ namespace Core
         //[SerializeField] private AudioService audioService;
 
         private EventInstance currentMusicInstance;
+        private EventInstance currentAmbienceInstance;
         private int currentTrackIndex = -1;
 
         private void Start()
@@ -57,13 +59,17 @@ namespace Core
             if (!currentMusicInstance.isValid())
             {
                 currentMusicInstance = RuntimeManager.CreateInstance(musicEventParameterDriven);
+                currentAmbienceInstance = RuntimeManager.CreateInstance(AmbienceEventParameterDriven);
                 RuntimeManager.AttachInstanceToGameObject(currentMusicInstance, transform);
                 currentMusicInstance.start();
+                currentAmbienceInstance.start();
                 currentMusicInstance.release();
+                currentAmbienceInstance.release();
             }
 
             // переключение через параметр
             currentMusicInstance.setParameterByName(trackParameterName, index);
+            currentAmbienceInstance.setParameterByName(trackParameterName, index);
         }
 
         private void PlayTrackViaSeparateEvents(int index)
@@ -78,10 +84,10 @@ namespace Core
             StopMusic(true);
 
             // Запускаем новый отдельный ивент
-            currentMusicInstance = RuntimeManager.CreateInstance(musicTracks[index]);
+            //currentMusicInstance = RuntimeManager.CreateInstance(musicTracks[index]);           
             //RuntimeManager.AttachInstanceToGameObject(currentMusicInstance, transform);
-            currentMusicInstance.start();
-            currentMusicInstance.release();
+           // currentMusicInstance.start();
+           // currentMusicInstance.release();          
         }
 
         public void StopMusic(bool fadeOut = true)
@@ -90,6 +96,8 @@ namespace Core
             {
                 currentMusicInstance.stop(fadeOut ? FMOD.Studio.STOP_MODE.ALLOWFADEOUT : FMOD.Studio.STOP_MODE.IMMEDIATE);
                 currentMusicInstance.clearHandle();
+                currentAmbienceInstance.stop(fadeOut ? FMOD.Studio.STOP_MODE.ALLOWFADEOUT : FMOD.Studio.STOP_MODE.IMMEDIATE);
+                currentAmbienceInstance.clearHandle();
             }
             currentTrackIndex = -1;
         }

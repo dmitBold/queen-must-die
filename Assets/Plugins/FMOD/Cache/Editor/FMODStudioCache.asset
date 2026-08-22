@@ -27,6 +27,30 @@ MonoBehaviour:
   MinDistance: 2.5
   MaxDistance: 20
   Length: 2125
+--- !u!114 &-8867648050713240379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Battle3d/TrackIndex
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: TrackIndex
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3886461460
+    data2: 2608001279
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-8294556767446969489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +159,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 131520
+--- !u!114 &-7329575337743277253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/Hom/Battle3d
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/Hom/Battle3d
+  Guid:
+    Data1: -473115414
+    Data2: 1312815974
+    Data3: 374641046
+    Data4: -1952902968
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8867648050713240379}
+  MinDistance: 1.4
+  MaxDistance: 2.6000001
+  Length: 34000
 --- !u!114 &-5912873670466735343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,10 +256,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639227715516052585
+  lastModified: 639230074596307579
   FileSizes:
   - Name: Desktop
-    Value: 5529344
+    Value: 6756448
   Exists: 1
 --- !u!114 &-4029956871787623766
 MonoBehaviour:
@@ -290,6 +342,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 375
+--- !u!114 &-3370766970595164140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Empty
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Empty
+  Guid:
+    Data1: 1544486034
+    Data2: 1250690231
+    Data3: -1321271642
+    Data4: 1980093303
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1766781598508079082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,13 +466,16 @@ MonoBehaviour:
   - {fileID: 8597994373032338506}
   - {fileID: 8929571478374914542}
   - {fileID: -8154616501568414239}
+  - {fileID: -7329575337743277253}
+  - {fileID: 4220321109266987824}
+  - {fileID: -3370766970595164140}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4548252348506558157}
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639227715516062439
+  cacheTime: 639230074596322742
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
@@ -449,6 +531,12 @@ MonoBehaviour:
     index: 25
   - key: event:/Scenes/Hom/Curtains
     index: 26
+  - key: event:/Scenes/Hom/Battle3d
+    index: 27
+  - key: event:/Scenes/Hom/Ambience
+    index: 28
+  - key: event:/Empty
+    index: 29
 --- !u!114 &52534761935187065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,6 +696,58 @@ MonoBehaviour:
   MinDistance: 9.25
   MaxDistance: 400
   Length: 1687
+--- !u!114 &4004855962291371639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ambience/TrackIndex
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: TrackIndex
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 3886461460
+    data2: 2608001279
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &4220321109266987824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/Hom/Ambience
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/Hom/Ambience
+  Guid:
+    Data1: -1066592001
+    Data2: 1310768084
+    Data3: -1237955907
+    Data4: -1563275099
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4004855962291371639}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 34000
 --- !u!114 &4344672008431369007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,10 +844,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639227715516062439
+  lastModified: 639230074596322742
   FileSizes:
   - Name: Desktop
-    Value: 2040
+    Value: 2166
   Exists: 1
 --- !u!114 &6713093496099956156
 MonoBehaviour:
@@ -896,6 +1036,6 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: 3471908741439231644}
-  MinDistance: 1
+  MinDistance: 4.4
   MaxDistance: 35
-  Length: 49097
+  Length: 48870
