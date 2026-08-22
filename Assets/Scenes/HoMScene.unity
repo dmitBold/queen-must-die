@@ -19022,28 +19022,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 862771611}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e55d0c2c39004d409812f3b60f78809, type: 3}
+  m_Script: {fileID: 11500000, guid: f40a7a7902fb69d409f923e93fa985f3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Core.MusicController
-  useParameterApproach: 1
-  musicEventParameterDriven:
+  m_EditorClassIdentifier: Assembly-CSharp::FMODEventRef
+  FmodEvent:
     Guid:
       Data1: -473115414
       Data2: 1312815974
       Data3: 374641046
       Data4: -1952902968
     Path: event:/Scenes/Hom/Battle3d
-  AmbienceEventParameterDriven:
-    Guid:
-      Data1: 1544486034
-      Data2: 1250690231
-      Data3: -1321271642
-      Data4: 1980093303
-    Path: event:/Empty
-  trackParameterName: TrackIndex
-  musicTracks: []
-  playOnStart: 1
-  startIndex: 0
 --- !u!1 &864604426
 GameObject:
   m_ObjectHideFlags: 0
@@ -30854,6 +30842,57 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8084703d30cc2204d910a3ffb54cf246, type: 3}
+--- !u!1 &1087675952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1087675953}
+  - component: {fileID: 1087675954}
+  m_Layer: 0
+  m_Name: Ambience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1087675953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087675952}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1779161252}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1087675954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087675952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40a7a7902fb69d409f923e93fa985f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FMODEventRef
+  FmodEvent:
+    Guid:
+      Data1: -1066592001
+      Data2: 1310768084
+      Data3: -1237955907
+      Data4: -1563275099
+    Path: event:/Scenes/Hom/Ambience
 --- !u!1 &1087691455
 GameObject:
   m_ObjectHideFlags: 0
@@ -43038,28 +43077,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1631907352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e55d0c2c39004d409812f3b60f78809, type: 3}
+  m_Script: {fileID: 11500000, guid: f40a7a7902fb69d409f923e93fa985f3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Core.MusicController
-  useParameterApproach: 1
-  musicEventParameterDriven:
+  m_EditorClassIdentifier: Assembly-CSharp::FMODEventRef
+  FmodEvent:
     Guid:
       Data1: -473115414
       Data2: 1312815974
       Data3: 374641046
       Data4: -1952902968
     Path: event:/Scenes/Hom/Battle3d
-  AmbienceEventParameterDriven:
-    Guid:
-      Data1: 1544486034
-      Data2: 1250690231
-      Data3: -1321271642
-      Data4: 1980093303
-    Path: event:/Empty
-  trackParameterName: TrackIndex
-  musicTracks: []
-  playOnStart: 1
-  startIndex: 0
 --- !u!4 &1632993372 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 428842, guid: 037edc94c4d25ab49a143371268aee98, type: 3}
@@ -352835,6 +352862,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1134467796}
+  - {fileID: 1087675953}
+  - {fileID: 1867262502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1780061266
@@ -354663,11 +354692,11 @@ MonoBehaviour:
     Path: event:/Scenes/Hom/MusicBox/Interactive Music
   AmbienceEventParameterDriven:
     Guid:
-      Data1: -1066592001
-      Data2: 1310768084
-      Data3: -1237955907
-      Data4: -1563275099
-    Path: event:/Scenes/Hom/Ambience
+      Data1: 1544486034
+      Data2: 1250690231
+      Data3: -1321271642
+      Data4: 1980093303
+    Path: event:/Empty
   trackParameterName: TrackIndex
   musicTracks: []
   playOnStart: 1
@@ -354681,11 +354710,11 @@ Transform:
   m_GameObject: {fileID: 1867262500}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -70.878, y: 1.153, z: -62.406}
+  m_LocalPosition: {x: -54.837997, y: -8.017, z: 43.522003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1779161252}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1868733365
 PrefabInstance:
@@ -358760,28 +358789,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2003077724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e55d0c2c39004d409812f3b60f78809, type: 3}
+  m_Script: {fileID: 11500000, guid: f40a7a7902fb69d409f923e93fa985f3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Core.MusicController
-  useParameterApproach: 1
-  musicEventParameterDriven:
+  m_EditorClassIdentifier: Assembly-CSharp::FMODEventRef
+  FmodEvent:
     Guid:
       Data1: -473115414
       Data2: 1312815974
       Data3: 374641046
       Data4: -1952902968
     Path: event:/Scenes/Hom/Battle3d
-  AmbienceEventParameterDriven:
-    Guid:
-      Data1: 1544486034
-      Data2: 1250690231
-      Data3: -1321271642
-      Data4: 1980093303
-    Path: event:/Empty
-  trackParameterName: TrackIndex
-  musicTracks: []
-  playOnStart: 1
-  startIndex: 0
 --- !u!1 &2017387708
 GameObject:
   m_ObjectHideFlags: 0
@@ -454841,7 +454858,6 @@ SceneRoots:
   - {fileID: 1438714456}
   - {fileID: 1017896077}
   - {fileID: 2095540549}
-  - {fileID: 1867262502}
   - {fileID: 1034428713}
   - {fileID: 54125005}
   - {fileID: 1432080778}
