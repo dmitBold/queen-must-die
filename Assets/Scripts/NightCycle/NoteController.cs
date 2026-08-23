@@ -14,6 +14,8 @@ namespace NightCycle
         [SerializeField] PlayerInteraction playerInteraction;
         private PlayerStateController playerStateController;
 
+        private NoteInteractable current_note = null;
+
         [Inject]
         private void Construct(PlayerStateController playerStateController, PlayerInteraction playerInteraction)
         {
@@ -34,6 +36,8 @@ namespace NightCycle
 
         public void ShowNote(NoteInteractable note)
         {
+            current_note = note;
+
             if (isActive) return;
 
             isActive = true;
@@ -48,6 +52,11 @@ namespace NightCycle
 
         public void CloseNote()
         {
+            if (current_note != null)
+            {
+                current_note.TriggerNoteEvent();
+            }
+
             if (!isActive) return;
 
             isActive = false;

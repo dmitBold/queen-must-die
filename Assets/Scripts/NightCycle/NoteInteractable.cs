@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace NightCycle
 {
@@ -9,6 +10,9 @@ namespace NightCycle
         [TextArea(5, 20)]
         public string[] noteText;
 
+        private bool trigger_once = true;
+        public UnityEvent noteEvent;
+
         public void OnEnterFocus()
         {
             NoteController.Instance.ShowNote(this);
@@ -17,6 +21,17 @@ namespace NightCycle
         public void OnExitFocus()
         {
             NoteController.Instance.CloseNote();
+            TriggerNoteEvent();
         }
+
+        public void TriggerNoteEvent()
+        {
+            if (trigger_once)
+            {
+                noteEvent?.Invoke();
+                trigger_once = false;
+            }
+        }
+
     }
 }

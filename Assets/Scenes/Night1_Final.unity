@@ -15941,7 +15941,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.14999999
+  m_VoxelSize: 0.08
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 17cc47feeacf8654d832453f3f039596, type: 2}
   m_BuildHeightMesh: 0
@@ -20696,7 +20696,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.14999999
+  m_VoxelSize: 0.08
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: c8eb23aecf9553c499dcacb54d241c7c, type: 2}
   m_BuildHeightMesh: 0
@@ -29250,6 +29250,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6125333377670305317, guid: b6c5138fc1e189d43b932aa1ca16445c, type: 3}
   m_PrefabInstance: {fileID: 370830134}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &384955084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 384955085}
+  m_Layer: 0
+  m_Name: Quests
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &384955085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384955084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 718024531}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &385433881
 GameObject:
   m_ObjectHideFlags: 0
@@ -46418,6 +46450,50 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 2.46, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &718024530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 718024531}
+  - component: {fileID: 718024532}
+  m_Layer: 0
+  m_Name: QuestBridge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &718024531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718024530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 384955085}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &718024532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718024530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d94fc14992c8673488ab9300b0d43f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestEventBridge
 --- !u!4 &719380863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1032815221, guid: abc00000000016180720385396287627, type: 3}
@@ -131585,6 +131661,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 718024532}
+        m_TargetAssemblyTypeName: QuestEventBridge, Assembly-CSharp
+        m_MethodName: AdvanceQuest
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 48b5bb3f2d84a5044b109e06524c132c, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Quest, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   triggerEventOnlyOnce: 1
   _playerStateController: {fileID: 0}
 --- !u!114 &1792745762
@@ -137571,12 +137659,17 @@ MonoBehaviour:
   FirstDelay: 3
   candleSound: {fileID: 8300000, guid: c8ad8c6810a05f24e967d7e0721c2575, type: 3}
   TinderSound: {fileID: 8300000, guid: d9df1de16f283e94b996ef63f16cf152, type: 3}
+  _events: []
   KnockSound: {fileID: 8300000, guid: f5a9b2bd410c113428cccc25ad4ee178, type: 3}
   door: {fileID: 0}
   Reznya: {fileID: 8300000, guid: 81713f53ae227ba48b89bd64db9e6b2c, type: 3}
   ON_Cleanup_Completed:
     m_PersistentCalls:
       m_Calls: []
+  turnOFF_time: 0
+  turnON_time: 0
+  AllLight: []
+  musicController: {fileID: 0}
 --- !u!4 &1938796851
 Transform:
   m_ObjectHideFlags: 0
@@ -143606,3 +143699,4 @@ SceneRoots:
   - {fileID: 1349523412}
   - {fileID: 849633202}
   - {fileID: 1660628950}
+  - {fileID: 384955085}
