@@ -1,6 +1,8 @@
-using System.Collections.Generic;
 using Core;
+using Inventory;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Cards
 {
@@ -8,10 +10,16 @@ namespace Cards
     {
 
         public List<CardData> AllCards;
-        public WorldState worldState;
+        private WorldState worldState;
 
         public Dictionary<CardData, int> last_seen;
         public int currentTurn = 0;
+
+        [Inject]
+        public void Constructor(WorldState state)
+        {
+            this.worldState = state;
+        }
 
         bool CheckCard(CardData card)
         {

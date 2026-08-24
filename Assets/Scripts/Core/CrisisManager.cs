@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using Cards;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Core
 {
@@ -8,6 +9,12 @@ namespace Core
     {
         [SerializeField] DeckManager deck;
         [SerializeField] WorldState world;
+
+        [Inject]
+        public void Constructor(WorldState state)
+        {
+            this.world = state;
+        }
 
         HashSet<WorldState.Stats> triggered = new();
 

@@ -1,3 +1,4 @@
+using Core;
 using Inventory;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -12,6 +13,7 @@ namespace NightCycle
         [SerializeField] HUDController hUDController;
         [SerializeField] QuestUI questUI;
         [SerializeField] SettingsMenu settingsMenu;
+        [SerializeField] WorldState state;
 
         public override void InstallBindings()
         {
@@ -21,6 +23,7 @@ namespace NightCycle
             Container.Bind<QuestUI>().FromComponentInNewPrefab(questUI).AsSingle().NonLazy();
             //Container.Bind<Volume>().FromComponentInHierarchy().AsSingle();
             Container.Bind<SettingsMenu>().FromComponentInNewPrefab(settingsMenu).AsSingle().NonLazy();
+            Container.Bind<WorldState>().FromComponentInNewPrefab(state).AsSingle().NonLazy();
         }
     }
 }

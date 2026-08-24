@@ -6,6 +6,7 @@ using NightCycle;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
+using Zenject;
 
 namespace Core
 {
@@ -18,9 +19,16 @@ namespace Core
 
         public UnityEvent onPagesEnded;
 
-        public WorldState worldState;
+        private WorldState worldState;
         public ChoiceUI choiceUI;
         public CardManager cardManager;
+
+        [Inject]
+        public void Constructor(WorldState state)
+        {
+            this.worldState = state;
+        }
+
         enum PageState
         {
             Idle,

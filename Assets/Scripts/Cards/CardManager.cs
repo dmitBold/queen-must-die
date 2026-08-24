@@ -10,7 +10,7 @@ namespace Cards
 {
     public class CardManager : MonoBehaviour
     {
-        public WorldState worldState;
+        //private WorldState worldState;
         private CardData currData;
         //private bool wait_for_choice;
         //test
@@ -25,11 +25,18 @@ namespace Cards
         private QuestManager questManager;
         [SerializeField] private DayNoteManager noteInventory;
 
+        [SerializeField] private WorldState worldStateManual;   // ручное назначение
+        [InjectOptional] private WorldState worldStateInjected; // инжект из контекста
+
+        private WorldState worldState =>
+            worldStateManual != null ? worldStateManual : worldStateInjected;
+
         [Inject]
-        public void Constructor(InventoryManager inventoryManager, QuestManager _questManager)
+        public void Constructor(InventoryManager inventoryManager, QuestManager _questManager/*, WorldState state*/)
         {
             this.questManager = _questManager;
             this.inventory = inventoryManager;
+            //this.worldState = state;
         }
         public System.Action OnAnyChoiceResolved;
 

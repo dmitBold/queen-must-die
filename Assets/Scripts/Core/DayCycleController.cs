@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Visitors;
+using Zenject;
 using static Cards.CardManager;
 
 namespace Core
@@ -14,7 +15,7 @@ namespace Core
     public class DayCycleController : MonoBehaviour
     {
 
-        public WorldState worldState;
+        private WorldState worldState;
         public CardManager cardManager;
         public DeckManager deckManager;
         public VisitorController visitor;
@@ -28,6 +29,12 @@ namespace Core
         public WarningManager warningManager;
         public UnityEvent onDayEnded;
         //test
+
+        [Inject]
+        public void Constructor(WorldState state)
+        {
+            this.worldState = state;
+        }
 
         //test
         private HashSet<int> resolvedIntermediatePages = new HashSet<int>();

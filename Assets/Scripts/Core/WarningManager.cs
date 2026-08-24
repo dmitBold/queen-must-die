@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using Cards;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Core
 {
@@ -8,7 +9,13 @@ namespace Core
     {
         [Header("Config")]
         public WarningConfig config;
-        public WorldState worldState;
+        private WorldState worldState;
+
+        [Inject]
+        public void Constructor(WorldState state)
+        {
+            this.worldState = state;
+        }
 
         // ������� ����
         private Queue<CardData> warningQueue = new Queue<CardData>();

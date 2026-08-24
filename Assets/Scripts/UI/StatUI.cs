@@ -1,6 +1,7 @@
 using Core;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace UI
 {
@@ -11,7 +12,12 @@ namespace UI
         //[SerializeField] Image icon;
 
         [SerializeField] StatVisualData visualData;
-        [SerializeField] WorldState worldState;
+
+        [SerializeField] private WorldState worldStateManual;   // ручное назначение
+        [InjectOptional] private WorldState worldStateInjected; // инжект из контекста
+
+        private WorldState worldState =>
+            worldStateManual != null ? worldStateManual : worldStateInjected;
 
         [SerializeField] float smoothSpeed = 5f;
 
