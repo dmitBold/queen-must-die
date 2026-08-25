@@ -1,5 +1,8 @@
+using Core;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace NightCycle.Puzzles
 {
@@ -9,6 +12,14 @@ namespace NightCycle.Puzzles
         public string puzzleId;
         public bool isSolved;
         public UnityEvent onPuzzleSolved;
+        public EventReference PuzzleCompletedEvent;
+        private AudioService _audioService;
+
+        [Inject]
+        public void Constructor(AudioService audioService)
+        {
+            _audioService = audioService;
+        }
 
         protected virtual void Awake()
         {
@@ -20,6 +31,7 @@ namespace NightCycle.Puzzles
 
         public virtual void SolvePuzzle()
         {
+            _audioService.PlayFMODEvent(PuzzleCompletedEvent, gameObject.transform.position);
             if (isSolved) return;
             isSolved = true;
             onPuzzleSolved?.Invoke();
