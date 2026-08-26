@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using Zenject;
 using Core;
 using FMOD;
+using FMODUnity;
 
 namespace NightCycle
 {
@@ -21,10 +22,11 @@ namespace NightCycle
         public float holdDuration = 1.0f;
         //test
 
-        
+
         //TEST
         //public AudioClip interact_sound;
         //bool play_once = true;
+        public EventReference interact_sound;
         //TEST
 
         private AudioService _audioService;
@@ -57,7 +59,8 @@ namespace NightCycle
 
         public void Interact()
         {
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Scenes/Hom/Curtains", transform.position);
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/Scenes/Hom/Curtains", transform.position);
+            _audioService.PlayFMODEvent(interact_sound, transform.position);
             onInteraction.Invoke();
         }
 

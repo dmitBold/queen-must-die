@@ -57,6 +57,18 @@ namespace NightCycle
             {
                 ToggleInteraction();
             }
+            //ƒÀﬂ “≈—“Œ¬ - œŒ“ŒÃ ”¡–¿“‹ Œ“ Àﬁ◊≈Õ»≈ œ–»÷≈À¿!!!
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                if (HUDController.instance.CrosshairImage.isActiveAndEnabled)
+                {
+                    HUDController.instance.SetCrosshairActivity(false);
+                }
+                else
+                {
+                    HUDController.instance.SetCrosshairActivity(true);
+                }
+            }
         }
 
         private void TryInteract()
