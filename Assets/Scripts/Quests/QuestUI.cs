@@ -6,7 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UI;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
