@@ -21,8 +21,15 @@ namespace NightCycle
 
         public void TriggerLoad()
         {
-            _saveManager.LoadGame();
-            Debug.Log("[SaveLoadBridge] Вызвана загрузка последнего сейва.");
+            bool success = _saveManager.LoadGame();
+            if (success)
+            {
+                Debug.Log("[SaveLoadBridge] Вызвана загрузка последнего сейва.");
+            }
+            else
+            {
+                Debug.Log("[SaveLoadBridge] Ошибка загрузки (нет файла).");
+            }
         }
     }
 }

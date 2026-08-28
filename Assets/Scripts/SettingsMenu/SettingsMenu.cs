@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
@@ -12,6 +13,10 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private Canvas rootCanvas;
     public Camera BrightnessCamera;
+
+    [Header("Save/Load Buttons")]
+    [SerializeField] private Button _loadButton;
+    [SerializeField] private Button _saveButton;
 
     [SerializeField] private GameObject BrightnessRoot;
 
@@ -42,6 +47,28 @@ public class SettingsMenu : MonoBehaviour
     public void Construct(SaveManager saveManager)
     {
         _saveManager = saveManager;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        UnlockButtons();
+
+        // ≈сли при смене сцены меню паузы осталось открытым - закрываем его,
+        // чтобы сн€ть паузу (Time.timeScale = 1) и спр€тать UI.
+        if (isOpen)
+        {
+            Close();
+        }
     }
 
     private void Start()
@@ -189,7 +216,27 @@ public class SettingsMenu : MonoBehaviour
 
     public void LoadLastSave()
     {
+        LockButtons();
         _saveManager.LoadGame();
+    }
+
+    public void SaveOnExit()
+    {
+        LockButtons();
+        _saveManager.SaveGame();
+        QuitGame();
+    }
+
+    private void LockButtons()
+    {
+        if (_loadButton != null) _loadButton.interactable = false;
+        if (_saveButton != null) _saveButton.interactable = false;
+    }
+
+    private void UnlockButtons()
+    {
+        if (_loadButton != null) _loadButton.interactable = true;
+        if (_saveButton != null) _saveButton.interactable = true;
     }
 
     void PauseGame()

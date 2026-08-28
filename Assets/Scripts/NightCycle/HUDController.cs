@@ -15,6 +15,7 @@ namespace NightCycle
         private void Awake()
         {
             instance = this;
+            CrosshairImage.rectTransform.sizeDelta /= 2f;
             DefaultImage = CrosshairImage.sprite;
             SetDefaultImage();
             SetCrosshairActivity(false);

@@ -18,6 +18,8 @@ public class SaveManager : MonoBehaviour
     [Inject] private InventoryManager _inventoryManager;
     //[Inject] private PlayerFlashlight _flashlight;
 
+    private bool _isProcessing = false;
+
     [System.Serializable]
     public struct SaveData
     {
@@ -47,6 +49,24 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        // Подписываемся на событие завершения загрузки сцены
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // отписываемся, чтобы избежать утечек памяти
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Сцена загрузилась - снимаем блокировку логики
+        _isProcessing = false;
+    }
+
     private void Update()
     {
         if (Keyboard.current.numpad1Key.wasPressedThisFrame)
@@ -63,6 +83,9 @@ public class SaveManager : MonoBehaviour
 
     public void SaveGame()
     {
+        if (_isProcessing) return;
+        _isProcessing = true;
+
         SaveData data = new SaveData();
 
         //var player = _container.TryResolve<Player>();
@@ -101,17 +124,25 @@ public class SaveManager : MonoBehaviour
         data.triggeredWorldEvents = new List<string>(_saveSystem.SessionTriggeredEvents);
 
         _saveSystem.Save(data);
+
+        _isProcessing = false;
     }
 
-    public void LoadGame()
+    public bool LoadGame()
     {
+        if (_isProcessing) return false;
+        _isProcessing = true;
+
         if (_saveSystem.Load())
         {
             _scenesManager.LoadSingle(_saveSystem.CurrentData.currentSceneName);
+            return true;
         }
         else
         {
             Debug.LogWarning("Save file not found!");
+            _isProcessing = false;
+            return false;
         }
     }
 
