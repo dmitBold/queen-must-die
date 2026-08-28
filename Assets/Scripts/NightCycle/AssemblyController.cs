@@ -169,6 +169,9 @@ namespace NightCycle
             // Настраиваем режим в зависимости от типа объекта
             if (currentAssemblyView != null)
             {
+                // ЭТО ТЕСТ
+                inventoryUI.EnableRootCanvas();
+                //
                 inventoryUI.SetMode(InventoryUI.InventoryMode.AssemblyItemSelection);
             }
             else if (currentLockView != null)
@@ -197,10 +200,15 @@ namespace NightCycle
             if (currentAssemblyView != null)
             {
                 inventoryUI.ExitSelection();
+                // ЭТО ТЕСТ
+                inventoryUI.DisableRootCanvas();
             }
             else if (currentLockView != null)
             {
                 //Debug.Log("IUI ENABLE");
+                // ЭТО ТЕСТ
+                //inventoryUI.DisableRootCanvas();
+                //
                 inventoryUI.ExitSelection();
             }
 

@@ -10,6 +10,7 @@ namespace NightCycle
         private PlayerStateController _playerStateController;
         private InventoryUI _inventoryUI;
         private HUDController _hudController;
+        private PlayerInteraction _playerInteraction;
         private IPlayerProvider _playerProvider;
 
         [Inject]
@@ -17,12 +18,14 @@ namespace NightCycle
             [Inject(Optional = true)] PlayerStateController playerStateController,
             [Inject(Optional = true)] InventoryUI inventoryUI,
             [Inject(Optional = true)] HUDController hudController,
+            [Inject(Optional = true)] PlayerInteraction playerInteraction,
             [Inject] IPlayerProvider playerProvider)
         {
             _playerProvider = playerProvider;
             _playerStateController = playerStateController;
             _inventoryUI = inventoryUI;
             _hudController = hudController;
+            _playerInteraction = playerInteraction;
         }
 
         public void FreezePlayer()
@@ -94,16 +97,18 @@ namespace NightCycle
         public void SetupToCutscene()
         {
             FreezePlayer();
-            DisableInventoryUI();
+            //DisableInventoryUI();
             DisableHUD();
             DiasableHUDtext();
+            DisableInteraction();
         }
 
         public void SetupFromCutscene()
         {
             UnfreezePlayer();
-            EnableInventoryUI();
+            //EnableInventoryUI();
             EnableHUD();
+            EnableInteraction();
         }
 
         /*public void MovePlayer(Transform point)
@@ -199,6 +204,16 @@ namespace NightCycle
             {
                 controller.enabled = true;
             }
+        }
+
+        public void EnableInteraction()
+        {
+            _playerInteraction.can_interact = true;
+        }
+
+        public void DisableInteraction()
+        {
+            _playerInteraction.can_interact = false;
         }
 
     }

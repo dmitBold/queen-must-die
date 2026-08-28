@@ -31,6 +31,7 @@ namespace NightCycle
         private float currentHoldTimer = 0f;
         private bool isInteractionProcessed = false;
         private bool isHolding = false;
+        public bool can_interact = true;
 
         #endregion
 
@@ -48,7 +49,7 @@ namespace NightCycle
 
         private void Update()
         {
-            if (playerStateController.CurrentMode == PlayerMode.FreeMovement)
+            if (playerStateController.CurrentMode == PlayerMode.FreeMovement && can_interact)
             {
                 CheckInteraction();
                 HandleInteractionInput();

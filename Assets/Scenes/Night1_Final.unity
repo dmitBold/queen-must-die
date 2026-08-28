@@ -5847,6 +5847,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &91171947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24481,6 +24488,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 1
   holdDuration: 1.5
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &279888959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28273,6 +28287,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!95 &338224899
 Animator:
   serializedVersion: 7
@@ -35296,6 +35317,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &467415023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35330,6 +35358,7 @@ MonoBehaviour:
   - "\"\u0417\u0434\u0435\u0441\u044C \u043F\u043E\u043A\u043E\u0438\u0442\u0441\u044F
     \u041A\u043B\u0430\u0432\u0434\u0438\u0439 \u041F\u044F\u0442\u044B\u0439\""
   - "\"\u0422\u043E\u0442, \u043A\u0442\u043E \u0443\u043C\u0435\u0440 \u0434\u0432\u0430\u0436\u0434\u044B\""
+  dialogueNames: []
   interact_sound: {fileID: 0}
   dialogue_sounds: []
   dialogue_sounds_index: 0
@@ -47351,6 +47380,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 1
   holdDuration: 1.5
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!65 &738381962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54474,6 +54510,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!95 &871922319
 Animator:
   serializedVersion: 7
@@ -116352,6 +116395,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1419953273}
+  - component: {fileID: 1419953275}
+  - component: {fileID: 1419953274}
   m_Layer: 0
   m_Name: PlayerSpawnPoint
   m_TagString: Untagged
@@ -116374,6 +116419,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1419953274
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419953272}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 13.75, y: 12.47, z: 18.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1419953275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419953272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c8d1e3cf9760347a8e4e7da50044b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.TriggerHandler
+  targetTag: Player
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 147517514}
+        m_TargetAssemblyTypeName: NightCycle.SaveLoadBridge, Assembly-CSharp
+        m_MethodName: TriggerSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerSound: {fileID: 0}
+  disable: 1
 --- !u!1 &1427758581
 GameObject:
   m_ObjectHideFlags: 0
@@ -122985,6 +123081,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!95 &1604669106
 Animator:
   serializedVersion: 7
@@ -131730,6 +131833,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!95 &1792745764
 Animator:
   serializedVersion: 7
@@ -132492,6 +132602,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 1
   holdDuration: 1.5
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!65 &1824779885
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -137598,6 +137715,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!95 &1937642015
 Animator:
   serializedVersion: 7
@@ -139208,6 +139332,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!95 &2026840067
 Animator:
   serializedVersion: 7
@@ -139477,6 +139608,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!95 &2028217439
 Animator:
   serializedVersion: 7
@@ -141426,6 +141564,13 @@ MonoBehaviour:
   assemblyController: {fileID: 0}
   interactionType: 1
   holdDuration: 1.5
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &2088758004
 MonoBehaviour:
   m_ObjectHideFlags: 0
