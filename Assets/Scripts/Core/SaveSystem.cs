@@ -43,4 +43,9 @@ public class SaveSystem
     {
         SessionTriggeredEvents.Add(eventId);
     }
+
+    public void RemoveEvent(string eventId)
+    {
+        SessionTriggeredEvents.Remove(eventId);
+    }
 }

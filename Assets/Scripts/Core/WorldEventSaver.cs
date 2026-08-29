@@ -39,6 +39,12 @@ namespace NightCycle
             _saveSystem.RegisterEvent(_uniqueId);
         }
 
+        public void ClearEventState()
+        {
+            if (string.IsNullOrEmpty(_uniqueId)) return;
+            _saveSystem.RemoveEvent(_uniqueId);
+        }
+
 #if UNITY_EDITOR
         private void OnValidate()
         {

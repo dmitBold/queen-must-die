@@ -33,5 +33,10 @@ namespace NightCycle
                 destroyOnPickup = false;
             }
         }
+
+        public void DeleteItem()
+        {
+            _inventoryManager.RemoveItem(item);
+        }
     }
 }

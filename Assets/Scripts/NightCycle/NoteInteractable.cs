@@ -10,7 +10,7 @@ namespace NightCycle
         [TextArea(5, 20)]
         public string[] noteText;
 
-        private bool trigger_once = true;
+        public bool trigger_once = true;
         public UnityEvent noteEvent;
 
         public void OnEnterFocus()
