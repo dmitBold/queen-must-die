@@ -13,6 +13,11 @@ namespace NightCycle
         public bool trigger_once = true;
         public UnityEvent noteEvent;
 
+        public void SetEvent(bool trigger)
+        {
+            trigger_once = trigger;
+        }
+
         public void OnEnterFocus()
         {
             NoteController.Instance.ShowNote(this);

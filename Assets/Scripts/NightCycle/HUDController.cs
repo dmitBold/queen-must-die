@@ -12,6 +12,9 @@ namespace NightCycle
         [SerializeField] Image interactionProgressImage;
         public Sprite DefaultImage;
 
+        public bool isNormal = false;
+        public bool isSmall = true;
+
         private void Awake()
         {
             instance = this;
@@ -40,6 +43,26 @@ namespace NightCycle
         public void SetCrosshairActivity(bool isActive)
         {
             CrosshairImage.gameObject.SetActive(isActive);
+        }
+
+        public void DoNormalSize()
+        {
+            if (!isNormal)
+            {
+                CrosshairImage.rectTransform.sizeDelta *= 2f;
+                isNormal = true;
+                isSmall = false;
+            }
+        }
+
+        public void DoSmallSize()
+        {
+            if (!isSmall)
+            {
+                CrosshairImage.rectTransform.sizeDelta /= 2f;
+                isSmall = true;
+                isNormal = false;
+            }
         }
 
         private void Start()

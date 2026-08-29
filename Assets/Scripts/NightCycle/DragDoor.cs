@@ -61,6 +61,9 @@ namespace NightCycle
 
                 if (lockDoor != null && lockDoor.enabled)
                 {
+
+                    controller.DoNormalSize();
+
                     controller.ChangeCrosshairImage(LockImage);
 
                     if (Input.GetMouseButtonDown(0))
@@ -73,6 +76,8 @@ namespace NightCycle
                 }
                 else
                 {
+                    controller.DoNormalSize();
+
                     controller.ChangeCrosshairImage(HandImage);
 
                     if (Input.GetMouseButtonDown(0))
@@ -83,6 +88,8 @@ namespace NightCycle
             }
             else
             {
+                controller.DoSmallSize();
+
                 controller.ChangeCrosshairImage(controller.DefaultImage);
             }
         }
@@ -98,6 +105,8 @@ namespace NightCycle
 
                 Vector3 doorToCam = cam.transform.position - selectedDoor.position;
                 sideMultiplier = Mathf.Sign(Vector3.Dot(selectedDoor.forward, doorToCam));
+
+                controller.DoNormalSize();
 
                 controller.ChangeCrosshairImage(DragImage);
             }
