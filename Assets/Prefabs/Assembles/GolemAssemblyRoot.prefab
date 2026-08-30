@@ -637,6 +637,7 @@ GameObject:
   - component: {fileID: 2611307238147610900}
   - component: {fileID: 4428741530917535273}
   - component: {fileID: 8465613677448755211}
+  - component: {fileID: 3181941759100408067}
   m_Layer: 6
   m_Name: HEAD_PLACE
   m_TagString: Untagged
@@ -768,6 +769,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: ba81df994afb04b47a7efceb3e45d309, type: 2}
   visualPart: {fileID: 9194594631106740342}
+  SocketFillEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  SocketEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3181941759100408067}
+        m_TargetAssemblyTypeName: NightCycle.WorldEventSaver, Assembly-CSharp
+        m_MethodName: SaveEventState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerOnnce: 1
+--- !u!114 &3181941759100408067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719450369870384569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ae4df52642e6e4db21ec3c5344329f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.WorldEventSaver
+  _uniqueId: 9e51fe13-6901-4e7b-af85-076ccd2d58fc
+  onStateRestored:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8465613677448755211}
+        m_TargetAssemblyTypeName: NightCycle.AssemblySocket, Assembly-CSharp
+        m_MethodName: Apply_now
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1427429050693137893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,6 +2524,7 @@ GameObject:
   - component: {fileID: 3696278585039607787}
   - component: {fileID: 332137886041203261}
   - component: {fileID: 2614127704003162151}
+  - component: {fileID: 1599349495801429039}
   m_Layer: 6
   m_Name: HAND_PLACE
   m_TagString: Untagged
@@ -2583,6 +2636,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: 6fdcf629841c56346ab1cd529570f2ac, type: 2}
   visualPart: {fileID: 3544348319289212053}
+  SocketFillEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  SocketEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1599349495801429039}
+        m_TargetAssemblyTypeName: NightCycle.WorldEventSaver, Assembly-CSharp
+        m_MethodName: SaveEventState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerOnnce: 1
 --- !u!65 &2614127704003162151
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2604,6 +2680,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.003788889, y: 0.0072211656, z: 0.0051731844}
   m_Center: {x: 0.008290903, y: -0.00047486692, z: 0.0032693797}
+--- !u!114 &1599349495801429039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4033189699027290628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ae4df52642e6e4db21ec3c5344329f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.WorldEventSaver
+  _uniqueId: 6ce55f83-8650-4e31-96aa-9d938fd4be6e
+  onStateRestored:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 332137886041203261}
+        m_TargetAssemblyTypeName: NightCycle.AssemblySocket, Assembly-CSharp
+        m_MethodName: Apply_now
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4148287776860558457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2981,6 +3085,7 @@ GameObject:
   - component: {fileID: 4549723677453671752}
   - component: {fileID: 6448216000406100578}
   - component: {fileID: 7700225097931920611}
+  - component: {fileID: 2127738950171101572}
   m_Layer: 6
   m_Name: GEAR_PLACE
   m_TagString: Untagged
@@ -3112,6 +3217,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: 1f66394c00d0dd142878c2d661239280, type: 2}
   visualPart: {fileID: 7554017414114948258}
+  SocketFillEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  SocketEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2127738950171101572}
+        m_TargetAssemblyTypeName: NightCycle.WorldEventSaver, Assembly-CSharp
+        m_MethodName: SaveEventState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerOnnce: 1
+--- !u!114 &2127738950171101572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5302520549049294802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ae4df52642e6e4db21ec3c5344329f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.WorldEventSaver
+  _uniqueId: 8d0f3efc-ff18-4a22-9a9d-242f9bf970ae
+  onStateRestored:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7700225097931920611}
+        m_TargetAssemblyTypeName: NightCycle.AssemblySocket, Assembly-CSharp
+        m_MethodName: Apply_now
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5742490226717161239
 GameObject:
   m_ObjectHideFlags: 0
@@ -4317,6 +4473,7 @@ GameObject:
   - component: {fileID: 8268556097998517138}
   - component: {fileID: 1396622903808114682}
   - component: {fileID: 3342959716353862043}
+  - component: {fileID: 5882370876262301690}
   m_Layer: 6
   m_Name: LEG_PLACE
   m_TagString: Untagged
@@ -4409,6 +4566,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AssemblySocket
   requiredItem: {fileID: 11400000, guid: f508ebde105cc0b4398352baa1cef1e1, type: 2}
   visualPart: {fileID: 7648144097753370584}
+  SocketFillEvent:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  SocketEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5882370876262301690}
+        m_TargetAssemblyTypeName: NightCycle.WorldEventSaver, Assembly-CSharp
+        m_MethodName: SaveEventState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerOnnce: 1
 --- !u!65 &1396622903808114682
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4448,6 +4628,34 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &5882370876262301690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795690144229716496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ae4df52642e6e4db21ec3c5344329f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.WorldEventSaver
+  _uniqueId: e0594bf5-f1d0-4976-b3a2-d1ddb892d50a
+  onStateRestored:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8268556097998517138}
+        m_TargetAssemblyTypeName: NightCycle.AssemblySocket, Assembly-CSharp
+        m_MethodName: Apply_now
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8839851323931943002
 GameObject:
   m_ObjectHideFlags: 0
