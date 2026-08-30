@@ -15,7 +15,7 @@ namespace NightCycle
 
         public void SetEvent(bool trigger)
         {
-            trigger_once = trigger;
+            this.trigger_once = trigger;
         }
 
         public void OnEnterFocus()

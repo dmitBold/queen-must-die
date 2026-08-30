@@ -9,6 +9,7 @@ public class AssetProviderSOInstaller : ScriptableObjectInstaller<AssetProviderS
     [SerializeField] private PlayerView _playerPrefab;
     //TEST
     [SerializeField] private ItemDatabase _itemDatabase;
+    [SerializeField] private QuestDatabase _questDatabase;
     //TEST
 
 
@@ -16,6 +17,7 @@ public class AssetProviderSOInstaller : ScriptableObjectInstaller<AssetProviderS
     {
         Container.BindInstance(globalAudioConfig).IfNotBound();
         Container.BindInstance(_playerPrefab).AsSingle();
-        Container.BindInstance(_itemDatabase).AsSingle();   
+        Container.BindInstance(_itemDatabase).AsSingle();
+        Container.BindInstance(_questDatabase).AsSingle();
     }
 }

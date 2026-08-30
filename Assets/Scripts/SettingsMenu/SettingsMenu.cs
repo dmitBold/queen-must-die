@@ -222,9 +222,9 @@ public class SettingsMenu : MonoBehaviour
 
     public void SaveOnExit()
     {
-        //LockButtons();
+        LockButtons();
         _saveManager.SaveGame();
-        //QuitGame();
+        QuitGame();
     }
 
     private void LockButtons()

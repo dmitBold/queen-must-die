@@ -16,6 +16,8 @@ public class SaveManager : MonoBehaviour
     [Inject] private ScenesManager _scenesManager;
     [Inject] private SaveSystem _saveSystem;
     [Inject] private InventoryManager _inventoryManager;
+    [Inject] private QuestManager _questManager;
+    [Inject] private WorldState _worldState;
     //[Inject] private PlayerFlashlight _flashlight;
 
     private bool _isProcessing = false;
@@ -28,6 +30,8 @@ public class SaveManager : MonoBehaviour
         public float posZ;
         public string currentSceneName;
         public List<SavedItem> savedInventory;
+        public List<SavedQuest> savedQuests;
+        public WorldState.WorldStateSaveData savedWorldState;
         public List<string> triggeredWorldEvents;
         public float rotX;
         public float rotY;
@@ -49,6 +53,21 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    [System.Serializable]
+    public struct SavedQuest
+    {
+        public string questId;
+        public int currentStageIndex;
+        public bool isCompleted;
+
+        public SavedQuest(string id, int stageIndex, bool completed)
+        {
+            questId = id;
+            currentStageIndex = stageIndex;
+            isCompleted = completed;
+        }
+    }
+
     private void OnEnable()
     {
         // Подписываемся на событие завершения загрузки сцены
@@ -65,6 +84,17 @@ public class SaveManager : MonoBehaviour
     {
         // Сцена загрузилась - снимаем блокировку логики
         _isProcessing = false;
+
+        if (_saveSystem.HasLoadedData)
+        {
+            var player = _playerProvider.CurrentPlayer;
+            if (player != null)
+            {
+                player.Position = new Vector3(_saveSystem.CurrentData.posX, _saveSystem.CurrentData.posY, _saveSystem.CurrentData.posZ);
+                player.Rotation = new Quaternion(_saveSystem.CurrentData.rotX, _saveSystem.CurrentData.rotY, _saveSystem.CurrentData.rotZ, _saveSystem.CurrentData.rotW);
+            }
+            // _saveSystem.ClearLoadedFlag();
+        }
     }
 
     private void Update()
@@ -121,6 +151,10 @@ public class SaveManager : MonoBehaviour
 
         data.savedInventory = _inventoryManager.GetInventorySaveData();
 
+        data.savedQuests = _questManager.GetQuestSaveData();
+
+        data.savedWorldState = _worldState.GetSaveData();
+
         data.triggeredWorldEvents = new List<string>(_saveSystem.SessionTriggeredEvents);
 
         _saveSystem.Save(data);
@@ -135,6 +169,19 @@ public class SaveManager : MonoBehaviour
 
         if (_saveSystem.Load())
         {
+
+            if (_saveSystem.CurrentData.savedInventory != null)
+            {
+                _inventoryManager.LoadInventoryData(_saveSystem.CurrentData.savedInventory);
+            }
+
+            if (_saveSystem.CurrentData.savedQuests != null)
+            {
+                _questManager.LoadQuestData(_saveSystem.CurrentData.savedQuests);
+            }
+
+            _worldState.LoadSaveData(_saveSystem.CurrentData.savedWorldState);
+
             _scenesManager.LoadSingle(_saveSystem.CurrentData.currentSceneName);
             return true;
         }

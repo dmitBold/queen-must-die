@@ -11,6 +11,9 @@ public class QuestStage
 [CreateAssetMenu(fileName = "Quest", menuName = "Scriptable Objects/Quest")]
 public class Quest : ScriptableObject
 {
+    [Header("Base Info")]
+    public string id;
+
     [TextArea(3, 5)]
     public string QuestName;
 

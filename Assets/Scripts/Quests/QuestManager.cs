@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Zenject;
 
 // Класс для хранения рантайм-состояния квеста
 public class QuestProgress
@@ -37,7 +38,59 @@ public class QuestManager
 
     private List<QuestProgress> activeQuests = new List<QuestProgress>();
 
-    public bool HasQuest(Quest quest)
+    [Inject] private QuestDatabase _questDatabase;
+
+    //test
+
+    public List<SaveManager.SavedQuest> GetQuestSaveData()
+    {
+        List<SaveManager.SavedQuest> savedList = new List<SaveManager.SavedQuest>();
+
+        foreach (var progress in activeQuests)
+        {
+            if (progress.Quest != null && !string.IsNullOrEmpty(progress.Quest.id))
+            {
+                savedList.Add(new SaveManager.SavedQuest(
+                    progress.Quest.id,
+                    progress.CurrentStageIndex,
+                    progress.IsCompleted
+                ));
+            }
+        }
+
+        return savedList;
+    }
+
+    public void LoadQuestData(List<SaveManager.SavedQuest> savedQuests)
+    {
+        activeQuests.Clear();
+
+        if (savedQuests == null) return;
+
+        foreach (var savedQuest in savedQuests)
+        {
+            Quest originalQuest = _questDatabase.GetQuestById(savedQuest.questId);
+
+            if (originalQuest != null)
+            {
+                // Восстанавливаем состояние квеста
+                QuestProgress progress = new QuestProgress(originalQuest)
+                {
+                    CurrentStageIndex = savedQuest.currentStageIndex,
+                    IsCompleted = savedQuest.isCompleted
+                };
+
+                activeQuests.Add(progress);
+            }
+        }
+
+        OnQuestPoolChanged?.Invoke(); // Оповещаем UI, что квесты обновились
+    }
+
+    //test
+
+
+public bool HasQuest(Quest quest)
     {
         return GetQuestProgress(quest) != null;
     }

@@ -15,6 +15,76 @@ namespace Core
             OrderStat
         }
 
+        [System.Serializable]
+        public struct WorldStateSaveData
+        {
+            public List<string> flags;
+
+            public int Wealth, Snakes, Wasps, Spiders, Order, People;
+            public int CriticaltWealth, CriticalSnakes, CriticalSpiders, CriticalWasps, CriticalOrder, CriticalPeople;
+            public bool IsWealthCritical, IsSnakesCritical, IsSpidersCritical, IsWaspsCritical, IsOrderCritical, IsPeopleCritical;
+
+            public int WeeksPassed;
+            public List<Stats> lockedStats;
+        }
+
+        public WorldStateSaveData GetSaveData()
+        {
+            return new WorldStateSaveData
+            {
+                flags = new List<string>(flags),
+
+                Wealth = this.Wealth,
+                Snakes = this.Snakes,
+                Wasps = this.Wasps,
+                Spiders = this.Spiders,
+                Order = this.Order,
+                People = this.People,
+
+                CriticaltWealth = this.CriticaltWealth,
+                CriticalSnakes = this.CriticalSnakes,
+                CriticalSpiders = this.CriticalSpiders,
+                CriticalWasps = this.CriticalWasps,
+                CriticalOrder = this.CriticalOrder,
+                CriticalPeople = this.CriticalPeople,
+
+                IsWealthCritical = this.IsWealthCritical,
+                IsSnakesCritical = this.IsSnakesCritical,
+                IsSpidersCritical = this.IsSpidersCritical,
+                IsWaspsCritical = this.IsWaspsCritical,
+                IsOrderCritical = this.IsOrderCritical,
+                IsPeopleCritical = this.IsPeopleCritical,
+
+                WeeksPassed = this.WeeksPassed,
+
+                lockedStats = new List<Stats>(locked_stats)
+            };
+        }
+
+        public void LoadSaveData(WorldStateSaveData data)
+        {
+            flags = new HashSet<string>(data.flags ?? new List<string>());
+
+            Wealth = data.Wealth; Snakes = data.Snakes; Wasps = data.Wasps; Spiders = data.Spiders; Order = data.Order; People = data.People;
+
+            CriticaltWealth = data.CriticaltWealth; CriticalSnakes = data.CriticalSnakes; CriticalSpiders = data.CriticalSpiders;
+            CriticalWasps = data.CriticalWasps; CriticalOrder = data.CriticalOrder; CriticalPeople = data.CriticalPeople;
+
+            IsWealthCritical = data.IsWealthCritical; IsSnakesCritical = data.IsSnakesCritical; IsSpidersCritical = data.IsSpidersCritical;
+            IsWaspsCritical = data.IsWaspsCritical; IsOrderCritical = data.IsOrderCritical; IsPeopleCritical = data.IsPeopleCritical;
+
+            WeeksPassed = data.WeeksPassed;
+
+            locked_stats = new HashSet<Stats>(data.lockedStats ?? new List<Stats>());
+
+            // Оповещаем интерфейс и другие системы об обновлении статов
+            foreach (Stats stat in System.Enum.GetValues(typeof(Stats)))
+            {
+                OnStatChanged?.Invoke(stat);
+                if (IsStatLocked(stat)) OnStatLocked?.Invoke(stat);
+            }
+        }
+
         public HashSet<string> flags = new HashSet<string>();
 
         [SerializeField] int Wealth = 50;
