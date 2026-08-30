@@ -51,6 +51,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-8647045381554864713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/Envelope
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/Envelope
+  Guid:
+    Data1: -1225164423
+    Data2: 1084857888
+    Data3: -266600318
+    Data4: -1490920368
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 640
 --- !u!114 &-8294556767446969489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,10 +311,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639236033232984730
+  lastModified: 639237121266625168
   FileSizes:
   - Name: Desktop
-    Value: 7398592
+    Value: 7406304
   Exists: 1
 --- !u!114 &-4029956871787623766
 MonoBehaviour:
@@ -442,6 +469,7 @@ MonoBehaviour:
   - {fileID: -3370766970595164140}
   - {fileID: 5005011261095000523}
   - {fileID: -6185306176472155119}
+  - {fileID: -8647045381554864713}
   EditorParameters:
   - {fileID: 4742735435840111238}
   MasterBanks:
@@ -449,7 +477,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639236033232984730
+  cacheTime: 639237121266655112
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
@@ -509,6 +537,8 @@ MonoBehaviour:
     index: 27
   - key: event:/Scenes/Hom/MusicBox/Chase music
     index: 28
+  - key: event:/Scenes/Envelope
+    index: 29
 --- !u!114 &52534761935187065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,7 +591,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 70
   Length: 14125
 --- !u!114 &1453415314139172251
 MonoBehaviour:
@@ -874,7 +904,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 35
+  MaxDistance: 65
   Length: 14125
 --- !u!114 &6213692079555805138
 MonoBehaviour:
@@ -891,10 +921,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639235467366566381
+  lastModified: 639237121266655112
   FileSizes:
   - Name: Desktop
-    Value: 2134
+    Value: 2172
   Exists: 1
 --- !u!114 &6713093496099956156
 MonoBehaviour:
@@ -1002,7 +1032,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 7.4
-  MaxDistance: 30
+  MaxDistance: 80
   Length: 14125
 --- !u!114 &8503659304102850927
 MonoBehaviour:
@@ -1030,7 +1060,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1500
+  Length: 1050
 --- !u!114 &8929571478374914542
 MonoBehaviour:
   m_ObjectHideFlags: 0
