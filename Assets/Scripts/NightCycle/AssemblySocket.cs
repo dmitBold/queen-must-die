@@ -2,6 +2,7 @@ using Core;
 using FMODUnity;
 using Inventory;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 namespace NightCycle
@@ -12,6 +13,8 @@ namespace NightCycle
         [SerializeField] ItemData requiredItem;
         [SerializeField] GameObject visualPart;
         public EventReference SocketFillEvent;
+        public UnityEvent SocketEvent;
+        public bool triggerOnnce = true;
         private AudioService _audioService;
         Outline outline;
 
@@ -61,11 +64,37 @@ namespace NightCycle
                 _audioService.PlayFMODEvent(SocketFillEvent, gameObject.transform.position);
             }
             //test
+
+            if (triggerOnnce)
+            {
+                SocketEvent?.Invoke();
+            }
+
+        }
+
+        public void Apply_now()
+        {
+
+            isFilled = true;
+
+            if (visualPart != null)
+            {
+                visualPart.SetActive(true);
+            }
+
+            SetHighlight(false);
+
         }
 
         public void SetHighlight(bool state)
         {
             outline.enabled = state;
         }
+
+        public void SetEvent(bool state)
+        {
+            triggerOnnce = state;
+        }
+
     }
 }
