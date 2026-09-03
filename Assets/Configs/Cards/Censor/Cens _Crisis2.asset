@@ -12,13 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c7e4b39926d0b42b78e88af0359330, type: 3}
   m_Name: Cens _Crisis2
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  CardText: "\u0412 \u043F\u0440\u043E\u0432\u0438\u043D\u0446\u0438\u0438 \u043A\u0440\u0438\u0437\u0438\u0441.
-    \u0422\u043A\u0430\u0447\u0438 \u0442\u0430\u043A \u0433\u043E\u043B\u043E\u0434\u043D\u044B,
-    \u0447\u0442\u043E \u043D\u0430\u043F\u0430\u043B\u0438 \u043D\u0430 \u0443\u043B\u044C\u0438.
-    \u041E\u0441\u044B \u0436\u0430\u043B\u044F\u0442, \u043F\u0430\u0443\u043A\u0438
-    \u0433\u0438\u0431\u043D\u0443\u0442"
+  CardPages: []
+  Card_name: 
   LeftChoice:
-    text: "\u0417\u0430\u0449\u0438\u0442\u0438\u0442\u044C \u0443\u043B\u044C\u0438"
+    text: Protect the hives
     effects:
     - type: 0
       stat: 2
@@ -33,12 +30,13 @@ MonoBehaviour:
     - 
     - 
     removeFlags: []
-    reactionText: 
+    reactionText: []
     rewardItem: {fileID: 0}
+    quest: {fileID: 0}
+    rewardNote: {fileID: 0}
     rewardAmount: 1
   RightChoice:
-    text: "\u041F\u0435\u0440\u0435\u0434\u0430\u0442\u044C \u043F\u0440\u043E\u0432\u0438\u0430\u043D\u0442
-      \u0443\u043B\u044C\u0435\u0432"
+    text: Transfer provisions to the hives
     effects:
     - type: 0
       stat: 2
@@ -48,8 +46,10 @@ MonoBehaviour:
       value: 10
     addFlags: []
     removeFlags: []
-    reactionText: 
+    reactionText: []
     rewardItem: {fileID: 0}
+    quest: {fileID: 0}
+    rewardNote: {fileID: 0}
     rewardAmount: 1
   RequiredFlags:
   - CRISIS_SPIDERS
@@ -60,5 +60,6 @@ MonoBehaviour:
   cooldown: 0
   visitor: {fileID: 11400000, guid: d2a8fcf3447a818469f77dd11c58aa8c, type: 2}
   itemReactions: []
+  intermediateChoices: []
   IsMandatory: 0
   IsRandom: 1

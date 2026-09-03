@@ -238,8 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0417\u0430\u043F\u0438\u0441\u0438 \u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\u0430
-    \u043E \u041F\u0442\u043E\u043B\u0435\u043C\u0435\u044F\u0445(E)"
+  message: Alexander's Notes on the Ptolemies(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -255,9 +254,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &3744280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1404,6 +1416,10 @@ MonoBehaviour:
   - 
   - 
   - 
+  trigger_once: 1
+  noteEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &3744282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: cefbb95f4617418798e0b828cfb0593e, type: 3}
@@ -3572,9 +3588,9 @@ PlayableDirector:
   - key: {fileID: 7454109166745937173, guid: 4b089cacfbcf0ba47af528ac7adbb6a5, type: 2}
     value: {fileID: 1207255223}
   - key: {fileID: 8707755096686705263, guid: 4b089cacfbcf0ba47af528ac7adbb6a5, type: 2}
-    value: {fileID: 1230407506}
+    value: {fileID: 0}
   - key: {fileID: 1925219895048576467, guid: 4b089cacfbcf0ba47af528ac7adbb6a5, type: 2}
-    value: {fileID: 1271873837}
+    value: {fileID: 0}
   - key: {fileID: 4247477691437117238, guid: 4b089cacfbcf0ba47af528ac7adbb6a5, type: 2}
     value: {fileID: 1014995340}
   - key: {fileID: -4580282592557965923, guid: 4b089cacfbcf0ba47af528ac7adbb6a5, type: 2}
@@ -4216,12 +4232,17 @@ MonoBehaviour:
   FirstDelay: 3
   candleSound: {fileID: 8300000, guid: c8ad8c6810a05f24e967d7e0721c2575, type: 3}
   TinderSound: {fileID: 8300000, guid: d9df1de16f283e94b996ef63f16cf152, type: 3}
+  _events: []
   KnockSound: {fileID: 8300000, guid: f5a9b2bd410c113428cccc25ad4ee178, type: 3}
   door: {fileID: 0}
   Reznya: {fileID: 8300000, guid: 81713f53ae227ba48b89bd64db9e6b2c, type: 3}
   ON_Cleanup_Completed:
     m_PersistentCalls:
       m_Calls: []
+  turnOFF_time: 0
+  turnON_time: 0
+  AllLight: []
+  musicController: {fileID: 0}
 --- !u!1001 &81810048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15964,7 +15985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -15980,9 +16001,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &260171804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15999,6 +16033,10 @@ MonoBehaviour:
   cleanObject: {fileID: 757446269}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &260724312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16383,6 +16421,10 @@ MonoBehaviour:
   cleanObject: {fileID: 410112633}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!114 &273275754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16395,7 +16437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -16411,9 +16453,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!4 &278078848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6136338046127473337, guid: 6e6718b48408fe14bbaf4553645cdbd7, type: 3}
@@ -18645,33 +18700,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4176324634888641414, guid: 6e6718b48408fe14bbaf4553645cdbd7, type: 3}
   m_PrefabInstance: {fileID: 90518622}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &381963376 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 47708058056793917, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
-  m_PrefabInstance: {fileID: 340577693221910730}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &381963377
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381963376}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &384771732
 GameObject:
   m_ObjectHideFlags: 0
@@ -68175,8 +68203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0412\u043E\u0441\u043F\u043E\u043C\u0438\u043D\u0430\u043D\u0438\u044F 
-    \u043E \u0432\u043E\u0439\u043D\u0435 \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0435\u043D\u0438\u044F(E)"
+  message: Memories of the War of Unification(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -68192,9 +68219,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &496403561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68209,9 +68249,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NoteInteractable
   noteImage: {fileID: 21300000, guid: 0345de52d30a6d147bcf358100db9bfa, type: 3}
   noteText:
-  - "\u0422\u0415\u0421\u0422"
-  - "\u0422\u0415\u0421\u0422"
-  - "\u0421\u0423\u041A\u0410"
+  - TEST
+  - TEST
+  - BITCH
+  trigger_once: 1
+  noteEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &496403562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68851,6 +68895,10 @@ MonoBehaviour:
   - 
   - 
   - 
+  trigger_once: 1
+  noteEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &500318619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68863,7 +68911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0438\u0441\u044C\u043C\u043E \u043E \u043B\u0430\u0431\u043E\u0440\u0430\u0442\u043E\u0440\u0438\u0438(E)"
+  message: Laboratory Letter(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -68879,9 +68927,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &500318620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69199,7 +69260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u0412\u0412\u0415\u0421\u0422\u0418 \u041A\u041E\u041C\u0411\u0418\u041D\u0410\u0426\u0418\u042E"
+  message: ENTER COMBINATION
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -69215,9 +69276,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!95 &501939906
 Animator:
   serializedVersion: 7
@@ -74684,6 +74758,10 @@ MonoBehaviour:
   - 
   - 
   - 
+  trigger_once: 1
+  noteEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &658634005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74736,8 +74814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0413\u043B\u0430\u0432\u043D\u044B\u0439 \u043F\u0440\u043E\u0435\u043A\u0442
-    \u043E\u0442\u0446\u0430(E)"
+  message: Father's Main Project(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -74753,9 +74830,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!4 &660049227 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9214819874049300100, guid: 6e6718b48408fe14bbaf4553645cdbd7, type: 3}
@@ -76503,7 +76593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -76519,9 +76609,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &688258320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76538,6 +76641,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1848994863}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!4 &693809125 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7346293765197801558, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
@@ -122622,9 +122729,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.NightDialogueInteractable
   dialoguePages:
-  - "\u0411\u044B\u043B \u0443\u0431\u0438\u0442 \u0437\u0430\u0433\u043E\u0432\u043E\u0440\u0449\u0438\u043A\u0430\u043C\u0438,
-    \u043D\u043E \u0432\u0435\u0440\u043D\u0443\u043B\u0441\u044F \u0438\u0437 \u043C\u0435\u0440\u0442\u0432\u044B\u0445
-    \u0432 \u041D\u043E\u0447\u044C \u0422\u0430\u0439\u043D."
+  - He was killed by conspirators, but returned from the dead on the Night of Secrets.
+  dialogueNames: []
   interact_sound: {fileID: 0}
   dialogue_sounds: []
   dialogue_sounds_index: 0
@@ -122644,7 +122750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u041A\u043B\u0430\u0432\u0434\u0438\u0439 V(E)"
+  message: Claudius V(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -122660,9 +122766,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1001 &818759032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -122796,9 +122915,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightDialogueInteractable
   dialoguePages:
-  - "\u0418\u0441\u0442\u0440\u0435\u0431\u0438\u043B \u0440\u0430\u0441\u0443 \u0442\u0438\u0440\u0430\u043D\u043E\u0432,
-    \u043F\u043E\u043B\u0443\u0440\u0430\u0437\u0443\u043C\u043D\u044B\u0445 \u0436\u0443\u043A\u043E\u0432
-    \u0441 \u0432\u0435\u0447\u043D\u044B\u043C \u0433\u043E\u043B\u043E\u0434\u043E\u043C."
+  - He exterminated a race of tyrants, semi-intelligent beetles with eternal hunger.
+  dialogueNames: []
   interact_sound: {fileID: 0}
   dialogue_sounds: []
   dialogue_sounds_index: 0
@@ -122836,7 +122954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0422\u0438\u0442\u0443\u0441 IV(E)"
+  message: Titus IV(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -122852,9 +122970,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1001 &820219024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123580,11 +123711,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightDialogueInteractable
   dialoguePages:
-  - "\u042D\u0442\u0430 \u0434\u0432\u0435\u0440\u044C \u0442\u0435\u0431\u0435 \u043D\u0435
-    \u043F\u043E \u0441\u0438\u043B\u0430\u043C. \u041D\u0430\u0439\u0434\u0438 \u043A\u043E\u0433\u043E-\u0442\u043E,
-    \u043A\u0442\u043E \u0441\u043C\u043E\u0436\u0435\u0442 \u0435\u0451 \u043E\u0442\u043A\u0440\u044B\u0442\u044C."
-  - "\u0422\u043E\u0440\u043E\u043F\u0438\u0441\u044C. \u041E\u043D\u043E \u0432\u0441\u0435
-    \u0441\u0438\u043B\u044C\u043D\u0435\u0435."
+  - This door is beyond your strength. Find someone who can open it.
+  - Hurry. It's getting stronger.
+  dialogueNames: []
   interact_sound: {fileID: 8300000, guid: d13f4aea2e93e0c4eab32a38b4acf776, type: 3}
   dialogue_sounds: []
   dialogue_sounds_index: 0
@@ -123604,7 +123733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041E\u0422\u041A\u0420\u042B\u0422\u042C"
+  message: OPEN
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -123620,9 +123749,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &846177211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123872,7 +124014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -123888,9 +124030,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &849694231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123907,6 +124062,10 @@ MonoBehaviour:
   cleanObject: {fileID: 2053293029}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &851082922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128518,6 +128677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DI.PlayerInstaller
   _spawnPoint: {fileID: 1471272243}
   _enableLantern: 0
+  _enableInventory: 0
 --- !u!4 &902467399 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6092781617332967814, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
@@ -129297,7 +129457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -129313,9 +129473,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &946070787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129332,6 +129505,10 @@ MonoBehaviour:
   cleanObject: {fileID: 1753136261}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1 &946724833
 GameObject:
   m_ObjectHideFlags: 0
@@ -131361,7 +131538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u043E\u0434\u043E\u0431\u0440\u0430\u0442\u044C?"
+  message: Pick up?
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -131377,9 +131554,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1002319312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135928,7 +136118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -135944,9 +136134,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1134975341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135963,6 +136166,10 @@ MonoBehaviour:
   cleanObject: {fileID: 551788699}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!4 &1138471188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4957905623578212694, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
@@ -136192,10 +136399,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.NightDialogueInteractable
   dialoguePages:
-  - "\u0418\u0441\u0442\u0440\u0435\u0431\u0438\u043B \u0441\u0435\u043D\u0430\u0442
-    \u0438 \u043F\u0440\u043E\u0432\u043E\u0437\u0433\u043B\u0430\u0441\u0438\u043B
-    \u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043C\u043E\u0435\u0433\u043E
-    \u0440\u043E\u0434\u0430."
+  - He exterminated the senate and proclaimed the rule of my family.
+  dialogueNames: []
   interact_sound: {fileID: 0}
   dialogue_sounds: []
   dialogue_sounds_index: 0
@@ -136215,7 +136420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u041F\u0430\u0442\u0440\u043E\u043A\u043B II(E)"
+  message: Patroclus II(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -136231,9 +136436,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1152771758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138078,7 +138296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u041A\u0440\u0430\u0441\u043D\u0430\u044F \u043A\u043D\u0438\u0433\u0430(E)"
+  message: Red Book(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -138094,9 +138312,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1207631701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139502,11 +139733,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1391739479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1230407506 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8258086656619095104, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
-  m_PrefabInstance: {fileID: 340577693221910730}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1232514648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140776,11 +141002,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6338325277534010236, guid: af9b294539a3daf4bbbd8852a4fd2632, type: 3}
   m_PrefabInstance: {fileID: 1261812864}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1271873837 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8134477865395619666, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
-  m_PrefabInstance: {fileID: 340577693221910730}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1273353701
 GameObject:
   m_ObjectHideFlags: 0
@@ -141277,13 +141498,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StartDialogueSound
   StartSound: {fileID: 8300000, guid: 0bcc1858269cdfc43801d3fb3982f184, type: 3}
   dialoguePages:
-  - "\u042D\u0442\u043E \u043E\u043D! \u042D\u0442\u043E \u043E\u043D!"
-  - "\u042D\u0422\u041E \u041E\u041D!"
-  - "\u041D\u0435\u043B\u044C\u0437\u044F, \u0447\u0442\u043E\u0431\u044B \u043E\u043D
-    \u0443\u0432\u0438\u0434\u0435\u043B \u0431\u0435\u0441\u043F\u043E\u0440\u044F\u0434\u043E\u043A
-    \u0432 \u0434\u043E\u043C\u0435."
-  - "\u041D\u0435\u043B\u044C\u0437\u044F."
-  - "\u041D\u0415\u041B\u042C\u0417\u042F!"
+  - It's him! It's him!
+  - THIS IS HIM!
+  - We can't let him see the mess in the house.
+  - It is forbidden.
+  - IT IS FORBIDDEN!
   delay: 3
   _playerStateController: {fileID: 0}
 --- !u!4 &1294019266
@@ -142984,8 +143203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0421\u043F\u0438\u043D\u043D\u043E\u0439 \u043C\u0435\u0445\u0430\u043D\u0438\u0437\u043C
-    \u0433\u043E\u043B\u0435\u043C\u0430"
+  message: Golem's spinal mechanism
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -143013,9 +143231,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!65 &1317313196
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -143379,7 +143610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -143395,9 +143626,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1340057517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143414,6 +143658,10 @@ MonoBehaviour:
   cleanObject: {fileID: 386938721}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1 &1341276885
 GameObject:
   m_ObjectHideFlags: 0
@@ -152904,9 +153152,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!65 &1484954816
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153317,7 +153578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u0421\u0443\u043D\u0434\u0443\u043A \u041F\u0442\u043E\u043B\u0435\u043C\u0435\u0435\u0432(E)"
+  message: Ptolemaic Chest(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -153333,9 +153594,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1491832550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153564,7 +153838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -153580,9 +153854,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1497384145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153599,6 +153886,10 @@ MonoBehaviour:
   cleanObject: {fileID: 260724314}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1 &1497564734
 GameObject:
   m_ObjectHideFlags: 0
@@ -156756,7 +157047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0420\u0443\u043A\u0430 \u0433\u043E\u043B\u0435\u043C\u0430"
+  message: Golem's Hand
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -156784,9 +157075,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1591702452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160754,7 +161058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -160770,9 +161074,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1714395764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160789,6 +161106,10 @@ MonoBehaviour:
   cleanObject: {fileID: 2114595219}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!4 &1715609320 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1046734528203475958, guid: cc021e06cb7fe6f4a88ef94b09592a0c, type: 3}
@@ -161385,7 +161706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0413\u043E\u043B\u043E\u0432\u0430 \u0433\u043E\u043B\u0435\u043C\u0430(E)"
+  message: Golem Head(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -161413,9 +161734,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!65 &1740771342
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -164456,7 +164790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0412\u0412\u0415\u0421\u0422\u0418 \u041A\u041E\u041C\u0411\u0418\u041D\u0410\u0426\u0418\u042E"
+  message: ENTER COMBINATION
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -164472,9 +164806,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1783476968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166738,7 +167085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u0422\u0430\u0439\u043D\u044B\u0439 \u043F\u0440\u043E\u0445\u043E\u0434(E)"
+  message: Secret Passage(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -166754,9 +167101,22 @@ MonoBehaviour:
           m_StringArgument: push
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1850526994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167699,7 +168059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u0420\u0435\u0430\u0433\u0435\u043D\u0442(E)"
+  message: Reagent(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -167715,9 +168075,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &1895519269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173905,7 +174278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041D\u043E\u0433\u0430 \u0433\u043E\u043B\u0435\u043C\u0430 (E)"
+  message: Golem's Leg (E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -173933,9 +174306,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!65 &1942959711
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -176897,6 +177283,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CleanupStage
   objectsToCleanup: 11
+  Stage_Completed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2010623766
 GameObject:
   m_ObjectHideFlags: 0
@@ -178252,11 +178641,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightDialogueInteractable
   dialoguePages:
-  - "\u0412\u044B\u0432\u0435\u0437\u0435\u043D\u043E \u0438\u0437 \u0437\u0435\u043C\u0435\u043B\u044C
-    \u043E\u0441. \u0412\u043E\u043A\u0440\u0443\u0433 \u043D\u0435\u0451 \u043E\u043D\u0438
-    \u043D\u0435 \u0440\u0430\u0441\u0442\u0438\u043B\u0438 \u0441\u0432\u043E\u0438
-    \u0446\u0432\u0435\u0442\u044B. \u041F\u0440\u0438\u0447\u0438\u043D\u0443 \u043E\u043D\u0438
-    \u0442\u0430\u043A \u0438 \u043D\u0435 \u0440\u0430\u0441\u043A\u0440\u044B\u043B\u0438."
+  - Removed from the wasps' lands. They didn't grow their flowers around it. They
+    never discovered the reason.
+  dialogueNames: []
   interact_sound: {fileID: 0}
   dialogue_sounds: []
   dialogue_sounds_index: 0
@@ -178292,9 +178679,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!64 &2074333337
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -180164,7 +180564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -180180,9 +180580,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &2124616692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180199,6 +180612,10 @@ MonoBehaviour:
   cleanObject: {fileID: 302873152}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!1001 &2124765069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -180686,7 +181103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u041F\u0440\u0438\u0431\u0440\u0430\u0442\u044C\u0441\u044F(E)"
+  message: Tidy up(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -180702,9 +181119,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &2128774530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180721,6 +181151,10 @@ MonoBehaviour:
   cleanObject: {fileID: 303792234}
   parentStage: {fileID: 2007961054}
   clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
 --- !u!4 &2131367176 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5400785697849452448, guid: 6e6718b48408fe14bbaf4553645cdbd7, type: 3}
@@ -182197,132 +182631,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7497138440365778387, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1649731934}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 47708058056793917, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 381963377}
-    - targetCorrespondingSourceObject: {fileID: 3156113085178230650, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 340577693221910736}
-    - targetCorrespondingSourceObject: {fileID: 3156113085178230650, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 340577693221910735}
-    - targetCorrespondingSourceObject: {fileID: 3156113085178230650, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 340577693221910734}
-    - targetCorrespondingSourceObject: {fileID: 3156113085178230650, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 340577693221910733}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
 --- !u!4 &340577693221910731 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7497138440365778387, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
   m_PrefabInstance: {fileID: 340577693221910730}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &340577693221910732 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3156113085178230650, guid: e7417d11d88c99145b54fc2648c4df87, type: 3}
-  m_PrefabInstance: {fileID: 340577693221910730}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &340577693221910733
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340577693221910732}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.94, z: 1}
-  m_Center: {x: 0, y: 0.23, z: 0}
---- !u!114 &340577693221910734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340577693221910732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &340577693221910735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340577693221910732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4a47048d6186a645af0e59e512ba0c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.NightDialogueInteractable
-  dialoguePages:
-  - "\u041E\u043D \u043F\u043E\u0434\u0430\u0440\u0438\u043B \u043C\u043D\u0435 \u0435\u0451
-    \u0432 \u0434\u0435\u043D\u044C, \u043A\u043E\u0433\u0434\u0430 \u043D\u0435
-    \u0441\u0442\u0430\u043B\u043E \u043C\u0430\u0442\u0435\u0440\u0438."
-  - "\u0412 \u0434\u0435\u043D\u044C, \u043A\u043E\u0433\u0434\u0430 \u043C\u044B
-    \u043F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u0438\u043B\u0438\u0441\u044C."
-  - "\u0412 \u0434\u0435\u043D\u044C, \u043A\u043E\u0433\u0434\u0430 \u043E\u043D
-    \u0443\u0432\u0435\u0437 \u043C\u0435\u043D\u044F \u0432 \u0442\u0443 \u0434\u0435\u0440\u0435\u0432\u043D\u044E."
-  - "\u041A\u0435\u043C \u0436\u0435 \u0431\u044B\u043B \u0442\u043E\u0442, \u043A\u0442\u043E
-    \u043F\u0440\u044F\u0442\u0430\u043B \u043C\u0435\u043D\u044F \u043E\u0442 \u043E\u0442\u0446\u0430?"
-  interact_sound: {fileID: 0}
-  dialogue_sounds: []
-  dialogue_sounds_index: 0
-  onDialogueCompleted:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerEventOnlyOnce: 1
---- !u!114 &340577693221910736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340577693221910732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u041C\u0443\u0437\u044B\u043A\u0430\u043B\u044C\u043D\u0430\u044F \u0448\u043A\u0430\u0442\u0443\u043B\u043A\u0430"
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 340577693221910732}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  assemblyController: {fileID: 0}
-  interactionType: 0
-  holdDuration: 1
 --- !u!4 &353083929827216845
 Transform:
   m_ObjectHideFlags: 0
@@ -184133,7 +184448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C(E)"
+  message: Open(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -184149,9 +184464,22 @@ MonoBehaviour:
           m_StringArgument: openLock
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &919132149281373980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192122,7 +192450,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5017972635240778708 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5644102506851172502, guid: fc611f1f5d751e047925ab851ec35f7a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5642024014168484282, guid: fc611f1f5d751e047925ab851ec35f7a, type: 3}
   m_PrefabInstance: {fileID: 5017972635240778703}
   m_PrefabAsset: {fileID: 0}
 --- !u!65 &5017972635240778712
@@ -192159,7 +192487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.NightDialogueInteractable
   dialoguePages:
-  - "\u041C\u043E\u0439 \u043E\u0442\u0435\u0446."
+  - My father.
+  dialogueNames: []
   interact_sound: {fileID: 0}
   dialogue_sounds: []
   dialogue_sounds_index: 0
@@ -192179,7 +192508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440 I \u041E\u0431\u044A\u0435\u0434\u0438\u043D\u0438\u0442\u0435\u043B\u044C(E)"
+  message: Alexander I the Unifier(E)
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -192195,9 +192524,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!4 &5034807101641631199
 Transform:
   m_ObjectHideFlags: 0
@@ -192777,7 +193119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  message: "\u0420\u0430\u0437\u043E\u0440\u0432\u0430\u043D\u043D\u044B\u0439 \u0413\u043E\u043B\u0435\u043C"
+  message: Torn Golem
   onInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -192793,9 +193135,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls: []
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls: []
   assemblyController: {fileID: 0}
   interactionType: 0
   holdDuration: 1
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &5342616406713611027
 MonoBehaviour:
   m_ObjectHideFlags: 0
