@@ -283,6 +283,7 @@
 	<object class="MixerBusEffectChain" id="{f361c88e-7f97-4686-852e-23f87e75e994}">
 		<relationship name="effects">
 			<destination>{247ba3f9-0490-4aeb-a97b-caf37b2af4f1}</destination>
+			<destination>{91de4dc1-b653-4474-abb1-f25152cfd7f3}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{d7f79bbb-9286-4180-8040-b4ee4c6a57d5}" />
@@ -292,7 +293,7 @@
 			<value>4</value>
 		</property>
 		<property name="maximumDistance">
-			<value>8.80000019</value>
+			<value>9.80000019</value>
 		</property>
 		<property name="overrideRange">
 			<value>true</value>
@@ -392,12 +393,20 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{247ba3f9-0490-4aeb-a97b-caf37b2af4f1}" />
+	<object class="ThreeEQEffect" id="{91de4dc1-b653-4474-abb1-f25152cfd7f3}">
+		<property name="midGain">
+			<value>-5.5</value>
+		</property>
+		<property name="highGain">
+			<value>-10</value>
+		</property>
+	</object>
 	<object class="AutomationPoint" id="{50fcf6e8-d388-4af0-b9a8-fc5549309079}">
 		<property name="position">
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>-7</value>
+			<value>-80</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{c92b7ae6-cb40-4803-aa97-8f848f1a31da}">

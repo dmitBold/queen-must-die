@@ -311,10 +311,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639240674261209541
+  lastModified: 639240746610534434
   FileSizes:
   - Name: Desktop
-    Value: 7407040
+    Value: 7407968
   Exists: 1
 --- !u!114 &-4029956871787623766
 MonoBehaviour:
@@ -478,7 +478,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639240674261224738
+  cacheTime: 639240746610559528
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
@@ -854,7 +854,8 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 8510012627143062490}
   MinDistance: 1
   MaxDistance: 20
   Length: 565
@@ -951,7 +952,7 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639240674261224738
+  lastModified: 639240746610559528
   FileSizes:
   - Name: Desktop
     Value: 2220
@@ -1088,9 +1089,33 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 2.4
+  MaxDistance: 30
   Length: 1050
+--- !u!114 &8510012627143062490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps_scene1/TrackIndex
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: TrackIndex
+  StudioPath: 
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 3886461460
+    data2: 2608001279
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &8929571478374914542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1117,5 +1142,5 @@ MonoBehaviour:
   Parameters:
   - {fileID: 3471908741439231644}
   MinDistance: 4.4
-  MaxDistance: 35
+  MaxDistance: 50
   Length: 56571
