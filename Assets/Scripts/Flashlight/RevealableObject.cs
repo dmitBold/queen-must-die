@@ -16,6 +16,7 @@ namespace NightCycle
         [Header("Interaction & Reveal")]
         [Tooltip("Компоненты, которые включатся при свете (Collider, Outline, Interactable)")]
         [SerializeField] private Behaviour[] componentsToToggle;
+        [SerializeField] private GameObject[] ObjectsToToggle;
         [Tooltip("Обычный материал, на который заменится скрытый при начале взаимодействия")]
         [SerializeField] private Material standardMaterial;
 
@@ -82,6 +83,11 @@ namespace NightCycle
             foreach (var comp in componentsToToggle)
             {
                 if (comp != null) comp.enabled = state;
+            }
+
+            foreach (var obj in ObjectsToToggle)
+            {
+                if (obj != null) obj.SetActive(state);
             }
         }
 
