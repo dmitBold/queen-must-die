@@ -4,6 +4,7 @@ using Zenject;
 using Core;
 using FMOD;
 using FMODUnity;
+using System.Collections;
 
 namespace NightCycle
 {
@@ -12,6 +13,12 @@ namespace NightCycle
         Outline outline;
         public string message;
         public UnityEvent onInteraction;
+        //new
+        public float delay;
+        public UnityEvent LateInteraction;
+        private Coroutine _lateInteractCoroutine;
+        public bool triggerLate = false;
+        //new
 
         public UnityEvent startHOLD;
         public UnityEvent resetHOLD;
@@ -62,6 +69,15 @@ namespace NightCycle
             //FMODUnity.RuntimeManager.PlayOneShot("event:/Scenes/Hom/Curtains", transform.position);
             _audioService.PlayFMODEvent(interact_sound, transform.position);
             onInteraction.Invoke();
+
+            if (_lateInteractCoroutine != null)
+            {
+                StopCoroutine(_lateInteractCoroutine);
+            }
+            if (triggerLate)
+            {
+                _lateInteractCoroutine = StartCoroutine(LateInteract());
+            }
         }
 
         public void InteractStartHOLD()
@@ -94,6 +110,24 @@ namespace NightCycle
         {
            
         }
+
+        //new
+        public IEnumerator LateInteract()
+        {
+            yield return new WaitForSeconds(delay);
+
+            if (this == null) yield break;
+
+            LateInteraction?.Invoke();
+
+            _lateInteractCoroutine = null;
+        }
+
+        private void OnDisable()
+        {
+            _lateInteractCoroutine = null;
+        }
+        //new
 
     }
 }
