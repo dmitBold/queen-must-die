@@ -78,6 +78,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 640
+--- !u!114 &-8614683318542630661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/NightSycle/Railing open
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/NightSycle/Railing open
+  Guid:
+    Data1: 302099618
+    Data2: 1154935711
+    Data3: -1260492885
+    Data4: -860788907
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 40
+  MaxDistance: 90
+  Length: 3996
 --- !u!114 &-8294556767446969489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,10 +338,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639250267643387374
+  lastModified: 639254501425826522
   FileSizes:
   - Name: Desktop
-    Value: 9119072
+    Value: 9272096
   Exists: 1
 --- !u!114 &-4029956871787623766
 MonoBehaviour:
@@ -424,6 +451,33 @@ MonoBehaviour:
   MinDistance: 2.5
   MaxDistance: 20
   Length: 1375
+--- !u!114 &-1173767196914467595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/Hom/Basement enter creak
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/Hom/Basement enter creak
+  Guid:
+    Data1: 1450688235
+    Data2: 1101812939
+    Data3: -1769468769
+    Data4: -1502483810
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,12 +521,13 @@ MonoBehaviour:
   - {fileID: -7329575337743277253}
   - {fileID: 4220321109266987824}
   - {fileID: -3370766970595164140}
-  - {fileID: 5005011261095000523}
   - {fileID: -6185306176472155119}
   - {fileID: -8647045381554864713}
   - {fileID: 3762428620662624110}
   - {fileID: 2783953248006518876}
   - {fileID: 981253068618138022}
+  - {fileID: -8614683318542630661}
+  - {fileID: -1173767196914467595}
   EditorParameters:
   - {fileID: 4742735435840111238}
   MasterBanks:
@@ -480,7 +535,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639250267643397389
+  cacheTime: 639254501425866437
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
@@ -536,18 +591,20 @@ MonoBehaviour:
     index: 25
   - key: event:/Empty
     index: 26
-  - key: event:/Scenes/NightSycle/Lab Open
-    index: 27
   - key: event:/Scenes/Hom/MusicBox/Chase music
-    index: 28
+    index: 27
   - key: event:/Scenes/Envelope
-    index: 29
+    index: 28
   - key: event:/Scenes/Hom/MusicBox/Chase music stop
-    index: 30
+    index: 29
   - key: event:/Scenes/Book
-    index: 31
+    index: 30
   - key: event:/Scenes/Hom/MusicBox/Chase music 2
+    index: 31
+  - key: event:/Scenes/NightSycle/Railing open
     index: 32
+  - key: event:/Scenes/Hom/Basement enter creak
+    index: 33
 --- !u!114 &52534761935187065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,33 +1001,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 565
---- !u!114 &5005011261095000523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Scenes/NightSycle/Lab Open
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Scenes/NightSycle/Lab Open
-  Guid:
-    Data1: 302099618
-    Data2: 1154935711
-    Data3: -1260492885
-    Data4: -860788907
-  Banks:
-  - {fileID: -4548252348506558157}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 40
-  MaxDistance: 90
-  Length: 3996
 --- !u!114 &5418574287204183210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,10 +1067,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639250267643397389
+  lastModified: 639254501425866437
   FileSizes:
   - Name: Desktop
-    Value: 2298
+    Value: 2364
   Exists: 1
 --- !u!114 &6713093496099956156
 MonoBehaviour:
