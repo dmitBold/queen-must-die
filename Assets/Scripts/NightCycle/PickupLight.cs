@@ -25,7 +25,9 @@ namespace NightCycle
         public void ChangeEssense(int value)
         {
             // ѕередаем значение в централизованный метод
-            flashlight.AddEssence(value);
+            //flashlight.AddEssence(value);
+            flashlight.AddEssenceWUI(value);
         }
+
     }
 }
