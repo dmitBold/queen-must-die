@@ -4,30 +4,27 @@ using Zenject;
 
 namespace NightCycle
 {
-    public class DragDoor : MonoBehaviour
+    public class PlayerInteractor : MonoBehaviour
     {
-        [SerializeField] LayerMask doorLayer;
+        // Объедини doorLayer и LockLayer в один общий слой в Unity
+        [SerializeField] LayerMask interactableLayer;
+
         [SerializeField] Sprite HandImage;
         [SerializeField] Sprite DragImage;
-        [SerializeField] Sprite og;
+        [SerializeField] Sprite LockImage;
 
         [SerializeField] float motorForce = 1500f;
         [SerializeField] float speedMultiplier = 400f;
 
         [SerializeField] private PlayerStateController playerStateController;
 
-
-        Transform selectedDoor;
-        HingeJoint joint;
+        Transform currentTarget;
+        HingeJoint currentJoint;
         bool isDragging = false;
         float sideMultiplier = 1f;
+
         HUDController controller;
         Camera cam;
-
-        //TEST
-        LockDoor Lock;
-        [SerializeField] Sprite LockImage;
-
         private AudioService _audioService;
 
         [Inject]
@@ -37,12 +34,9 @@ namespace NightCycle
             controller = hudController;
         }
 
-        //TEST
         void Start()
         {
-            controller = HUDController.instance;
             cam = Camera.main;
-            //OgImage = HUDController.instance.CrosshairImage.sprite;
         }
 
         void Update()
@@ -53,63 +47,72 @@ namespace NightCycle
                 return;
             }
 
-            RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 3f, doorLayer))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, 3f, interactableLayer))
             {
-                selectedDoor = hit.collider.transform;
-                LockDoor lockDoor = selectedDoor.GetComponent<LockDoor>();
+                currentTarget = hit.collider.transform;
 
-                if (lockDoor != null && lockDoor.enabled)
+                // 1. Сначала проверяем, не заблокирован ли объект
+                if (currentTarget.TryGetComponent(out LockObject lockObj) && lockObj.isLocked && lockObj.enabled)
                 {
+                    SetCursor(LockImage, true);
 
-                    controller.DoNormalSize();
+                    if (Input.GetMouseButtonDown(0) && lockObj.LockSound != null)
+                    {
+                        _audioService.PlaySound(lockObj.LockSound);
+                    }
+                    return; // Если объект закрыт, прерываем выполнение (рука не появится)
+                }
 
-                    controller.ChangeCrosshairImage(LockImage);
+                // 2. Если объект не заблокирован (или замка вообще нет), проверяем, дверь ли это
+                // Можно проверять по наличию HingeJoint, как у тебя, или создать пустой скрипт-метку DoorComponent
+                if (currentTarget.TryGetComponent(out HingeJoint joint))
+                {
+                    SetCursor(HandImage, true);
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if (lockDoor.LockSound != null)
-                        {
-                            _audioService.PlaySound(lockDoor.LockSound);
-                        }
+                        StartDragging(joint);
                     }
+                    return;
                 }
-                else
-                {
-                    controller.DoNormalSize();
 
-                    controller.ChangeCrosshairImage(HandImage);
+                // 3. Здесь в будущем можно добавить проверки на другие объекты (например, Chest chest)
+                // if (currentTarget.TryGetComponent(out Chest chest)) { ... }
 
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        StartDragging();
-                    }
-                }
+                // Если объект на слое interactableLayer, но скриптов нет:
+                ResetCursor();
             }
             else
             {
-                controller.DoSmallSize();
-
-                controller.ChangeCrosshairImage(controller.DefaultImage);
+                ResetCursor();
             }
         }
 
-        private void StartDragging()
+        private void SetCursor(Sprite icon, bool isNormalSize)
         {
-            joint = selectedDoor.GetComponent<HingeJoint>();
-            if (joint != null)
-            {
-                isDragging = true;
-                joint.useMotor = true;
-                playerStateController.SetMode(PlayerMode.DoorState);
+            if (isNormalSize) controller.DoNormalSize();
+            else controller.DoSmallSize();
 
-                Vector3 doorToCam = cam.transform.position - selectedDoor.position;
-                sideMultiplier = Mathf.Sign(Vector3.Dot(selectedDoor.forward, doorToCam));
+            controller.ChangeCrosshairImage(icon);
+        }
 
-                controller.DoNormalSize();
+        private void ResetCursor()
+        {
+            currentTarget = null;
+            SetCursor(controller.DefaultImage, false);
+        }
 
-                controller.ChangeCrosshairImage(DragImage);
-            }
+        private void StartDragging(HingeJoint joint)
+        {
+            currentJoint = joint;
+            isDragging = true;
+            currentJoint.useMotor = true;
+            playerStateController.SetMode(PlayerMode.DoorState);
+
+            Vector3 doorToCam = cam.transform.position - currentTarget.position;
+            sideMultiplier = Mathf.Sign(Vector3.Dot(currentTarget.forward, doorToCam));
+
+            SetCursor(DragImage, true);
         }
 
         private void HandleDragging()
@@ -117,23 +120,23 @@ namespace NightCycle
             if (Input.GetMouseButtonUp(0))
             {
                 isDragging = false;
-                joint.useMotor = false;
-                joint = null;
-                selectedDoor = null;
+                currentJoint.useMotor = false;
+                currentJoint = null;
+                currentTarget = null;
                 playerStateController.SetMode(PlayerMode.FreeMovement);
                 return;
             }
 
-            if (joint != null)
+            if (currentJoint != null)
             {
                 float mouseX = Input.GetAxis("Mouse X");
                 float mouseY = Input.GetAxis("Mouse Y");
                 float combinedInput = mouseX + mouseY;
 
-                JointMotor motor = joint.motor;
+                JointMotor motor = currentJoint.motor;
                 motor.force = motorForce;
                 motor.targetVelocity = combinedInput * speedMultiplier * sideMultiplier;
-                joint.motor = motor;
+                currentJoint.motor = motor;
             }
         }
     }

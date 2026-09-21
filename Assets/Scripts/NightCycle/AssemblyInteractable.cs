@@ -11,6 +11,7 @@ namespace NightCycle
     public class AssemblyInteractable : MonoBehaviour
     {
         public UnityEvent onAssemblyCompleted;
+        public bool isCompleted = false;
         [SerializeField] private InteractableView viewPrefab;
 
         private AssemblyService _assemblyService;
@@ -35,6 +36,7 @@ namespace NightCycle
 
         private void OnAssemblyCompleted()
         {
+            isCompleted = true;
             onAssemblyCompleted?.Invoke();
         }
     }
