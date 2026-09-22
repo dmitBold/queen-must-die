@@ -1,7 +1,10 @@
+using Core;
+using EasyTextEffects;
+using FMODUnity;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using EasyTextEffects;
+using Zenject;
 
 namespace Dialogue
 {
@@ -10,6 +13,7 @@ namespace Dialogue
         [SerializeField] float delay = 0.03f;
 
         public TextEffect textEffectComponent;
+        [SerializeField] private EventReference typeSound;
 
         TextMeshProUGUI field;
         string[] pages;
@@ -26,6 +30,13 @@ namespace Dialogue
         public event System.Action OnDialogueFinished;
         public event System.Action<int> OnPageFinished;
         public event System.Action OnDialogueBack;
+        private AudioService _audioService;
+
+        [Inject]
+        public void Constructor(AudioService audioService)
+        {
+            _audioService = audioService;
+        }
 
         public enum SkipResult
         {
@@ -93,6 +104,10 @@ namespace Dialogue
             while (currentVisibleCharacters < totalCharacters)
             {
                 currentVisibleCharacters++;
+                if (/*typeSound != null &&*/ currentVisibleCharacters % 2 == 0)
+                {
+                    _audioService.PlayFMODEvent(typeSound);
+                }
                 yield return new WaitForSeconds(delay);
             }
 

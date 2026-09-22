@@ -1,6 +1,7 @@
 using System.Collections;
 using Core;
 using EasyTextEffects;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -11,7 +12,7 @@ namespace NightCycle
     {
         [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private float typingDelay = 0;
-        [SerializeField] private AudioClip typeSound;
+        [SerializeField] private EventReference typeSound;
         public TextEffect textEffectComponent;
 
         private Coroutine typingCoroutine;
@@ -52,9 +53,9 @@ namespace NightCycle
             {
                 currentVisibleCharacters++;
 
-                if (typeSound != null && currentVisibleCharacters % 2 == 0)
+                if (/*typeSound != null &&*/ currentVisibleCharacters % 2 == 0)
                 {
-                    _audioService.PlaySound(typeSound);
+                    _audioService.PlayFMODEvent(typeSound);
                 }
 
                 yield return new WaitForSeconds(typingDelay);
