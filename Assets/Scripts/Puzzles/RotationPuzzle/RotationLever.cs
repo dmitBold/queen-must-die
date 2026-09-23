@@ -1,4 +1,7 @@
+using Core;
+using FMODUnity;
 using UnityEngine;
+using Zenject;
 
 namespace NightCycle.Puzzles
 {
@@ -12,8 +15,16 @@ namespace NightCycle.Puzzles
         [SerializeField] private Animator animator;
         [SerializeField] private string animationTrigger = "Pull";
         [SerializeField] private float interactCooldown = 1.0f;
+        public EventReference LeverSound;
 
         private float lastInteractTime = -9999f;
+        private AudioService audioService;
+
+        [Inject]
+        private void Construct(AudioService audioService)
+        {
+            this.audioService = audioService;
+        }
 
         public void TriggerLever()
         {
@@ -33,6 +44,8 @@ namespace NightCycle.Puzzles
             {
                 animator.SetTrigger(animationTrigger);
             }
+
+            audioService.PlayFMODEvent(LeverSound, this.gameObject.transform.position);
 
             // Запускаем поворот
             foreach (var item in targetItems)
