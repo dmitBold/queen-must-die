@@ -1,8 +1,8 @@
 using UnityEngine;
 using Zenject;
 using Unity.Cinemachine;
-using Core; // Подключаем пространство имен с AudioService
-using FMODUnity; // Для EventReference
+using Core;
+using FMODUnity;
 
 namespace NightCycle
 {
@@ -13,6 +13,12 @@ namespace NightCycle
         [Header("Movement Speeds")]
         [SerializeField] private float walkSpeed = 3.0f;
         [SerializeField] private float sprintMultiplier = 2.0f;
+
+        [Header("Crouch Parameters")]
+        [SerializeField] private float crouchSpeedMultiplier = 0.5f; // Уменьшение скорости при приседе
+        [SerializeField] private float crouchHeightRatio = 1.5f; // Во сколько раз уменьшается высота
+        [SerializeField] private float crouchCameraTransitionSpeed = 10f; // Скорость приседания камеры
+        [SerializeField] private LayerMask ceilingCheckMask = ~0; // Слои для проверки препятствий сверху (убери слой Player/IgnoreRaycast)
 
         [Header("Jump Parameters")]
         [SerializeField] private float jumpForce = 5.0f;
@@ -31,14 +37,13 @@ namespace NightCycle
         [SerializeField] private float sprintAmplitude = 1.0f;
         [SerializeField] private float sprintFrequency = 2.5f;
 
-        // --- НОВЫЕ ПАРАМЕТРЫ ШАГОВ ---
         [Header("Footsteps (FMOD)")]
-        [SerializeField] private EventReference footstepEvent; // Позволит выбрать ивент через UI
-        [SerializeField] private float walkStepInterval = 0.5f; // Секунд между шагами при ходьбе
-        [SerializeField] private float sprintStepInterval = 0.3f; // Секунд между шагами при беге
+        [SerializeField] private EventReference footstepEvent;
+        [SerializeField] private float walkStepInterval = 0.5f;
+        [SerializeField] private float sprintStepInterval = 0.3f;
+        [SerializeField] private float crouchStepInterval = 0.7f; // Интервал шагов в приседе
 
-        private float stepTimer; // Внутренний таймер
-        // ------------------------------
+        private float stepTimer;
         private bool wasMoving;
 
         [Header("References")]
@@ -47,14 +52,27 @@ namespace NightCycle
         [SerializeField] private PlayerStateController playerStateController;
 
         private PlayerInputManager playerInputHandler;
-        private AudioService audioService; // Ссылка на наш сервис звуков
+        private AudioService audioService;
 
         [SerializeField] private CinemachineBasicMultiChannelPerlin cameraNoise;
 
         private Vector3 currentMovement;
         private float verticalRotation;
 
-        private float CurrentSpeed => walkSpeed * (playerInputHandler.SprintTriggered ? sprintMultiplier : 1);
+        // Состояния и параметры приседа
+        private bool isCrouching;
+        private float originalControllerHeight;
+        private Vector3 originalControllerCenter;
+        private float originalCameraLocalY;
+
+        private float CurrentSpeed
+        {
+            get
+            {
+                if (isCrouching) return walkSpeed * crouchSpeedMultiplier;
+                return walkSpeed * (playerInputHandler.SprintTriggered ? sprintMultiplier : 1);
+            }
+        }
 
         [Inject]
         private void Construct(PlayerInputManager playerInputHandler, AudioService audioService)
@@ -67,10 +85,14 @@ namespace NightCycle
         private void Start()
         {
             InitializeCursor();
-
-            // Сбрасываем таймер шагов в начале
             stepTimer = 0f;
             wasMoving = false;
+
+            // Запоминаем изначальные параметры для приседа
+            originalControllerHeight = characterController.height;
+            originalControllerCenter = characterController.center;
+            if (mainCamera != null)
+                originalCameraLocalY = mainCamera.transform.localPosition.y;
         }
 
         private void InitializeCursor()
@@ -81,6 +103,9 @@ namespace NightCycle
 
         private void Update()
         {
+            // Обновляем камеру и присед даже если движение заблокировано, чтобы не прерывать анимацию камеры
+            HandleCrouching();
+
             if (!playerStateController.CanMove())
             {
                 HandleJumpingItemSelection();
@@ -97,39 +122,82 @@ namespace NightCycle
 
             bool isMoving = characterController.isGrounded && playerInputHandler.MovementInput.sqrMagnitude > 0.01f;
             HandleCameraBobbing(isMoving);
-            HandleFootsteps(isMoving); // Вызов логики шагов
+            HandleFootsteps(isMoving);
         }
 
-        // --- ЛОГИКА ШАГОВ ---
+        private void HandleCrouching()
+        {
+            // Логика перехода в присед и обратно
+            if (playerInputHandler.CrouchTriggered && !isCrouching)
+            {
+                isCrouching = true;
+            }
+            else if (!playerInputHandler.CrouchTriggered && isCrouching)
+            {
+                // Пытаемся встать. Если сверху нет потолка - встаем.
+                if (!IsCeilingAbove())
+                {
+                    isCrouching = false;
+                }
+            }
+
+            // Целевые значения для физики
+            float targetHeight = isCrouching ? (originalControllerHeight / crouchHeightRatio) : originalControllerHeight;
+            Vector3 targetCenter = isCrouching ? (originalControllerCenter / crouchHeightRatio) : originalControllerCenter;
+
+            // Мгновенно меняем коллайдер, чтобы избежать застреваний
+            if (Mathf.Abs(characterController.height - targetHeight) > 0.001f)
+            {
+                characterController.height = targetHeight;
+                characterController.center = targetCenter;
+            }
+
+            // Плавно интерполируем позицию камеры
+            if (mainCamera != null)
+            {
+                float targetCameraY = isCrouching ? originalCameraLocalY - (originalControllerHeight - targetHeight) : originalCameraLocalY;
+                Vector3 camPos = mainCamera.transform.localPosition;
+                camPos.y = Mathf.Lerp(camPos.y, targetCameraY, Time.deltaTime * crouchCameraTransitionSpeed);
+                mainCamera.transform.localPosition = camPos;
+            }
+        }
+
+        private bool IsCeilingAbove()
+        {
+            // Рассчитываем текущую высоту (высоту в приседе)
+            float currentCrouchHeight = originalControllerHeight / crouchHeightRatio;
+
+            // Центр сферы начинается прямо на макушке игрока в приседе
+            Vector3 origin = transform.position + (Vector3.up * currentCrouchHeight);
+            float castDistance = originalControllerHeight - currentCrouchHeight;
+
+            // Пускаем сферу (радиусом с игрока) вверх на разницу в высоте с небольшим запасом (0.1f)
+            return Physics.SphereCast(origin, characterController.radius, Vector3.up, out _, castDistance + 0.1f, ceilingCheckMask);
+        }
+
         private void HandleFootsteps(bool isMoving)
         {
             if (!isMoving)
             {
                 wasMoving = false;
-
-                // Время кулдауна продолжает уменьшаться, даже когда игрок стоит.
-                // Это предотвращает мгновенный повторный щелчок звука, если игрок спамит WASD.
-                if (stepTimer > 0)
-                {
-                    stepTimer -= Time.deltaTime;
-                }
+                if (stepTimer > 0) stepTimer -= Time.deltaTime;
                 return;
             }
 
-            // Если игрок только что начал движение и кулдаун с прошлого шага завершен
+            float currentStepInterval = isCrouching ? crouchStepInterval : (playerInputHandler.SprintTriggered ? sprintStepInterval : walkStepInterval);
+
             if (!wasMoving && stepTimer <= 0f)
             {
                 PlayFootstepSound();
-                stepTimer = playerInputHandler.SprintTriggered ? sprintStepInterval : walkStepInterval;
+                stepTimer = currentStepInterval;
             }
             else
             {
                 stepTimer -= Time.deltaTime;
-
                 if (stepTimer <= 0f)
                 {
                     PlayFootstepSound();
-                    stepTimer = playerInputHandler.SprintTriggered ? sprintStepInterval : walkStepInterval;
+                    stepTimer = currentStepInterval;
                 }
             }
 
@@ -140,11 +208,9 @@ namespace NightCycle
         {
             if (audioService != null)
             {
-                // Передаем координаты игрока для 3D звука
                 audioService.PlayFMODEvent(footstepEvent, transform.position);
             }
         }
-        // --------------------
 
         private void HandleCameraBobbing(bool isMoving)
         {
@@ -155,7 +221,8 @@ namespace NightCycle
 
             if (isMoving)
             {
-                if (playerInputHandler.SprintTriggered)
+                // Если игрок присел, отключаем спринт-боббинг
+                if (playerInputHandler.SprintTriggered && !isCrouching)
                 {
                     targetAmplitude = sprintAmplitude;
                     targetFrequency = sprintFrequency;
@@ -209,7 +276,8 @@ namespace NightCycle
             {
                 currentMovement.y = GROUNDED_GRAVITY;
 
-                if (playerInputHandler.JumpTriggered)
+                // Блокируем прыжок, если игрок сидит
+                if (playerInputHandler.JumpTriggered && !isCrouching)
                 {
                     currentMovement.y = jumpForce;
                 }
@@ -262,7 +330,6 @@ namespace NightCycle
         private void OnEnable()
         {
             SettingsMenu.OnSensitivityChanged += UpdateSensitivity;
-
             mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1f);
         }
 
