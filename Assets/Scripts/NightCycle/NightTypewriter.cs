@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Core;
 using EasyTextEffects;
@@ -13,6 +14,7 @@ namespace NightCycle
         [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private float typingDelay = 0;
         [SerializeField] private EventReference typeSound;
+        [SerializeField] private string TextingParameterName = "IsTyping";
         public TextEffect textEffectComponent;
 
         private Coroutine typingCoroutine;
@@ -47,6 +49,8 @@ namespace NightCycle
         private IEnumerator TypeRoutine()
         {
             IsTyping = true;
+            RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 1);
+            _audioService.PlayFMODEvent(typeSound);
             int totalCharacters = dialogueText.textInfo.characterCount;
 
             while (currentVisibleCharacters < totalCharacters)
@@ -55,13 +59,14 @@ namespace NightCycle
 
                 if (/*typeSound != null &&*/ currentVisibleCharacters % 2 == 0)
                 {
-                    _audioService.PlayFMODEvent(typeSound);
+                   // _audioService.PlayFMODEvent(typeSound);
                 }
 
                 yield return new WaitForSeconds(typingDelay);
             }
 
             IsTyping = false;
+            RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
         }
 
         public void SkipTyping()
