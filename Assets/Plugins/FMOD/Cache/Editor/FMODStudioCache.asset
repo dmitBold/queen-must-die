@@ -42,7 +42,7 @@ MonoBehaviour:
   Name: TrackIndex
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 5
   Default: 0
   ID:
     data1: 3886461460
@@ -51,6 +51,34 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-8798937521324116886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Text
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/UI/Text
+  Guid:
+    Data1: 2038725471
+    Data2: 1134353487
+    Data3: 1427374212
+    Data4: 872564125
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 8095676952615887210}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 812
 --- !u!114 &-8647045381554864713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,10 +420,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639257923282265486
+  lastModified: 639258028275249374
   FileSizes:
   - Name: Desktop
-    Value: 10310848
+    Value: 10351680
   Exists: 1
 --- !u!114 &-4528472134983763805
 MonoBehaviour:
@@ -412,7 +440,7 @@ MonoBehaviour:
   Name: TrackIndex
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 5
   Default: 0
   ID:
     data1: 3886461460
@@ -556,6 +584,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1200
+--- !u!114 &-401231331353995621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/IsTyping
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: IsTyping
+  StudioPath: parameter:/IsTyping
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3233872685
+    data2: 1295805530
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &-166473851218126022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,14 +691,16 @@ MonoBehaviour:
   - {fileID: -7776105576227852250}
   - {fileID: 2236874552428953835}
   - {fileID: 2394405514335810655}
+  - {fileID: -8798937521324116886}
   EditorParameters:
   - {fileID: 4742735435840111238}
+  - {fileID: -401231331353995621}
   MasterBanks:
   - {fileID: -4548252348506558157}
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639257923282344207
+  cacheTime: 639258028275283146
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
@@ -722,6 +776,14 @@ MonoBehaviour:
     index: 35
   - key: event:/Scenes/NightSycle/Library/Guard Kill
     index: 36
+  - key: event:/Scenes/NightSycle/Library/O I I A Cat/I
+    index: 37
+  - key: event:/Scenes/NightSycle/Library/O I I A Cat/U
+    index: 38
+  - key: event:/Scenes/NightSycle/Library/O I I A Cat/A
+    index: 39
+  - key: event:/UI/Text
+    index: 40
 --- !u!114 &52534761935187065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,7 +908,7 @@ MonoBehaviour:
   Name: TrackIndex
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 5
   Default: 0
   ID:
     data1: 3886461460
@@ -978,7 +1040,7 @@ MonoBehaviour:
   Name: TrackIndex
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 5
   Default: 0
   ID:
     data1: 3886461460
@@ -1056,7 +1118,7 @@ MonoBehaviour:
   Name: TrackIndex
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 5
   Default: 0
   ID:
     data1: 3886461460
@@ -1135,7 +1197,7 @@ MonoBehaviour:
   Name: TrackIndex
   StudioPath: parameter:/TrackIndex
   Min: 0
-  Max: 4
+  Max: 5
   Default: 0
   ID:
     data1: 3886461460
@@ -1187,7 +1249,7 @@ MonoBehaviour:
   Name: TrackIndex
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 5
   Default: 0
   ID:
     data1: 3886461460
@@ -1238,10 +1300,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639257923282344207
+  lastModified: 639258028275283146
   FileSizes:
   - Name: Desktop
-    Value: 2624
+    Value: 2712
   Exists: 1
 --- !u!114 &6713093496099956156
 MonoBehaviour:
@@ -1325,6 +1387,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 134260
+--- !u!114 &8095676952615887210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Text/IsTyping
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: IsTyping
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3233872685
+    data2: 1295805530
+  Type: 0
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &8293087449597447812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1421,7 +1507,7 @@ MonoBehaviour:
   Name: TrackIndex
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 5
   Default: 0
   ID:
     data1: 3886461460
