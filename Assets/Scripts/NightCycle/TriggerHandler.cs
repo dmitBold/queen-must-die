@@ -36,5 +36,10 @@ namespace NightCycle
                 }
             }
         }
+
+        public void triggerEvent()
+        {
+            onTriggerEnter?.Invoke();
+        }
     }
 }
