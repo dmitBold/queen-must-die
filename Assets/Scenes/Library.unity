@@ -3914,6 +3914,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1030981245, guid: abc00000000007230188709461465564, type: 3}
   m_PrefabInstance: {fileID: 246085338}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &246984416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 246984418}
+  - component: {fileID: 246984417}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &246984417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246984416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 221e2ac1ba588ee41b02351bc2941b10, type: 2}
+--- !u!4 &246984418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246984416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 45.185005, y: 17.83597, z: -5.5744996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &248859885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17705,13 +17754,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101774352}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.1949336, y: -0.6763343, z: 0.1971483, w: -0.68242615}
-  m_LocalPosition: {x: -10.5, y: 9.7, z: -23.1}
+  m_LocalRotation: {x: 0.076029524, y: 0.7062511, z: 0.07577371, w: -0.6997767}
+  m_LocalPosition: {x: 62.9, y: 7.1999993, z: -6.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 32.19, y: 89.381, z: -0.365}
+  m_LocalEulerAnglesHint: {x: -12.324, y: -90.536, z: 0.079}
 --- !u!1001 &1108268877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20668,6 +20717,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1065020589}
     m_Modifications:
+    - target: {fileID: 2573837898390101436, guid: bad5794a53f5c3645bb444b3a040ba01, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.296113
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573837898390101436, guid: bad5794a53f5c3645bb444b3a040ba01, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573837898390101436, guid: bad5794a53f5c3645bb444b3a040ba01, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6063518424537689786, guid: bad5794a53f5c3645bb444b3a040ba01, type: 3}
       propertyPath: m_Name
       value: Plexus
@@ -32799,7 +32860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2821212514896130789, guid: 3433f077a79d57e4089328461987914c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2842759955627288782, guid: 3433f077a79d57e4089328461987914c, type: 3}
       propertyPath: m_Size.x
@@ -32811,7 +32872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2888995725681081984, guid: 3433f077a79d57e4089328461987914c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3012695028770879531, guid: 3433f077a79d57e4089328461987914c, type: 3}
       propertyPath: m_IsActive
@@ -33660,3 +33721,4 @@ SceneRoots:
   - {fileID: 1065020589}
   - {fileID: 1946943645}
   - {fileID: 538432304}
+  - {fileID: 246984418}
