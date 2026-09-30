@@ -104,7 +104,7 @@ namespace Dialogue
             while (currentVisibleCharacters < totalCharacters)
             {
                 currentVisibleCharacters++;
-                if (/*typeSound != null &&*/ currentVisibleCharacters % 2 == 0)
+                if (/*typeSound != null &&*/ currentVisibleCharacters % 2 == 0 && isTyping)
                 {
                     _audioService.PlayFMODEvent(typeSound);
                 }
@@ -129,9 +129,11 @@ namespace Dialogue
 
             if (isTyping)
             {
+                //isTyping = false;
                 if (routine != null) StopCoroutine(routine);
                 currentVisibleCharacters = field.textInfo.characterCount;
                 isTyping = false;
+                //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("IsTyping", 0f);
                 UpdateVertexVisibility();
 
                 if (IsFinished)
