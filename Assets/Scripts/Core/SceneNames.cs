@@ -12,7 +12,8 @@ namespace Core
         IntroDialogue2,
         Throne,
         Night1_final,
-        Night1_outro
+        Night1_outro,
+        Library
     }
 
     public static class SceneNames
@@ -28,6 +29,7 @@ namespace Core
         public const string Throne = "Throne";
         public const string Night1_final = "Night1_Final";
         public const string Night1_outro = "Night1_outro";
+        public const string Library = "Library";
 
         public static string GetName(GameScene scene)
         {
@@ -44,6 +46,7 @@ namespace Core
                 case GameScene.Throne: return Throne;
                 case GameScene.Night1_final: return Night1_final;
                 case GameScene.Night1_outro: return Night1_outro;
+                case GameScene.Library: return Library;
                 default: return Night;
             }
         }
