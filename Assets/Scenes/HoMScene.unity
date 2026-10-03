@@ -18955,15 +18955,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4379276163588916207, guid: 3142a80b0a2c5244b95498c1a9a868ae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.8768606
+      value: -0.8768607
       objectReference: {fileID: 0}
     - target: {fileID: 4379276163588916207, guid: 3142a80b0a2c5244b95498c1a9a868ae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3438426
+      value: 1.3438427
       objectReference: {fileID: 0}
     - target: {fileID: 4379276163588916207, guid: 3142a80b0a2c5244b95498c1a9a868ae, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.5941417
+      value: 3.594142
       objectReference: {fileID: 0}
     - target: {fileID: 4379276163588916207, guid: 3142a80b0a2c5244b95498c1a9a868ae, type: 3}
       propertyPath: m_LocalRotation.w
@@ -37057,6 +37057,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 1701050700}
+          m_TargetAssemblyTypeName: HintTrigger, Assembly-CSharp
+          m_MethodName: TriggerHint
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &1355910806 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1030752698791737003, guid: fd7526115934ed34586d1ab2d983c678, type: 3}
@@ -46058,6 +46070,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9605b29a3bb859044b915908ef299a64, type: 3}
+--- !u!1 &1701050698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1701050699}
+  - component: {fileID: 1701050700}
+  m_Layer: 0
+  m_Name: RunHint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1701050699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701050698}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1998501219}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1701050700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701050698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aed5bf0608aa804e87ec0a5cf4d9c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HintTrigger
+  hintText: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 shift, \u0447\u0442\u043E\u0431\u044B
+    \u0431\u0435\u0436\u0430\u0442\u044C"
+  displayDuration: 3
+  fadeDuration: 0.25
+  showOnStart: 0
 --- !u!1 &1702711562
 GameObject:
   m_ObjectHideFlags: 0
@@ -359773,6 +359834,38 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7309863757619328985, guid: fd7526115934ed34586d1ab2d983c678, type: 3}
+--- !u!1 &1998501218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1998501219}
+  m_Layer: 0
+  m_Name: TutorialHints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1998501219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998501218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1701050699}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2003077724
 GameObject:
   m_ObjectHideFlags: 0
@@ -455941,3 +456034,4 @@ SceneRoots:
   - {fileID: 1334439055}
   - {fileID: 2074604201}
   - {fileID: 6922454}
+  - {fileID: 1998501219}
