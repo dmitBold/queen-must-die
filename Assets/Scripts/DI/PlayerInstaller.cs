@@ -15,6 +15,7 @@ namespace DI
         [Inject] private SaveSystem _saveSystem;
         //TEST
         [Inject] private IPlayerProvider _playerProvider;
+        [Inject] private IFlashlightProvider _flashlightProvider;
         //TEST
 
         public override void InstallBindings()
@@ -23,6 +24,18 @@ namespace DI
 
             Vector3 targetPosition = _spawnPoint.position;
             Quaternion targetRotation = _spawnPoint.rotation;
+
+            if (PendingSpawn.TryConsume(out var pos, out var rot))
+            {
+                targetPosition = pos;
+                targetRotation = rot;
+            }
+            else if (_saveSystem.HasLoadedData)
+            {
+                var data = _saveSystem.CurrentData;
+                targetPosition = new Vector3(data.posX, data.posY, data.posZ);
+                targetRotation = new Quaternion(data.rotX, data.rotY, data.rotZ, data.rotW);
+            }
 
             if (_saveSystem.HasLoadedData)
             {
@@ -45,6 +58,12 @@ namespace DI
 
             var rb = instance.GetComponentInChildren<Rigidbody>();
             var mr = instance.GetComponentInChildren<MeshRenderer>();
+            _flashlightProvider.Current = instance.Flashlight;
+            if (_flashlightProvider.PendingEssence.HasValue)
+            {
+                instance.Flashlight.SetEssense(_flashlightProvider.PendingEssence.Value);
+                _flashlightProvider.PendingEssence = null;
+            }
             Container.Bind<Player>().AsSingle().WithArguments(rb, mr);
         }
 
@@ -86,6 +105,8 @@ namespace DI
             {
                 _playerProvider.CurrentPlayer = null;
             }
+
+            _flashlightProvider.Current = null;
             //TEST
         }
     }

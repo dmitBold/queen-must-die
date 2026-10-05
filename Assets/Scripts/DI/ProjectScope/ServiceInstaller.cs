@@ -23,6 +23,7 @@ namespace DI
             Container.Bind<SaveManager>().FromInstance(saveManager).AsSingle();
             Container.Bind<SaveSystem>().AsSingle();
             Container.Bind<IPlayerProvider>().To<PlayerProvider>().AsSingle();
+            Container.Bind<IFlashlightProvider>().To<FlashlightProvider>().AsSingle().NonLazy();
             //TEST
         }
     }

@@ -18,7 +18,8 @@ public class SaveManager : MonoBehaviour
     [Inject] private InventoryManager _inventoryManager;
     [Inject] private QuestManager _questManager;
     [Inject] private WorldState _worldState;
-    //[Inject] private PlayerFlashlight _flashlight;
+
+    [Inject] private IFlashlightProvider _flashlightProvider;
 
     private bool _isProcessing = false;
 
@@ -37,6 +38,7 @@ public class SaveManager : MonoBehaviour
         public float rotY;
         public float rotZ;
         public float rotW;
+        public float Essence;
         //public bool isLightOn;
     }
 
@@ -144,8 +146,18 @@ public class SaveManager : MonoBehaviour
         {
             Debug.Log("FLASHLIGHT_SAVE_IS_NULL");
         }*/
+        var fl = _flashlightProvider.Current;
+        if (fl != null)
+        {
+            data.Essence = fl.GetEssense();
+            Debug.Log($"ESSENCE SAVED: {data.Essence}");
+        }
+        else
+        {
+            Debug.LogWarning("SAVE: flashlight is null, Essence=0");
+        }
 
-        string unitySceneName = SceneManager.GetActiveScene().name;
+            string unitySceneName = SceneManager.GetActiveScene().name;
         GameScene currentScene = GetGameSceneEnum(unitySceneName);
         data.currentSceneName = SceneNames.GetName(currentScene);
 
@@ -169,6 +181,16 @@ public class SaveManager : MonoBehaviour
 
         if (_saveSystem.Load())
         {
+            var fl = _flashlightProvider.Current;
+            if (fl != null)
+            {
+                fl.SetEssense(_saveSystem.CurrentData.Essence);
+            }
+            else
+            {
+                // игрока в сцене нет Ч отложим, применитс€ в PlayerInstaller
+                _flashlightProvider.PendingEssence = _saveSystem.CurrentData.Essence;
+            }
 
             if (_saveSystem.CurrentData.savedInventory != null)
             {

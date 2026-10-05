@@ -231,5 +231,15 @@ namespace NightCycle
         {
             return flashlight.transform.position - (flashlight.transform.forward * coneBackOffset);
         }
+
+        public float GetEssense()
+        {
+            return currentEssence;
+        }
+
+        public void SetEssense(float essence)
+        {
+            currentEssence = essence;
+        }
     }
 }
