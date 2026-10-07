@@ -66,15 +66,18 @@ namespace NightCycle
             }
 
             IsTyping = false;
+            
             RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
         }
 
         public void SkipTyping()
         {
+
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
 
             currentVisibleCharacters = dialogueText.textInfo.characterCount;
             IsTyping = false;
+            RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
         }
 
         private void LateUpdate()

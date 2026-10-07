@@ -10,6 +10,8 @@ namespace Dialogue
 {
     public class TypewriterEffect : MonoBehaviour
     {
+        [SerializeField] private string TextingParameterName = "IsTyping";
+
         [SerializeField] float delay = 0.03f;
 
         public TextEffect textEffectComponent;
@@ -133,7 +135,7 @@ namespace Dialogue
                 if (routine != null) StopCoroutine(routine);
                 currentVisibleCharacters = field.textInfo.characterCount;
                 isTyping = false;
-                //FMODUnity.RuntimeManager.StudioSystem.setParameterByName("IsTyping", 0f);
+                RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
                 UpdateVertexVisibility();
 
                 if (IsFinished)
@@ -164,6 +166,8 @@ namespace Dialogue
             {
                 if (routine != null) StopCoroutine(routine);
                 isTyping = false;
+                RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
+
             }
 
             if (pageIndex <= 0) return;
