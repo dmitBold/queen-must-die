@@ -77,6 +77,7 @@ namespace Dialogue
             {
                 currentVisibleCharacters = totalCharacters;
                 isTyping = false;
+                RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
                 UpdateVertexVisibility();
 
                 if (IsFinished)
@@ -101,19 +102,22 @@ namespace Dialogue
 
         IEnumerator TypeRoutine()
         {
+            RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 1);
+            _audioService.PlayFMODEvent(typeSound);
             int totalCharacters = field.textInfo.characterCount;
 
             while (currentVisibleCharacters < totalCharacters)
             {
                 currentVisibleCharacters++;
-                if (/*typeSound != null &&*/ currentVisibleCharacters % 2 == 0 && isTyping)
+                /*if (typeSound != null && currentVisibleCharacters % 2 == 0 && isTyping)
                 {
                     _audioService.PlayFMODEvent(typeSound);
-                }
+                }*/
                 yield return new WaitForSeconds(delay);
             }
 
             isTyping = false;
+            RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
 
             if (IsFinished)
             {

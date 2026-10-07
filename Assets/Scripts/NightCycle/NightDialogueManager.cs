@@ -220,6 +220,8 @@ namespace NightCycle
         public void ForceEndDialogue()
         {
             dialoguePanel.SetActive(false);
+
+            typewriter.StopTyping();
         }
 
 

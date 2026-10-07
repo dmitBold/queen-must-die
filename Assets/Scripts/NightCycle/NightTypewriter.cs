@@ -80,6 +80,16 @@ namespace NightCycle
             RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
         }
 
+        public void StopTyping()
+        {
+
+            if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+
+            currentVisibleCharacters = 0;
+            IsTyping = false;
+            RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
+        }
+
         private void LateUpdate()
         {
             if (dialogueText.textInfo == null || dialogueText.textInfo.characterCount == 0) return;
