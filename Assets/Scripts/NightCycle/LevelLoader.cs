@@ -23,6 +23,8 @@ namespace NightCycle
         [SerializeField] private GameObject loadingUI;
         public bool showUI = true;
 
+        [Inject] private IFlashlightProvider _flashlightProvider;
+
         [Inject]
         private void Construct(ScenesManager scenesManager)
         {
@@ -40,6 +42,10 @@ namespace NightCycle
 
         public void LoadNext()
         {
+            var fl = _flashlightProvider?.Current;
+            if (fl != null)
+                _flashlightProvider.PendingEssence = fl.GetEssense();
+
             if (useCustomSpawn)
             {
                 if (exitSpawnPoint != null)
@@ -47,8 +53,6 @@ namespace NightCycle
                 else
                     PendingSpawn.Set(customSpawnPosition, Quaternion.Euler(customSpawnEuler));
             }
-            // если useCustomSpawn == false Ч PendingSpawn не трогаем,
-            // PlayerInstaller возьмЄт свой _spawnPoint
 
             if (showUI)
             {
