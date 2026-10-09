@@ -20,6 +20,9 @@ namespace NightCycle
         [SerializeField] private Vector3 customSpawnEuler;
         [SerializeField] private bool useCustomSpawn;
 
+        [SerializeField] private GameObject loadingUI;
+        public bool showUI = true;
+
         [Inject]
         private void Construct(ScenesManager scenesManager)
         {
@@ -46,6 +49,11 @@ namespace NightCycle
             }
             // если useCustomSpawn == false Ч PendingSpawn не трогаем,
             // PlayerInstaller возьмЄт свой _spawnPoint
+
+            if (showUI)
+            {
+                loadingUI.gameObject.SetActive(true);
+            }
 
             _scenesManager.LoadSingle(SceneNames.GetName(targetScene));
         }
