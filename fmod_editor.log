@@ -9,7 +9,7 @@
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 0
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000002E0831F4A88 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000002B13C311AD8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -20,115 +20,4 @@
 [LOG] BankLoader::serializeBank                : fileversion = 146, compatVersion = 146 (oldest = 44, newest = 146)
 [LOG] BankLoader::serializeBank                : fileversion = 146, compatVersion = 146 (oldest = 44, newest = 146)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] BankLoader::serializeBank                : fileversion = 146, compatVersion = 146 (oldest = 44, newest = 146)
-[LOG] BankLoader::serializeBank                : fileversion = 146, compatVersion = 146 (oldest = 44, newest = 146)
-[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] SystemI::createSound                     : filename = Assets/FMOD_project/QMD/Build/Desktop/Master.bank : mode 02010081
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::getAsyncThread              : index = 0 / 5
-[LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 114688, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002E3B985D7B8, queue head = 000002E3B985A578, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002E3B985D7B8
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/FMOD_project/QMD/Build/Desktop/Master.bank', mode=0x02010081
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10821280
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116800
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002E3B3057B48
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Bell', format=5, channels=2, frequency=48000, lengthbytes=188960, lengthpcm=915331, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002E3B985D7B8
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002DD264F9F68, queue head = 000002E3B985A578, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002DD264F9F68
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002DD264F9F68
-[LOG] SystemI::createSound                     : filename = Assets/FMOD_project/QMD/Build/Desktop/Master.bank : mode 02010081
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::getAsyncThread              : index = 0 / 5
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002DD27048A08, queue head = 000002E3B985A578, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002DD27048A08
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/FMOD_project/QMD/Build/Desktop/Master.bank', mode=0x02010081
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10821280
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116800
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002E3B3059828
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Bell', format=5, channels=2, frequency=48000, lengthbytes=188960, lengthpcm=915331, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002DD27048A08
-[LOG] SoundI::release                          : Bell (000002E3B985D7B8)
-[LOG] SoundI::release                          :     Bell (000002DFB0CD06C8)
-[LOG] SoundI::release                          :     Bell (000002DD264F9F68)
-[LOG] SystemI::createSound                     : filename = Assets/FMOD_project/QMD/Build/Desktop/Master.bank : mode 02010081
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::getAsyncThread              : index = 0 / 5
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002DD270483C8, queue head = 000002E3B985A578, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002DD270483C8
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/FMOD_project/QMD/Build/Desktop/Master.bank', mode=0x02010081
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10821280
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116800
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002E3B3058E88
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Bell', format=5, channels=2, frequency=48000, lengthbytes=188960, lengthpcm=915331, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002DD270483C8
-[LOG] SoundI::release                          : Bell (000002DD27048A08)
-[LOG] SoundI::release                          :     Bell (000002DFB0CD1748)
-[LOG] SoundI::release                          :     Bell (000002DD264F9AB8)
-[LOG] SystemI::createSound                     : filename = Assets/FMOD_project/QMD/Build/Desktop/Master.bank : mode 02010081
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::getAsyncThread              : index = 0 / 5
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002DD270480A8, queue head = 000002E3B985A578, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002DD270480A8
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/FMOD_project/QMD/Build/Desktop/Master.bank', mode=0x02010081
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10821280
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116800
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002E3B3059DA8
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Bell', format=5, channels=2, frequency=48000, lengthbytes=188960, lengthpcm=915331, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002DD270480A8
-[LOG] SoundI::release                          : Bell (000002DD270483C8)
-[LOG] SoundI::release                          :     Bell (000002DFB0CD1EC8)
-[LOG] SoundI::release                          :     Bell (000002DD264FA288)
-[LOG] SystemI::createSound                     : filename = Assets/FMOD_project/QMD/Build/Desktop/Master.bank : mode 02010081
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::getAsyncThread              : index = 0 / 5
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002DD27048238, queue head = 000002E3B985A578, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002DD27048238
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/FMOD_project/QMD/Build/Desktop/Master.bank', mode=0x02010081
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 10821280
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 116800
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002E3B305ACC8
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Bell', format=5, channels=2, frequency=48000, lengthbytes=188960, lengthpcm=915331, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002DD27048238
-[LOG] SoundI::release                          : Bell (000002DD270480A8)
-[LOG] SoundI::release                          :     Bell (000002DFB0CD1748)
-[LOG] SoundI::release                          :     Bell (000002DD264FA418)
-[LOG] SoundI::release                          : Bell (000002DD27048238)
-[LOG] SoundI::release                          :     Bell (000002DFB0CD18C8)
-[LOG] SoundI::release                          :     Bell (000002DD264F9F68)
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] SystemI::closeInternal                   : Closed.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.
+[ERR] ~Global                                  : assertion: 'gSystemInitCount == 0' failed
