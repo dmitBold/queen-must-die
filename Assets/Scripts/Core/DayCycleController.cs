@@ -288,7 +288,7 @@ namespace Core
             choiceUI.OnEyeSelected += OnEyeSelected;
 
             //
-            inventoryUI.Init(this);
+            //inventoryUI.Init(this);
 
             //test
             cardManager.OnAnyChoiceResolved += FinishChoice;
@@ -322,7 +322,7 @@ namespace Core
 
             choiceUI.Hide();
 
-            inventoryUI.CancelDrag();
+            //inventoryUI.CancelDrag();
 
             cardManager.SkipCard();
         }

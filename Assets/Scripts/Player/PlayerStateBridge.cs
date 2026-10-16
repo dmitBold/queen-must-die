@@ -58,12 +58,12 @@ namespace NightCycle
 
         public void DisableInventoryUI()
         {
-            if (_inventoryUI != null) _inventoryUI.DisableRootCanvas();
+            //if (_inventoryUI != null) _inventoryUI.DisableRootCanvas();
         }
 
         public void EnableInventoryUI()
         {
-            if (_inventoryUI != null) _inventoryUI.EnableRootCanvas();
+            //if (_inventoryUI != null) _inventoryUI.EnableRootCanvas();
         }
 
         public void DisableHUD()

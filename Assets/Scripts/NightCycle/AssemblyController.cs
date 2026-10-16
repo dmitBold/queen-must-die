@@ -62,7 +62,7 @@ namespace NightCycle
             if (assemblyCamera)
                 assemblyCamera.gameObject.SetActive(false);
 
-            inventoryUI.OnSocketFilled += OnAssemblyCompleted;
+            //inventoryUI.OnSocketFilled += OnAssemblyCompleted;
         }
 
         private void Update()
@@ -92,14 +92,14 @@ namespace NightCycle
 
         private void OnDestroy()
         {
-            inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
+            //inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
             if (_subscribedView != null)
                 _subscribedView.onInteractionCompleted.RemoveListener(HandleViewInteractionCompleted);
         }
 
         public void Dispose()
         {
-            inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
+            //inventoryUI.OnSocketFilled -= OnAssemblyCompleted;
             activeSockets = null;
             foreach (var instance in _prefabInstances.Values)
             {
@@ -167,7 +167,7 @@ namespace NightCycle
             currentView?.OnEnterFocus();
 
             // Настраиваем режим в зависимости от типа объекта
-            if (currentAssemblyView != null)
+            /*if (currentAssemblyView != null)
             {
                 // ЭТО ТЕСТ
                 inventoryUI.EnableRootCanvas();
@@ -179,7 +179,7 @@ namespace NightCycle
                 // Для замков не нужен режим выбора предметов из инвентаря
                 //Debug.Log("IUI DISABLE");
                 inventoryUI.SetMode(InventoryUI.InventoryMode.Disable);
-            }
+            }*/
 
             playerStateController.SetMode(PlayerMode.Focused);
 
@@ -197,7 +197,12 @@ namespace NightCycle
             assemblyCanvas.gameObject.SetActive(false);
             isActive = false;
 
-            if (currentAssemblyView != null)
+
+            if (inventoryUI != null)
+            {
+                inventoryUI.CloseMiniPartsPanel();
+            }
+            /*if (currentAssemblyView != null)
             {
                 inventoryUI.ExitSelection();
                 // ЭТО ТЕСТ
@@ -210,7 +215,7 @@ namespace NightCycle
                 //inventoryUI.DisableRootCanvas();
                 //
                 inventoryUI.ExitSelection();
-            }
+            }*/
 
             playerStateController.SetMode(PlayerMode.FreeMovement);
 
@@ -284,7 +289,7 @@ namespace NightCycle
 
         private void OpenInventoryForSocket(AssemblySocket socket)
         {
-            inventoryUI.OpenForAssemblySocket(socket);
+            //inventoryUI.OpenForAssemblySocket(socket);
         }
     }
 }

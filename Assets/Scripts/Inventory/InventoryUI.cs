@@ -1,7 +1,10 @@
-using System;
-using Cards;
-using Core;
+п»їusing Core;
 using NightCycle;
+using NUnit.Framework.Internal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,280 +14,275 @@ namespace Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
-        public enum InventoryMode
-        {
-            Default,
-            NightItemSelection,
-            AssemblyItemSelection,
-            Disable
-        }
+        [Header("UI References")]
+        [SerializeField] private Image panel;
+        [SerializeField] private Canvas rootCanvas;
+        [SerializeField] private TextMeshProUGUI descriptionText;
 
-        public bool set_active_on_start = false;
-
-        [Header("UI References")] [SerializeField]
-        private GameObject panel;
-
+        [Header("Main List (3 Items)")]
         [SerializeField] private Transform slotsParent;
         [SerializeField] private ItemSlot slotPrefab;
         [SerializeField] private ItemTooltip tooltip;
-        [SerializeField] private Canvas rootCanvas;
-        [SerializeField] private Image dragIconPrefab;
 
-        [Header("State")] public bool isOpen;
-        public CardManager cardManager;
-        public AssemblySocket currentAssemblySocket;
+        [Header("Mini Parts Window")]
+        [SerializeField] private GameObject miniPartsPanel;
+        [SerializeField] private Transform partsSlotsParent;
+        [SerializeField] private ItemSlot partSlotPrefab;
 
+        //[SerializeField] private List<ItemData> test_items;
+
+        // State
+        public bool isOpen { get; private set; }
+        private int currentScrollIndex = 0;
+        private List<ItemData> filteredMainItems = new();
+        private ItemData selectedItem;
+        private List<ItemSlot> activeMainSlots = new();
+
+        private AssemblySocket activeSocket;
+        private AssemblyView activeAssemblyView;
+
+        // Dependencies
         private InventoryManager inventory;
-        private DayCycleController dayCycle;
-
-        private ItemData draggedItem;
-        private DragIconController dragIcon;
-        private ItemTarget currentTarget;
-        private InventoryMode currentMode;
-
-        public event Action OnSocketFilled;
+        private AssemblyService assemblyService;
+        private AudioService audioService;
 
         [Inject]
-        public void Construct(InventoryManager inventoryManager)
+        public void Construct(InventoryManager inventoryManager, AssemblyService assemblyService, AudioService audioService)
         {
-            inventory = inventoryManager;
-            inventory.OnInventoryChanged += Refresh;
-        }
+            this.inventory = inventoryManager;
+            this.assemblyService = assemblyService;
+            this.audioService = audioService;
 
-        private void OnDestroy()
-        {
-            if (inventory != null)
-                inventory.OnInventoryChanged -= Refresh;
+            this.inventory.OnInventoryChanged += RefreshUI;
         }
 
         private void Start()
         {
-            SetMode(InventoryMode.Disable);
-            if (set_active_on_start)
-            {
-                SetMode(InventoryMode.Default);
-            }
-        }
-
-        public void DisableRootCanvas()
-        {
-            rootCanvas.gameObject.SetActive(false);
-        }
-
-        public void EnableRootCanvas()
-        {
-            rootCanvas.gameObject.SetActive(true);
-        }
-
-        public void Init(DayCycleController dayCycle)
-        {
-            SetMode(InventoryMode.Default);
-            this.dayCycle = dayCycle;
-            Refresh();
-            Close();
+            rootCanvas.enabled = false;
+            miniPartsPanel.SetActive(false);
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                Toggle();
+                if (isOpen) Close();
+                else Open();
             }
-        }
 
-        public void Toggle()
-        {
-            if (!CanOpen())
-                return;
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
+            if (isOpen && !miniPartsPanel.activeSelf && filteredMainItems.Count > 3)
+            {
+                float scroll = Input.GetAxis("Mouse ScrollWheel");
+                if (scroll > 0f) ScrollList(-1);
+                else if (scroll < 0f) ScrollList(1);
+            }
 
-            if (isOpen)
-                Close();
-            else
-                Open();
-        }
-
-        private bool CanOpen()
-        {
-            return true;
+            /*if (Input.GetKeyDown(KeyCode.B))
+            {
+                Debug.Log("TEST ADD ITEM");
+                //inventory.AddItem(test);
+                foreach (ItemData item in test_items)
+                {
+                    inventory.AddItem(item);
+                }
+            }*/
         }
 
         private void Open()
         {
             isOpen = true;
-            panel.SetActive(true);
-            Refresh();
+            rootCanvas.enabled = true;
+            panel.gameObject.SetActive(true);
+            miniPartsPanel.SetActive(false);
+
+            UpdateFilteredItems();
+
+            if (filteredMainItems.Count > 0)
+            {
+                currentScrollIndex = Mathf.Max(0, filteredMainItems.Count - 3);
+                SelectItem(filteredMainItems.Last());
+                panel.enabled = false;
+            }
+            else
+            {
+                SelectItem(null);
+            }
+
+            RefreshUI();
         }
 
-        private void Close()
+        public void Close()
         {
             isOpen = false;
-            panel.SetActive(false);
-            tooltip.Hide();
-            EndDrag();
+            rootCanvas.enabled = false;
+            miniPartsPanel.SetActive(false);
+
+            if (assemblyService != null && assemblyService.IsActive)
+            {
+                assemblyService.CloseAssembly();
+            }
         }
 
-        private void Refresh()
+        public void CloseMiniPartsPanel()
         {
-            if (slotsParent == null) return;
+            if (miniPartsPanel != null)
+            {
+                miniPartsPanel.SetActive(false);
+            }
 
-            /*foreach (Transform child in slotsParent)
+            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ rootCanvas, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+            if (!isOpen && rootCanvas != null)
+            {
+                rootCanvas.enabled = false;
+            }
+        }
+
+        private void UpdateFilteredItems()
+        {
+            filteredMainItems = inventory.GetAllItems()
+                .Where(item => item.itemType == ItemType.Normal || item.itemType == ItemType.PortableBase)
+                .ToList();
+        }
+
+        private void ScrollList(int direction)
+        {
+            int maxIndex = Mathf.Max(0, filteredMainItems.Count - 3);
+            currentScrollIndex = Mathf.Clamp(currentScrollIndex + direction, 0, maxIndex);
+            RefreshUI();
+        }
+
+        private void RefreshUI()
+        {
+            if (!isOpen) return;
+            UpdateFilteredItems();
+
+            foreach (var slot in activeMainSlots)
+            {
+                if (slot != null) Destroy(slot.gameObject);
+            }
+            activeMainSlots.Clear();
+
+            if (currentScrollIndex + 3 > filteredMainItems.Count)
+                currentScrollIndex = Mathf.Max(0, filteredMainItems.Count - 3);
+
+            int countToSpawn = Mathf.Min(3, filteredMainItems.Count - currentScrollIndex);
+            for (int i = 0; i < countToSpawn; i++)
+            {
+                ItemData item = filteredMainItems[currentScrollIndex + i];
+                ItemSlot slot = Instantiate(slotPrefab, slotsParent);
+                slot.Set(item, this, true, tooltip);
+                activeMainSlots.Add(slot);
+            }
+
+            if (selectedItem != null)
+                descriptionText.text = $"<b>{selectedItem.itemName}</b>\n{selectedItem.description}";
+            else
+                descriptionText.text = "пїЅпїЅпїЅпїЅпїЅ";
+        }
+
+        public void OnItemClicked(ItemData item, bool isPartClick = false)
+        {
+            if (isPartClick)
+            {
+                TryApplyPartToSocket(item);
+            }
+            else
+            {
+                SelectItem(item);
+            }
+        }
+
+        private void SelectItem(ItemData item)
+        {
+            selectedItem = item;
+            miniPartsPanel.SetActive(false);
+
+            if (assemblyService.IsActive) assemblyService.CloseAssembly();
+
+            if (selectedItem != null && selectedItem.itemType == ItemType.PortableBase && selectedItem.assemblyPrefab != null)
+            {
+                InteractableView viewPrefab = selectedItem.assemblyPrefab.GetComponent<InteractableView>();
+                if (viewPrefab != null)
+                {
+                    assemblyService.OpenAssembly(viewPrefab, OnPortableBaseAssembled);
+                }
+            }
+
+            RefreshUI();
+        }
+
+        // --- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ---
+
+        public void OpenPartsMenuForSocket(AssemblySocket socket, AssemblyView assemblyView)
+        {
+            activeSocket = socket;
+            activeAssemblyView = assemblyView;
+
+            rootCanvas.enabled = true;
+            miniPartsPanel.SetActive(true);
+
+            foreach (Transform child in partsSlotsParent)
             {
                 Destroy(child.gameObject);
-            }*/
-
-            for (int i = slotsParent.childCount - 1; i >= 0; i--)
-            {
-                Destroy(slotsParent.GetChild(i).gameObject);
             }
 
-            var items = inventory.GetAllItems();
+            var availableParts = inventory.GetAllItems().Where(item => item.itemType == ItemType.Part).ToList();
 
-            foreach (var item in items)
+            foreach (var part in availableParts)
             {
-                ItemSlot slot = Instantiate(slotPrefab, slotsParent);
-
-                bool canApply = false;
-                if (currentMode == InventoryMode.Default)
-                {
-                    canApply = true;
-                }
-                else if (currentMode == InventoryMode.NightItemSelection)
-                {
-                    canApply = currentTarget != null && currentTarget.CanApply(item);
-                }
-                else if (currentMode == InventoryMode.AssemblyItemSelection)
-                {
-                    canApply = currentAssemblySocket != null && currentAssemblySocket.CanAccept(item);
-                }
-
-                slot.Set(item, this, canApply, tooltip);
+                ItemSlot partSlot = Instantiate(partSlotPrefab, partsSlotsParent);
+                partSlot.Set(part, this, true, tooltip, isPart: true);
             }
         }
 
-        public void BeginDrag(ItemData item, Sprite icon)
+        private void TryApplyPartToSocket(ItemData part)
         {
-            draggedItem = item;
+            if (activeSocket == null) return;
 
-            var obj = Instantiate(dragIconPrefab, rootCanvas.transform);
-            dragIcon = obj.GetComponent<DragIconController>();
-
-            dragIcon.SetItem(icon);
-            dragIcon.SetResult(null);
-        }
-
-        public void UpdateDrag(Vector2 screenPos)
-        {
-            if (dragIcon)
-                dragIcon.transform.position = screenPos;
-        }
-
-        public void EndDrag()
-        {
-            if (dragIcon)
-                Destroy(dragIcon.gameObject);
-
-            dragIcon = null;
-            draggedItem = null;
-        }
-
-        public ItemData GetDraggedItem()
-        {
-            return draggedItem;
-        }
-
-        public void ConsumeDraggedItem()
-        {
-            inventory.RemoveItem(draggedItem);
-            EndDrag();
-            Refresh();
-        }
-
-        public void CancelDrag()
-        {
-            EndDrag();
-        }
-
-        public void UpdateDropIndicator(bool isOverDropZone)
-        {
-            if (dragIcon == null)
-                return;
-
-            if (!isOverDropZone || draggedItem == null || !cardManager.wait_for_choice)
+            if (activeSocket.CanAccept(part))
             {
-                dragIcon.SetResult(null);
-                return;
-            }
+                activeSocket.Apply(part);
+                inventory.RemoveItem(part);
+                miniPartsPanel.SetActive(false);
 
-            bool canApply = cardManager.CanApplyItem(draggedItem);
-            dragIcon.SetResult(canApply);
+                // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ "I"), пїЅпїЅпїЅпїЅпїЅпїЅ Canvas
+                if (!isOpen && rootCanvas != null)
+                {
+                    rootCanvas.enabled = false;
+                }
+
+                RefreshUI();
+
+                if (activeAssemblyView != null)
+                {
+                    activeAssemblyView.CheckSocketsCompletion();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!");
+            }
         }
 
-        public void OpenForItemTarget(ItemTarget target)
+        private void OnPortableBaseAssembled()
         {
-            currentMode = InventoryMode.NightItemSelection;
-            currentTarget = target;
+            if (selectedItem == null || selectedItem.resultItem == null) return;
+
+            ItemData completedItem = selectedItem.resultItem;
+            inventory.RemoveItem(selectedItem);
+            inventory.AddItem(completedItem);
+
+            Debug.Log($"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: {completedItem.itemName}");
             Open();
         }
 
-        public void OpenForAssemblySocket(AssemblySocket socket)
+        private void OnDestroy()
         {
-            currentMode = InventoryMode.AssemblyItemSelection;
-            currentAssemblySocket = socket;
-            Open();
-        }
-
-        public void OnItemClicked(ItemData item)
-        {
-            if (currentMode == InventoryMode.NightItemSelection)
+            if (inventory != null)
             {
-                if (!currentTarget.CanApply(item))
-                    return;
-
-                currentTarget.Apply(item);
-                inventory.RemoveItem(item);
-                Refresh();
-                return;
+                inventory.OnInventoryChanged -= RefreshUI;
             }
-
-            if (currentMode == InventoryMode.AssemblyItemSelection)
-            {
-                if (!currentAssemblySocket.CanAccept(item))
-                    return;
-
-                currentAssemblySocket.Apply(item);
-                OnSocketFilled?.Invoke();
-                inventory.RemoveItem(item);
-                Refresh();
-                return;
-            }
-        }
-        // тут был баг с тем что когда выходим из замка то блять пропадает inventoryRoot
-        public void ExitItemSelection()
-        {
-            //currentMode = InventoryMode.Default;
-            SetMode(InventoryMode.Default);
-            currentTarget = null;
-            Close();
-        }
-
-        public void ExitSelection()
-        {
-            //currentMode = InventoryMode.Default;
-            SetMode(InventoryMode.Default);
-            currentAssemblySocket = null;
-            Close();
-        }
-
-        public bool IsDefaultMode()
-        {
-            return currentMode == InventoryMode.Default;
-        }
-
-        public void SetMode(InventoryMode mode)
-        {
-            //Debug.Log(mode);
-            currentMode = mode;
-            rootCanvas.gameObject.SetActive(mode != InventoryMode.Disable);
         }
     }
 }
