@@ -29,7 +29,7 @@ namespace Inventory
         [SerializeField] private Transform partsSlotsParent;
         [SerializeField] private ItemSlot partSlotPrefab;
 
-        //[SerializeField] private List<ItemData> test_items;
+        [SerializeField] private List<ItemData> test_items;
 
         // State
         public bool isOpen { get; private set; }
@@ -78,7 +78,7 @@ namespace Inventory
                 else if (scroll < 0f) ScrollList(1);
             }
 
-            /*if (Input.GetKeyDown(KeyCode.B))
+            if (Input.GetKeyDown(KeyCode.B))
             {
                 Debug.Log("TEST ADD ITEM");
                 //inventory.AddItem(test);
@@ -86,7 +86,7 @@ namespace Inventory
                 {
                     inventory.AddItem(item);
                 }
-            }*/
+            }
         }
 
         private void Open()

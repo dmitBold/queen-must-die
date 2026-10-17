@@ -45,7 +45,7 @@ namespace NightCycle
         //test
 
         [Inject]
-        private void Construct(PlayerStateController playerStateController, DiContainer container, AssemblyService assemblyService)
+        private void Construct([InjectOptional] PlayerStateController playerStateController, DiContainer container, AssemblyService assemblyService)
         {
             this.playerStateController = playerStateController;
             this.container = container;
@@ -180,8 +180,11 @@ namespace NightCycle
                 //Debug.Log("IUI DISABLE");
                 inventoryUI.SetMode(InventoryUI.InventoryMode.Disable);
             }*/
+            if (playerStateController != null)
+            {
+                playerStateController.SetMode(PlayerMode.Focused);
+            }
 
-            playerStateController.SetMode(PlayerMode.Focused);
 
             assemblyCamera.gameObject.SetActive(true);
             assemblyCamera.Priority = 100;
@@ -217,7 +220,10 @@ namespace NightCycle
                 inventoryUI.ExitSelection();
             }*/
 
-            playerStateController.SetMode(PlayerMode.FreeMovement);
+            if (playerStateController != null)
+            {
+                playerStateController.SetMode(PlayerMode.FreeMovement);
+            }
 
             assemblyCamera.Priority = 0;
             assemblyCamera.gameObject.SetActive(false);
@@ -284,12 +290,12 @@ namespace NightCycle
         private void HandleSocketClick()
         {
             if (Input.GetMouseButtonDown(0) && currentSocket != null && !currentSocket.IsFilled)
-                OpenInventoryForSocket(currentSocket);
-        }
-
-        private void OpenInventoryForSocket(AssemblySocket socket)
-        {
-            //inventoryUI.OpenForAssemblySocket(socket);
+            {
+                if (inventoryUI != null)
+                {
+                    inventoryUI.OpenPartsMenuForSocket(currentSocket, currentAssemblyView);
+                }
+            }
         }
     }
 }

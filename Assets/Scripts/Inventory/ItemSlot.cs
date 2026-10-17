@@ -94,6 +94,7 @@ namespace Inventory
             Light light = lightObj.AddComponent<Light>();
             light.type = LightType.Directional;
             light.intensity = 1.5f; // ������� ��� ���� �������
+            light.cullingMask = LayerMask.GetMask("Assembly");
             lightObj.transform.rotation = Quaternion.Euler(45f, -45f, 0);
             int layerIndex = LayerMask.NameToLayer("Default");
             light.cullingMask = 1 << layerIndex;
