@@ -16,6 +16,7 @@ namespace Dialogue
         Mode mode;
 
         Action onReactionClosed;
+        public CanvasGroup cg;
 
         public void Show(string[] pages, string card_name)
         {
@@ -122,6 +123,10 @@ namespace Dialogue
         {
             if (Input.GetMouseButtonDown(0) && view.canSkip())
             {
+                if (cg != null && cg.alpha < 0.1f)
+                {
+                    return;
+                }
                 OnSkipPressed();
             }
         }

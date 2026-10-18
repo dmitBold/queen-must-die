@@ -33,6 +33,7 @@ namespace NightCycle
 
         //Test
         private Action currentDialogueCallback;
+        //public CanvasGroup cg;
         //Test
 
         [Inject]
@@ -58,6 +59,17 @@ namespace NightCycle
         {
             if (dialoguePanel.activeSelf && Input.GetMouseButtonDown(0))
             {
+                /*if (cg != null && cg.alpha < 0.1f)
+                {
+                    Debug.Log("BBBB");
+                    return;
+                }
+                else
+                {
+                    Debug.Log("AAAA");
+                    Debug.Log(cg.alpha);
+                }
+                Debug.Log("CCCC");*/
                 HandleClick();
             }
         }

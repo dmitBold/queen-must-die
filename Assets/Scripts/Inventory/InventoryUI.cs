@@ -50,6 +50,8 @@ namespace Inventory
         private AudioService audioService;
         private IPlayerProvider playerProvider;
 
+        public CanvasGroup DayUI;
+
         [Inject]
         public void Construct(InventoryManager inventoryManager, AssemblyService assemblyService, AudioService audioService, IPlayerProvider playerProvider)
         {
@@ -60,6 +62,19 @@ namespace Inventory
             this.playerProvider = playerProvider;
 
             this.inventory.OnInventoryChanged += RefreshUI;
+        }
+
+        private void Awake()
+        {
+            // Если поле пустое, ищем объект на сцене по имени
+            if (DayUI == null)
+            {
+                GameObject uiObject = GameObject.Find("UI"); // Убедись, что объект на сцене называется именно "UI"
+                if (uiObject != null)
+                {
+                    DayUI = uiObject.GetComponent<CanvasGroup>();
+                }
+            }
         }
 
         private void Start()
@@ -99,6 +114,11 @@ namespace Inventory
         {
             isOpen = true;
             playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
+            if (DayUI != null)
+            {
+                DayUI.alpha = 0f;
+                DayUI.blocksRaycasts = false;
+            }
             rootCanvas.enabled = true;
             panel.gameObject.SetActive(true);
             panel.enabled = true;
@@ -123,6 +143,11 @@ namespace Inventory
         public void Close()
         {
             playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
+            if (DayUI != null)
+            {
+                DayUI.alpha = 1f;
+                DayUI.blocksRaycasts = true;
+            }
             isOpen = false;
             rootCanvas.enabled = false;
             miniPartsPanel.SetActive(false);
@@ -205,6 +230,10 @@ namespace Inventory
         private void SelectItem(ItemData item)
         {
             selectedItem = item;
+            if (selectedItem != null && selectedItem.itemType == ItemType.Normal)
+            {
+                return;
+            }
             miniPartsPanel.SetActive(false);
 
             if (assemblyService.IsActive) assemblyService.CloseAssembly();

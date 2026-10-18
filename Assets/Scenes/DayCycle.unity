@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueController
   view: {fileID: 8747543}
+  cg: {fileID: 1353886343}
 --- !u!114 &8747543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4839,6 +4840,7 @@ MonoBehaviour:
   partsSlotsParent: {fileID: 0}
   partSlotPrefab: {fileID: 0}
   test_items: []
+  DayUI: {fileID: 0}
 --- !u!1 &420445536
 GameObject:
   m_ObjectHideFlags: 0
@@ -6488,7 +6490,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 602527531}
+    m_TransformParent: {fileID: 1353886342}
     m_Modifications:
     - target: {fileID: 50369821948635870, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
       propertyPath: m_fontAsset
@@ -6531,6 +6533,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4901871637801878396, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
+      propertyPath: cg
+      value: 
+      objectReference: {fileID: 1353886343}
+    - target: {fileID: 4901871637801878396, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
       propertyPath: cameraBrain
       value: 
       objectReference: {fileID: 1742266575}
@@ -6544,7 +6550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7493048067513781368, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7656645295052471699, guid: cceb1f8d502eca641861c1a5c75da56e, type: 3}
       propertyPath: m_Pivot.x
@@ -7221,7 +7227,6 @@ Transform:
   - {fileID: 1690252911}
   - {fileID: 899365862}
   - {fileID: 4299548498629038233}
-  - {fileID: 560035483}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &606742380
@@ -14626,7 +14631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1107639059
 Transform:
   m_ObjectHideFlags: 0
@@ -17553,6 +17558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1353886342}
+  - component: {fileID: 1353886343}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -17577,8 +17583,21 @@ Transform:
   - {fileID: 709304019}
   - {fileID: 1111770811}
   - {fileID: 8747544}
+  - {fileID: 560035483}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &1353886343
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353886341}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1376225087
 GameObject:
   m_ObjectHideFlags: 0

@@ -65,6 +65,17 @@ namespace NightCycle
                 assemblyCamera.gameObject.SetActive(false);
 
             //inventoryUI.OnSocketFilled += OnAssemblyCompleted;
+            /*if (assemblyCanvas != null && camera != null)
+            {
+                // 1. Программно переключаем режим
+                assemblyCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+
+                // 2. Говорим, через какую камеру рендериться (ту самую Main)
+                assemblyCanvas.worldCamera = camera;
+
+                // 3. Выставляем дистанцию, чтобы UI не провалился за 3D-объект
+                assemblyCanvas.planeDistance = 1f;
+            }*/
         }
 
         private void Update()
@@ -293,6 +304,7 @@ namespace NightCycle
         {
             if (Input.GetMouseButtonDown(0) && currentSocket != null && !currentSocket.IsFilled)
             {
+                Debug.Log("SOCKET CLICK!!!");
                 if (inventoryUI != null)
                 {
                     inventoryUI.OpenPartsMenuForSocket(currentSocket, currentAssemblyView);
