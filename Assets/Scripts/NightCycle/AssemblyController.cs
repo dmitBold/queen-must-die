@@ -1,12 +1,13 @@
+using DI;
+using Inventory;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using Inventory;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
-using Unity.Cinemachine;
 
 namespace NightCycle
 {
@@ -34,7 +35,8 @@ namespace NightCycle
         private LockView currentLockView;
         private IReadOnlyList<AssemblySocket> activeSockets;
         private AssemblySocket currentSocket;
-        private PlayerStateController playerStateController;
+        // private PlayerStateController playerStateController;
+        private IPlayerProvider playerProvider;
         private DiContainer container;
         private InteractableView _subscribedView;
 
@@ -45,9 +47,9 @@ namespace NightCycle
         //test
 
         [Inject]
-        private void Construct([InjectOptional] PlayerStateController playerStateController, DiContainer container, AssemblyService assemblyService)
+        private void Construct(IPlayerProvider playerProvider, DiContainer container, AssemblyService assemblyService)
         {
-            this.playerStateController = playerStateController;
+            this.playerProvider = playerProvider;
             this.container = container;
 
             //test
@@ -180,9 +182,9 @@ namespace NightCycle
                 //Debug.Log("IUI DISABLE");
                 inventoryUI.SetMode(InventoryUI.InventoryMode.Disable);
             }*/
-            if (playerStateController != null)
+            if (playerProvider.PlayerView != null && playerProvider.PlayerView.PlayerStateController != null)
             {
-                playerStateController.SetMode(PlayerMode.Focused);
+                playerProvider.PlayerView.PlayerStateController.SetMode(PlayerMode.Focused);
             }
 
 
@@ -220,9 +222,9 @@ namespace NightCycle
                 inventoryUI.ExitSelection();
             }*/
 
-            if (playerStateController != null)
+            if (playerProvider.PlayerView != null && playerProvider.PlayerView.PlayerStateController != null)
             {
-                playerStateController.SetMode(PlayerMode.FreeMovement);
+                playerProvider.PlayerView.PlayerStateController.SetMode(PlayerMode.FreeMovement);
             }
 
             assemblyCamera.Priority = 0;

@@ -1,12 +1,15 @@
 ﻿using Core;
+using DI;
 using NightCycle;
 using NUnit.Framework.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using TMPro;
 using UI;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 using Zenject;
 
@@ -45,13 +48,16 @@ namespace Inventory
         private InventoryManager inventory;
         private AssemblyService assemblyService;
         private AudioService audioService;
+        private IPlayerProvider playerProvider;
 
         [Inject]
-        public void Construct(InventoryManager inventoryManager, AssemblyService assemblyService, AudioService audioService)
+        public void Construct(InventoryManager inventoryManager, AssemblyService assemblyService, AudioService audioService, IPlayerProvider playerProvider)
         {
             this.inventory = inventoryManager;
             this.assemblyService = assemblyService;
             this.audioService = audioService;
+
+            this.playerProvider = playerProvider;
 
             this.inventory.OnInventoryChanged += RefreshUI;
         }
@@ -92,8 +98,10 @@ namespace Inventory
         private void Open()
         {
             isOpen = true;
+            playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
             rootCanvas.enabled = true;
             panel.gameObject.SetActive(true);
+            panel.enabled = true;
             miniPartsPanel.SetActive(false);
 
             UpdateFilteredItems();
@@ -114,6 +122,7 @@ namespace Inventory
 
         public void Close()
         {
+            playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
             isOpen = false;
             rootCanvas.enabled = false;
             miniPartsPanel.SetActive(false);

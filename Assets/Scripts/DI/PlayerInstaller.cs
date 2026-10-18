@@ -65,6 +65,8 @@ namespace DI
                 _flashlightProvider.PendingEssence = null;
             }
             Container.Bind<Player>().AsSingle().WithArguments(rb, mr);
+
+            _playerProvider.PlayerView = instance;
         }
 
         public override void Start()

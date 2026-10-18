@@ -91,13 +91,15 @@ namespace Inventory
             // 4. ��������� ������� ���� (����� ������ �� ���� ������� ���������)
             GameObject lightObj = new GameObject("PreviewLight");
             lightObj.transform.SetParent(previewScene.transform);
+            lightObj.transform.localPosition = new Vector3(1f, 2f, -2f); // Ставим лампу перед моделью
+
             Light light = lightObj.AddComponent<Light>();
-            light.type = LightType.Directional;
-            light.intensity = 1.5f; // ������� ��� ���� �������
-            light.cullingMask = LayerMask.GetMask("Assembly");
-            lightObj.transform.rotation = Quaternion.Euler(45f, -45f, 0);
-            int layerIndex = LayerMask.NameToLayer("Default");
-            light.cullingMask = 1 << layerIndex;
+            light.type = LightType.Point;
+            light.range = 10f;            // Ограничиваем радиус действия, чтобы не светить в сцену
+            light.intensity = 60f;
+
+            int previewLayer = LayerMask.NameToLayer("Assembly");
+            light.cullingMask = 1 << previewLayer;
 
             // 5. ������� ���� 3D ������
             GameObject modelInstance = Instantiate(data.uiModelPrefab, previewScene.transform);

@@ -15,6 +15,8 @@ namespace NightCycle
         public bool isNormal = false;
         public bool isSmall = true;
 
+        public bool IsCrosshairActive => CrosshairImage.gameObject.activeSelf;
+
         private void Awake()
         {
             instance = this;
