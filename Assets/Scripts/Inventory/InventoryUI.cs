@@ -52,6 +52,8 @@ namespace Inventory
 
         public CanvasGroup DayUI;
 
+        public bool canOpen = true;
+
         [Inject]
         public void Construct(InventoryManager inventoryManager, AssemblyService assemblyService, AudioService audioService, IPlayerProvider playerProvider)
         {
@@ -83,12 +85,27 @@ namespace Inventory
             miniPartsPanel.SetActive(false);
         }
 
+        private void Toggle()
+        {
+            if (isOpen) Close();
+            else Open();
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                if (isOpen) Close();
-                else Open();
+                /*if (isOpen) Close();
+                else Open();*/
+                Toggle();
+                /*if (miniPartsPanel.activeSelf)
+                {
+                    CloseMiniPartsPanel();
+                }
+                else
+                {
+                    Toggle();
+                }*/
             }
 
             // ��������� ��������� ���� (������ ���� ������ ��������� � ������� ���� �������)
@@ -112,6 +129,7 @@ namespace Inventory
 
         private void Open()
         {
+            if (!canOpen) { return; }
             isOpen = true;
             playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
             if (DayUI != null)
@@ -155,6 +173,20 @@ namespace Inventory
             if (assemblyService != null && assemblyService.IsActive)
             {
                 assemblyService.CloseAssembly();
+            }
+        }
+
+        public void CloseUIOnly()
+        {
+            isOpen = false;
+            if (rootCanvas != null) rootCanvas.enabled = false;
+            if (miniPartsPanel != null) miniPartsPanel.SetActive(false);
+            if (panel != null) panel.gameObject.SetActive(false);
+
+            if (DayUI != null)
+            {
+                DayUI.alpha = 1f;
+                DayUI.blocksRaycasts = true;
             }
         }
 
@@ -243,7 +275,7 @@ namespace Inventory
                 InteractableView viewPrefab = selectedItem.assemblyPrefab.GetComponent<InteractableView>();
                 if (viewPrefab != null)
                 {
-                    assemblyService.OpenAssembly(viewPrefab, OnPortableBaseAssembled);
+                    assemblyService.OpenAssembly(viewPrefab, OnPortableBaseAssembled, true);
                 }
             }
 
@@ -256,6 +288,23 @@ namespace Inventory
         {
             activeSocket = socket;
             activeAssemblyView = assemblyView;
+
+            // ПРОВЕРЯЕМ КОНТЕКСТ: Это PortableBase или объект в мире?
+            bool isPortableBase = assemblyService != null && assemblyService.IsPortableBaseSession;
+
+            if (isPortableBase)
+            {
+                // Для PortableBase ОСТАВЛЯЕМ боковую панель активной
+                panel.gameObject.SetActive(true);
+                isOpen = true; // Оставляем true, чтобы работал RefreshUI
+            }
+            else
+            {
+                //Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA#$#$#$#$#$#$");
+                // Для AssemblyInteractable (мира) СКРЫВАЕМ боковую панель
+                panel.gameObject.SetActive(false);
+                isOpen = false;
+            }
 
             rootCanvas.enabled = true;
             miniPartsPanel.SetActive(true);

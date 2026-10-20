@@ -30,7 +30,7 @@ namespace NightCycle
             }
             else
             {
-                _assemblyService.OpenAssembly(viewPrefab, OnAssemblyCompleted);
+                _assemblyService.OpenAssembly(viewPrefab, OnAssemblyCompleted, false);
             }
         }
 

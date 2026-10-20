@@ -1,8 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Core;
+using Inventory;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 namespace NightCycle
 {
@@ -25,15 +27,26 @@ namespace NightCycle
 
         private bool _wasCrosshairActive;
 
-        public AssemblyService(ScenesManager scenesManager, CinemachineBrain brain)
+        public bool IsPortableBaseSession { get; private set; }
+        private readonly InventoryUI _inventoryUI;
+
+        public AssemblyService(ScenesManager scenesManager, CinemachineBrain brain, InventoryUI inventoryUI)
         {
             _scenesManager = scenesManager;
             _brain = brain;
             _defaultCameraMode = _brain.DefaultBlend;
+            _inventoryUI = inventoryUI;
         }
 
-        public void OpenAssembly(InteractableView viewPrefab, System.Action onCompleteCallback = null)
+        public void OpenAssembly(InteractableView viewPrefab, System.Action onCompleteCallback = null, bool isPortableBase = false)
         {
+            //Debug.Log(isPortableBase);
+            if (!isPortableBase)
+            {
+                _inventoryUI.Close();
+                _inventoryUI.canOpen = false;
+            }
+            IsPortableBaseSession = isPortableBase;
             _previousSceneName = SceneManager.GetActiveScene().name;
 
             if (_isInitialized && _controller != null)
@@ -83,6 +96,9 @@ namespace NightCycle
         public void CloseAssembly()
         {
             SetupCameraForExit();
+
+            IsPortableBaseSession = false;
+            _inventoryUI.canOpen = true;
 
             if (_controller != null)
             {

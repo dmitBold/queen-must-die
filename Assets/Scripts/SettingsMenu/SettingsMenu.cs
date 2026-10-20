@@ -6,6 +6,8 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
+using Inventory;
+using NightCycle;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -43,10 +45,16 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private UniversalRendererData rendererData;
     [SerializeField] private string retroFeatureName = "FullScreenPassRendererFeature";
 
+    private AssemblyService _assemblyService;
+    private InventoryUI _inventoryUI;
+    private bool invUI_Prev_state; 
+
     [Inject]
-    public void Construct(SaveManager saveManager)
+    public void Construct(SaveManager saveManager, AssemblyService assemblyService, InventoryUI inventoryUI)
     {
         _saveManager = saveManager;
+        _assemblyService = assemblyService;
+        _inventoryUI = inventoryUI;
     }
 
     private void OnEnable()
@@ -168,15 +176,39 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
+    private void HandleEscapeInput()
+    {
+        if (isOpen)
+        {
+            Close();
+            return;
+        }
+
+        if (_assemblyService != null && _assemblyService.IsActive)
+        {
+            _assemblyService.CloseAssembly();
+            return;
+        }
+
+        if (_inventoryUI != null && _inventoryUI.isOpen)
+        {
+            _inventoryUI.Close();
+            return;
+        }
+
+        Open();
+    }
+
     public void Toggle()
     {
         if (!CanOpen())
             return;
 
-        if (isOpen)
+        /*if (isOpen)
             Close();
         else
-            Open();
+            Open();*/
+        HandleEscapeInput();
     }
 
     private bool CanOpen()
@@ -186,6 +218,12 @@ public class SettingsMenu : MonoBehaviour
 
     private void Open()
     {
+        if (_inventoryUI != null && _inventoryUI.isOpen)
+        {
+            _inventoryUI.Close();
+            //invUI_Prev_state = _inventoryUI.canOpen;
+        }
+        _inventoryUI.canOpen = false;
         isOpen = true;
         panel.SetActive(true);
         PauseGame();
@@ -193,7 +231,16 @@ public class SettingsMenu : MonoBehaviour
 
     private void Close()
     {
-        isOpen = false;
+        //_inventoryUI.canOpen = invUI_Prev_state;
+        if (_assemblyService.IsActive)
+        {
+            _inventoryUI.canOpen = false;
+        }
+        else
+        {
+            _inventoryUI.canOpen = true;
+        }
+            isOpen = false;
         panel.SetActive(false);
         BrightnessRoot.SetActive(false);
         BrightnessCamera.gameObject.SetActive(false);
