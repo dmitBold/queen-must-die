@@ -170,6 +170,8 @@ public class SettingsMenu : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("ASS" + _assemblyService.IsActive);
+        Debug.Log("INV" + _inventoryUI.isOpen);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Toggle();
@@ -187,14 +189,30 @@ public class SettingsMenu : MonoBehaviour
         if (_assemblyService != null && _assemblyService.IsActive)
         {
             _assemblyService.CloseAssembly();
-            return;
+            return; // Выходим, чтобы не открыть меню паузы!
         }
 
+        // 2. Затем проверяем инвентарь
         if (_inventoryUI != null && _inventoryUI.isOpen)
         {
             _inventoryUI.Close();
             return;
         }
+        /*if (_inventoryUI != null && _inventoryUI.isOpen)
+        {
+            if (_assemblyService != null && _assemblyService.IsActive)
+            {
+                _assemblyService.CloseAssembly();
+            }
+            _inventoryUI.Close();
+            return;
+        }
+        Debug.Log(_assemblyService.IsActive);
+        if (_assemblyService != null && _assemblyService.IsActive)
+        {
+            _assemblyService.CloseAssembly();
+            return;
+        }*/
 
         Open();
     }

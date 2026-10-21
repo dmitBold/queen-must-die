@@ -268,7 +268,7 @@ namespace Inventory
             }
             miniPartsPanel.SetActive(false);
 
-            if (assemblyService.IsActive) assemblyService.CloseAssembly();
+            if (item != null && assemblyService.IsActive) assemblyService.CloseAssembly();
 
             if (selectedItem != null && selectedItem.itemType == ItemType.PortableBase && selectedItem.assemblyPrefab != null)
             {

@@ -24,8 +24,8 @@ namespace NightCycle
          .FromMethod(ctx => {
              var brain = Camera.main?.GetComponent<CinemachineBrain>();
              if (brain == null) brain = GameObject.FindObjectOfType<CinemachineBrain>();
-             if (brain == null) throw new System.InvalidOperationException(
-                 "CinemachineBrain íå íàéäåí. Óáåäèòåñü, ÷òî â ñöåíå åñòü êàìåðà ñ ýòèì êîìïîíåíòîì è òåãîì MainCamera.");
+             /*if (brain == null) throw new System.InvalidOperationException(
+                 "CinemachineBrain íå íàéäåí. Óáåäèòåñü, ÷òî â ñöåíå åñòü êàìåðà ñ ýòèì êîìïîíåíòîì è òåãîì MainCamera.");*/
              return brain;
          })
          .AsSingle();

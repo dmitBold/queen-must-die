@@ -93,10 +93,10 @@ namespace NightCycle
                 HandleSocketClick();
 
                 //Test
-                if (Input.GetKeyDown(KeyCode.Escape))
+                /*if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     _assemblyService.CloseAssembly();
-                }
+                }*/
                 //Test
             }
 

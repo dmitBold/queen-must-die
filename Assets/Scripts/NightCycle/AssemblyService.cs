@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
-using Core;
+﻿using Core;
 using Inventory;
+using System.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 
 namespace NightCycle
@@ -30,11 +31,14 @@ namespace NightCycle
         public bool IsPortableBaseSession { get; private set; }
         private readonly InventoryUI _inventoryUI;
 
-        public AssemblyService(ScenesManager scenesManager, CinemachineBrain brain, InventoryUI inventoryUI)
+        public AssemblyService(ScenesManager scenesManager, [InjectOptional] CinemachineBrain brain, InventoryUI inventoryUI)
         {
             _scenesManager = scenesManager;
             _brain = brain;
-            _defaultCameraMode = _brain.DefaultBlend;
+            if (brain != null)
+            {
+                _defaultCameraMode = _brain.DefaultBlend;
+            }
             _inventoryUI = inventoryUI;
         }
 
@@ -43,7 +47,10 @@ namespace NightCycle
             //Debug.Log(isPortableBase);
             if (!isPortableBase)
             {
-                _inventoryUI.Close();
+                if (_inventoryUI.isOpen)
+                {
+                    _inventoryUI.Close();
+                }
                 _inventoryUI.canOpen = false;
             }
             IsPortableBaseSession = isPortableBase;
