@@ -170,8 +170,12 @@ public class SettingsMenu : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("ASS" + _assemblyService.IsActive);
-        Debug.Log("INV" + _inventoryUI.isOpen);
+        //Debug.Log("ASS" + _assemblyService.IsActive);
+        //Debug.Log("INV" + _inventoryUI.isOpen);
+        /*if (!_assemblyService.IsActive)
+        {
+            Debug.Log($"[CHECK] IsActive={_assemblyService.IsActive} hash={_assemblyService.GetHashCode()}");
+        }*/
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Toggle();
@@ -186,7 +190,7 @@ public class SettingsMenu : MonoBehaviour
             return;
         }
 
-        if (_assemblyService != null && _assemblyService.IsActive)
+        /*if (_assemblyService != null && _assemblyService.IsActive)
         {
             _assemblyService.CloseAssembly();
             return; // Выходим, чтобы не открыть меню паузы!
@@ -197,8 +201,8 @@ public class SettingsMenu : MonoBehaviour
         {
             _inventoryUI.Close();
             return;
-        }
-        /*if (_inventoryUI != null && _inventoryUI.isOpen)
+        }*/
+        if (_inventoryUI != null && _inventoryUI.isOpen)
         {
             if (_assemblyService != null && _assemblyService.IsActive)
             {
@@ -207,12 +211,12 @@ public class SettingsMenu : MonoBehaviour
             _inventoryUI.Close();
             return;
         }
-        Debug.Log(_assemblyService.IsActive);
+        //Debug.Log(_assemblyService.IsActive);
         if (_assemblyService != null && _assemblyService.IsActive)
         {
             _assemblyService.CloseAssembly();
             return;
-        }*/
+        }
 
         Open();
     }

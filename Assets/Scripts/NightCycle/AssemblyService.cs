@@ -16,7 +16,8 @@ namespace NightCycle
     /// </summary>
     public class AssemblyService
     {
-        public bool IsActive => _isInitialized && _controller != null && _controller.isActive;
+        //public bool IsActive => _isInitialized && _controller != null && _controller.isActive;
+        public bool IsActive => _sessionActive;
 
         private readonly ScenesManager _scenesManager;
         private readonly CinemachineBrain _brain;
@@ -31,6 +32,8 @@ namespace NightCycle
         public bool IsPortableBaseSession { get; private set; }
         private readonly InventoryUI _inventoryUI;
 
+        private bool _sessionActive;
+
         public AssemblyService(ScenesManager scenesManager, [InjectOptional] CinemachineBrain brain, InventoryUI inventoryUI)
         {
             _scenesManager = scenesManager;
@@ -44,7 +47,9 @@ namespace NightCycle
 
         public void OpenAssembly(InteractableView viewPrefab, System.Action onCompleteCallback = null, bool isPortableBase = false)
         {
+            if (IsActive) return;
             //Debug.Log(isPortableBase);
+            _sessionActive = true;
             if (!isPortableBase)
             {
                 if (_inventoryUI.isOpen)
@@ -66,6 +71,8 @@ namespace NightCycle
 
             _scenesManager.LoadAdditive(SceneNames.Assembly, scene =>
             {
+                if (!_sessionActive) return;
+
                 _controller = FindController(scene);
 
                 if (_controller == null)
@@ -102,6 +109,16 @@ namespace NightCycle
 
         public void CloseAssembly()
         {
+            if (_controller == null || !_controller.isActive)
+            {
+                _sessionActive = false;
+                _inventoryUI.canOpen = true;
+                IsPortableBaseSession = false;
+                return;
+            }
+
+            _sessionActive = false;
+
             SetupCameraForExit();
 
             IsPortableBaseSession = false;
