@@ -57,6 +57,7 @@ namespace NightCycle
             }
 
             SetHighlight(false);
+            outline.enabled = false;
 
             //test
             if (!SocketFillEvent.IsNull)
@@ -88,7 +89,10 @@ namespace NightCycle
 
         public void SetHighlight(bool state)
         {
-            outline.enabled = state;
+            if (!IsFilled)
+            {
+                outline.enabled = state;
+            }
         }
 
         public void SetEvent(bool state)
