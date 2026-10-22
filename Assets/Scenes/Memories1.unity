@@ -52590,16 +52590,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c55e11353bf99b4a84f6625d4ea877d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
-  set_active_on_start: 1
   panel: {fileID: 1093578546}
+  rootCanvas: {fileID: 1932417517}
+  descriptionText: {fileID: 0}
   slotsParent: {fileID: 1220036064}
   slotPrefab: {fileID: -8607331106481982355, guid: e629578b8b62a3244b1a8ec6c63af293, type: 3}
   tooltip: {fileID: 422822991}
-  rootCanvas: {fileID: 1932417517}
-  dragIconPrefab: {fileID: 7831947218672123532, guid: 8d31ba0ab9ae8b54fa1a55f1552b2506, type: 3}
-  isOpen: 0
-  cardManager: {fileID: 0}
-  currentAssemblySocket: {fileID: 0}
+  miniPartsPanel: {fileID: 0}
+  partsSlotsParent: {fileID: 0}
+  partSlotPrefab: {fileID: 0}
+  test_items: []
+  DayUI: {fileID: 0}
+  canOpen: 1
 --- !u!1 &1455370884
 GameObject:
   m_ObjectHideFlags: 0
@@ -59320,6 +59322,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 64acf2bb8cf143aeb1dee7245e05a350, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1721182783}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 64acf2bb8cf143aeb1dee7245e05a350, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1721182788}
   m_SourcePrefab: {fileID: 100100000, guid: 64acf2bb8cf143aeb1dee7245e05a350, type: 3}
 --- !u!1 &1721182782 stripped
 GameObject:
@@ -59361,6 +59366,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1721182788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721182782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9307563177c1dc3419968ae78a040bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Doc_paper
+  SignatureEvent:
+    Guid:
+      Data1: -317334516
+      Data2: 1182053679
+      Data3: -929224530
+      Data4: 891060424
+    Path: event:/Scenes/Memories/Page
 --- !u!1 &1721896162
 GameObject:
   m_ObjectHideFlags: 0
@@ -61986,6 +62010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueController
   view: {fileID: 1828953327}
+  cg: {fileID: 0}
 --- !u!114 &1828953327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67769,6 +67794,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8665316340721851284, guid: 58a9ce4822b5f574b9379116232be31b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2026140757}
+    - targetCorrespondingSourceObject: {fileID: 8665316340721851284, guid: 58a9ce4822b5f574b9379116232be31b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2026140759}
   m_SourcePrefab: {fileID: 100100000, guid: 58a9ce4822b5f574b9379116232be31b, type: 3}
 --- !u!1 &2026140755 stripped
 GameObject:
@@ -67815,6 +67843,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2026140759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026140755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f5848014f448d4da4f5b240b503077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PenWritingSound
+  SignatureEvent:
+    Guid:
+      Data1: -806069123
+      Data2: 1337103106
+      Data3: 59782077
+      Data4: -969820676
+    Path: event:/Scenes/Memories/Signature
 --- !u!1001 &2029770690
 PrefabInstance:
   m_ObjectHideFlags: 0
