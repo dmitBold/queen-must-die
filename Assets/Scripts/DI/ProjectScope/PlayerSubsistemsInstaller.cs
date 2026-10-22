@@ -17,6 +17,7 @@ namespace NightCycle
         [SerializeField] HintManager HintUI;
         [SerializeField] SettingsMenu settingsMenu;
         [SerializeField] WorldState state;
+        [SerializeField] DayNoteUI notes;
 
         public override void InstallBindings()
         {
@@ -43,6 +44,7 @@ namespace NightCycle
             Container.Bind<SettingsMenu>().FromComponentInNewPrefab(settingsMenu).AsSingle().NonLazy();
             Container.Bind<WorldState>().FromComponentInNewPrefab(state).AsSingle().NonLazy();
             Container.Bind<FlashlightUI>().FromComponentInNewPrefab(flashlightUI).AsSingle().NonLazy();
+            Container.Bind<DayNoteUI>().FromComponentInNewPrefab(notes).AsSingle().NonLazy();
         }
     }
 }

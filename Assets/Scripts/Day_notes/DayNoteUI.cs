@@ -1,5 +1,6 @@
 using Cards;
 using Core;
+using DI;
 using Dialogue;
 using Inventory;
 using NightCycle;
@@ -23,6 +24,7 @@ public class DayNoteUI : MonoBehaviour
     private GameObject Textpanel;
     [SerializeField] private UnityEngine.UI.Image TextImage;
     [SerializeField] private TextMeshProUGUI NoteText;
+    [SerializeField] private Canvas rootCanvas;
 
     [Header("State")] 
     public bool isOpen;
@@ -32,10 +34,21 @@ public class DayNoteUI : MonoBehaviour
 
     DayNoteData currentNote;
     public DayNoteManager NoteManager;
+    private IPlayerProvider playerProvider;
+    private AssemblyService assemblyService;
+
+    [Inject]
+    public void Construct(AssemblyService assemblyService, IPlayerProvider playerProvider)
+    {
+        this.assemblyService = assemblyService;
+
+        this.playerProvider = playerProvider;
+    }
 
     private void Start()
     {
         NoteManager.OnNotesChanged += Refresh;
+        rootCanvas.enabled = false;
     }
 
     private void OnDestroy()
@@ -97,12 +110,16 @@ public class DayNoteUI : MonoBehaviour
     private void Open()
     {
         isOpen = true;
+        rootCanvas.enabled = true;
+        playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
         panel.SetActive(true);
     }
 
     private void Close()
     {
         isOpen = false;
+        rootCanvas.enabled = false;
+        playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
         panel.SetActive(false);
     }
 
@@ -120,7 +137,7 @@ public class DayNoteUI : MonoBehaviour
 
     public void OnNoteClicked(DayNoteData note)
     {
-        Debug.Log("AAAA");
+        //Debug.Log("AAAA");
         ToggleText(note);
         //SetNote(note);
     }

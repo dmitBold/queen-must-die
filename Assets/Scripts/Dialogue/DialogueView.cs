@@ -12,13 +12,18 @@ namespace Dialogue
         [SerializeField] GameObject skipButton;
         [SerializeField] GameObject backButton;
 
+        public bool test = false;
+
         public void Show() => root.SetActive(true);
         public void Hide() => root.SetActive(false);
 
         public void PlayText(string[] contentPages)
         {
-            skipButton.SetActive(false);
-            backButton.SetActive(false);
+            if (!test)
+            {
+                skipButton.SetActive(false);
+                backButton.SetActive(false);
+            }
             typewriter.Play(text, contentPages);
         }
 
