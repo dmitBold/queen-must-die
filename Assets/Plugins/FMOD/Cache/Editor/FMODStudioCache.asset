@@ -447,10 +447,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639282781076303396
+  lastModified: 639282834221599150
   FileSizes:
   - Name: Desktop
-    Value: 11144064
+    Value: 11764256
   Exists: 1
 --- !u!114 &-4528472134983763805
 MonoBehaviour:
@@ -780,6 +780,9 @@ MonoBehaviour:
   - {fileID: -2916902340744406019}
   - {fileID: -3300214662458561094}
   - {fileID: -8289549386874955455}
+  - {fileID: 1606318443463911373}
+  - {fileID: 8108095658887332868}
+  - {fileID: 7972752956843004981}
   EditorParameters:
   - {fileID: 4742735435840111238}
   - {fileID: -401231331353995621}
@@ -788,7 +791,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639282781076374919
+  cacheTime: 639282834221659057
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
@@ -884,6 +887,14 @@ MonoBehaviour:
     index: 45
   - key: event:/Scenes/NightSycle/Wardrobe
     index: 46
+  - key: event:/Scenes/NightSycle/Enters/Wall Enter
+    index: 47
+  - key: event:/Chests and locks/Chest
+    index: 48
+  - key: event:/Scenes/NightSycle/Library/Heart/Base Heart Beat
+    index: 49
+  - key: event:/Scenes/NightSycle/Library/Heart/Danger Heart Beat
+    index: 50
 --- !u!114 &52534761935187065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,6 +1004,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 500
+--- !u!114 &1606318443463911373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Chests and locks/Chest
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Chests and locks/Chest
+  Guid:
+    Data1: 1067923815
+    Data2: 1261793497
+    Data3: 1987415687
+    Data4: 1658652778
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3021
 --- !u!114 &2183989540255411249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1481,10 +1519,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639282781076374919
+  lastModified: 639282834221659057
   FileSizes:
   - Name: Desktop
-    Value: 3026
+    Value: 3202
   Exists: 1
 --- !u!114 &6713093496099956156
 MonoBehaviour:
@@ -1595,6 +1633,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 19069
+--- !u!114 &7972752956843004981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/NightSycle/Library/Heart/Danger Heart Beat
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/NightSycle/Library/Heart/Danger Heart Beat
+  Guid:
+    Data1: -421874438
+    Data2: 1121476691
+    Data3: -2088360283
+    Data4: 1933386089
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8095676952615887210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1619,6 +1684,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &8108095658887332868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scenes/NightSycle/Library/Heart/Base Heart Beat
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Scenes/NightSycle/Library/Heart/Base Heart Beat
+  Guid:
+    Data1: -2089190280
+    Data2: 1100742168
+    Data3: -653200459
+    Data4: 1122757945
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 499
 --- !u!114 &8293087449597447812
 MonoBehaviour:
   m_ObjectHideFlags: 0
