@@ -30,6 +30,8 @@ public class DayNoteUI : MonoBehaviour
     public bool isOpen;
     public bool isTextOpen;
 
+    public bool canOpen = true;
+
     [SerializeField] DayNoteDialogue dialogueManager;
 
     DayNoteData currentNote;
@@ -110,6 +112,7 @@ public class DayNoteUI : MonoBehaviour
 
     private void Open()
     {
+        if (!canOpen) { return; }
         isOpen = true;
         rootCanvas.enabled = true;
         playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
@@ -131,6 +134,13 @@ public class DayNoteUI : MonoBehaviour
         }
         panel.SetActive(false);
 
+    }
+
+    public void CloseUIOnly()
+    {
+        isOpen = false;
+        rootCanvas.enabled = false;
+        panel.SetActive(false);
     }
 
     private void OpenText()

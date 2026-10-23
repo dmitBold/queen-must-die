@@ -39,5 +39,10 @@ namespace NightCycle
             isCompleted = true;
             onAssemblyCompleted?.Invoke();
         }
+
+        public void Complete()
+        {
+            isCompleted = true;
+        }
     }
 }

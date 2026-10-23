@@ -174,6 +174,14 @@ namespace Inventory
             {
                 assemblyService.CloseAssembly();
             }
+            if (playerProvider.CurrentPlayer == null)
+            {
+                playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
+            }
+            else
+            {
+                playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
+            }
         }
 
         public void CloseUIOnly()

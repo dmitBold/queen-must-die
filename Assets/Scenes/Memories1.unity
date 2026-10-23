@@ -2771,6 +2771,7 @@ MonoBehaviour:
       Data4: -1490920368
     Path: event:/Scenes/Envelope
   trigger_sound_once: 0
+  noteData: {fileID: 0}
 --- !u!114 &99663681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18267,6 +18268,7 @@ MonoBehaviour:
   typewriter: {fileID: 66926708}
   skipButton: {fileID: 1880979336}
   backButton: {fileID: 442183389}
+  test: 0
 --- !u!224 &449445701
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20860,6 +20862,7 @@ MonoBehaviour:
   typewriter: {fileID: 66926708}
   skipButton: {fileID: 1880979336}
   backButton: {fileID: 442183389}
+  test: 0
 --- !u!114 &536891188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30465,6 +30468,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1693210281}
         m_TargetAssemblyTypeName: NightCycle.PlayerStateBridge, Assembly-CSharp
         m_MethodName: EnableHUD
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1811136007}
+        m_TargetAssemblyTypeName: BridgeUI, Assembly-CSharp
+        m_MethodName: UnlockUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -51079,6 +51094,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1811136007}
+        m_TargetAssemblyTypeName: BridgeUI, Assembly-CSharp
+        m_MethodName: LockUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   delay: 0
   LateInteraction:
     m_PersistentCalls:
@@ -57234,8 +57261,10 @@ MonoBehaviour:
   Textpanel: {fileID: 449445699}
   TextImage: {fileID: 1982265849}
   NoteText: {fileID: 0}
+  rootCanvas: {fileID: 0}
   isOpen: 0
   isTextOpen: 0
+  canOpen: 1
   dialogueManager: {fileID: 1652231360}
   NoteManager: {fileID: 1652231359}
 --- !u!114 &1652231359
@@ -57250,8 +57279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6824afbbf941fbe4984385c493a01d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayNoteManager
-  test: {fileID: 11400000, guid: 2febb5719f0f7504bbc6478275590e5e, type: 2}
-  test1: {fileID: 11400000, guid: e12cf1f8048b13e4e84be53609b6c31b, type: 2}
 --- !u!114 &1652231360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61281,6 +61308,50 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 803150114}
   m_SourcePrefab: {fileID: 100100000, guid: d119f9920a8205b45b1e51485a2163a5, type: 3}
+--- !u!1 &1811136006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1811136008}
+  - component: {fileID: 1811136007}
+  m_Layer: 0
+  m_Name: BridgeUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1811136007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811136006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5cb1babc9b31e347aa9c7ef66f694fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BridgeUI
+--- !u!4 &1811136008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811136006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1812642345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62029,6 +62100,7 @@ MonoBehaviour:
   typewriter: {fileID: 1439710154}
   skipButton: {fileID: 333503296}
   backButton: {fileID: 739605587}
+  test: 0
 --- !u!4 &1828953328
 Transform:
   m_ObjectHideFlags: 0
@@ -79372,3 +79444,4 @@ SceneRoots:
   - {fileID: 1033704826}
   - {fileID: 736308288}
   - {fileID: 1419694637}
+  - {fileID: 1811136008}
