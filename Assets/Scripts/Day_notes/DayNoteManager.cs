@@ -8,10 +8,6 @@ public class DayNoteManager : MonoBehaviour
     List<DayNoteData> notes = new();
 
     public event Action OnNotesChanged;
-    //
-    public DayNoteData test;
-    public DayNoteData test1;
-    //
 
     public void AddNote(DayNoteData note)
     {
@@ -41,12 +37,4 @@ public class DayNoteManager : MonoBehaviour
         return result;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            AddNote(test);
-            AddNote(test1);
-        }
-    }
 }

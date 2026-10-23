@@ -1,5 +1,6 @@
 using Core;
 using FMODUnity;
+using Inventory;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
@@ -19,12 +20,19 @@ namespace NightCycle
         public bool trigger_sound_once = false;
         private bool soundFlag = true;
 
+        public DayNoteData noteData;
+
         private AudioService _audioService;
+        private DayNoteManager notemanager;
+
+        private bool noteAdded = false;
+
 
         [Inject]
-        public void Constructor(AudioService audioService)
+        public void Constructor(AudioService audioService, DayNoteUI formanager)
         {
             _audioService = audioService;
+            notemanager = formanager.NoteManager;
         }
 
         public void SetEvent(bool trigger)
@@ -43,6 +51,11 @@ namespace NightCycle
                 }
             }
             NoteController.Instance.ShowNote(this);
+            if (!noteAdded)
+            {
+                notemanager.AddNote(noteData);
+                noteAdded = true;
+            }
         }
 
         public void OnExitFocus()
