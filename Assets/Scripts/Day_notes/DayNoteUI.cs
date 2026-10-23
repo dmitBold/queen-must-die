@@ -36,6 +36,7 @@ public class DayNoteUI : MonoBehaviour
     public DayNoteManager NoteManager;
     private IPlayerProvider playerProvider;
     private AssemblyService assemblyService;
+    
 
     [Inject]
     public void Construct(AssemblyService assemblyService, IPlayerProvider playerProvider)
@@ -119,8 +120,17 @@ public class DayNoteUI : MonoBehaviour
     {
         isOpen = false;
         rootCanvas.enabled = false;
-        playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
+        //playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
+        if (playerProvider.CurrentPlayer == null)
+        {
+            playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
+        }
+        else
+        {
+            playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
+        }
         panel.SetActive(false);
+
     }
 
     private void OpenText()

@@ -51,7 +51,7 @@ namespace NightCycle
                 }
             }
             NoteController.Instance.ShowNote(this);
-            if (!noteAdded)
+            if (!noteAdded && noteData != null)
             {
                 notemanager.AddNote(noteData);
                 noteAdded = true;
