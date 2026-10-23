@@ -21,16 +21,16 @@ namespace NightCycle
 
         public override void InstallBindings()
         {
-            Container.Bind<CinemachineBrain>()
+            /*Container.Bind<CinemachineBrain>()
          .FromMethod(ctx => {
              var brain = Camera.main?.GetComponent<CinemachineBrain>();
-             if (brain == null) brain = GameObject.FindObjectOfType<CinemachineBrain>();
-             /*if (brain == null) throw new System.InvalidOperationException(
-                 "CinemachineBrain íå íàéäåí. Óáåäèòåñü, ÷òî â ñöåíå åñòü êàìåðà ñ ýòèì êîìïîíåíòîì è òåãîì MainCamera.");*/
-             return brain;
-         })
-         .AsSingle();
-
+             if (brain == null) brain = GameObject.FindObjectOfType<CinemachineBrain>();*/
+            /*if (brain == null) throw new System.InvalidOperationException(
+                "CinemachineBrain íå íàéäåí. Óáåäèòåñü, ÷òî â ñöåíå åñòü êàìåðà ñ ýòèì êîìïîíåíòîì è òåãîì MainCamera.");*/
+            /*return brain;
+        })
+        .AsSingle();*/
+            Container.Bind<CinemachineBrainProvider>().AsSingle();
             // 2. Áèíäèì ñåðâèñ ñáîðêè. Òåïåðü îí ïîëó÷èò ScenesManager èç ProjectContext è êàìåðó èç SceneContext
             Container.Bind<AssemblyService>().AsSingle();
 

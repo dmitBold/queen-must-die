@@ -20,7 +20,8 @@ namespace NightCycle
         public bool IsActive => _sessionActive;
 
         private readonly ScenesManager _scenesManager;
-        private readonly CinemachineBrain _brain;
+        private CinemachineBrain _brain;
+        private readonly CinemachineBrainProvider _brains;
         private readonly CinemachineBlendDefinition _defaultCameraMode;
         private string _previousSceneName;
         private AssemblyController _controller;
@@ -34,14 +35,14 @@ namespace NightCycle
 
         private bool _sessionActive;
 
-        public AssemblyService(ScenesManager scenesManager, [InjectOptional] CinemachineBrain brain, InventoryUI inventoryUI)
+        public AssemblyService(ScenesManager scenesManager, CinemachineBrainProvider brains, InventoryUI inventoryUI)
         {
             _scenesManager = scenesManager;
-            _brain = brain;
-            if (brain != null)
+            _brains = brains;
+            /*if (brain != null)
             {
                 _defaultCameraMode = _brain.DefaultBlend;
-            }
+            }*/
             _inventoryUI = inventoryUI;
         }
 
@@ -152,6 +153,12 @@ namespace NightCycle
 
         private void SetupCameraForEntry()
         {
+            _brain = _brains.Current;
+            if (_brain == null || _brain.OutputCamera == null)
+            {
+                Debug.LogError("[AssemblyService] CinemachineBrain/OutputCamera not available");
+                return;
+            }
             _brain.DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Styles.Cut, 0f);
             _brain.OutputCamera.cullingMask = LayerMask.GetMask("Assembly");
             _brain.OutputCamera.clearFlags = CameraClearFlags.SolidColor;
