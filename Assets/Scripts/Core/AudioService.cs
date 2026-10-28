@@ -11,7 +11,7 @@ namespace Core
 
         public void PlaySound(AudioClip clip, float volume = 1f)
         {
-            if (clip == null) return;
+            if (clip == null || CutsceneSkipper.IsSkipping) return;
             sfxSource.PlayOneShot(clip, volume);
         }
 
@@ -24,7 +24,7 @@ namespace Core
 
         public void PlaySoundAtPoint(AudioClip clip, Vector3 position, float volume = 1f)
         {
-            if (clip == null) return;
+            if (clip == null || CutsceneSkipper.IsSkipping) return;
             AudioSource.PlayClipAtPoint(clip, position, volume);
         }
 
@@ -62,14 +62,14 @@ namespace Core
         // Воспроизведение через EventReference (самый удобный способ для инспектора)
         public void PlayFMODEvent(EventReference eventReference, Vector3 position = default)
         {
-            if (eventReference.IsNull) return;
+            if (eventReference.IsNull || CutsceneSkipper.IsSkipping) return;
             RuntimeManager.PlayOneShot(eventReference, position);
         }
 
         // Воспроизведение через строковый путь (например: "event:/FS_Wood")
         public void PlayFMODEvent(string eventPath, Vector3 position = default)
         {
-            if (string.IsNullOrEmpty(eventPath)) return;
+            if (string.IsNullOrEmpty(eventPath) || CutsceneSkipper.IsSkipping) return;
             RuntimeManager.PlayOneShot(eventPath, position);
         }
     }

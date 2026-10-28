@@ -26,6 +26,8 @@ namespace NightCycle
         private PlayerInteraction playerInteraction;
 
         private PlayableDirector currentDirector;
+        // Director whose timeline dialogue is currently shown (paused or not).
+        private PlayableDirector currentTimelineDirector;
 
         //test
         public CinemachineBrain cameraBrain;
@@ -84,6 +86,7 @@ namespace NightCycle
             currentPageIndex = 0;
 
             currentDirector = null;
+            currentTimelineDirector = null;
 
             currentDialogueCallback = onComplete;
 
@@ -105,6 +108,7 @@ namespace NightCycle
             currentPageIndex = 0;
 
             currentDirector = null;
+            currentTimelineDirector = null;
 
             currentDialogueCallback = onComplete;
 
@@ -200,6 +204,7 @@ namespace NightCycle
         public void EndDialogue()
         {
             dialoguePanel.SetActive(false);
+            currentTimelineDirector = null;
             //dialogueName.ClearMesh();
             dialogueName.text = "";
             if (currentDirector != null)
@@ -229,6 +234,18 @@ namespace NightCycle
             currentDialogueCallback = null;
         }
 
+        /// <summary>
+        /// Completes the dialogue shown by the given timeline as if the player clicked through it.
+        /// Used when the cutscene is skipped.
+        /// </summary>
+        public void CompleteTimelineDialogue(PlayableDirector director)
+        {
+            if (director == null || currentTimelineDirector != director || !dialoguePanel.activeSelf) return;
+
+            typewriter.StopTyping();
+            EndDialogue();
+        }
+
         public void ForceEndDialogue()
         {
             dialoguePanel.SetActive(false);
@@ -240,6 +257,15 @@ namespace NightCycle
         public void StartTimelineDialogue(string[] pages, PlayableDirector director, bool pauseTimeline)
         {
             if (pages == null || pages.Length == 0) return;
+
+            if (CutsceneSkipper.IsSkipping)
+            {
+                // Skipped cutscene: the dialogue counts as read without being shown.
+                DialogEnded?.Invoke();
+                return;
+            }
+
+            currentTimelineDirector = director;
 
             currentNPC = null;
             currentPages = pages;
@@ -266,6 +292,15 @@ namespace NightCycle
         public void StartTimelineDialogue(string[] pages, string[] dialNames, PlayableDirector director, bool pauseTimeline)
         {
             if (pages == null || pages.Length == 0) return;
+
+            if (CutsceneSkipper.IsSkipping)
+            {
+                // Skipped cutscene: the dialogue counts as read without being shown.
+                DialogEnded?.Invoke();
+                return;
+            }
+
+            currentTimelineDirector = director;
 
             currentNPC = null;
             currentPages = pages;

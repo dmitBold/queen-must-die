@@ -19,6 +19,9 @@ namespace Core
 
         public UnityEvent onPagesEnded;
 
+        [Tooltip("Если включено, этап Docs пропускается: сразу после катсцены вызывается onPagesEnded (переход на следующую сцену).")]
+        public bool skipDocs = true;
+
         private WorldState worldState;
         public ChoiceUI choiceUI;
         public CardManager cardManager;
@@ -65,6 +68,12 @@ namespace Core
 
         public void StartDocs()
         {
+            if (skipDocs)
+            {
+                EndDocs();
+                return;
+            }
+
             dialogue.gameObject.SetActive(true);
             NextDoc();
         }
