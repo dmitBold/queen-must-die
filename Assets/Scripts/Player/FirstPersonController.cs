@@ -330,6 +330,30 @@ namespace NightCycle
             mainCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
         }
 
+        /// <summary>
+        /// Places the player so that the player camera sees exactly what the reference
+        /// transform sees: same view direction and same camera position.
+        /// Used to hand control back after a cutscene without a camera jump.
+        /// </summary>
+        public void MatchView(Transform reference)
+        {
+            if (reference == null) return;
+
+            LookAlong(reference.forward);
+
+            // Offset from the body to the camera with the new orientation applied.
+            Vector3 cameraOffset = mainCamera.transform.position - transform.position;
+            Vector3 targetBodyPosition = reference.position - cameraOffset;
+
+            bool controllerWasEnabled = characterController.enabled;
+            characterController.enabled = false;
+            transform.position = targetBodyPosition;
+            Physics.SyncTransforms();
+            characterController.enabled = controllerWasEnabled;
+
+            currentMovement = Vector3.zero;
+        }
+
         private void HandleRotation()
         {
             if (Time.timeScale == 0f)

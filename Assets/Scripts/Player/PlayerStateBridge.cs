@@ -219,6 +219,16 @@ namespace NightCycle
             _firstPersonController.LookAlong(reference.forward);
         }
 
+        /// <summary>
+        /// Moves and turns the player so the player camera matches the given transform
+        /// exactly (e.g. the last cutscene camera), so there is no camera jump.
+        /// </summary>
+        public void MatchViewTo(Transform reference)
+        {
+            if (_firstPersonController == null || reference == null) return;
+            _firstPersonController.MatchView(reference);
+        }
+
         public void EnableInteraction()
         {
             _playerInteraction.can_interact = true;
