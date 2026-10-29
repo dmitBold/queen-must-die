@@ -313,6 +313,23 @@ namespace NightCycle
             mainCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
         }
 
+        /// <summary>
+        /// Turns the player to look along a world direction: body yaw plus camera pitch.
+        /// Mouse look continues from the new orientation.
+        /// </summary>
+        public void LookAlong(Vector3 worldDirection)
+        {
+            if (worldDirection.sqrMagnitude < 0.0001f) return;
+
+            Vector3 dir = worldDirection.normalized;
+            float yaw = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+
+            float pitch = -Mathf.Asin(Mathf.Clamp(dir.y, -1f, 1f)) * Mathf.Rad2Deg;
+            verticalRotation = Mathf.Clamp(pitch, -upDownLookRange, upDownLookRange);
+            mainCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+        }
+
         private void HandleRotation()
         {
             if (Time.timeScale == 0f)

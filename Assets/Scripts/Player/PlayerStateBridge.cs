@@ -12,6 +12,7 @@ namespace NightCycle
         private HUDController _hudController;
         private PlayerInteraction _playerInteraction;
         private IPlayerProvider _playerProvider;
+        private FirstPersonController _firstPersonController;
 
         [Inject]
         public void Construct(
@@ -19,8 +20,10 @@ namespace NightCycle
             [Inject(Optional = true)] InventoryUI inventoryUI,
             [Inject(Optional = true)] HUDController hudController,
             [Inject(Optional = true)] PlayerInteraction playerInteraction,
-            [Inject] IPlayerProvider playerProvider)
+            [Inject] IPlayerProvider playerProvider,
+            [Inject(Optional = true)] FirstPersonController firstPersonController)
         {
+            _firstPersonController = firstPersonController;
             _playerProvider = playerProvider;
             _playerStateController = playerStateController;
             _inventoryUI = inventoryUI;
@@ -204,6 +207,16 @@ namespace NightCycle
             {
                 controller.enabled = true;
             }
+        }
+
+        /// <summary>
+        /// Turns the player's view to look the same way as the given transform
+        /// (e.g. the last cutscene camera), so control resumes facing that direction.
+        /// </summary>
+        public void AlignViewTo(Transform reference)
+        {
+            if (_firstPersonController == null || reference == null) return;
+            _firstPersonController.LookAlong(reference.forward);
         }
 
         public void EnableInteraction()
