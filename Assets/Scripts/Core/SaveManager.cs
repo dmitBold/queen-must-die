@@ -229,6 +229,8 @@ public class SaveManager : MonoBehaviour
             case SceneNames.IntroDialogue2: return GameScene.IntroDialogue2;
             case SceneNames.Throne: return GameScene.Throne;
             case SceneNames.Night1_final: return GameScene.Night1_final;
+            case SceneNames.Night1_outro: return GameScene.Night1_outro;
+            case SceneNames.Library: return GameScene.Library;
             default: return GameScene.Night;
         }
     }
