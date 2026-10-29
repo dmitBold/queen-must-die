@@ -1,4 +1,5 @@
 using System.Collections;
+using Core;
 using UnityEngine;
 using Zenject;
 
@@ -7,12 +8,27 @@ namespace NightCycle
     public class PlayerFlashlight : MonoBehaviour
     {
         private FlashlightUI flashlightUI;
+        private HintManager hintManager;
+        private WorldState worldState;
 
         [Inject]
-        public void Construct(FlashlightUI _flashlightUI)
+        public void Construct(FlashlightUI _flashlightUI,
+            [InjectOptional] HintManager _hintManager,
+            [InjectOptional] WorldState _worldState)
         {
             flashlightUI = _flashlightUI;
+            hintManager = _hintManager;
+            worldState = _worldState;
         }
+
+        [Header("First Crown Use Hint")]
+        [Tooltip("Hint shown the first time the player turns the crown on with F (once per playthrough, stored in save flags).")]
+        [TextArea(2, 4)]
+        [SerializeField] private string firstUseHintText = "\u042D\u0441\u0441\u0435\u043D\u0446\u0438\u044F - \u0442\u043E\u043F\u043B\u0438\u0432\u043E \u0434\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u043A\u043E\u0440\u043E\u043B\u0435\u0432\u0441\u043A\u043E\u0439 \u043A\u043E\u0440\u043E\u043D\u044B. \u0420\u0430\u0441\u0445\u043E\u0434\u0443\u0439\u0442\u0435 \u0435\u0451 \u0441 \u0443\u043C\u043E\u043C";
+        [SerializeField] private float firstUseHintDuration = 4f;
+        [SerializeField] private float firstUseHintFade = 0.5f;
+
+        private const string FirstUseHintFlag = "hint_crown_first_use_shown";
 
         [Header("Reveal Shader Settings")]
         [SerializeField] private float revealDistance = 15f;
@@ -70,9 +86,14 @@ namespace NightCycle
             if (Input.GetKeyDown(KeyCode.F))
             {
                 if (light_active)
+                {
                     TurnOffCrown();
+                }
                 else if (currentEssence > 0)
+                {
                     TurnOnCrown();
+                    ShowFirstUseHint();
+                }
             }
         }
 
@@ -202,6 +223,15 @@ namespace NightCycle
             anim.ResetTrigger(trig_on);
             anim.SetTrigger(trig_off);
             light_active = false;
+        }
+
+        private void ShowFirstUseHint()
+        {
+            if (hintManager == null || worldState == null) return;
+            if (worldState.HasFlag(FirstUseHintFlag)) return;
+
+            worldState.AddFlag(FirstUseHintFlag);
+            hintManager.ShowHint(firstUseHintText, firstUseHintDuration, firstUseHintFade);
         }
 
         public void AddEssence(float amount)

@@ -19,8 +19,8 @@ namespace Core
 
         public UnityEvent onPagesEnded;
 
-        [Tooltip("Если включено, этап Docs пропускается: сразу после катсцены вызывается onPagesEnded (переход на следующую сцену).")]
-        public bool skipDocs = true;
+        [Tooltip("Если включено, этап Docs пропускается: сразу после катсцены вызывается onPagesEnded (переход на следующую сцену). Включено только в DayCycle.")]
+        public bool skipDocs = false;
 
         private WorldState worldState;
         public ChoiceUI choiceUI;
