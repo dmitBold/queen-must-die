@@ -19,6 +19,13 @@ namespace NightCycle
         public Light scene_light;
         public List<CandleController> OrderedCandles;
         public List<CandleController> ImmediateCandles;
+        [Tooltip("Свечи, которые горят до затемнения: их свет, свечение меша и огонь плавно гаснут вместе со светом и плавно возвращаются")]
+        public List<CandleController> BlackoutCandles;
+        [Tooltip("За сколько секунд разгорается каждая свеча из OrderedCandles")]
+        public float CandleFadeTime = 0.8f;
+        [Tooltip("Источники, которые после затемнения возвращаются медленнее остальных (в SlowRestoreFactor раз)")]
+        public List<Light> SlowRestoreLights;
+        public float SlowRestoreFactor = 1.5f;
         public float CandleTime;
         public float FirstDelay;
         public AudioClip candleSound;
@@ -130,12 +137,16 @@ namespace NightCycle
             {
                 yield return new WaitForSeconds(CandleTime);
                 _audioService.PlaySound(candleSound);
-                candle.SetCandleState(true);
+                if (candle != null) candle.FadeTo(1f, CandleFadeTime);
             }
             TurnOnAllLight();
             foreach (CandleController candle in ImmediateCandles)
             {
-                candle.SetCandleState(true);
+                if (candle != null) candle.FadeTo(1f, turnON_time);
+            }
+            foreach (CandleController candle in BlackoutCandles)
+            {
+                if (candle != null) candle.FadeTo(1f, turnON_time);
             }
             _audioService.PlaySound(candleSound, 2.0f);
         }
@@ -154,6 +165,10 @@ namespace NightCycle
                         musicController.PlayTrack(1);
                     }
                     TurnOffAllLight();
+                    foreach (CandleController candle in BlackoutCandles)
+                    {
+                        if (candle != null) candle.FadeTo(0f, turnOFF_time);
+                    }
                     if (scene_light != null) scene_light.enabled = false;
                     StartCoroutine(CandlesRoutine());
                     break;
@@ -218,6 +233,7 @@ namespace NightCycle
         {
             foreach (Light light in AllLight)
             {
+                if (light == null) continue;
                 _originalIntensities[light] = light.intensity;
                 ChangeLightIntensity(light, 0f, turnOFF_time);
             }
@@ -229,7 +245,8 @@ namespace NightCycle
             {
                 if (light != null && _originalIntensities.TryGetValue(light, out float origIntensity))
                 {
-                    ChangeLightIntensity(light, origIntensity, turnON_time);
+                    float duration = SlowRestoreLights != null && SlowRestoreLights.Contains(light) ? turnON_time * SlowRestoreFactor : turnON_time;
+                    ChangeLightIntensity(light, origIntensity, duration);
                 }
             }
         }
