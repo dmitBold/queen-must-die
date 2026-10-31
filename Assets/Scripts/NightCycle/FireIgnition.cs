@@ -51,6 +51,12 @@ namespace NightCycle
 
         private void Awake() => Capture();
 
+        // Звук факела включается только для горящего огня (у эмиттера Play Event = None).
+        private void Start()
+        {
+            if (sound && IsLit && !sound.IsPlaying()) sound.Play();
+        }
+
         private void Capture()
         {
             if (_captured) return;
