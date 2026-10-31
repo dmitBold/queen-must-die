@@ -10,7 +10,7 @@ namespace NightCycle
     {
         [SerializeField] private GameScene targetScene;
         
-        private ScenesManager _scenesManager;
+        private SceneTransitionService _transitionService;
 
         [Header("Куда спавнить игрока в новой сцене")]
         [SerializeField] private Transform exitSpawnPoint;
@@ -20,15 +20,13 @@ namespace NightCycle
         [SerializeField] private Vector3 customSpawnEuler;
         [SerializeField] private bool useCustomSpawn;
 
-        [SerializeField] private GameObject loadingUI;
-        public bool showUI = true;
 
         [Inject] private IFlashlightProvider _flashlightProvider;
 
         [Inject]
-        private void Construct(ScenesManager scenesManager)
+        private void Construct(SceneTransitionService transitionService)
         {
-            _scenesManager = scenesManager;
+            _transitionService = transitionService;
         }
         public Animator transition;
 
@@ -42,6 +40,9 @@ namespace NightCycle
 
         public void LoadNext()
         {
+            if (!_transitionService.TryBegin(SceneNames.GetName(targetScene)))
+                return;
+
             var fl = _flashlightProvider?.Current;
             if (fl != null)
                 _flashlightProvider.PendingEssence = fl.GetEssense();
@@ -53,13 +54,6 @@ namespace NightCycle
                 else
                     PendingSpawn.Set(customSpawnPosition, Quaternion.Euler(customSpawnEuler));
             }
-
-            if (showUI)
-            {
-                loadingUI.gameObject.SetActive(true);
-            }
-
-            _scenesManager.LoadSingle(SceneNames.GetName(targetScene));
         }
     }
 }

@@ -19,6 +19,7 @@ namespace DI
                 .Bind<ScenesManager>()
                 .AsSingle()
                 .WithArguments(this as MonoBehaviour);
+            Container.Bind<SceneTransitionService>().AsSingle();
             //TEST
             Container.Bind<SaveManager>().FromInstance(saveManager).AsSingle();
             Container.Bind<SaveSystem>().AsSingle();

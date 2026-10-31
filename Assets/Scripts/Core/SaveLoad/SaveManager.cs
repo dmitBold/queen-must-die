@@ -13,7 +13,7 @@ public class SaveManager : MonoBehaviour
 {
     //[Inject] private DiContainer _container;
     [Inject] private IPlayerProvider _playerProvider;
-    [Inject] private ScenesManager _scenesManager;
+    [Inject] private SceneTransitionService _transitionService;
     [Inject] private SaveSystem _saveSystem;
     [Inject] private InventoryManager _inventoryManager;
     [Inject] private QuestManager _questManager;
@@ -115,7 +115,7 @@ public class SaveManager : MonoBehaviour
 
     public void SaveGame()
     {
-        if (_isProcessing) return;
+        if (_isProcessing || _transitionService.IsTransitioning) return;
         _isProcessing = true;
 
         SaveData data = new SaveData();
@@ -176,11 +176,17 @@ public class SaveManager : MonoBehaviour
 
     public bool LoadGame()
     {
-        if (_isProcessing) return false;
+        if (_isProcessing || _transitionService.IsTransitioning) return false;
         _isProcessing = true;
 
         if (_saveSystem.Load())
         {
+            if (!_transitionService.TryBegin(_saveSystem.CurrentData.currentSceneName))
+            {
+                _isProcessing = false;
+                return false;
+            }
+
             var fl = _flashlightProvider.Current;
             if (fl != null)
             {
@@ -204,7 +210,6 @@ public class SaveManager : MonoBehaviour
 
             _worldState.LoadSaveData(_saveSystem.CurrentData.savedWorldState);
 
-            _scenesManager.LoadSingle(_saveSystem.CurrentData.currentSceneName);
             return true;
         }
         else

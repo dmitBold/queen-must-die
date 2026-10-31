@@ -30,6 +30,7 @@ namespace Core
         public const string Night1_final = "Night1_Final";
         public const string Night1_outro = "Night1_outro";
         public const string Library = "Library";
+        public const string Loading = "LoadingScene";
 
         public static string GetName(GameScene scene)
         {

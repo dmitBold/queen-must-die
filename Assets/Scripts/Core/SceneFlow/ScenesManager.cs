@@ -28,6 +28,23 @@ namespace Core
             _runner.StartCoroutine(LoadSingleRoutine(sceneName, onLoaded));
         }
 
+        /// <summary>
+        /// Начинает полную загрузку сцены с allowSceneActivation = false и возвращает операцию.
+        /// Активацию разрешает вызывающий код. Возвращает null, если сцены нет в Build Settings.
+        /// </summary>
+        public AsyncOperation BeginLoadSingle(string sceneName)
+        {
+            if (!Application.CanStreamedLevelBeLoaded(sceneName))
+            {
+                Debug.LogError($"[ScenesManager] Scene '{sceneName}' is not in Build Settings.");
+                return null;
+            }
+
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+            operation.allowSceneActivation = false;
+            return operation;
+        }
+
         public void Unload(string sceneName, Action onUnloaded = null)
         {
             _runner.StartCoroutine(UnloadRoutine(sceneName, onUnloaded));
