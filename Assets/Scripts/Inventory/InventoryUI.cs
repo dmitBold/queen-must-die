@@ -54,6 +54,8 @@ namespace Inventory
 
         public bool canOpen = true;
 
+        [InjectOptional] private ItemDatabase itemDatabase;
+
         [Inject]
         public void Construct(InventoryManager inventoryManager, AssemblyService assemblyService, AudioService audioService, IPlayerProvider playerProvider)
         {
@@ -118,12 +120,20 @@ namespace Inventory
 
             if (Input.GetKeyDown(KeyCode.B))
             {
-                Debug.Log("TEST ADD ITEM");
-                //inventory.AddItem(test);
-                foreach (ItemData item in test_items)
+                // DEBUG: B - все основы и детали из ItemDatabase (+ test_items), которых ещё нет в инвентаре
+                int added = 0;
+                var toAdd = new List<ItemData>();
+                if (itemDatabase != null)
+                    foreach (var item in itemDatabase.AllItems)
+                        if (item != null && (item.itemType == ItemType.PortableBase || item.itemType == ItemType.Part)) toAdd.Add(item);
+                if (test_items != null) toAdd.AddRange(test_items);
+                foreach (ItemData item in toAdd)
                 {
+                    if (item == null || inventory.HasItem(item)) continue;
                     inventory.AddItem(item);
+                    added++;
                 }
+                Debug.Log($"[DEBUG B] added {added} items (all bases and parts)");
             }
         }
 
