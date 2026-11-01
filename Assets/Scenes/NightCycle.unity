@@ -194780,7 +194780,19 @@ MonoBehaviour:
   dialogue_sounds_index: 0
   onDialogueCompleted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2105929853}
+        m_TargetAssemblyTypeName: NightSecretsQuest, Assembly-CSharp
+        m_MethodName: OnDoorReached
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   triggerEventOnlyOnce: 1
 --- !u!114 &846177210
 MonoBehaviour:
@@ -194805,6 +194817,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2105929853}
+        m_TargetAssemblyTypeName: NightSecretsQuest, Assembly-CSharp
+        m_MethodName: OnDoorReached
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -248328,6 +248352,7 @@ Transform:
   - {fileID: 1604979361}
   - {fileID: 101856108}
   - {fileID: 931913898}
+  - {fileID: 2105929852}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1141637806
@@ -345112,13 +345137,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471272242}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7601081, z: -0, w: -0.64979666}
-  m_LocalPosition: {x: -15.62144, y: 8.86, z: -11.36}
+  m_LocalRotation: {x: -0, y: 0.3303751, z: -0, w: -0.94384974}
+  m_LocalPosition: {x: -11.895262, y: 7.657404, z: -20.398382}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 261.053, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 321.417, z: 0}
 --- !u!114 &1471272244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464914,6 +464939,52 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3802654285107226080, guid: fc5f7e35987b3934fb6a40f529bfa2a5, type: 3}
   m_PrefabInstance: {fileID: 1024901544}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2105929851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2105929852}
+  - component: {fileID: 2105929853}
+  m_Layer: 0
+  m_Name: NightSecretsQuest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2105929852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105929851}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1141486186}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2105929853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105929851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f521609575f4eb2478019362beb1f20c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightSecretsQuest
+  quest: {fileID: 11400000, guid: d93fc8568785df447a48c8435b6e45fe, type: 2}
+  giveOnStart: 1
 --- !u!1001 &2107013299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -845826,6 +845897,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2105929853}
+        m_TargetAssemblyTypeName: NightSecretsQuest, Assembly-CSharp
+        m_MethodName: OnGolemAssembled
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isCompleted: 0
   viewPrefab: {fileID: 1526973361532908333, guid: cd37342313919cd4daa296c93c4bc479, type: 3}
 --- !u!114 &5342616406713611033
@@ -845941,6 +846024,18 @@ MonoBehaviour:
       - m_Target: {fileID: 5342616406713611034}
         m_TargetAssemblyTypeName: NightCycle.DialogueGate, Assembly-CSharp
         m_MethodName: Unlock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2105929853}
+        m_TargetAssemblyTypeName: NightSecretsQuest, Assembly-CSharp
+        m_MethodName: OnGolemExamined
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
