@@ -188304,10 +188304,19 @@ MonoBehaviour:
   secretAnimator: {fileID: 727574945}
   openStateName: Library secret enter
   breather: {fileID: 1413095451}
+  breathEvent:
+    Guid:
+      Data1: 1612455376
+      Data2: 1103673397
+      Data3: 343184013
+      Data4: 1789556169
+    Path: event:/Scenes/NightSycle/Statue/Activate
   silentMovers:
   - {fileID: 1455719789}
   - {fileID: 1467881980}
-  activateDelay: 1
+  - {fileID: 1413095451}
+  activateDelay: 4
+  saveAfterOpen: 1
   enableOnActivate:
   - {fileID: 543757698}
   - {fileID: 1549153427}
@@ -214326,18 +214335,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 169893324}
-        m_TargetAssemblyTypeName: NightCycle.SaveLoadBridge, Assembly-CSharp
-        m_MethodName: TriggerSave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2065023508}
         m_TargetAssemblyTypeName: NightCycle.OfficeBlackout, Assembly-CSharp
         m_MethodName: Trigger
@@ -221976,18 +221973,6 @@ MonoBehaviour:
       - m_Target: {fileID: 999844901}
         m_TargetAssemblyTypeName: NightCycle.PickupItem, Assembly-CSharp
         m_MethodName: Pickup
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 169893324}
-        m_TargetAssemblyTypeName: NightCycle.SaveLoadBridge, Assembly-CSharp
-        m_MethodName: TriggerSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -409627,6 +409612,30 @@ MonoBehaviour:
           m_StringArgument: unlock
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1783476974}
+        m_TargetAssemblyTypeName: NightCycle.WorldEventSaver, Assembly-CSharp
+        m_MethodName: SaveEventState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 169893324}
+        m_TargetAssemblyTypeName: NightCycle.SaveLoadBridge, Assembly-CSharp
+        m_MethodName: TriggerSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isCompleted: 0
   viewPrefab: {fileID: 2412704716860033239, guid: 6fddbc36ebd83fa4dbc644ca2f8d02b0, type: 3}
 --- !u!4 &1783476973 stripped
@@ -409649,7 +409658,31 @@ MonoBehaviour:
   _uniqueId: c1496c42-0190-49e8-b69a-f3d88c88c45a
   onStateRestored:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1783476970}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: unlock
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1783476966}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1783476975
 MonoBehaviour:
   m_ObjectHideFlags: 0
