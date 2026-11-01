@@ -12,14 +12,12 @@ namespace NightCycle
 
         private bool isActive = false;
         [SerializeField] PlayerInteraction playerInteraction;
-        private PlayerStateController playerStateController;
 
         private NoteInteractable current_note = null;
 
         [Inject]
-        private void Construct(PlayerStateController playerStateController, PlayerInteraction playerInteraction)
+        private void Construct(PlayerInteraction playerInteraction)
         {
-            this.playerStateController = playerStateController;
             this.playerInteraction = playerInteraction;
         }
         
@@ -42,8 +40,6 @@ namespace NightCycle
 
             isActive = true;
 
-            playerStateController.SetMode(PlayerMode.Focused);
-
             view.Show(note.noteImage, note.noteText);
 
 
@@ -61,23 +57,12 @@ namespace NightCycle
 
             isActive = false;
             view.Hide();
-
-            playerStateController.SetMode(PlayerMode.FreeMovement);
         }
 
         private void Update()
         {
+            // Esc обрабатывает UIManager и вызывает выход из фокуса через PlayerInteraction.
             if (!isActive || !view.Tintroot.activeSelf) return;
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (playerInteraction != null)
-                {
-                    playerInteraction.ForceExitFocus();
-                }
-                return;
-            }
-
 
             if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetMouseButtonDown(0))
             {

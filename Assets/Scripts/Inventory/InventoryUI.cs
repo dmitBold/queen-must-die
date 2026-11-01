@@ -15,8 +15,11 @@ using Zenject;
 
 namespace Inventory
 {
-    public class InventoryUI : MonoBehaviour
+    public class InventoryUI : MonoBehaviour, IUIScreen
     {
+        [Tooltip("Идентификатор окна инвентаря. Клавиша открытия задаётся в самом ассете.")]
+        [SerializeField] private UIScreenId screenId;
+
         [Header("UI References")]
         [SerializeField] private Image panel;
         [SerializeField] private Canvas rootCanvas;
@@ -48,22 +51,31 @@ namespace Inventory
         private InventoryManager inventory;
         private AssemblyService assemblyService;
         private AudioService audioService;
-        private IPlayerProvider playerProvider;
 
         public CanvasGroup DayUI;
 
-        public bool canOpen = true;
+        public UIScreenId Id => screenId;
 
         [Inject]
-        public void Construct(InventoryManager inventoryManager, AssemblyService assemblyService, AudioService audioService, IPlayerProvider playerProvider)
+        public void Construct(InventoryManager inventoryManager, AssemblyService assemblyService, AudioService audioService, UIManager uiManager)
         {
             this.inventory = inventoryManager;
             this.assemblyService = assemblyService;
             this.audioService = audioService;
 
-            this.playerProvider = playerProvider;
-
             this.inventory.OnInventoryChanged += RefreshUI;
+            _uiManager = uiManager;
+            uiManager.Register(this);
+        }
+
+        private UIManager _uiManager;
+
+        /// <summary>
+        /// Оставлен для кнопок и событий в сценах и префабах, назначенных через UnityEvent: делегирует UIManager.
+        /// </summary>
+        public void Toggle()
+        {
+            _uiManager.Toggle(screenId);
         }
 
         private void Awake()
@@ -85,28 +97,9 @@ namespace Inventory
             miniPartsPanel.SetActive(false);
         }
 
-        private void Toggle()
-        {
-            if (isOpen) Close();
-            else Open();
-        }
-
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                /*if (isOpen) Close();
-                else Open();*/
-                Toggle();
-                /*if (miniPartsPanel.activeSelf)
-                {
-                    CloseMiniPartsPanel();
-                }
-                else
-                {
-                    Toggle();
-                }*/
-            }
+            // Хоткей I обрабатывает UIInputHandler через UIManager.
 
             // ��������� ��������� ���� (������ ���� ������ ��������� � ������� ���� �������)
             if (isOpen && !miniPartsPanel.activeSelf && filteredMainItems.Count > 3)
@@ -127,11 +120,9 @@ namespace Inventory
             }
         }
 
-        private void Open()
+        public void Open()
         {
-            if (!canOpen) { return; }
             isOpen = true;
-            playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
             if (DayUI != null)
             {
                 DayUI.alpha = 0f;
@@ -160,7 +151,6 @@ namespace Inventory
 
         public void Close()
         {
-            playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
             if (DayUI != null)
             {
                 DayUI.alpha = 1f;
@@ -170,31 +160,10 @@ namespace Inventory
             rootCanvas.enabled = false;
             miniPartsPanel.SetActive(false);
 
+            // Закрытие окна в обход Esc (BlockAll, загрузка) не должно оставлять сессию сборки висеть.
             if (assemblyService != null && assemblyService.IsActive)
             {
                 assemblyService.CloseAssembly();
-            }
-            if (playerProvider.CurrentPlayer == null)
-            {
-                playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
-            }
-            else
-            {
-                playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
-            }
-        }
-
-        public void CloseUIOnly()
-        {
-            isOpen = false;
-            if (rootCanvas != null) rootCanvas.enabled = false;
-            if (miniPartsPanel != null) miniPartsPanel.SetActive(false);
-            if (panel != null) panel.gameObject.SetActive(false);
-
-            if (DayUI != null)
-            {
-                DayUI.alpha = 1f;
-                DayUI.blocksRaycasts = true;
             }
         }
 
@@ -365,11 +334,14 @@ namespace Inventory
             if (selectedItem == null || selectedItem.resultItem == null) return;
 
             ItemData completedItem = selectedItem.resultItem;
-            inventory.RemoveItem(selectedItem);
+            ItemData sourceItem = selectedItem;
+            // Сбрасываем выбор до обмена: RefreshUI по событию инвентаря не должен показывать описание удалённого предмета.
+            selectedItem = null;
+            inventory.RemoveItem(sourceItem);
             inventory.AddItem(completedItem);
 
             Debug.Log($"������ �������! �������: {completedItem.itemName}");
-            Open();
+            // Инвентарь остаётся открытым под сборкой, поэтому после неё игрок возвращается в него без повторного Open.
         }
 
         private void OnDestroy()

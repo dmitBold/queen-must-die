@@ -1,31 +1,28 @@
-using Core;
-using Inventory;
+using UI;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Мост для UnityEvent в сценах: блокирует и разблокирует окна через UIManager.
+/// Имя сохранено, чтобы не перенастраивать события в сценах.
+/// </summary>
 public class BridgeUI : MonoBehaviour
 {
-    private InventoryUI inventoryUI;
-    private DayNoteUI noteUI;
+    private UIManager _uiManager;
 
     [Inject]
-    public void Constructor(InventoryUI _inventoryUI, DayNoteUI _noteUI)
+    public void Constructor(UIManager uiManager)
     {
-        inventoryUI = _inventoryUI;
-        noteUI = _noteUI;
+        _uiManager = uiManager;
     }
 
     public void LockUI()
     {
-        inventoryUI.CloseUIOnly();
-        noteUI.CloseUIOnly();
-        inventoryUI.canOpen = false;
-        noteUI.canOpen = false;
+        _uiManager.BlockAll(this);
     }
 
     public void UnlockUI()
     {
-        inventoryUI.canOpen = true;
-        noteUI.canOpen = true;
+        _uiManager.UnblockAll(this);
     }
 }

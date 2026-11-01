@@ -1,4 +1,5 @@
 using Core;
+using UI;
 using UnityEngine;
 using Zenject;
 
@@ -16,7 +17,6 @@ namespace NightCycle
         [SerializeField] float motorForce = 1500f;
         [SerializeField] float speedMultiplier = 400f;
 
-        [SerializeField] private PlayerStateController playerStateController;
 
         Transform currentTarget;
         HingeJoint currentJoint;
@@ -26,11 +26,13 @@ namespace NightCycle
         HUDController controller;
         Camera cam;
         private AudioService _audioService;
+        private UIManager _uiManager;
 
         [Inject]
-        public void Constructor(AudioService audioService, HUDController hudController)
+        public void Constructor(AudioService audioService, HUDController hudController, UIManager uiManager)
         {
             _audioService = audioService;
+            _uiManager = uiManager;
             controller = hudController;
         }
 
@@ -69,7 +71,7 @@ namespace NightCycle
                 {
                     SetCursor(HandImage, true);
 
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0) && _uiManager.CanInteract)
                     {
                         StartDragging(joint);
                     }
@@ -107,7 +109,7 @@ namespace NightCycle
             currentJoint = joint;
             isDragging = true;
             currentJoint.useMotor = true;
-            playerStateController.SetMode(PlayerMode.DoorState);
+            _uiManager.SetDoorState(true);
 
             Vector3 doorToCam = cam.transform.position - currentTarget.position;
             sideMultiplier = Mathf.Sign(Vector3.Dot(currentTarget.forward, doorToCam));
@@ -123,7 +125,7 @@ namespace NightCycle
                 currentJoint.useMotor = false;
                 currentJoint = null;
                 currentTarget = null;
-                playerStateController.SetMode(PlayerMode.FreeMovement);
+                _uiManager.SetDoorState(false);
                 return;
             }
 

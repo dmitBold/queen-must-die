@@ -1,6 +1,7 @@
 ﻿using Core;
 using Inventory;
 using System.Threading.Tasks;
+using UI;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,11 +32,11 @@ namespace NightCycle
         private bool _wasCrosshairActive;
 
         public bool IsPortableBaseSession { get; private set; }
-        private readonly InventoryUI _inventoryUI;
+        private readonly UIManager _uiManager;
 
         private bool _sessionActive;
 
-        public AssemblyService(ScenesManager scenesManager, CinemachineBrainProvider brains, InventoryUI inventoryUI)
+        public AssemblyService(ScenesManager scenesManager, CinemachineBrainProvider brains, UIManager uiManager)
         {
             _scenesManager = scenesManager;
             _brains = brains;
@@ -43,22 +44,21 @@ namespace NightCycle
             {
                 _defaultCameraMode = _brain.DefaultBlend;
             }*/
-            _inventoryUI = inventoryUI;
+            _uiManager = uiManager;
         }
 
         public void OpenAssembly(InteractableView viewPrefab, System.Action onCompleteCallback = null, bool isPortableBase = false)
         {
             if (IsActive) return;
             //Debug.Log(isPortableBase);
-            _sessionActive = true;
+            // Окно закрываем до взведения сессии: InventoryUI.Close завершает активную сборку.
+            // PortableBase окно не закрывает: инвентарь остаётся под сборкой, и Esc возвращает игрока в него.
             if (!isPortableBase)
             {
-                if (_inventoryUI.isOpen)
-                {
-                    _inventoryUI.Close();
-                }
-                _inventoryUI.canOpen = false;
+                _uiManager.CloseCurrent();
             }
+            _sessionActive = true;
+            _uiManager.BeginAssembly(CloseAssembly);
             IsPortableBaseSession = isPortableBase;
             _previousSceneName = SceneManager.GetActiveScene().name;
 
@@ -79,6 +79,8 @@ namespace NightCycle
                 if (_controller == null)
                 {
                     Debug.LogError($"[AssemblyService] AssemblyController not found in scene '{SceneNames.Assembly}'.");
+                    // Иначе сессия и контекст сборки в UIManager остались бы взведёнными, а окна заблокированными.
+                    CloseAssembly();
                     return;
                 }
 
@@ -113,8 +115,8 @@ namespace NightCycle
             if (_controller == null || !_controller.isActive)
             {
                 _sessionActive = false;
-                _inventoryUI.canOpen = true;
                 IsPortableBaseSession = false;
+                _uiManager.EndAssembly();
                 return;
             }
 
@@ -123,12 +125,14 @@ namespace NightCycle
             SetupCameraForExit();
 
             IsPortableBaseSession = false;
-            _inventoryUI.canOpen = true;
 
             if (_controller != null)
             {
                 _controller.ExitAssembly();
             }
+
+            // После ExitAssembly, чтобы пересчёт режима видел уже закрытый контроллер.
+            _uiManager.EndAssembly();
 
             if (!string.IsNullOrEmpty(_previousSceneName))
             {

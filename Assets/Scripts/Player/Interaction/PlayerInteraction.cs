@@ -1,6 +1,7 @@
 using Inventory;
 using UnityEngine;
 using static NightCycle.PlayerStateController;
+using UI;
 using Zenject;
 
 namespace NightCycle
@@ -38,13 +39,15 @@ namespace NightCycle
         #region Dependencies
 
         private InventoryUI inventoryUI;
+        private UIManager uiManager;
 
         #endregion
 
         [Inject]
-        private void Construct(InventoryUI inventoryUI)
+        private void Construct(InventoryUI inventoryUI, UIManager uiManager)
         {
             this.inventoryUI = inventoryUI;
+            this.uiManager = uiManager;
         }
 
         private void Update()
@@ -54,7 +57,9 @@ namespace NightCycle
                 CheckInteraction();
                 HandleInteractionInput();
             }
-            else if (Input.GetKeyDown(KeyCode.E))
+            // Без активного фокуса E в не-Free режиме (окно, сборка, катсцена, драг двери) ничего не делает:
+            // иначе устаревший currentInteractable входил бы в фокус сквозь открытое окно.
+            else if (activeFocus != null && Input.GetKeyDown(KeyCode.E))
             {
                 ToggleInteraction();
             }
@@ -92,7 +97,7 @@ namespace NightCycle
             {
                 activeFocus.OnExitFocus();
                 activeFocus = null;
-                playerStateController.SetMode(PlayerMode.FreeMovement);
+                uiManager.EndFocus();
                 return;
             }
 
@@ -103,7 +108,7 @@ namespace NightCycle
                 if (activeFocus != null)
                 {
                     activeFocus.OnEnterFocus();
-                    playerStateController.SetMode(PlayerMode.Focused);
+                    uiManager.BeginFocus(ForceExitFocus);
                 }
                 else
                 {
@@ -282,7 +287,7 @@ namespace NightCycle
                 activeFocus = null;
             }
 
-            playerStateController.SetMode(PlayerMode.FreeMovement);
+            uiManager.EndFocus();
         }
     }
 }

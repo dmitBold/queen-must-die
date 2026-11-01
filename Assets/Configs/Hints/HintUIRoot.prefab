@@ -280,6 +280,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7025184541294547000}
   - component: {fileID: 3332204812151115025}
+  - component: {fileID: 2359944067676349395}
+  - component: {fileID: 2910609203266167616}
   m_Layer: 0
   m_Name: HintUIRoot
   m_TagString: Untagged
@@ -318,3 +320,28 @@ MonoBehaviour:
   hintCanvasGroup: {fileID: 4473408728767832915}
   hintText: {fileID: 8115629962201665515}
   delayBetweenHints: 0.5
+--- !u!225 &2359944067676349395
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8965369302642929905}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &2910609203266167616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8965369302642929905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4a9ae0b4da6c3409ea849e0ff41fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI.UIHideableGroup
+  group: {fileID: 2359944067676349395}

@@ -38,6 +38,12 @@ namespace NightCycle
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;
                     break;
+
+                // Полная заморозка без курсора: CanMove и CanRotate для Frozen уже возвращают false.
+                case PlayerMode.Frozen:
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    break;
             }
         }
 
