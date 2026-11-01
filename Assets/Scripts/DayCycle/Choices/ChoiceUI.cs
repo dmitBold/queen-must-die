@@ -1,8 +1,10 @@
 using System;
 using Cards;
+using Inventory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 //using UnityEngine.EventSystems;
 
 namespace Choices
@@ -28,6 +30,17 @@ namespace Choices
         [SerializeField] CardManager cardManager;
         //test
 
+        private InventoryManager inventory;
+        private bool inventorySubscribed;
+        private bool lastLeftAvailable = true;
+        private bool lastRightAvailable = true;
+
+        [Inject]
+        public void Construct(InventoryManager inventoryManager)
+        {
+            inventory = inventoryManager;
+        }
+
         void Awake()
         {
             leftButton.onClick.AddListener(() => Select(leftChoice));
@@ -43,6 +56,7 @@ namespace Choices
             rightText.text = right.text;
 
             gameObject.SetActive(true);
+            SubscribeInventory();
 
             SetupHover(leftButton, left);
             SetupHover(rightButton, right);
@@ -53,6 +67,7 @@ namespace Choices
             gameObject.SetActive(false);
             //test
             impactUI.Hide();
+            UnsubscribeInventory();
         }
 
         void Select(Choice choice)
@@ -76,8 +91,50 @@ namespace Choices
         //test
         public void SetChoiceAvailability(bool leftAvailable, bool rightAvailable)
         {
+            lastLeftAvailable = leftAvailable;
+            lastRightAvailable = rightAvailable;
             leftButton.interactable = leftAvailable;
             rightButton.interactable = rightAvailable;
+        }
+
+        void SubscribeInventory()
+        {
+            if (inventory == null || inventorySubscribed) return;
+
+            inventory.OnInventoryChanged += RefreshAvailability;
+            inventorySubscribed = true;
+        }
+
+        void UnsubscribeInventory()
+        {
+            if (inventory == null || !inventorySubscribed) return;
+
+            inventory.OnInventoryChanged -= RefreshAvailability;
+            inventorySubscribed = false;
+        }
+
+        // Пересчёт доступности при изменении инвентаря, пока выбор на экране (например, сборка PortableBase)
+        void RefreshAvailability()
+        {
+            if (leftChoice == null || rightChoice == null || cardManager == null) return;
+
+            bool leftAvailable = cardManager.CanChoose(leftChoice) == CardManager.ChoiceAvailability.Available;
+            bool rightAvailable = cardManager.CanChoose(rightChoice) == CardManager.ChoiceAvailability.Available;
+
+            // Если выбор стал недоступен под курсором, панель влияния нужно убрать
+            bool becameUnavailable = (lastLeftAvailable && !leftAvailable) || (lastRightAvailable && !rightAvailable);
+
+            SetChoiceAvailability(leftAvailable, rightAvailable);
+
+            if (becameUnavailable)
+            {
+                impactUI.Hide();
+            }
+        }
+
+        void OnDestroy()
+        {
+            UnsubscribeInventory();
         }
 
 

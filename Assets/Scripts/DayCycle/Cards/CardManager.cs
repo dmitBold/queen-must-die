@@ -123,20 +123,7 @@ namespace Cards
             }
 
             //test
-            if (choice.rewardItem != null)
-            {
-                inventory.AddItem(choice.rewardItem, choice.rewardAmount);
-            }
-
-            if (choice.quest != null)
-            {
-                questManager.AddQuest(choice.quest);
-            }
-
-            if (choice.rewardNote != null)
-            {
-                noteInventory.AddNote(choice.rewardNote);
-            }
+            GrantChoiceRewards(choice, currData);
 
             if (choice.reactionText != null && choice.reactionText.Length > 0)
             {
@@ -151,19 +138,16 @@ namespace Cards
             OnAnyChoiceResolved?.Invoke();
         }
 
-        public void ResolveIntermediateChoice(Choice choice)
+        public void ResolveIntermediateChoice(Choice choice, CardData card)
         {
             ApplyChoice(choice);
 
-            if (choice.rewardItem != null)
+            if (choice.requiredItem != null && choice.consumeRequiredItem)
             {
-                inventory.AddItem(choice.rewardItem, choice.rewardAmount);
+                inventory.RemoveItem(choice.requiredItem);
             }
 
-            if (choice.rewardNote != null)
-            {
-                noteInventory.AddNote(choice.rewardNote);
-            }
+            GrantChoiceRewards(choice, card);
         }
 
         void EndCard()
@@ -315,6 +299,96 @@ namespace Cards
         public void SetCurrData(CardData card)
         {
             currData = card;
+        }
+
+        // ---- Rewards (card pages and choices) ----
+        // Grant status is stored as a WorldState flag, so it is saved by the existing SaveData.
+        private const string RewardFlagPrefix = "reward:";
+
+        // Grants the reward bound to a card page. Any index is safe: missing or empty rewards do nothing.
+        public void GrantPageReward(CardData card, int pageIndex)
+        {
+            if (card == null || !card.TryGetPageReward(pageIndex, out CardPageReward reward)) return;
+
+            string key = reward.SaveGrantStatus ? RewardFlagPrefix + card.name + ":page:" + pageIndex : null;
+            if (IsRewardGranted(key)) return;
+
+            GrantRewards(reward.Item, reward.Amount, reward.Quest, reward.Note);
+            MarkRewardGranted(key);
+        }
+
+        private void GrantChoiceRewards(Choice choice, CardData card)
+        {
+            if (choice.rewardItem == null && choice.quest == null && choice.rewardNote == null) return;
+
+            string key = choice.saveGrantStatus ? BuildChoiceRewardKey(choice, card) : null;
+            if (IsRewardGranted(key)) return;
+
+            GrantRewards(choice.rewardItem, choice.rewardAmount, choice.quest, choice.rewardNote);
+            MarkRewardGranted(key);
+        }
+
+        private void GrantRewards(ItemData item, int amount, Quest quest, DayNoteData note)
+        {
+            if (item != null)
+            {
+                inventory.AddItem(item, amount);
+            }
+
+            if (quest != null)
+            {
+                questManager.AddQuest(quest);
+            }
+
+            if (note != null)
+            {
+                if (noteInventory == null)
+                {
+                    Debug.LogWarning("CardManager: noteInventory is not assigned, note reward skipped");
+                }
+                else if (!noteInventory.HasNote(note))
+                {
+                    noteInventory.AddNote(note);
+                }
+            }
+        }
+
+        private bool IsRewardGranted(string key)
+        {
+            return key != null && worldState != null && worldState.HasFlag(key);
+        }
+
+        private void MarkRewardGranted(string key)
+        {
+            if (key != null && worldState != null)
+            {
+                worldState.AddFlag(key);
+            }
+        }
+
+        // Key is derived from the asset name and the choice slot, e.g. reward:CardName:left, reward:CardName:inter0:right
+        private static string BuildChoiceRewardKey(Choice choice, CardData card)
+        {
+            if (card == null) return null;
+
+            string prefix = RewardFlagPrefix + card.name + ":";
+
+            if (ReferenceEquals(choice, card.LeftChoice)) return prefix + "left";
+            if (ReferenceEquals(choice, card.RightChoice)) return prefix + "right";
+
+            if (card.intermediateChoices != null)
+            {
+                for (int i = 0; i < card.intermediateChoices.Count; i++)
+                {
+                    var inter = card.intermediateChoices[i];
+                    if (inter == null) continue;
+
+                    if (ReferenceEquals(choice, inter.leftChoice)) return prefix + "inter" + i + ":left";
+                    if (ReferenceEquals(choice, inter.rightChoice)) return prefix + "inter" + i + ":right";
+                }
+            }
+
+            return null;
         }
         //test
 

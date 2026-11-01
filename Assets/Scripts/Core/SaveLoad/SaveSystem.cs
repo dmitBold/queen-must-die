@@ -8,6 +8,9 @@ public class SaveSystem
 
     public HashSet<string> SessionTriggeredEvents { get; private set; } = new HashSet<string>();
 
+    // Id собранных записок (DayNoteData.id), порядок сохраняется
+    public List<string> SessionNoteIds { get; private set; } = new List<string>();
+
     private readonly string _saveFilePath;
 
     public SaveSystem()
@@ -29,6 +32,7 @@ public class SaveSystem
         CurrentData = JsonUtility.FromJson<SaveManager.SaveData>(saveContent);
 
         SessionTriggeredEvents = new HashSet<string>(CurrentData.triggeredWorldEvents ?? new List<string>());
+        SessionNoteIds = new List<string>(CurrentData.savedNotes ?? new List<string>());
 
         HasLoadedData = true;
         return true;
@@ -37,6 +41,12 @@ public class SaveSystem
     public void ClearLoadedFlag()
     {
         HasLoadedData = false;
+    }
+
+    public void RegisterNote(string noteId)
+    {
+        if (string.IsNullOrEmpty(noteId) || SessionNoteIds.Contains(noteId)) return;
+        SessionNoteIds.Add(noteId);
     }
 
     public void RegisterEvent(string eventId)

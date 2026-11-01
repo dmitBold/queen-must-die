@@ -34,6 +34,7 @@ public class SaveManager : MonoBehaviour
         public List<SavedQuest> savedQuests;
         public WorldState.WorldStateSaveData savedWorldState;
         public List<string> triggeredWorldEvents;
+        public List<string> savedNotes;
         public float rotX;
         public float rotY;
         public float rotZ;
@@ -168,6 +169,7 @@ public class SaveManager : MonoBehaviour
         data.savedWorldState = _worldState.GetSaveData();
 
         data.triggeredWorldEvents = new List<string>(_saveSystem.SessionTriggeredEvents);
+        data.savedNotes = new List<string>(_saveSystem.SessionNoteIds);
 
         _saveSystem.Save(data);
 

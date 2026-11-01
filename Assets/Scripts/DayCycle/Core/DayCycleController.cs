@@ -38,6 +38,8 @@ namespace Core
 
         //test
         private HashSet<int> resolvedIntermediatePages = new HashSet<int>();
+        // Страницы текущей карты, награда за которые уже выдана в этот показ (защита от повторов при листании назад-вперёд)
+        private HashSet<int> grantedPageRewards = new HashSet<int>();
         private int currentIntermediatePage = -1;
         //test
 
@@ -163,12 +165,21 @@ namespace Core
             if (state != DayState.VisitorComing) return;
 
             resolvedIntermediatePages.Clear();
+            grantedPageRewards.Clear();
             //
             currentIntermediatePage = -1;
             //
             state = DayState.ShowingDialogue;
             
             dialogue.Show(visitor.currentCard.CardPages, visitor.currentCard.Card_name); 
+        }
+
+        void GrantPageRewardOnce(int pageIndex)
+        {
+            if (visitor.currentCard == null) return;
+            if (!grantedPageRewards.Add(pageIndex)) return;
+
+            cardManager.GrantPageReward(visitor.currentCard, pageIndex);
         }
 
         void OnVisitorLeft()
@@ -200,6 +211,14 @@ namespace Core
             if (state != DayState.ShowingDialogue) return;
 
             //dialogue.Hide();
+
+            // Последняя страница приходит без индекса (событие окончания диалога), поэтому её награда выдаётся здесь,
+            // до расчёта доступности финального выбора
+            var cardPages = visitor.currentCard.CardPages;
+            if (cardPages != null && cardPages.Length > 0)
+            {
+                GrantPageRewardOnce(cardPages.Length - 1);
+            }
 
             cardManager.ShowCard(visitor.currentCard);
 
@@ -331,6 +350,9 @@ namespace Core
         {
             if (state != DayState.ShowingDialogue) return;
 
+            // Награда за страницу выдаётся до логики промежуточного выбора, чтобы предмет мог его разблокировать
+            GrantPageRewardOnce(pageIndex);
+
             if (resolvedIntermediatePages.Contains(pageIndex)) return;
             var interChoice = visitor.currentCard.intermediateChoices?.Find(c => c.triggerAfterPage == pageIndex);
 
@@ -362,7 +384,7 @@ namespace Core
             //
             currentIntermediatePage = -1;
             //
-            cardManager.ResolveIntermediateChoice(choice);
+            cardManager.ResolveIntermediateChoice(choice, visitor.currentCard);
 
             state = DayState.ShowingDialogue;
             dialogue.SetNavigationInteractable(true);

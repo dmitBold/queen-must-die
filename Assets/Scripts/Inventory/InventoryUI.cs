@@ -194,7 +194,7 @@ namespace Inventory
         private void UpdateFilteredItems()
         {
             filteredMainItems = inventory.GetAllItems()
-                .Where(item => item.itemType == ItemType.Normal || item.itemType == ItemType.PortableBase)
+                .Where(item => item.itemType == ItemType.Normal || item.itemType == ItemType.PortableBase /*|| item.itemType == ItemType.Part*/)
                 .ToList();
         }
 

@@ -64,6 +64,8 @@ public class DayNoteUI : MonoBehaviour, IUIScreen
     private void Start()
     {
         NoteManager.OnNotesChanged += Refresh;
+        // Записки могли быть восстановлены из сохранения до подписки
+        Refresh();
         rootCanvas.enabled = false;
     }
 
