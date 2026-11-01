@@ -1,6 +1,7 @@
 using DI;
 using Inventory;
 using UnityEngine;
+using UI;
 using Zenject;
 
 namespace NightCycle
@@ -13,6 +14,7 @@ namespace NightCycle
         private PlayerInteraction _playerInteraction;
         private IPlayerProvider _playerProvider;
         private FirstPersonController _firstPersonController;
+        private UIManager _uiManager;
 
         [Inject]
         public void Construct(
@@ -21,9 +23,11 @@ namespace NightCycle
             [Inject(Optional = true)] HUDController hudController,
             [Inject(Optional = true)] PlayerInteraction playerInteraction,
             [Inject] IPlayerProvider playerProvider,
-            [Inject(Optional = true)] FirstPersonController firstPersonController)
+            [Inject(Optional = true)] FirstPersonController firstPersonController,
+            [Inject] UIManager uiManager)
         {
             _firstPersonController = firstPersonController;
+            _uiManager = uiManager;
             _playerProvider = playerProvider;
             _playerStateController = playerStateController;
             _inventoryUI = inventoryUI;
@@ -99,7 +103,8 @@ namespace NightCycle
 
         public void SetupToCutscene()
         {
-            FreezePlayer();
+            // Закрытие окон и режим игрока решает UIManager, а не прямой SetMode: так катсцену не перебьёт закрытие окна.
+            _uiManager.BeginCutscene();
             //DisableInventoryUI();
             DisableHUD();
             DiasableHUDtext();
@@ -108,7 +113,7 @@ namespace NightCycle
 
         public void SetupFromCutscene()
         {
-            UnfreezePlayer();
+            _uiManager.EndCutscene();
             //EnableInventoryUI();
             EnableHUD();
             EnableInteraction();

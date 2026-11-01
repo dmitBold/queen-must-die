@@ -10,8 +10,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class QuestUI : MonoBehaviour
+public class QuestUI : MonoBehaviour, IUIScreen
 {
+    [Tooltip("Идентификатор окна журнала квестов. Клавиша открытия задаётся в самом ассете.")]
+    [SerializeField] private UIScreenId screenId;
+
     [Header("UI References")]
     [SerializeField] private GameObject panel;
     [SerializeField] private Transform slotsParent;
@@ -25,11 +28,25 @@ public class QuestUI : MonoBehaviour
 
     public QuestManager questManager;
 
+    private UIManager _uiManager;
+
     [Inject]
-    public void Construct(QuestManager QuestManager)
+    public void Construct(QuestManager QuestManager, UIManager uiManager)
     {
         questManager = QuestManager;
         questManager.OnQuestPoolChanged += Refresh;
+        _uiManager = uiManager;
+        uiManager.Register(this);
+    }
+
+    public UIScreenId Id => screenId;
+
+    /// <summary>
+    /// Оставлен для кнопок и событий в сценах и префабах, назначенных через UnityEvent: делегирует UIManager.
+    /// </summary>
+    public void Toggle()
+    {
+        _uiManager.Toggle(screenId);
     }
 
     private void OnDestroy()
@@ -50,38 +67,14 @@ public class QuestUI : MonoBehaviour
         rootCanvas.gameObject.SetActive(true);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Toggle();
-        }
-    }
-
-    public void Toggle()
-    {
-        if (!CanOpen())
-            return;
-
-        if (isOpen)
-            Close();
-        else
-            Open();
-    }
-
-    private bool CanOpen()
-    {
-        return true;
-    }
-
-    private void Open()
+    public void Open()
     {
         isOpen = true;
         panel.SetActive(true);
         Refresh();
     }
 
-    private void Close()
+    public void Close()
     {
         isOpen = false;
         panel.SetActive(false);

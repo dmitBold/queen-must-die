@@ -36,7 +36,6 @@ namespace NightCycle
         private IReadOnlyList<AssemblySocket> activeSockets;
         private AssemblySocket currentSocket;
         // private PlayerStateController playerStateController;
-        private IPlayerProvider playerProvider;
         private DiContainer container;
         private InteractableView _subscribedView;
 
@@ -47,9 +46,8 @@ namespace NightCycle
         //test
 
         [Inject]
-        private void Construct(IPlayerProvider playerProvider, DiContainer container, AssemblyService assemblyService)
+        private void Construct(DiContainer container, AssemblyService assemblyService)
         {
-            this.playerProvider = playerProvider;
             this.container = container;
 
             //test
@@ -193,11 +191,7 @@ namespace NightCycle
                 //Debug.Log("IUI DISABLE");
                 inventoryUI.SetMode(InventoryUI.InventoryMode.Disable);
             }*/
-            if (playerProvider.PlayerView != null && playerProvider.PlayerView.PlayerStateController != null)
-            {
-                playerProvider.PlayerView.PlayerStateController.SetMode(PlayerMode.Focused);
-            }
-
+            // Режим игрока выставляет UIManager через BeginAssembly.
 
             assemblyCamera.gameObject.SetActive(true);
             assemblyCamera.Priority = 100;
@@ -233,10 +227,7 @@ namespace NightCycle
                 inventoryUI.ExitSelection();
             }*/
 
-            if (playerProvider.PlayerView != null && playerProvider.PlayerView.PlayerStateController != null)
-            {
-                playerProvider.PlayerView.PlayerStateController.SetMode(PlayerMode.FreeMovement);
-            }
+            // Режим игрока пересчитывает UIManager в AssemblyService.CloseAssembly.
 
             assemblyCamera.Priority = 0;
             assemblyCamera.gameObject.SetActive(false);

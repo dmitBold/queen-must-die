@@ -13,8 +13,11 @@ using Zenject;
 using static Inventory.InventoryUI;
 using static System.Net.Mime.MediaTypeNames;
 
-public class DayNoteUI : MonoBehaviour
+public class DayNoteUI : MonoBehaviour, IUIScreen
 {
+    [Tooltip("Идентификатор окна записок. Клавиша открытия задаётся в самом ассете.")]
+    [SerializeField] private UIScreenId screenId;
+
     [Header("UI References")]
     [SerializeField]
     private GameObject panel;
@@ -30,22 +33,32 @@ public class DayNoteUI : MonoBehaviour
     public bool isOpen;
     public bool isTextOpen;
 
-    public bool canOpen = true;
+
 
     [SerializeField] DayNoteDialogue dialogueManager;
 
     DayNoteData currentNote;
     public DayNoteManager NoteManager;
-    private IPlayerProvider playerProvider;
-    private AssemblyService assemblyService;
+
     
 
     [Inject]
-    public void Construct(AssemblyService assemblyService, IPlayerProvider playerProvider)
+    public void Construct(UIManager uiManager)
     {
-        this.assemblyService = assemblyService;
+        _uiManager = uiManager;
+        uiManager.Register(this);
+    }
 
-        this.playerProvider = playerProvider;
+    public UIScreenId Id => screenId;
+
+    private UIManager _uiManager;
+
+    /// <summary>
+    /// Оставлен для кнопок и событий в сценах и префабах, назначенных через UnityEvent: делегирует UIManager.
+    /// </summary>
+    public void Toggle()
+    {
+        _uiManager.Toggle(screenId);
     }
 
     private void Start()
@@ -57,25 +70,6 @@ public class DayNoteUI : MonoBehaviour
     private void OnDestroy()
     {
         NoteManager.OnNotesChanged -= Refresh;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Toggle();
-        }
-    }
-
-    public void Toggle()
-    {
-        if (!CanOpen())
-            return;
-
-        if (isOpen)
-            Close();
-        else
-            Open();
     }
 
     public void ToggleText(DayNoteData note)
@@ -105,38 +99,14 @@ public class DayNoteUI : MonoBehaviour
         }*/
     }
 
-    private bool CanOpen()
+    public void Open()
     {
-        return true;
-    }
-
-    private void Open()
-    {
-        if (!canOpen) { return; }
         isOpen = true;
         rootCanvas.enabled = true;
-        playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
         panel.SetActive(true);
     }
 
-    private void Close()
-    {
-        isOpen = false;
-        rootCanvas.enabled = false;
-        //playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
-        if (playerProvider.CurrentPlayer == null)
-        {
-            playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.Focused);
-        }
-        else
-        {
-            playerProvider.PlayerView?.PlayerStateController?.SetMode(PlayerMode.FreeMovement);
-        }
-        panel.SetActive(false);
-
-    }
-
-    public void CloseUIOnly()
+    public void Close()
     {
         isOpen = false;
         rootCanvas.enabled = false;

@@ -8,9 +8,13 @@ using UnityEngine.UI;
 using Zenject;
 using Inventory;
 using NightCycle;
+using UI;
 
-public class SettingsMenu : MonoBehaviour
+public class SettingsMenu : MonoBehaviour, IUIScreen
 {
+    [Tooltip("Идентификатор окна настроек. В ассете включите IsPauseMenu: именно это окно открывает Esc.")]
+    [SerializeField] private UIScreenId screenId;
+
     [Header("UI References")]
     [SerializeField] private GameObject panel;
     [SerializeField] private Canvas rootCanvas;
@@ -24,8 +28,6 @@ public class SettingsMenu : MonoBehaviour
 
     public TMP_Dropdown ResolutionDropdown;
 
-    private CursorLockMode previousLockState;
-    private bool previousVisibleState;
 
     [Header("State")] 
     public bool isOpen = false;
@@ -45,17 +47,17 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private UniversalRendererData rendererData;
     [SerializeField] private string retroFeatureName = "FullScreenPassRendererFeature";
 
-    private AssemblyService _assemblyService;
-    private InventoryUI _inventoryUI;
-    private bool invUI_Prev_state; 
+    private UIManager _uiManager;
 
     [Inject]
-    public void Construct(SaveManager saveManager, AssemblyService assemblyService, InventoryUI inventoryUI)
+    public void Construct(SaveManager saveManager, UIManager uiManager)
     {
         _saveManager = saveManager;
-        _assemblyService = assemblyService;
-        _inventoryUI = inventoryUI;
+        _uiManager = uiManager;
+        uiManager.Register(this);
     }
+
+    public UIScreenId Id => screenId;
 
     private void OnEnable()
     {
@@ -70,13 +72,6 @@ public class SettingsMenu : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         UnlockButtons();
-
-        // Если при смене сцены меню паузы осталось открытым - закрываем его,
-        // чтобы снять паузу (Time.timeScale = 1) и спрятать UI.
-        if (isOpen)
-        {
-            Close();
-        }
     }
 
     private void Start()
@@ -168,105 +163,28 @@ public class SettingsMenu : MonoBehaviour
         rootCanvas.gameObject.SetActive(true);
     }
 
-    private void Update()
+    public void Open()
     {
-        //Debug.Log("ASS" + _assemblyService.IsActive);
-        //Debug.Log("INV" + _inventoryUI.isOpen);
-        /*if (!_assemblyService.IsActive)
-        {
-            Debug.Log($"[CHECK] IsActive={_assemblyService.IsActive} hash={_assemblyService.GetHashCode()}");
-        }*/
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Toggle();
-        }
-    }
-
-    private void HandleEscapeInput()
-    {
-        if (isOpen)
-        {
-            Close();
-            return;
-        }
-
-        /*if (_assemblyService != null && _assemblyService.IsActive)
-        {
-            _assemblyService.CloseAssembly();
-            return; // Выходим, чтобы не открыть меню паузы!
-        }
-
-        // 2. Затем проверяем инвентарь
-        if (_inventoryUI != null && _inventoryUI.isOpen)
-        {
-            _inventoryUI.Close();
-            return;
-        }*/
-        if (_inventoryUI != null && _inventoryUI.isOpen)
-        {
-            if (_assemblyService != null && _assemblyService.IsActive)
-            {
-                _assemblyService.CloseAssembly();
-            }
-            _inventoryUI.Close();
-            return;
-        }
-        //Debug.Log(_assemblyService.IsActive);
-        if (_assemblyService != null && _assemblyService.IsActive)
-        {
-            _assemblyService.CloseAssembly();
-            return;
-        }
-
-        Open();
-    }
-
-    public void Toggle()
-    {
-        if (!CanOpen())
-            return;
-
-        /*if (isOpen)
-            Close();
-        else
-            Open();*/
-        HandleEscapeInput();
-    }
-
-    private bool CanOpen()
-    {
-        return true;
-    }
-
-    private void Open()
-    {
-        if (_inventoryUI != null && _inventoryUI.isOpen)
-        {
-            _inventoryUI.Close();
-            //invUI_Prev_state = _inventoryUI.canOpen;
-        }
-        _inventoryUI.canOpen = false;
         isOpen = true;
         panel.SetActive(true);
         PauseGame();
     }
 
-    private void Close()
+    public void Close()
     {
-        //_inventoryUI.canOpen = invUI_Prev_state;
-        if (_assemblyService.IsActive)
-        {
-            _inventoryUI.canOpen = false;
-        }
-        else
-        {
-            _inventoryUI.canOpen = true;
-        }
-            isOpen = false;
+        isOpen = false;
         panel.SetActive(false);
         BrightnessRoot.SetActive(false);
         BrightnessCamera.gameObject.SetActive(false);
         ResumeGame();
+    }
+
+    /// <summary>
+    /// Оставлен для кнопок в сцене, назначенных через UnityEvent: делегирует UIManager.
+    /// </summary>
+    public void Toggle()
+    {
+        _uiManager.Toggle(screenId);
     }
 
     public void SetFullScreen(bool isFullScreen)
@@ -312,21 +230,12 @@ public class SettingsMenu : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0f;
-
-        previousLockState = Cursor.lockState;
-        previousVisibleState = Cursor.visible;
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     void ResumeGame()
     {
         isPaused = false;
         Time.timeScale = 1f;
-
-        Cursor.lockState = previousLockState;
-        Cursor.visible = previousVisibleState;
     }
 
 }

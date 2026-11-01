@@ -2,6 +2,7 @@ using Core;
 using UnityEngine;
 using Zenject;
 using Inventory; 
+using UI;
 
 namespace DI
 {
@@ -20,6 +21,9 @@ namespace DI
                 .AsSingle()
                 .WithArguments(this as MonoBehaviour);
             Container.Bind<SceneTransitionService>().AsSingle();
+            // Interfaces нужны, чтобы Zenject вызвал IInitializable, ITickable и IDisposable.
+            Container.BindInterfacesAndSelfTo<UIManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<UIInputHandler>().AsSingle();
             //TEST
             Container.Bind<SaveManager>().FromInstance(saveManager).AsSingle();
             Container.Bind<SaveSystem>().AsSingle();
