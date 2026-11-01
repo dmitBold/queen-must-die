@@ -10,6 +10,8 @@ public class ItemDatabase : ScriptableObject
     // Кэшированный словарь для моментального поиска
     private Dictionary<string, ItemData> _itemDict;
 
+    public IReadOnlyList<ItemData> AllItems => allItems;
+
     private void Initialize()
     {
         _itemDict = new Dictionary<string, ItemData>();
