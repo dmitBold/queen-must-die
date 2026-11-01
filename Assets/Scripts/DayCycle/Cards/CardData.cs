@@ -38,6 +38,11 @@ namespace Cards
         public Quest quest;
         public DayNoteData rewardNote;
         public int rewardAmount = 1;
+
+        [Tooltip("Если задан, выбор недоступен без этого предмета в инвентаре")]
+        public ItemData requiredItem;
+        [Tooltip("Забрать требуемый предмет из инвентаря при выборе")]
+        public bool consumeRequiredItem = true;
     }
 
 //testtesttest

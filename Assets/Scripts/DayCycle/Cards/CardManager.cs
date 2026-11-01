@@ -117,6 +117,11 @@ namespace Cards
             wait_for_choice = false;
             ApplyChoice(choice);
 
+            if (choice.requiredItem != null && choice.consumeRequiredItem)
+            {
+                inventory.RemoveItem(choice.requiredItem);
+            }
+
             //test
             if (choice.rewardItem != null)
             {
@@ -288,6 +293,11 @@ namespace Cards
         //test
         public ChoiceAvailability CanChoose(Choice choice)
         {
+            if (choice.requiredItem != null && !inventory.HasItem(choice.requiredItem))
+            {
+                return ChoiceAvailability.CustomBlocked;
+            }
+
             foreach (var effect in choice.effects)
             {
                 if (effect.type == CardEffectType.ModifyStat)
