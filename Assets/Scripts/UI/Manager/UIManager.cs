@@ -73,7 +73,12 @@ namespace UI
 
         private bool IsInputBlocked => IsLoading || _cutsceneActive || _blockOwners.Count > 0;
 
-        private bool CanOpenScreens => !IsInputBlocked && !_assemblyActive && !_focusActive;
+        // Сборка окна не блокирует: окна работают как вкладки, и открытие нового окна прерывает сборку.
+        private bool CanOpenScreens => !IsInputBlocked && !_focusActive;
+
+        // Счётчик вложенных составных операций: пока он больше нуля, режим игрока не пересчитывается,
+        // чтобы смена окна и завершение сборки не давали промежуточный FreeMovement.
+        private int _recomputeSuspend;
 
         public void Initialize()
         {
@@ -107,15 +112,23 @@ namespace UI
         /// </summary>
         public void Register(IUIScreen screen)
         {
+            // Контекст нужен, чтобы клик по ошибке в консоли подсвечивал лишний объект в иерархии.
+            UnityEngine.Object context = screen as UnityEngine.Object;
+
             if (screen == null || screen.Id == null)
             {
-                Debug.LogError("[UIManager] Окно без UIScreenId не зарегистрировано.");
+                Debug.LogError("[UIManager] Окно без UIScreenId не зарегистрировано.", context);
                 return;
             }
 
-            if (_screens.ContainsKey(screen.Id))
+            if (_screens.TryGetValue(screen.Id, out IUIScreen existing))
             {
-                Debug.LogError($"[UIManager] Окно '{screen.Id.name}' уже зарегистрировано.");
+                // Повторная регистрация того же экземпляра (двойной вызов Construct) не ошибка.
+                if (ReferenceEquals(existing, screen))
+                    return;
+
+                Debug.LogError($"[UIManager] Окно '{screen.Id.name}' уже зарегистрировано другим объектом: " +
+                               $"'{(existing as UnityEngine.Object)?.name}'. Лишний экземпляр в сцене или префабе нужно удалить.", context);
                 return;
             }
 
@@ -143,13 +156,18 @@ namespace UI
 
         /// <summary>
         /// Открывает окно, атомарно закрывая предыдущее (один пересчёт режима, без промежуточного Free).
-        /// Возвращает false, если открытие запрещено: загрузка, блокировка, катсцена, сборка, фокус-объект
+        /// Активная сборка принудительно завершается: окна ведут себя как вкладки.
+        /// Возвращает false, если открытие запрещено: загрузка, блокировка, катсцена, фокус-объект
         /// или открыто окно паузы.
         /// </summary>
         public bool Open(UIScreenId id)
         {
             if (id == null || !_screens.TryGetValue(id, out IUIScreen screen))
+            {
+                // Тихий отказ скрывал бы кнопки, привязанные к сценной копии окна без UIScreenId.
+                Debug.LogWarning($"[UIManager] Открытие окна '{(id != null ? id.name : "null")}' невозможно: окно не зарегистрировано.");
                 return false;
+            }
 
             if (!CanOpenScreens)
                 return false;
@@ -160,10 +178,23 @@ namespace UI
             if (_currentId != null && _currentId.IsPauseMenu)
                 return false;
 
-            _current?.Close();
-            _current = screen;
-            _currentId = id;
-            screen.Open();
+            _recomputeSuspend++;
+            try
+            {
+                // Сначала окно: InventoryUI.Close завершает сборку PortableBase сам.
+                // Потом остаток сборки, у которой окна нет (AssemblyInteractable в мире).
+                _current?.Close();
+                CancelAssembly();
+
+                _current = screen;
+                _currentId = id;
+                screen.Open();
+            }
+            finally
+            {
+                _recomputeSuspend--;
+            }
+
             Recompute();
             return true;
         }
@@ -187,14 +218,10 @@ namespace UI
         }
 
         /// <summary>
-        /// Закрывает окно, если оно открыто, иначе открывает.
+        /// Закрывает окно, если оно открыто (вместе с его сборкой), иначе открывает, прерывая активную сборку.
         /// </summary>
         public void Toggle(UIScreenId id)
         {
-            // Во время сборки окно остаётся открытым (PortableBase) и закрывается только после неё.
-            if (_assemblyActive)
-                return;
-
             if (IsOpen(id))
                 CloseCurrent();
             else
@@ -202,19 +229,30 @@ namespace UI
         }
 
         /// <summary>
-        /// Обрабатывает Esc. Отменяет сборку, иначе закрывает окно, иначе выходит из фокус-объекта,
-        /// иначе открывает окно паузы. Один Esc выполняет только одно действие.
+        /// Обрабатывает Esc. Если есть сборка или окно, закрывает их целиком за одно нажатие (игрок сразу в Free),
+        /// иначе выходит из фокус-объекта, иначе открывает окно паузы. Один Esc выполняет только одно действие.
         /// </summary>
         public void HandleCancel()
         {
             if (IsInputBlocked)
                 return;
 
-            // Сборка раньше окна: для PortableBase инвентарь остаётся открытым под ней,
-            // и первый Esc должен вернуть игрока в инвентарь, а не закрыть его вместе со сборкой.
+            // Сборка PortableBase идёт под открытым инвентарём: закрываем и окно, и сборку без промежуточного
+            // возврата в инвентарь. Сборка из мира окна не имеет, её завершает CancelAssembly.
             if (_assemblyActive)
             {
-                CancelAssembly();
+                _recomputeSuspend++;
+                try
+                {
+                    CloseCurrentInternal();
+                    CancelAssembly();
+                }
+                finally
+                {
+                    _recomputeSuspend--;
+                }
+
+                Recompute();
                 return;
             }
 
@@ -307,10 +345,10 @@ namespace UI
         }
 
         /// <summary>
-        /// Начало сборки: переводит игрока в Focused и запрещает открывать окна. Текущее окно остаётся открытым:
-        /// для PortableBase инвентарь виден под сборкой, и после неё игрок возвращается в него.
+        /// Начало сборки: переводит игрока в Focused. Текущее окно остаётся открытым:
+        /// для PortableBase инвентарь виден под сборкой. Esc, другое окно или Toggle закрывают и окно, и сборку.
         /// </summary>
-        /// <param name="cancel">Вызывается при Esc, начале катсцены и загрузке. Должен завершить сессию и вызвать EndAssembly.</param>
+        /// <param name="cancel">Вызывается при Esc, открытии другого окна, начале катсцены и загрузке. Должен завершить сессию и вызвать EndAssembly.</param>
         public void BeginAssembly(Action cancel)
         {
             if (_assemblyActive)
@@ -488,6 +526,9 @@ namespace UI
         // Игрока нет в дневной сцене и в меню: тогда режим применять некуда, и это не ошибка.
         private void Recompute()
         {
+            if (_recomputeSuspend > 0)
+                return;
+
             PlayerView view = _playerProvider.PlayerView;
             if (view == null)
                 return;

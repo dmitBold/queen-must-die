@@ -52,7 +52,7 @@ namespace NightCycle
             if (IsActive) return;
             //Debug.Log(isPortableBase);
             // Окно закрываем до взведения сессии: InventoryUI.Close завершает активную сборку.
-            // PortableBase окно не закрывает: инвентарь остаётся под сборкой, и Esc возвращает игрока в него.
+            // PortableBase окно не закрывает: инвентарь виден под сборкой. Esc, I, N и Q закрывают окно и сборку вместе.
             if (!isPortableBase)
             {
                 _uiManager.CloseCurrent();

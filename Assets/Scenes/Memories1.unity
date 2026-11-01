@@ -2872,7 +2872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardManager
   wait_for_choice: 0
   dialogue: {fileID: 0}
-  noteInventory: {fileID: 1652231359}
+  noteInventory: {fileID: 0}
   worldStateManual: {fileID: 1205996424}
 --- !u!1 &100825247
 GameObject:
@@ -15826,7 +15826,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1454894011}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
         m_MethodName: Toggle
         m_Mode: 1
@@ -17671,7 +17671,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1652231360}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DayNoteDialogue, Assembly-CSharp
         m_MethodName: OnBackPressed
         m_Mode: 1
@@ -52828,7 +52828,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1454894010}
-  - component: {fileID: 1454894011}
   m_Layer: 5
   m_Name: InventoryRoot
   m_TagString: Untagged
@@ -52858,30 +52857,6 @@ RectTransform:
   m_AnchoredPosition: {x: -780, y: -481}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1454894011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1454894009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c55e11353bf99b4a84f6625d4ea877d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
-  panel: {fileID: 1093578546}
-  rootCanvas: {fileID: 1932417517}
-  descriptionText: {fileID: 0}
-  slotsParent: {fileID: 1220036064}
-  slotPrefab: {fileID: -8607331106481982355, guid: e629578b8b62a3244b1a8ec6c63af293, type: 3}
-  tooltip: {fileID: 422822991}
-  miniPartsPanel: {fileID: 0}
-  partsSlotsParent: {fileID: 0}
-  partSlotPrefab: {fileID: 0}
-  test_items: []
-  DayUI: {fileID: 0}
-  canOpen: 1
 --- !u!1 &1455370884
 GameObject:
   m_ObjectHideFlags: 0
@@ -57583,9 +57558,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652231357}
-  - component: {fileID: 1652231358}
-  - component: {fileID: 1652231359}
-  - component: {fileID: 1652231360}
   m_Layer: 5
   m_Name: NoteRoot
   m_TagString: Untagged
@@ -57614,55 +57586,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1652231358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652231356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b426e41b9a1e4d45a628e2651d61854, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DayNoteUI
-  panel: {fileID: 219766780}
-  NoteSlotParent: {fileID: 76765161}
-  NoteSlotPrefab: {fileID: 170690607658339504, guid: 863077273901c6e4d988c1f19ec51fba, type: 3}
-  Textpanel: {fileID: 449445699}
-  TextImage: {fileID: 1982265849}
-  NoteText: {fileID: 0}
-  rootCanvas: {fileID: 0}
-  isOpen: 0
-  isTextOpen: 0
-  canOpen: 1
-  dialogueManager: {fileID: 1652231360}
-  NoteManager: {fileID: 1652231359}
---- !u!114 &1652231359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652231356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6824afbbf941fbe4984385c493a01d29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DayNoteManager
---- !u!114 &1652231360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652231356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bba411fe64c94c4ab9e69795b19f87c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DayNoteDialogue
-  view: {fileID: 449445700}
 --- !u!1 &1654423765
 GameObject:
   m_ObjectHideFlags: 0
@@ -58380,7 +58303,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1652231358}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DayNoteUI, Assembly-CSharp
         m_MethodName: Toggle
         m_Mode: 1
@@ -63853,7 +63776,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1652231360}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DayNoteDialogue, Assembly-CSharp
         m_MethodName: OnSkipPressed
         m_Mode: 1
