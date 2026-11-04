@@ -55,6 +55,49 @@ namespace Inventory
             return true;
         }
 
+        /// <summary>
+        /// Атомарно заменяет один экземпляр oldItem на newItem с единственным OnInventoryChanged.
+        /// Если oldItem был единственным, newItem встаёт на его позицию в порядке инвентаря
+        /// (если newItem уже есть в инвентаре, счётчик просто увеличивается). Иначе newItem добавляется в конец.
+        /// Возвращает false, если oldItem отсутствует или предметы совпадают.
+        /// </summary>
+        public bool ReplaceItem(ItemData oldItem, ItemData newItem)
+        {
+            if (oldItem == null || newItem == null || oldItem == newItem)
+                return false;
+
+            if (!items.TryGetValue(oldItem, out int oldCount) || oldCount <= 0)
+                return false;
+
+            if (oldCount == 1 && !items.ContainsKey(newItem))
+            {
+                // Порядок словаря не гарантируется после удалений, поэтому пересобираем его явно:
+                // UI опирается на позицию предмета, чтобы обновить слот на месте.
+                var snapshot = new List<KeyValuePair<ItemData, int>>(items);
+                items.Clear();
+
+                foreach (var pair in snapshot)
+                {
+                    if (pair.Key == oldItem)
+                        items[newItem] = 1;
+                    else
+                        items[pair.Key] = pair.Value;
+                }
+            }
+            else
+            {
+                if (oldCount == 1)
+                    items.Remove(oldItem);
+                else
+                    items[oldItem] = oldCount - 1;
+
+                items[newItem] = items.TryGetValue(newItem, out int newCount) ? newCount + 1 : 1;
+            }
+
+            OnInventoryChanged?.Invoke();
+            return true;
+        }
+
         //
         public List<ItemData> GetAllItems()
         {

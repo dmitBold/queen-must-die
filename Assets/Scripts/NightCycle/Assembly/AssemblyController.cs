@@ -157,6 +157,13 @@ namespace NightCycle
                 currentAssemblyView = assemblyView;
                 activeSockets = currentAssemblyView.Sockets;
                 currentLockView = null;
+
+                // Вью кэшируется по префабу, а не по предмету: вторая копия основы получила бы уже собранную вью.
+                // Мировые сборки не сбрасываем, они должны оставаться собранными.
+                if (_assemblyService != null && _assemblyService.IsPortableBaseSession)
+                {
+                    assemblyView.ResetIfFinished();
+                }
             }
             else if (currentView is LockView lockView)
             {
@@ -195,6 +202,15 @@ namespace NightCycle
 
             assemblyCamera.gameObject.SetActive(true);
             assemblyCamera.Priority = 100;
+        }
+
+        /// <summary>
+        /// Мгновенно завершает идущие анимации заполнения сокетов текущей сборки.
+        /// Если заполнялся последний сокет, это синхронно запускает цепочку завершения сборки.
+        /// </summary>
+        public void CompletePendingFills()
+        {
+            currentAssemblyView?.CompletePendingFills();
         }
 
         public void ExitAssembly()
@@ -293,7 +309,7 @@ namespace NightCycle
 
         private void HandleSocketClick()
         {
-            if (Input.GetMouseButtonDown(0) && currentSocket != null && !currentSocket.IsFilled)
+            if (Input.GetMouseButtonDown(0) && currentSocket != null && currentSocket.IsEmpty)
             {
                 Debug.Log("SOCKET CLICK!!!");
                 if (inventoryUI != null)

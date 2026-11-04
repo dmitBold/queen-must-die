@@ -25,6 +25,11 @@ namespace Inventory
         private Coroutine hoverRoutine;
         private bool isPartSlot;
 
+        /// <summary>
+        /// Предмет, который сейчас показывает слот. Нужен InventoryUI, чтобы обновлять слот на месте, а не пересоздавать.
+        /// </summary>
+        public ItemData Item => item;
+
         // ���������� ��� 3D �������
         private GameObject previewScene;
         private Camera previewCamera;

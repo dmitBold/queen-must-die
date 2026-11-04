@@ -42,6 +42,12 @@ namespace Inventory
         private int currentScrollIndex = 0;
         private List<ItemData> filteredMainItems = new();
         private ItemData selectedItem;
+
+        // Пока играет финальная анимация сборки, данные инвентаря уже заменены, а слот показывает старый предмет.
+        private ItemData frozenOld;
+        private ItemData frozenNew;
+        // Основа, с которой стартовала текущая сессия сборки. selectedItem к моменту завершения может уже указывать на другой предмет.
+        private ItemData sessionBase;
         private List<ItemSlot> activeMainSlots = new();
 
         private AssemblySocket activeSocket;
@@ -132,6 +138,8 @@ namespace Inventory
 
         public void Open()
         {
+            // До isOpen = true: RefreshUI внутри ReleaseFreeze не должен перестраивать список раньше времени.
+            ReleaseFreeze();
             isOpen = true;
             if (DayUI != null)
             {
@@ -175,6 +183,9 @@ namespace Inventory
             {
                 assemblyService.CloseAssembly();
             }
+
+            // Страховка: если цепочка завершения сборки не дошла до колбэка, слот не должен остаться замороженным.
+            ReleaseFreeze();
         }
 
         public void CloseMiniPartsPanel()
@@ -194,8 +205,26 @@ namespace Inventory
         private void UpdateFilteredItems()
         {
             filteredMainItems = inventory.GetAllItems()
-                .Where(item => item.itemType == ItemType.Normal || item.itemType == ItemType.PortableBase /*|| item.itemType == ItemType.Part*/)
+                .Where(IsMainListItem)
                 .ToList();
+
+            // Во время заморозки на месте результата показываем старый предмет: слот не пересоздаётся и не мигает.
+            if (frozenOld != null)
+            {
+                int index = filteredMainItems.IndexOf(frozenNew);
+                if (index >= 0)
+                    filteredMainItems[index] = frozenOld;
+            }
+        }
+
+        /// <summary>
+        /// Part показывается в главной панели наравне с Normal и PortableBase, а в мини-панели остаётся деталью для сокетов.
+        /// </summary>
+        private static bool IsMainListItem(ItemData item)
+        {
+            return item.itemType == ItemType.Normal
+                || item.itemType == ItemType.PortableBase
+                || item.itemType == ItemType.Part;
         }
 
         private void ScrollList(int direction)
@@ -210,22 +239,44 @@ namespace Inventory
             if (!isOpen) return;
             UpdateFilteredItems();
 
-            foreach (var slot in activeMainSlots)
-            {
-                if (slot != null) Destroy(slot.gameObject);
-            }
-            activeMainSlots.Clear();
-
             if (currentScrollIndex + 3 > filteredMainItems.Count)
                 currentScrollIndex = Mathf.Max(0, filteredMainItems.Count - 3);
 
-            int countToSpawn = Mathf.Min(3, filteredMainItems.Count - currentScrollIndex);
-            for (int i = 0; i < countToSpawn; i++)
+            int countToShow = Mathf.Min(3, filteredMainItems.Count - currentScrollIndex);
+
+            // Слоты переиспользуем: пересоздание заново строит 3D-превью и даёт мигание.
+            if (activeMainSlots.Any(s => s == null))
+            {
+                foreach (var slot in activeMainSlots)
+                {
+                    if (slot != null) Destroy(slot.gameObject);
+                }
+                activeMainSlots.Clear();
+            }
+
+            while (activeMainSlots.Count > countToShow)
+            {
+                int last = activeMainSlots.Count - 1;
+                // Destroy отложен до конца кадра, поэтому слот сначала скрываем, чтобы он не влиял на раскладку.
+                activeMainSlots[last].gameObject.SetActive(false);
+                Destroy(activeMainSlots[last].gameObject);
+                activeMainSlots.RemoveAt(last);
+            }
+
+            for (int i = 0; i < countToShow; i++)
             {
                 ItemData item = filteredMainItems[currentScrollIndex + i];
-                ItemSlot slot = Instantiate(slotPrefab, slotsParent);
-                slot.Set(item, this, true, tooltip);
-                activeMainSlots.Add(slot);
+                if (i < activeMainSlots.Count)
+                {
+                    if (activeMainSlots[i].Item != item)
+                        activeMainSlots[i].Set(item, this, true, tooltip);
+                }
+                else
+                {
+                    ItemSlot slot = Instantiate(slotPrefab, slotsParent);
+                    slot.Set(item, this, true, tooltip);
+                    activeMainSlots.Add(slot);
+                }
             }
 
             if (selectedItem != null)
@@ -242,6 +293,10 @@ namespace Inventory
             }
             else
             {
+                // Замороженный слот показывает уже заменённую основу: сессию по ней открывать нельзя.
+                if (frozenOld != null && item == frozenOld)
+                    return;
+
                 SelectItem(item);
             }
         }
@@ -249,12 +304,10 @@ namespace Inventory
         private void SelectItem(ItemData item)
         {
             selectedItem = item;
-            if (selectedItem != null && selectedItem.itemType == ItemType.Normal)
-            {
-                return;
-            }
             miniPartsPanel.SetActive(false);
 
+            // Выбор любого предмета завершает активную сессию сборки. Normal и Part на этом заканчиваются:
+            // у них нет assemblyPrefab, и больше с ними ничего не происходит.
             if (item != null && assemblyService.IsActive) assemblyService.CloseAssembly();
 
             if (selectedItem != null && selectedItem.itemType == ItemType.PortableBase && selectedItem.assemblyPrefab != null)
@@ -262,6 +315,7 @@ namespace Inventory
                 InteractableView viewPrefab = selectedItem.assemblyPrefab.GetComponent<InteractableView>();
                 if (viewPrefab != null)
                 {
+                    sessionBase = selectedItem;
                     assemblyService.OpenAssembly(viewPrefab, OnPortableBaseAssembled, true);
                 }
             }
@@ -316,8 +370,22 @@ namespace Inventory
 
             if (activeSocket.CanAccept(part))
             {
-                activeSocket.Apply(part);
+                AssemblySocket socket = activeSocket;
+
+                // Данные меняем до Apply: без анимации Apply синхронно доходит до колбэка завершения и закрывает сессию.
+                ItemData result = GetResultIfCompleting(socket);
+                bool freeze = result != null && CanFreeze(sessionBase, result);
+                if (freeze)
+                {
+                    frozenOld = sessionBase;
+                    frozenNew = result;
+                }
+
                 inventory.RemoveItem(part);
+                if (result != null)
+                {
+                    CommitReplacement(sessionBase, result, freeze);
+                }
                 miniPartsPanel.SetActive(false);
 
                 // ���� ��������� �� ��� ������ ���������� (������ ����� ��� ���� "I"), ������ Canvas
@@ -328,10 +396,8 @@ namespace Inventory
 
                 RefreshUI();
 
-                if (activeAssemblyView != null)
-                {
-                    activeAssemblyView.CheckSocketsCompletion();
-                }
+                // Завершение сборки проверяет сам AssemblyView по OnFilled сокета, когда заполнение закончено.
+                socket.Apply(part);
             }
             else
             {
@@ -339,16 +405,72 @@ namespace Inventory
             }
         }
 
+        /// <summary>
+        /// Возвращает результат сборки, если вставка в этот сокет завершит сборку основы из инвентаря. Иначе null.
+        /// </summary>
+        private ItemData GetResultIfCompleting(AssemblySocket socket)
+        {
+            if (sessionBase == null || sessionBase.resultItem == null || sessionBase.resultItem == sessionBase)
+                return null;
+
+            if (assemblyService == null || !assemblyService.IsPortableBaseSession)
+                return null;
+
+            if (activeAssemblyView == null || !activeAssemblyView.IsLastEmptySocket(socket))
+                return null;
+
+            return inventory.HasItem(sessionBase) ? sessionBase.resultItem : null;
+        }
+
+        // Слот можно держать на месте, только если позиция однозначна: единственная копия основы и новый предмет в списке.
+        private bool CanFreeze(ItemData oldItem, ItemData newItem)
+        {
+            return inventory.GetCount(oldItem) == 1 && !inventory.HasItem(newItem) && IsMainListItem(newItem);
+        }
+
+        private void CommitReplacement(ItemData oldItem, ItemData newItem, bool freeze)
+        {
+            if (!inventory.ReplaceItem(oldItem, newItem))
+            {
+                frozenOld = null;
+                frozenNew = null;
+                return;
+            }
+
+            // Без заморозки выделение переносим сразу, при заморозке это сделает ReleaseFreeze после анимации.
+            if (!freeze && selectedItem == oldItem && !inventory.HasItem(oldItem))
+            {
+                selectedItem = IsMainListItem(newItem) ? newItem : null;
+            }
+        }
+
+        /// <summary>
+        /// Снимает заморозку слота: слот обновляется на месте, выделение переходит со старого предмета на результат.
+        /// </summary>
+        private void ReleaseFreeze()
+        {
+            if (frozenOld == null)
+                return;
+
+            ItemData oldItem = frozenOld;
+            ItemData newItem = frozenNew;
+            frozenOld = null;
+            frozenNew = null;
+
+            if (selectedItem == oldItem)
+                selectedItem = newItem;
+
+            RefreshUI();
+        }
+
         private void OnPortableBaseAssembled()
         {
-            if (selectedItem == null || selectedItem.resultItem == null) return;
+            // Инвентарь уже заменён в TryApplyPartToSocket. Здесь только завершается визуальная часть.
+            // Пустой resultItem безопасен: подмены не было, замороженного слота тоже нет.
+            if (sessionBase == null || sessionBase.resultItem == null) return;
 
-            ItemData completedItem = selectedItem.resultItem;
-            ItemData sourceItem = selectedItem;
-            // Сбрасываем выбор до обмена: RefreshUI по событию инвентаря не должен показывать описание удалённого предмета.
-            selectedItem = null;
-            inventory.RemoveItem(sourceItem);
-            inventory.AddItem(completedItem);
+            ItemData completedItem = sessionBase.resultItem;
+            ReleaseFreeze();
 
             Debug.Log($"������ �������! �������: {completedItem.itemName}");
             // Инвентарь остаётся открытым под сборкой, поэтому после неё игрок возвращается в него без повторного Open.

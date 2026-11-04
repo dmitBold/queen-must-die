@@ -35,6 +35,7 @@ namespace NightCycle
         private readonly UIManager _uiManager;
 
         private bool _sessionActive;
+        private bool _isClosing;
 
         public AssemblyService(ScenesManager scenesManager, CinemachineBrainProvider brains, UIManager uiManager)
         {
@@ -110,7 +111,35 @@ namespace NightCycle
             CloseAssembly();
         }
 
+        /// <summary>
+        /// Закрывает сессию сборки. Перед выходом мгновенно доводит до конца идущие анимации заполнения сокетов,
+        /// поэтому любая отмена (Esc, смена предмета, другое окно, катсцена, загрузка) оставляет согласованное состояние.
+        /// Повторный вход из цепочки завершения сборки игнорируется: сессию закрывает внешний вызов.
+        /// </summary>
         public void CloseAssembly()
+        {
+            if (_isClosing)
+                return;
+
+            _isClosing = true;
+            try
+            {
+                // До смены состояния: завершение последнего сокета синхронно вызовет колбэк сборки,
+                // а вложенный CloseAssembly из OnControllerCompleted отсекается флагом.
+                if (_controller != null && _controller.isActive)
+                {
+                    _controller.CompletePendingFills();
+                }
+
+                CloseAssemblyInternal();
+            }
+            finally
+            {
+                _isClosing = false;
+            }
+        }
+
+        private void CloseAssemblyInternal()
         {
             if (_controller == null || !_controller.isActive)
             {
