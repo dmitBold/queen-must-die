@@ -23,6 +23,101 @@ namespace NightCycle
         public bool IsAssemblyCompleted => isAssemblyCompleted;
         public override bool IsCompleted => isAssemblyCompleted;
 
+        private void Awake()
+        {
+            if (sockets == null)
+                return;
+
+            // Сокет сообщает о завершении заполнения сам, поэтому проверку завершения сборки ведёт вью, а не UI.
+            foreach (var socket in sockets)
+            {
+                if (socket != null)
+                    socket.OnFilled.AddListener(HandleSocketFilled);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (sockets == null)
+                return;
+
+            foreach (var socket in sockets)
+            {
+                if (socket != null)
+                    socket.OnFilled.RemoveListener(HandleSocketFilled);
+            }
+        }
+
+        private void HandleSocketFilled()
+        {
+            CheckSocketsCompletion();
+        }
+
+        /// <summary>
+        /// Мгновенно доводит до конца все идущие анимации заполнения сокетов.
+        /// Если это были последние сокеты, сборка завершится синхронно через OnFilled.
+        /// </summary>
+        public void CompletePendingFills()
+        {
+            if (sockets == null)
+                return;
+
+            foreach (var socket in sockets)
+            {
+                if (socket != null)
+                    socket.CompleteImmediately();
+            }
+        }
+
+        /// <summary>
+        /// Истина, если указанный сокет пуст, а все остальные уже заполнены или заполняются.
+        /// Вставка в такой сокет приводит к завершению сборки.
+        /// </summary>
+        public bool IsLastEmptySocket(AssemblySocket target)
+        {
+            if (target == null || !target.IsEmpty || sockets == null)
+                return false;
+
+            foreach (var socket in sockets)
+            {
+                if (socket != null && socket != target && socket.IsEmpty)
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Сбрасывает вью для новой сессии сборки, если она осталась завершённой от предыдущей.
+        /// Частично заполненную вью не трогает, чтобы не потерять прогресс.
+        /// </summary>
+        public void ResetIfFinished()
+        {
+            if (sockets == null || sockets.Count == 0)
+                return;
+
+            bool allFilled = true;
+            foreach (var socket in sockets)
+            {
+                if (socket != null && !socket.IsFilled)
+                {
+                    allFilled = false;
+                    break;
+                }
+            }
+
+            if (!isAssemblyCompleted && !allFilled)
+                return;
+
+            foreach (var socket in sockets)
+            {
+                if (socket != null)
+                    socket.ResetState();
+            }
+
+            isAssemblyCompleted = false;
+        }
+
         /// <summary>
         /// Проверяет, все ли сокеты заполнены
         /// </summary>
