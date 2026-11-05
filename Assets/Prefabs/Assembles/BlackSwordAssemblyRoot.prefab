@@ -106,6 +106,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.AssemblySocket
   requiredItem: {fileID: 11400000, guid: 373cf8f2c3187964188ca329e9f37a60, type: 2}
   visualPart: {fileID: 6301816724486351450}
+  fillAnimator: {fileID: 6972536531285052291}
+  fillStateName: Blade-sword
   SocketFillEvent:
     Guid:
       Data1: 0
@@ -115,19 +117,10 @@ MonoBehaviour:
     Path: 
   SocketEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6972536531285052291}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: play
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  OnFilled:
+    m_PersistentCalls:
+      m_Calls: []
   triggerOnnce: 1
 --- !u!65 &2127942825182168849
 BoxCollider:
@@ -220,7 +213,6 @@ MonoBehaviour:
       m_Calls: []
   sockets:
   - {fileID: 2136814258303634906}
-  - {fileID: 0}
   onAssemblyCompleted:
     m_PersistentCalls:
       m_Calls: []
