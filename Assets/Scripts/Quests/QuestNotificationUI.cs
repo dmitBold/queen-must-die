@@ -32,6 +32,8 @@ public class QuestNotificationUI : MonoBehaviour
     [SerializeField] private float fastFadeDuration = 0.5f;
     [SerializeField] private float readDelay = 2.0f; // Время, чтобы игрок успел прочитать
     [SerializeField] private float strikethroughDelay = 0.5f; // Пауза после зачёркивания
+    /// <summary>Пауза перед первым зачёркиванием, когда игрок уже видит текст задачи.</summary>
+    [SerializeField] private float strikethroughStartDelay = 1f;
 
     private Queue<QuestNotificationData> notificationQueue = new Queue<QuestNotificationData>();
     private bool isProcessingQueue = false;
@@ -186,7 +188,7 @@ public class QuestNotificationUI : MonoBehaviour
         yield return fade2;
 
         // Пауза, чтобы игрок увидел, что выполнил
-        yield return new WaitForSeconds(readDelay / 2);
+        yield return new WaitForSeconds(strikethroughStartDelay);
 
         // 3. Название стадии зачёркивается
         tpQuestStage.StrikethroughText();
@@ -221,7 +223,7 @@ public class QuestNotificationUI : MonoBehaviour
         yield return fade1;
         yield return fade2;
 
-        yield return new WaitForSeconds(readDelay / 2);
+        yield return new WaitForSeconds(strikethroughStartDelay);
 
         // 3. Зачёркивается название стадии
         tpQuestStage.StrikethroughText();
