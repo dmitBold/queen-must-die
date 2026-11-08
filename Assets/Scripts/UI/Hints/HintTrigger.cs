@@ -1,3 +1,4 @@
+using Core;
 using UnityEngine;
 using Zenject;
 
@@ -16,12 +17,18 @@ public class HintTrigger : MonoBehaviour
     [Tooltip("Показывать подсказку сразу при старте сцены?")]
     public bool showOnStart = false;
 
+    /// <summary>Флаг WorldState, по которому подсказка показывается один раз за прохождение. Пусто: без ограничения.</summary>
+    [Tooltip("Если задан, подсказка покажется один раз за прохождение (флаг сохраняется в WorldState)")]
+    [SerializeField] private string showOnceFlag;
+
     private HintManager _hintManager;
+    private WorldState _worldState;
 
     [Inject]
-    public void Construct(HintManager hintManager)
+    public void Construct(HintManager hintManager, WorldState worldState)
     {
         _hintManager = hintManager;
+        _worldState = worldState;
     }
 
     private void Start()
@@ -37,6 +44,12 @@ public class HintTrigger : MonoBehaviour
     {
         if (_hintManager != null && !string.IsNullOrEmpty(hintText))
         {
+            if (!string.IsNullOrEmpty(showOnceFlag))
+            {
+                if (_worldState.HasFlag(showOnceFlag)) return;
+                _worldState.AddFlag(showOnceFlag);
+            }
+
             _hintManager.ShowHint(hintText, displayDuration, fadeDuration);
         }
         else

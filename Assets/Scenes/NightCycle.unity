@@ -91950,6 +91950,7 @@ MonoBehaviour:
   displayDuration: 3
   fadeDuration: 0.5
   showOnStart: 0
+  showOnceFlag: 
 --- !u!1001 &445787969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113425,11 +113426,118 @@ MonoBehaviour:
   displayDuration: 3
   fadeDuration: 0.5
   showOnStart: 0
+  showOnceFlag: 
 --- !u!4 &611311981 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 900400971657951974, guid: 6e6718b48408fe14bbaf4553645cdbd7, type: 3}
   m_PrefabInstance: {fileID: 90518622}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &611605328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 611605329}
+  - component: {fileID: 611605332}
+  - component: {fileID: 611605331}
+  - component: {fileID: 611605330}
+  m_Layer: 2
+  m_Name: Consequence_Statues_Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &611605329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611605328}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.9331597, z: -0, w: 0.35946205}
+  m_LocalPosition: {x: 26.929178, y: 7.692304, z: 19.756111}
+  m_LocalScale: {x: 0.7692308, y: 0.7692308, z: 0.7692308}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2014949926}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &611605330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611605328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c8d1e3cf9760347a8e4e7da50044b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.TriggerHandler
+  targetTag: Player
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 611605331}
+        m_TargetAssemblyTypeName: HintTrigger, Assembly-CSharp
+        m_MethodName: TriggerHint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerSound: {fileID: 0}
+  disable: 1
+--- !u!114 &611605331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611605328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aed5bf0608aa804e87ec0a5cf4d9c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HintTrigger
+  hintText: "\u041F\u043E\u0441\u043B\u0435\u0434\u0441\u0442\u0432\u0438\u0435:\n\u0432\u044B
+    \u043F\u043E\u0437\u0432\u043E\u043B\u0438\u043B\u0438 \u0433\u0432\u0430\u0440\u0434\u0435\u0439\u0446\u0430\u043C
+    \u0410\u043B\u0435\u043A\u0441\u0430\u043D\u0434\u0440\u0430 \u0441\u043E\u0432\u0435\u0440\u0448\u0438\u0442\u044C
+    \u0440\u0438\u0442\u0443\u0430\u043B, \u043F\u043E\u044D\u0442\u043E\u043C\u0443
+    \u0432 \u0437\u0430\u043C\u043A\u0435 \u0431\u043E\u043B\u044C\u0448\u0435 \u0441\u0442\u0430\u0442\u0443\u0439"
+  displayDuration: 5
+  fadeDuration: 0.5
+  showOnStart: 0
+  showOnceFlag: hint:consequence:statues
+--- !u!65 &611605332
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611605328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 3.6, z: 3.7}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &612130143
 GameObject:
   m_ObjectHideFlags: 0
@@ -185703,7 +185811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &786727805
 Transform:
   m_ObjectHideFlags: 0
@@ -205263,6 +205371,7 @@ Transform:
   - {fileID: 766283891}
   - {fileID: 1972205531}
   - {fileID: 332156816}
+  - {fileID: 1493672994}
   m_Father: {fileID: 2014949926}
   m_LocalEulerAnglesHint: {x: 0, y: -38.505, z: 0}
 --- !u!1001 &931757657
@@ -221869,6 +221978,7 @@ MonoBehaviour:
   displayDuration: 5
   fadeDuration: 0.5
   showOnStart: 0
+  showOnceFlag: 
 --- !u!1 &1002618595
 GameObject:
   m_ObjectHideFlags: 0
@@ -226789,6 +226899,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1461137811}
+        m_TargetAssemblyTypeName: HintTrigger, Assembly-CSharp
+        m_MethodName: TriggerHint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -275203,6 +275325,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1461137811}
+        m_TargetAssemblyTypeName: HintTrigger, Assembly-CSharp
+        m_MethodName: TriggerHint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   delay: 0
   LateInteraction:
     m_PersistentCalls:
@@ -301338,6 +301472,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1461137811}
+        m_TargetAssemblyTypeName: HintTrigger, Assembly-CSharp
+        m_MethodName: TriggerHint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -340502,6 +340648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1461137810}
+  - component: {fileID: 1461137811}
   m_Layer: 0
   m_Name: DeadGolems
   m_TagString: Untagged
@@ -340540,6 +340687,27 @@ Transform:
   - {fileID: 138561832}
   m_Father: {fileID: 2076672804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461137811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461137809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aed5bf0608aa804e87ec0a5cf4d9c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HintTrigger
+  hintText: "\u041F\u043E\u0441\u043B\u0435\u0434\u0441\u0442\u0432\u0438\u0435:\n\u0432\u044B
+    \u043D\u0435 \u0440\u0430\u0437\u0440\u0435\u0448\u0438\u043B\u0438 \u043E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C
+    \u0433\u043E\u043B\u0435\u043C\u043E\u0432 \u0432 \u0441\u043F\u044F\u0447\u043A\u0443,
+    \u043F\u043E\u044D\u0442\u043E\u043C\u0443 \u0432 \u0437\u0430\u043C\u043A\u0435
+    \u0431\u043E\u043B\u044C\u0448\u0435 \u0438\u0445 \u0442\u0435\u043B"
+  displayDuration: 5
+  fadeDuration: 0.5
+  showOnStart: 0
+  showOnceFlag: hint:consequence:golems
 --- !u!1001 &1461177066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -354226,6 +354394,112 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.LockObject
   LockSound: {fileID: 0}
   isLocked: 1
+--- !u!1 &1493672993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1493672994}
+  - component: {fileID: 1493672997}
+  - component: {fileID: 1493672996}
+  - component: {fileID: 1493672995}
+  m_Layer: 2
+  m_Name: Consequence_Jul_Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1493672994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493672993}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.32972923, z: -0, w: 0.9440756}
+  m_LocalPosition: {x: 0, y: 0.40800926, z: -2.28}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 931483836}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1493672995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493672993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c8d1e3cf9760347a8e4e7da50044b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.TriggerHandler
+  targetTag: Player
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1493672996}
+        m_TargetAssemblyTypeName: HintTrigger, Assembly-CSharp
+        m_MethodName: TriggerHint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerSound: {fileID: 0}
+  disable: 1
+--- !u!114 &1493672996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493672993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aed5bf0608aa804e87ec0a5cf4d9c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HintTrigger
+  hintText: "\u041F\u043E\u0441\u043B\u0435\u0434\u0441\u0442\u0432\u0438\u0435:\n\u0412\u044B
+    \u043F\u043E\u0437\u0432\u043E\u043B\u0438\u043B\u0438 \u0414\u0436\u0443\u043B
+    \u0410\u043C\u0438\u043D\u0442\u043E\u0440 \u043E\u0442\u043D\u0435\u0441\u0442\u0438
+    \u043F\u0438\u0441\u044C\u043C\u043E. \u041E\u043D\u0430 \u043D\u0435 \u043F\u0435\u0440\u0435\u0436\u0438\u043B\u0430
+    \u044D\u0442\u0443 \u043D\u043E\u0447\u044C"
+  displayDuration: 5
+  fadeDuration: 0.5
+  showOnStart: 0
+  showOnceFlag: hint:consequence:jul
+--- !u!65 &1493672997
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493672993}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2, y: 3.5, z: 4.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1496047789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4579717994101260122, guid: fc5f7e35987b3934fb6a40f529bfa2a5, type: 3}
@@ -408069,6 +408343,7 @@ MonoBehaviour:
   displayDuration: 3
   fadeDuration: 0.5
   showOnStart: 0
+  showOnceFlag: 
 --- !u!1 &1746585128
 GameObject:
   m_ObjectHideFlags: 0
@@ -441392,6 +441667,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1461137811}
+        m_TargetAssemblyTypeName: HintTrigger, Assembly-CSharp
+        m_MethodName: TriggerHint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   delay: 0
   LateInteraction:
     m_PersistentCalls:
@@ -459920,7 +460207,7 @@ Transform:
   m_GameObject: {fileID: 2014949925}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9331597, z: -0, w: 0.35946205}
-  m_LocalPosition: {x: -24.109089, y: -0.39999485, z: 17.91}
+  m_LocalPosition: {x: 3410.741, y: -0.39999485, z: -2144.9812}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -459933,7 +460220,8 @@ Transform:
   - {fileID: 697061940}
   - {fileID: 1113272590}
   - {fileID: 1793300002}
-  m_Father: {fileID: 0}
+  - {fileID: 611605329}
+  m_Father: {fileID: 2076672804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2016343528
 GameObject:
@@ -466829,6 +467117,7 @@ Transform:
   m_Children:
   - {fileID: 1461137810}
   - {fileID: 786727805}
+  - {fileID: 2014949926}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2076672805
@@ -466971,7 +467260,7 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!1001 &2076921045
 PrefabInstance:
@@ -1101650,7 +1101939,6 @@ SceneRoots:
   - {fileID: 1213657616}
   - {fileID: 169893325}
   - {fileID: 1107321880}
-  - {fileID: 2014949926}
   - {fileID: 1923764819}
   - {fileID: 617983035}
   - {fileID: 1410275139}
