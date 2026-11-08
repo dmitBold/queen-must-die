@@ -19,6 +19,14 @@ namespace UI
         private const float SnapEpsilon = 0.005f;
         private const float VelocityEpsilon = 0.05f;
 
+        // Выезд за цель заканчивается, когда до точки выброса осталась эта доля самого выброса.
+        // Ждать полного подхода нельзя: SmoothDamp приближается к точке асимптотически,
+        // и возврат начинался бы с заметной паузой на самом краю выброса.
+        private const float ApproachExitFraction = 0.25f;
+
+        // Возврат с выброса идёт быстрее выезда: во столько раз меньше smoothTime на этапе Settling.
+        private const float SettleSmoothFactor = 0.5f;
+
         // Одна и та же лента идёт и в замер шаблона, и в каждый разряд: иначе высота строки
         // и высота колеса разъедутся и цифры поплывут относительно окна.
         private const string WheelText = "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n0";
@@ -34,11 +42,12 @@ namespace UI
 
             if (state == State.Approaching)
             {
-                float aim = target + Mathf.Sign(target - shown) * ResolveOvershoot();
+                shown = Mathf.SmoothDamp(shown, approachAim, ref velocity, settings.smoothTime, settings.rollSpeed, dt);
 
-                shown = Mathf.SmoothDamp(shown, aim, ref velocity, settings.smoothTime, settings.rollSpeed, dt);
+                // Если выброса нет (точка совпадает с целью), порог вырождается в SnapEpsilon.
+                float exitDistance = Mathf.Max(SnapEpsilon, Mathf.Abs(approachAim - target) * ApproachExitFraction);
 
-                if (Mathf.Abs(shown - aim) < SnapEpsilon)
+                if (Mathf.Abs(shown - approachAim) < exitDistance)
                 {
                     state = State.Settling;
                     velocity = 0f;
@@ -46,7 +55,7 @@ namespace UI
             }
             else
             {
-                shown = Mathf.SmoothDamp(shown, target, ref velocity, settings.smoothTime, settings.rollSpeed, dt);
+                shown = Mathf.SmoothDamp(shown, target, ref velocity, settings.smoothTime * SettleSmoothFactor, settings.rollSpeed, dt);
 
                 if (Mathf.Abs(shown - target) < SnapEpsilon && Mathf.Abs(velocity) < VelocityEpsilon)
                 {
@@ -60,8 +69,10 @@ namespace UI
         }
 
         /// <summary>
-        /// Величина выброса в единицах значения. На границах диапазона выброс срезается:
-        /// иначе счётчик уезжал бы в разряд, которого у него нет, и на кадр показывал лишнюю цифру.
+        /// Величина выброса в единицах значения. Выброс срезается в двух местах:
+        /// на границах диапазона счётчика (иначе барабан уезжал бы в разряд, которого у него нет)
+        /// и на границах текущего десятка цели (иначе старший разряд на долю секунды
+        /// подъезжал бы к соседней цифре и мелькал призраком, например «20» при цели 19).
         /// </summary>
         private float ResolveOvershoot()
         {
@@ -82,7 +93,17 @@ namespace UI
                 return 0f;
             }
 
-            return settings.overshoot;
+            // Дальше считаем в модуле значения: старшие разряды зависят только от него.
+            // Пока модуль выброса остаётся внутри десятка цели [low, low + 9], колёса десятков, сотен
+            // и выше стоят на месте, и мелькать нечему. Запас считаем в ту сторону, куда выброс двигает модуль.
+            int magnitude = Mathf.Abs(target);
+            int decadeLow = magnitude / 10 * 10;
+
+            // Для нуля выброс в любую сторону увеличивает модуль; для остальных зависит от знака цели.
+            bool growsMagnitude = target == 0 || (target > 0) == movingUp;
+            float room = growsMagnitude ? decadeLow + 9 - magnitude : magnitude - decadeLow;
+
+            return Mathf.Min(settings.overshoot, room);
         }
 
         private void Build()
@@ -222,7 +243,9 @@ namespace UI
 
         private void Render()
         {
-            if (!isBuilt)
+            // viewport == null срабатывает и для уничтоженного объекта (выгрузка сцены, выход из Play):
+            // OnDisable вызывается и в этот момент, а колёса лежат внутри viewport и уничтожаются вместе с ним.
+            if (!isBuilt || viewport == null)
             {
                 return;
             }

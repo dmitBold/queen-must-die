@@ -46,6 +46,10 @@ namespace UI
         private float velocity;
         private int target;
 
+        // Точка, к которой едет барабан в Approaching (цель + выброс). Фиксируется один раз при смене цели:
+        // если считать её каждый кадр от текущего shown, знак выброса меняется при пересечении цели.
+        private float approachAim;
+
         private State state = State.Idle;
         private bool isBuilt;
         private bool hasValue;
@@ -91,6 +95,7 @@ namespace UI
             value = ClampToCapacity(value);
 
             bool isFirstAssignment = !hasValue;
+            bool isSameTarget = !isFirstAssignment && target == value;
 
             hasValue = true;
             target = value;
@@ -127,8 +132,17 @@ namespace UI
                 return;
             }
 
+            // Повторный вызов с той же целью не перезапускает движение: иначе каждый такой вызов
+            // заново вешал бы выброс на уже севший барабан.
+            if (state != State.Idle && isSameTarget)
+            {
+                return;
+            }
+
             // Скорость не обнуляется: серия «прибавили, отняли, прибавили» продолжает движение с уже набранной скоростью,
             // поэтому барабан не дёргается при каждой смене цели.
+            // Точка выброса считается здесь один раз, а не каждый кадр в Update.
+            approachAim = value + Mathf.Sign(value - shown) * ResolveOvershoot();
             state = State.Approaching;
         }
 
