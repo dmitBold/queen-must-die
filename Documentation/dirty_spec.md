@@ -340,6 +340,8 @@ AssemblyView — компонент на префабе сборочного о�
 
 LockView — компонент на префабе замка для работы в AssemblyController. Наследуется от InteractableView для унификации с AssemblyView.
 
+Маленький сундук (предмет CHEST_KEY, PortableBase) — собирается в префабе ChestKeyAssemblyRoot, модель SmallChest (Base, Lid, LockPlate). Animator висит на chest_key рядом с AssemblySocket и проигрывает SmallChest-open (2.8 с): ключ входит и поворачивается, крышка открывается, сундук наклоняется к камере на 70° и держит паузу, чтобы был виден предмет внутри. У среза пальца стоит URP-декаль BloodDecal (работает только с рендерером PC_Renderer, где включён Decal Feature). Состояние Idle нужно: оно возвращает закрытую крышку, когда ResetIfFinished сбрасывает кэшированную вью для следующей копии сундука. Результат сборки — предмет SEVERED_FINGER, старый CHEST_KEY_assembled больше не используется. На onAssemblyCompleted вьюхи висят QuestEventBridge.AdvanceQuest (Книга всадника) и PostWindowDialogue.Play. PostWindowDialogue — показывает ночной диалог после закрытия всех окон через UIManager.RunWhenInteractive; днём NightDialogueManager нет, и диалог не показывается. Камера сборки — Main Camera сцены с маской слоя Assembly (6), смотрит вдоль +Z, поэтому лицевая сторона модели (+Z) должна быть развёрнута к ней.
+
 NightCycle/Cleanup/
 Механика уборки объектов и связанные с ней визуальные/звуковые эффекты.
 

@@ -80,6 +80,8 @@ namespace UI
         // чтобы смена окна и завершение сборки не давали промежуточный FreeMovement.
         private int _recomputeSuspend;
 
+        private Action _whenInteractive;
+
         public void Initialize()
         {
             _isLoadingSceneActive = SceneManager.GetActiveScene().name == SceneNames.Loading;
@@ -105,6 +107,22 @@ namespace UI
 
             _wasLoading = loading;
             ApplyHidden();
+
+            if (_whenInteractive != null && CanInteract)
+            {
+                Action pending = _whenInteractive;
+                _whenInteractive = null;
+                pending();
+            }
+        }
+
+        /// <summary>
+        /// Выполняет действие в ближайшем кадре, когда закрыты все окна и нет сборки, катсцены и загрузки.
+        /// Нужно тем, кто запускается из сборки в инвентаре: её вью к этому моменту уже выключена.
+        /// </summary>
+        public void RunWhenInteractive(Action action)
+        {
+            _whenInteractive += action;
         }
 
         /// <summary>
