@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,8 @@ public class NightSecretsQuest : MonoBehaviour
     public Quest quest;
     [Tooltip("Выдать квест при старте сцены, если его ещё нет")]
     public bool giveOnStart = true;
+    /// <summary>Задержка выдачи квеста после старта сцены, в секундах.</summary>
+    [SerializeField] private float giveDelay = 1f;
 
     public const int FindDoor = 0, OpenDoor = 1, ReturnParts = 2, Escape = 3;
 
@@ -22,9 +25,12 @@ public class NightSecretsQuest : MonoBehaviour
     [Inject]
     public void Construct(QuestManager questManager) => _quests = questManager;
 
-    private void Start()
+    private IEnumerator Start()
     {
-        if (giveOnStart && _quests != null && quest != null && !_quests.HasQuest(quest)) _quests.AddQuest(quest);
+        if (!giveOnStart) yield break;
+        yield return new WaitForSeconds(giveDelay);
+        // Проверка после паузы: за это время квест могли выдать через AdvanceTo
+        if (_quests != null && quest != null && !_quests.HasQuest(quest)) _quests.AddQuest(quest);
     }
 
     public void OnDoorReached() => AdvanceTo(OpenDoor);

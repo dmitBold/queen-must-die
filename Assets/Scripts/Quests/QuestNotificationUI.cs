@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Core;
+using FMODUnity;
 using UnityEngine;
 using Zenject;
 using NightCycle;
@@ -35,14 +37,22 @@ public class QuestNotificationUI : MonoBehaviour
     /// <summary>Пауза перед первым зачёркиванием, когда игрок уже видит текст задачи.</summary>
     [SerializeField] private float strikethroughStartDelay = 1f;
 
+    [Header("Звуки")]
+    /// <summary>Звук первого получения квеста.</summary>
+    [SerializeField] private EventReference questGetEvent;
+    /// <summary>Звук прогресса: старая задача зачёркивается, затем появляется новая.</summary>
+    [SerializeField] private EventReference questProgressEvent;
+
     private Queue<QuestNotificationData> notificationQueue = new Queue<QuestNotificationData>();
     private bool isProcessingQueue = false;
     private QuestManager questManager;
+    private AudioService audioService;
 
     [Inject]
-    public void Construct(QuestManager questManager)
+    public void Construct(QuestManager questManager, AudioService audioService)
     {
         this.questManager = questManager;
+        this.audioService = audioService;
         questManager.OnQuestAdded += HandleQuestAdded;
         questManager.OnQuestStageFinished += HandleStageAdvanced;
         questManager.OnQuestFinished += HandleQuestCompleted;
@@ -157,6 +167,8 @@ public class QuestNotificationUI : MonoBehaviour
 
     private IEnumerator PlayNewQuestSequence(QuestNotificationData data)
     {
+        audioService.PlayFMODEvent(questGetEvent);
+
         // 1. Печатается название квеста
         tpQuestName.TypeText(data.QuestName);
         yield return new WaitWhile(() => tpQuestName.IsTyping);
@@ -191,6 +203,9 @@ public class QuestNotificationUI : MonoBehaviour
         yield return new WaitForSeconds(strikethroughStartDelay);
 
         // 3. Название стадии зачёркивается
+        // У последнего этапа следующей задачи нет: его завершение озвучивать как прогресс не нужно
+        if (!string.IsNullOrEmpty(data.StageName))
+            audioService.PlayFMODEvent(questProgressEvent);
         tpQuestStage.StrikethroughText();
         yield return new WaitForSeconds(strikethroughDelay);
 
