@@ -6,6 +6,9 @@ public class AnimRewind : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private float rewindSpeed = -5f;
 
+    /// <summary>—корость анимации при удержании: 1 Ч обычна€, меньше 1 Ч медленнее.</summary>
+    [SerializeField] private float forwardSpeed = 1f;
+
     [Header("»мена состо€ний")]
     public string cleanStateName = "Boxes";
     public string idleStateName = "idle";
@@ -22,7 +25,7 @@ public class AnimRewind : MonoBehaviour
             rewindCoroutine = null;
         }
 
-        animator.SetFloat("AnimSpeed", 1f);
+        animator.SetFloat("AnimSpeed", forwardSpeed);
         animator.Play(cleanStateName);
     }
 

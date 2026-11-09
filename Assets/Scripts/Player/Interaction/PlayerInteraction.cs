@@ -165,7 +165,7 @@ namespace NightCycle
         {
             nearestHit = default;
             bool found = false;
-            int hitCount = Physics.RaycastNonAlloc(ray, rayHits, playerReach);
+            int hitCount = Physics.RaycastNonAlloc(ray, rayHits, GetInteractionReach());
 
             for (int i = 0; i < hitCount; i++)
             {
@@ -185,6 +185,18 @@ namespace NightCycle
             }
 
             return found;
+        }
+
+        private float GetInteractionReach()
+        {
+            if (currentInteractable != null
+                && currentInteractable.TryGetComponent(out CleanupTrackTarget target)
+                && target.IsTracking)
+            {
+                return target.TrackingReach;
+            }
+
+            return playerReach;
         }
 
         private void ProcessInteractableHit(RaycastHit hit)
