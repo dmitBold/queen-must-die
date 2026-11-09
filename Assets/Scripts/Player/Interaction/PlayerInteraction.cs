@@ -13,6 +13,7 @@ namespace NightCycle
         private const string INTERACTABLE_TAG = "Interactable";
         private const string INTERACTION_KEY_TEXT = "E";
         private const float DEFAULT_PLAYER_REACH = 3f;
+        private const int MAX_RAY_HITS = 16;
 
         #endregion
 
@@ -33,6 +34,9 @@ namespace NightCycle
         private bool isInteractionProcessed = false;
         private bool isHolding = false;
         public bool can_interact = true;
+        private bool doorHoldCompleted = false;
+        private CharacterController characterController;
+        private readonly RaycastHit[] rayHits = new RaycastHit[MAX_RAY_HITS];
 
         #endregion
 
@@ -48,10 +52,16 @@ namespace NightCycle
         {
             this.inventoryUI = inventoryUI;
             this.uiManager = uiManager;
+            characterController = GetComponent<CharacterController>();
         }
 
         private void Update()
         {
+            if (!Input.GetKey(KeyCode.E))
+            {
+                doorHoldCompleted = false;
+            }
+
             if (playerStateController.CurrentMode == PlayerMode.FreeMovement && can_interact)
             {
                 CheckInteraction();
@@ -134,7 +144,7 @@ namespace NightCycle
 
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, playerReach))
+            if (TryGetInteractionHit(ray, out RaycastHit hit))
             {
                 if (hit.collider.CompareTag(INTERACTABLE_TAG))
                 {
@@ -149,6 +159,32 @@ namespace NightCycle
             {
                 DisableCurrentInteractable();
             }
+        }
+
+        private bool TryGetInteractionHit(Ray ray, out RaycastHit nearestHit)
+        {
+            nearestHit = default;
+            bool found = false;
+            int hitCount = Physics.RaycastNonAlloc(ray, rayHits, playerReach);
+
+            for (int i = 0; i < hitCount; i++)
+            {
+                RaycastHit candidate = rayHits[i];
+
+                // Зоны-триггеры (Volume, чекпоинты) не должны перекрывать то, что находится за ними.
+                if (candidate.collider.isTrigger && !candidate.collider.CompareTag(INTERACTABLE_TAG))
+                {
+                    continue;
+                }
+
+                if (!found || candidate.distance < nearestHit.distance)
+                {
+                    nearestHit = candidate;
+                    found = true;
+                }
+            }
+
+            return found;
         }
 
         private void ProcessInteractableHit(RaycastHit hit)
@@ -214,7 +250,14 @@ namespace NightCycle
                     HandleInstantInteraction();
                     break;
                 case Interactable.InteractionType.Hold:
-                    HandleHoldInteraction();
+                    if (currentInteractable.TryGetComponent(out HoldDoor door))
+                    {
+                        HandleDoorHold(door);
+                    }
+                    else
+                    {
+                        HandleHoldInteraction();
+                    }
                     break;
             }
         }
@@ -241,6 +284,25 @@ namespace NightCycle
             {
                 ResetHoldProgress();
             }
+        }
+
+        private void HandleDoorHold(HoldDoor door)
+        {
+            if (doorHoldCompleted || !Input.GetKey(KeyCode.E))
+            {
+                HUDController.instance.HideProgress();
+                return;
+            }
+
+            if (door.AdvanceHold(characterController, Time.deltaTime))
+            {
+                doorHoldCompleted = true;
+                HUDController.instance.HideProgress();
+                currentInteractable.Interact();
+                return;
+            }
+
+            HUDController.instance.UpdateProgress(door.Progress);
         }
 
         private void UpdateHoldProgress()
