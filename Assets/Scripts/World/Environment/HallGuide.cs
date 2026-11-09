@@ -9,9 +9,10 @@ namespace NightCycle
     /// <summary>
     /// Холл ночью: огни ведут игрока к сломанному голему.
     /// Старт — в холле горят только окна и факелы у двери в спальню (всё из steps / finalFires / finalLights погашено).
-    /// StartGuide() (подобрана эссенция стражника) — загорается steps[0] и тусклый свет над големом.
+    /// StartGuide() (активирована руна у двери в спальню) — загорается steps[0] и тусклый свет над големом.
     /// Reach(k) (игрок дошёл до steps[k-1]) — загорается steps[k]. Последний шаг — факелы у голема.
-    /// Через finalDelay после последнего шага за finalDuration разгорается весь остальной свет холла.
+    /// Через finalDelay после последнего шага за finalDuration разгорается весь остальной свет холла,
+    /// в этот же момент включаются объекты finalObjects (лестницы).
     /// Прогресс сохраняется через SaveSystem (события "{saveId}_1".."{saveId}_done").
     /// </summary>
     public class HallGuide : MonoBehaviour
@@ -34,6 +35,10 @@ namespace NightCycle
         public List<Light> finalLights = new List<Light>();
         public float finalDelay = 2f;
         public float finalDuration = 4f;
+        [Tooltip("Объекты, которые появляются одновременно с началом разгорания остального света")]
+        public List<GameObject> finalObjects = new List<GameObject>();
+        [Tooltip("Объекты, которые исчезают одновременно с началом разгорания остального света")]
+        public List<GameObject> finalRemovedObjects = new List<GameObject>();
 
         [Header("Сохранение")]
         public string saveId = "HallGuide";
@@ -70,7 +75,7 @@ namespace NightCycle
             if (Stage == steps.Count && !Finished) StartCoroutine(FinalRoutine());
         }
 
-        /// <summary>Эссенция стражника подобрана.</summary>
+        /// <summary>Руна у двери в спальню активирована, лестница появилась.</summary>
         public void StartGuide()
         {
             if (Stage != 0) return;
@@ -97,6 +102,13 @@ namespace NightCycle
         private IEnumerator FinalRoutine()
         {
             yield return new WaitForSeconds(finalDelay);
+            foreach (var o in finalObjects)
+            {
+                if (!o) continue;
+                if (o.TryGetComponent(out DissolveAppear appear)) appear.Appear();
+                else o.SetActive(true);
+            }
+            foreach (var o in finalRemovedObjects) if (o) o.SetActive(false);
             // огни разгораются вразнобой в течение finalDuration, лампы плавно набирают яркость
             var order = new List<FireIgnition>(finalFires);
             for (int i = 0; i < order.Count; i++) { int j = UnityEngine.Random.Range(i, order.Count); (order[i], order[j]) = (order[j], order[i]); }
@@ -125,6 +137,13 @@ namespace NightCycle
             for (int i = 0; i < finalLights.Count; i++)
                 if (finalLights[i]) { finalLights[i].intensity = _finalIntensity[i]; finalLights[i].enabled = Finished; }
             if (guideLight) { guideLight.intensity = _guideIntensity; guideLight.enabled = Stage > 0; }
+            SetFinalObjects(Finished);
+        }
+
+        private void SetFinalObjects(bool active)
+        {
+            foreach (var o in finalObjects) if (o) o.SetActive(active);
+            foreach (var o in finalRemovedObjects) if (o) o.SetActive(!active);
         }
 
         private IEnumerator FadeLight(Light l, float from, float to, float dur)
