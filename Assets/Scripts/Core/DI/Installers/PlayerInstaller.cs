@@ -54,6 +54,7 @@ namespace DI
             Container.BindInstance(instance.FirstPersonController).AsSingle();
             Container.BindInstance(instance.PlayerInteraction).AsSingle();
             Container.BindInstance(instance.PlayerStateController).AsSingle();
+            Container.BindInstance(instance.Torch).AsSingle();
             instance.SetLanternActivity(_enableLantern);
 
             var rb = instance.GetComponentInChildren<Rigidbody>();

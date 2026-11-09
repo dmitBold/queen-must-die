@@ -17,6 +17,9 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private PlayerFlashlight _flashlight;
     public PlayerFlashlight Flashlight => _flashlight;
 
+    [SerializeField] private PlayerTorch _torch;
+    public PlayerTorch Torch => _torch;
+
     
     
     public void SetLanternActivity(bool value)

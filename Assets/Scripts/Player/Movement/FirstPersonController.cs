@@ -65,12 +65,14 @@ namespace NightCycle
         private Vector3 originalControllerCenter;
         private float originalCameraLocalY;
 
+        public float SpeedMultiplier { get; set; } = 1f;
+
         private float CurrentSpeed
         {
             get
             {
-                if (isCrouching) return walkSpeed * crouchSpeedMultiplier;
-                return walkSpeed * (playerInputHandler.SprintTriggered ? sprintMultiplier : 1);
+                if (isCrouching) return walkSpeed * crouchSpeedMultiplier * SpeedMultiplier;
+                return walkSpeed * (playerInputHandler.SprintTriggered ? sprintMultiplier : 1) * SpeedMultiplier;
             }
         }
 

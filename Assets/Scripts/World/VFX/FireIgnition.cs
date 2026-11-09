@@ -90,6 +90,21 @@ namespace NightCycle
             if (lit) ApplyFull(); else ApplyOff(true);
         }
 
+        /// <summary>Задаёт уровень горящего огня 0..1 раздельно для света, пламени и громкости (выгорающий факел).</summary>
+        public void SetBurnLevel(float light, float flame, float volume)
+        {
+            Capture();
+            SetLight(light);
+            SetGlow(light);
+            for (int i = 0; i < flames.Count; i++)
+            {
+                if (!flames[i]) continue;
+                var main = flames[i].main; main.startSizeMultiplier = _size[i] * flame;
+                var em = flames[i].emission; em.rateOverTimeMultiplier = _rate[i] * flame;
+            }
+            if (sound && sound.EventInstance.isValid()) sound.EventInstance.setVolume(volume);
+        }
+
         private void Run(IEnumerator routine)
         {
             if (_co != null) StopCoroutine(_co);

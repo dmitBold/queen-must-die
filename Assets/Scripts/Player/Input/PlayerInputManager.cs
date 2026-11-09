@@ -12,6 +12,7 @@ namespace NightCycle
         [SerializeField] private string actionMapName = "Player1";
 
         [Header("Action Name References")]
+        [SerializeField] private string throwTorch = "ThrowTorch";
         [SerializeField] private string movement = "Movement";
         [SerializeField] private string rotation = "Rotation";
         [SerializeField] private string jump = "Jump";
@@ -19,6 +20,7 @@ namespace NightCycle
         [SerializeField] private string crouch = "Crouch"; // Новая ссылка на Action
 
 
+        private InputAction throwTorchAction;
         private InputAction movementAction;
         private InputAction rotationAction;
         private InputAction jumpAction;
@@ -26,6 +28,7 @@ namespace NightCycle
         private InputAction crouchAction; // Новый InputAction
 
 
+        public bool ThrowTorchPressed => throwTorchAction.WasPressedThisFrame();
         public Vector2 MovementInput { get; private set; }
         public Vector2 RotationInput { get; private set; }
         public bool JumpTriggered { get; private set; }
@@ -38,6 +41,7 @@ namespace NightCycle
             InputActionMap mapReference = playerControls.FindActionMap(actionMapName);
 
 
+            throwTorchAction = mapReference.FindAction(throwTorch);
             movementAction = mapReference.FindAction(movement);
             rotationAction = mapReference.FindAction(rotation);
             jumpAction = mapReference.FindAction(jump);
