@@ -45,7 +45,7 @@ public class EyeConstraint : MonoBehaviour
 
         ConstraintSource source = new ConstraintSource
         {
-            sourceTransform = _player.Rigidbody.transform,
+            sourceTransform = Camera.main != null ? Camera.main.transform : _player.Rigidbody.transform,
             weight = 1f
         };
 

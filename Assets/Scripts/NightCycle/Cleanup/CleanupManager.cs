@@ -43,6 +43,10 @@ namespace NightCycle
         private AudioService _audioService;
         //test
         public UnityEvent ON_Cleanup_Completed;
+        [Tooltip("Свет после второго этапа полностью погас")]
+        public UnityEvent BlackoutCompleted = new UnityEvent();
+        [Tooltip("Свечи зажглись по очереди и весь свет полностью вернулся")]
+        public UnityEvent LightsRestored = new UnityEvent();
 
         //Light
         public float turnOFF_time;
@@ -129,6 +133,12 @@ namespace NightCycle
             }
         }
 
+        IEnumerator BlackoutRoutine()
+        {
+            yield return new WaitForSeconds(turnOFF_time);
+            BlackoutCompleted.Invoke();
+        }
+
         IEnumerator CandlesRoutine()
         {
             yield return new WaitForSeconds(FirstDelay);
@@ -149,6 +159,10 @@ namespace NightCycle
                 if (candle != null) candle.FadeTo(1f, turnON_time);
             }
             _audioService.PlaySound(candleSound, 2.0f);
+
+            bool hasSlowLights = SlowRestoreLights != null && SlowRestoreLights.Count > 0;
+            yield return new WaitForSeconds(hasSlowLights ? turnON_time * SlowRestoreFactor : turnON_time);
+            LightsRestored.Invoke();
         }
 
         public void apply_stage_effect()
@@ -170,6 +184,7 @@ namespace NightCycle
                         if (candle != null) candle.FadeTo(0f, turnOFF_time);
                     }
                     if (scene_light != null) scene_light.enabled = false;
+                    StartCoroutine(BlackoutRoutine());
                     StartCoroutine(CandlesRoutine());
                     break;
                 case 3:
