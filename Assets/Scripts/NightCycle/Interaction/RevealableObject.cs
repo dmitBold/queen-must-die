@@ -91,6 +91,17 @@ namespace NightCycle
             }
         }
 
+        /// <summary>
+        /// Снова делает объект проявляемым после того, как его выключили при использовании.
+        /// Сбрасывает видимость, поэтому взаимодействие включится при следующей проверке луча фонаря, даже если он уже наведён.
+        /// </summary>
+        public void Rearm()
+        {
+            isCurrentlyVisible = false;
+            SetComponentsState(false);
+            enabled = true;
+        }
+
         // ВЫЗЫВАТЬ ЧЕРЕЗ ТВОЙ СКРИПТ ВЗАИМОДЕЙСТВИЯ ПРИ КЛИКЕ ИГРОКА
         public void LockInteraction()
         {
