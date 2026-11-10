@@ -13,6 +13,17 @@ namespace NightCycle
         private const string ThrowHintFlag = "hint_torch_throw_shown";
         private const float MinSwaySpeed = 0.1f;
         private const float WallMargin = 0.15f;
+        // Чуть меньше 1: пружина инерции слегка перелетает ноль, и факел «догоняет» взгляд с отскоком.
+        private const float LookSwayDamping = 0.55f;
+        // Больше этого за кадр — не поворот мышью, а телепорт взгляда (катсцена, MatchView): инерцию не копим.
+        private const float MaxLookDeltaPerFrame = 30f;
+        private const float LookSwayMaxStep = 1f / 120f;
+        // Смещение руки на градус отставания: при повороте факел уходит вбок, а не только вращается.
+        private const float LookSwayShiftPerDegree = 0.004f;
+        // Совпадает с дыханием камеры в покое.
+        private const float BreathFrequency = 0.3f;
+        private const float BreathPitchPerMeter = 100f;
+        private const float StrafeTiltSmoothing = 8f;
 
         [Header("Ссылки")]
         [SerializeField] private FirstPersonController _movement;
@@ -46,6 +57,22 @@ namespace NightCycle
         /// <summary>Сколько циклов покачивания приходится на метр пути.</summary>
         [SerializeField] private float _swayCyclesPerMeter = 0.125f;
         [SerializeField] private float _swayFadeSpeed = 6f;
+        /// <summary>Наклон факела вбок на пике шага, градусы. Наклон вперёд-назад — вдвое меньше.</summary>
+        [SerializeField] private float _swayTilt = 3f;
+        /// <summary>Наклон факела при движении вбок, градусы на 1 м/с.</summary>
+        [SerializeField] private float _strafeTilt = 1.5f;
+
+        /// <summary>Какая доля поворота взгляда достаётся факелу как отставание (0 — без инерции, 1 — факел стоит на месте).</summary>
+        [Header("Инерция при повороте")]
+        [SerializeField, Range(0f, 1f)] private float _lookSwayAmount = 0.5f;
+        /// <summary>Наибольшее отставание факела от взгляда, градусы.</summary>
+        [SerializeField] private float _lookSwayMax = 5f;
+        /// <summary>Как быстро факел возвращается к взгляду. Больше — жёстче рука.</summary>
+        [SerializeField] private float _lookSwayReturnSpeed = 10f;
+
+        /// <summary>Размах дыхания в покое по вертикали, метры.</summary>
+        [Header("Дыхание")]
+        [SerializeField] private float _breathAmplitude = 0.004f;
 
         [Header("Подсказка про бросок")]
         [TextArea(1, 2)]
@@ -58,8 +85,13 @@ namespace NightCycle
         private WorldState _worldState;
         private TorchItem _held;
         private Vector3 _holdPointBase;
+        private Quaternion _holdRotationBase;
         private float _swayPhase;
         private float _swayWeight;
+        private float _strafeRoll;
+        private Vector2 _lookLag;
+        private Vector2 _lookLagVelocity;
+        private Quaternion _prevViewRotation;
         private bool _animating;
 
         /// <summary>Контроллер игрока: брошенный факел не должен с ним сталкиваться.</summary>
@@ -78,7 +110,11 @@ namespace NightCycle
             _worldState = worldState;
         }
 
-        private void Awake() => _holdPointBase = _holdPoint.localPosition;
+        private void Awake()
+        {
+            _holdPointBase = _holdPoint.localPosition;
+            _holdRotationBase = _holdPoint.localRotation;
+        }
 
         private void Update()
         {
@@ -98,6 +134,9 @@ namespace NightCycle
 
             _held = torch;
             _animating = true;
+            _prevViewRotation = _view.rotation;
+            _lookLag = Vector2.zero;
+            _lookLagVelocity = Vector2.zero;
             torch.TakeInHand();
             _movement.SpeedMultiplier = _heldSpeedMultiplier;
             ShowThrowHint();
@@ -149,6 +188,7 @@ namespace NightCycle
             _held = null;
             _movement.SpeedMultiplier = 1f;
             _holdPoint.localPosition = _holdPointBase;
+            _holdPoint.localRotation = _holdRotationBase;
         }
 
         // Рука может оказаться за стеной, и тогда факел улетел бы за пределы комнаты.
@@ -176,8 +216,51 @@ namespace NightCycle
             _swayPhase += speed * _swayCyclesPerMeter * 2f * Mathf.PI * Time.deltaTime;
 
             // Вдвое большая частота по вертикали даёт движение восьмёркой, как при шаге.
-            Vector3 offset = new Vector3(Mathf.Sin(_swayPhase) * _swaySide, Mathf.Sin(_swayPhase * 2f) * _swayUp, 0f);
-            _holdPoint.localPosition = _holdPointBase + offset * _swayWeight;
+            float side = Mathf.Sin(_swayPhase);
+            float up = Mathf.Sin(_swayPhase * 2f);
+            Vector3 offset = new Vector3(side * _swaySide, up * _swayUp, 0f) * _swayWeight;
+            float roll = -side * _swayTilt * _swayWeight;
+            float pitch = up * _swayTilt * 0.5f * _swayWeight;
+
+            float breath = Mathf.Sin(Time.time * BreathFrequency * 2f * Mathf.PI) * _breathAmplitude * (1f - _swayWeight);
+            offset.y += breath;
+            pitch -= breath * BreathPitchPerMeter;
+
+            float lateralSpeed = Vector3.Dot(velocity, _view.right);
+            _strafeRoll = Mathf.Lerp(_strafeRoll, -lateralSpeed * _strafeTilt, StrafeTiltSmoothing * Time.deltaTime);
+            roll += _strafeRoll;
+
+            UpdateLookLag();
+            offset += new Vector3(_lookLag.y, -_lookLag.x, 0f) * LookSwayShiftPerDegree;
+
+            _holdPoint.localPosition = _holdPointBase + offset;
+            _holdPoint.localRotation = Quaternion.Euler(_lookLag.x + pitch, _lookLag.y, roll) * _holdRotationBase;
+        }
+
+        // Факел отстаёт от поворота взгляда и возвращается недодемпфированной пружиной, как рука с весом.
+        private void UpdateLookLag()
+        {
+            float dt = Time.deltaTime;
+            Quaternion current = _view.rotation;
+            Vector3 delta = (Quaternion.Inverse(_prevViewRotation) * current).eulerAngles;
+            _prevViewRotation = current;
+            if (dt <= 0f) return;
+
+            var turn = new Vector2(Mathf.DeltaAngle(0f, delta.x), Mathf.DeltaAngle(0f, delta.y));
+            if (turn.magnitude < MaxLookDeltaPerFrame)
+                _lookLag = Vector2.ClampMagnitude(_lookLag - turn * _lookSwayAmount, _lookSwayMax);
+
+            // Мелкие подшаги: при просадке FPS один большой шаг пружины раскачивает её вместо затухания.
+            float omega = _lookSwayReturnSpeed;
+            int steps = Mathf.CeilToInt(dt / LookSwayMaxStep);
+            float step = dt / steps;
+            for (int i = 0; i < steps; i++)
+            {
+                Vector2 accel = -omega * omega * _lookLag - 2f * LookSwayDamping * omega * _lookLagVelocity;
+                _lookLagVelocity += accel * step;
+                _lookLag += _lookLagVelocity * step;
+            }
+            _lookLag = Vector2.ClampMagnitude(_lookLag, _lookSwayMax);
         }
 
         private void ShowThrowHint()

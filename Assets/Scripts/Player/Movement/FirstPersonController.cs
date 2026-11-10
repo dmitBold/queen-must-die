@@ -37,6 +37,10 @@ namespace NightCycle
         [SerializeField] private float walkFrequency = 1.5f;
         [SerializeField] private float sprintAmplitude = 1.0f;
         [SerializeField] private float sprintFrequency = 2.5f;
+        /// <summary>Сила тряски при ходьбе в приседе. Ниже ходьбы: шаг в приседе мягче.</summary>
+        [SerializeField] private float crouchAmplitude = 0.7f;
+        /// <summary>Скорость тряски при ходьбе в приседе. Подбирается под crouchStepInterval, чтобы покачивание совпадало с шагами.</summary>
+        [SerializeField] private float crouchFrequency = 0.7f;
 
         [Header("Footsteps (FMOD)")]
         [SerializeField] private EventReference footstepEvent;
@@ -236,8 +240,13 @@ namespace NightCycle
 
             if (isMoving)
             {
-                // Если игрок присел, отключаем спринт-боббинг
-                if (playerInputHandler.SprintTriggered && !isCrouching)
+                // В приседе спринта нет, а шаги реже: своя, более мягкая тряска
+                if (isCrouching)
+                {
+                    targetAmplitude = crouchAmplitude;
+                    targetFrequency = crouchFrequency;
+                }
+                else if (playerInputHandler.SprintTriggered)
                 {
                     targetAmplitude = sprintAmplitude;
                     targetFrequency = sprintFrequency;

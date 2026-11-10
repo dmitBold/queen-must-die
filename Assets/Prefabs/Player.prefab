@@ -89,13 +89,15 @@ MonoBehaviour:
   gravityMultiplier: 7
   mouseSensitivity: 0.1
   upDownLookRange: 80
-  noiseTransitionSpeed: 5
-  idleAmplitude: 0.3
-  idleFrequency: 0.5
-  walkAmplitude: 1.5
-  walkFrequency: 1.5
-  sprintAmplitude: 4.5
-  sprintFrequency: 2.5
+  noiseTransitionSpeed: 4
+  idleAmplitude: 0.4
+  idleFrequency: 0.15
+  walkAmplitude: 1
+  walkFrequency: 1
+  sprintAmplitude: 2.2
+  sprintFrequency: 1.65
+  crouchAmplitude: 0.7
+  crouchFrequency: 0.7
   footstepEvent:
     Guid:
       Data1: 1622595066
@@ -193,10 +195,16 @@ MonoBehaviour:
   _throwUpSpeed: 1.02
   _throwSpin: 2.5
   _dropSpeed: 0.5
-  _swaySide: 0.03
-  _swayUp: 0.02
-  _swayCyclesPerMeter: 0.125
+  _swaySide: 0.02
+  _swayUp: 0.012
+  _swayCyclesPerMeter: 0.37
   _swayFadeSpeed: 6
+  _swayTilt: 3
+  _strafeTilt: 1.5
+  _lookSwayAmount: 0.5
+  _lookSwayMax: 5
+  _lookSwayReturnSpeed: 10
+  _breathAmplitude: 0.004
   _throwHintText: "H \u2014 \u0432\u044B\u043A\u0438\u043D\u0443\u0442\u044C"
   _throwHintDuration: 4
   _throwHintFade: 0.5
@@ -507,10 +515,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBasicMultiChannelPerlin
-  NoiseProfile: {fileID: 11400000, guid: 415363919447f2443b248a078eba7e7d, type: 2}
+  NoiseProfile: {fileID: 11400000, guid: 1277750e901668744aba88ecb29715d9, type: 2}
   PivotOffset: {x: 0, y: 0, z: 0}
-  AmplitudeGain: 1
-  FrequencyGain: 1
+  AmplitudeGain: 0.4
+  FrequencyGain: 0.15
   m_NoiseOffsets: {x: 144.31558, y: 177.7731, z: -989.47595}
 --- !u!114 &3313499309760999473
 MonoBehaviour:
@@ -1030,10 +1038,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8dc4f7a4e3cfdc4bba66c0f53312fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFlashlight
-  firstUseHintText: "\u0420\u0430\u0441\u0445\u043E\u0434\u0443\u0439\u0442\u0435 \u044D\u0441\u0441\u0435\u043D\u0446\u0438\u044E \u0441
-    \u0443\u043C\u043E\u043C, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0445\u043E\u0434\u0438\u0442\u044C
-    \u0441\u043A\u0440\u044B\u0442\u044B\u0435 \u0440\u0443\u043D\u044B \u0441
-    \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u043A\u043E\u0440\u043E\u043D\u044B"
+  firstUseHintText: "\u0420\u0430\u0441\u0445\u043E\u0434\u0443\u0439\u0442\u0435
+    \u044D\u0441\u0441\u0435\u043D\u0446\u0438\u044E \u0441 \u0443\u043C\u043E\u043C,
+    \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0445\u043E\u0434\u0438\u0442\u044C
+    \u0441\u043A\u0440\u044B\u0442\u044B\u0435 \u0440\u0443\u043D\u044B \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E
+    \u043A\u043E\u0440\u043E\u043D\u044B"
   firstUseHintDuration: 4
   firstUseHintFade: 0.5
   revealDistance: 11
