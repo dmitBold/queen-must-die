@@ -17,6 +17,58 @@ public class NavigationController : MonoBehaviour
     [Inject]
     private Player _player;
 
+    private const string DoorLayerName = "DoorLayer";
+    private const float DoorSearchRadius = 4f;
+    private const float MinMoveSpeed = 0.1f;
+
+    private readonly Collider[] _doorHits = new Collider[8];
+    private int _doorMask;
+    private Vector3 _lastPosition;
+
+    private void Awake()
+    {
+        _doorMask = LayerMask.GetMask(DoorLayerName);
+        _lastPosition = agent != null ? agent.transform.position : transform.position;
+    }
+
+    private void Update()
+    {
+        KickDoorsOnTheWay();
+    }
+
+    // Ќаправление по фактическому смещению: на NavMeshLink скорость агента не отражает движение.
+    private void KickDoorsOnTheWay()
+    {
+        if (agent == null || !agent.enabled)
+        {
+            return;
+        }
+
+        Vector3 position = agent.transform.position;
+        Vector3 moveDirection = position - _lastPosition;
+        _lastPosition = position;
+        moveDirection.y = 0f;
+
+        if (Time.deltaTime <= 0f || moveDirection.magnitude / Time.deltaTime < MinMoveSpeed)
+        {
+            moveDirection = agent.desiredVelocity;
+            moveDirection.y = 0f;
+            if (moveDirection.sqrMagnitude < MinMoveSpeed * MinMoveSpeed)
+            {
+                return;
+            }
+        }
+
+        int hitCount = Physics.OverlapSphereNonAlloc(position, DoorSearchRadius, _doorHits, _doorMask, QueryTriggerInteraction.Ignore);
+        for (int i = 0; i < hitCount; i++)
+        {
+            if (_doorHits[i].TryGetComponent(out NightCycle.HoldDoor door))
+            {
+                door.TryKick(position, moveDirection);
+            }
+        }
+    }
+
     // ƒвижение за движущейс€ целью (трансформом)
     public void StartMove(Transform target)
     {
