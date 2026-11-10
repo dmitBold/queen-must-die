@@ -46,10 +46,31 @@ namespace NightCycle
         private bool _captured;
         private float[] _intensity, _size, _rate;
         private Color[] _emission;
+        private ParticleSystemRenderer[] _flameRenderers;
         private MaterialPropertyBlock _mpb;
         private Coroutine _co;
+        private float _darkness = 1f;
+        private float _lightLevel = 1f;
+        private float _glowLevel = 1f;
 
         private void Awake() => Capture();
+
+        /// <summary>
+        /// Внешнее затемнение огня 0..1 (DarknessZone через FireDarkness): умножает свет и свечение,
+        /// при полной темноте прячет пламя. Не меняет IsLit и не трогает горение.
+        /// </summary>
+        public void SetDarkness(float level)
+        {
+            level = Mathf.Clamp01(level);
+            if (Mathf.Approximately(level, _darkness)) return;
+            Capture();
+            _darkness = level;
+            // Рендереры пламени переключаются и у погасшего огня, иначе после повторного розжига пламя осталось бы скрытым.
+            foreach (var r in _flameRenderers) if (r) r.enabled = _darkness > 0.001f;
+            if (!IsLit) return;
+            SetLight(_lightLevel);
+            SetGlow(_glowLevel);
+        }
 
         // Звук факела включается только для горящего огня (у эмиттера Play Event = None).
         private void Start()
@@ -65,9 +86,11 @@ namespace NightCycle
             _intensity = new float[lights.Count];
             for (int i = 0; i < lights.Count; i++) _intensity[i] = lights[i] ? lights[i].intensity : 0f;
             _size = new float[flames.Count]; _rate = new float[flames.Count];
+            _flameRenderers = new ParticleSystemRenderer[flames.Count];
             for (int i = 0; i < flames.Count; i++)
             {
                 if (!flames[i]) continue;
+                _flameRenderers[i] = flames[i].GetComponent<ParticleSystemRenderer>();
                 _size[i] = flames[i].main.startSizeMultiplier;
                 _rate[i] = flames[i].emission.rateOverTimeMultiplier;
             }
@@ -174,7 +197,8 @@ namespace NightCycle
         private void ApplyFull()
         {
             IsLit = true;
-            for (int i = 0; i < lights.Count; i++) if (lights[i]) { lights[i].intensity = _intensity[i]; lights[i].enabled = true; }
+            for (int i = 0; i < lights.Count; i++) if (lights[i]) lights[i].enabled = true;
+            SetLight(1f);
             for (int i = 0; i < flames.Count; i++)
             {
                 var f = flames[i]; if (!f) continue;
@@ -183,7 +207,9 @@ namespace NightCycle
                 if (!f.isPlaying) f.Play(true);
             }
             foreach (var s in smoke) if (s && !s.isPlaying) s.Play(true);
-            foreach (var r in glowMeshes) if (r) r.SetPropertyBlock(null);
+            _glowLevel = 1f;
+            if (_darkness < 1f) SetGlow(1f);
+            else foreach (var r in glowMeshes) if (r) r.SetPropertyBlock(null);
             if (sound && !sound.IsPlaying()) sound.Play();
         }
 
@@ -198,16 +224,18 @@ namespace NightCycle
 
         private void SetLight(float k)
         {
-            for (int i = 0; i < lights.Count; i++) if (lights[i]) lights[i].intensity = _intensity[i] * k;
+            _lightLevel = k;
+            for (int i = 0; i < lights.Count; i++) if (lights[i]) lights[i].intensity = _intensity[i] * k * _darkness;
         }
 
         private void SetGlow(float k)
         {
+            _glowLevel = k;
             for (int i = 0; i < glowMeshes.Count; i++)
             {
                 var r = glowMeshes[i]; if (!r) continue;
                 r.GetPropertyBlock(_mpb);
-                _mpb.SetColor(EmissionColorId, _emission[i] * k);
+                _mpb.SetColor(EmissionColorId, _emission[i] * k * _darkness);
                 r.SetPropertyBlock(_mpb);
             }
         }
