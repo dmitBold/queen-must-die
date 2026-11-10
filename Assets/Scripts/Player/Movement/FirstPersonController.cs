@@ -9,6 +9,7 @@ namespace NightCycle
     public class FirstPersonController : MonoBehaviour
     {
         private const float GROUNDED_GRAVITY = -0.5f;
+        private const float CEILING_CHECK_INSET = 0.05f;
 
         [Header("Movement Speeds")]
         [SerializeField] private float walkSpeed = 3.0f;
@@ -64,6 +65,9 @@ namespace NightCycle
         private float originalControllerHeight;
         private Vector3 originalControllerCenter;
         private float originalCameraLocalY;
+
+        // Буфер для проверки места над головой при вставании, чтобы не выделять память каждый кадр.
+        private readonly Collider[] _ceilingHits = new Collider[16];
 
         public float SpeedMultiplier { get; set; } = 1f;
 
@@ -145,7 +149,10 @@ namespace NightCycle
 
             // Целевые значения для физики
             float targetHeight = isCrouching ? (originalControllerHeight / crouchHeightRatio) : originalControllerHeight;
-            Vector3 targetCenter = isCrouching ? (originalControllerCenter / crouchHeightRatio) : originalControllerCenter;
+            // Низ капсулы остаётся на месте: центр опускается на половину потерянной высоты.
+            // У префаба центр (0,0,0), поэтому простое деление центра сжимало капсулу к середине,
+            // и при вставании она уходила под пол — в углах игрок застревал.
+            Vector3 targetCenter = originalControllerCenter + Vector3.down * ((originalControllerHeight - targetHeight) * 0.5f);
 
             // Мгновенно меняем коллайдер, чтобы избежать застреваний
             if (Mathf.Abs(characterController.height - targetHeight) > 0.001f)
@@ -166,15 +173,21 @@ namespace NightCycle
 
         private bool IsCeilingAbove()
         {
-            // Рассчитываем текущую высоту (высоту в приседе)
-            float currentCrouchHeight = originalControllerHeight / crouchHeightRatio;
+            // Проверяем объём, который добавится сверху при вставании: от верхней сферы сидячей капсулы до верхней сферы стоячей.
+            // Радиус чуть меньше, чтобы стены, к которым игрок прижат в углу, не считались потолком.
+            float radius = characterController.radius;
+            Vector3 bottom = transform.TransformPoint(originalControllerCenter) + Vector3.down * (originalControllerHeight * 0.5f);
+            Vector3 crouchTopSphere = bottom + Vector3.up * (originalControllerHeight / crouchHeightRatio - radius);
+            Vector3 standTopSphere = bottom + Vector3.up * (originalControllerHeight - radius);
 
-            // Центр сферы начинается прямо на макушке игрока в приседе
-            Vector3 origin = transform.position + (Vector3.up * currentCrouchHeight);
-            float castDistance = originalControllerHeight - currentCrouchHeight;
-
-            // Пускаем сферу (радиусом с игрока) вверх на разницу в высоте с небольшим запасом (0.1f)
-            return Physics.SphereCast(origin, characterController.radius, Vector3.up, out _, castDistance + 0.1f, ceilingCheckMask);
+            int count = Physics.OverlapCapsuleNonAlloc(crouchTopSphere, standTopSphere, radius - CEILING_CHECK_INSET, _ceilingHits, ceilingCheckMask, QueryTriggerInteraction.Ignore);
+            for (int i = 0; i < count; i++)
+            {
+                // Собственные коллайдеры игрока потолком не считаются.
+                if (!_ceilingHits[i].transform.IsChildOf(transform))
+                    return true;
+            }
+            return false;
         }
 
         private void HandleFootsteps(bool isMoving)
@@ -295,7 +308,11 @@ namespace NightCycle
             Vector3 worldDirection = CalculateWorldDirection();
             SetHorizontalMovement(worldDirection);
             HandleJumping();
-            characterController.Move(currentMovement * Time.deltaTime);
+            CollisionFlags flags = characterController.Move(currentMovement * Time.deltaTime);
+
+            // Удар головой гасит подъём: иначе скорость прыжка держит игрока прижатым к потолку или балке, пока её не съест гравитация.
+            if ((flags & CollisionFlags.Above) != 0 && currentMovement.y > 0f)
+                currentMovement.y = 0f;
         }
 
         private void SetHorizontalMovement(Vector3 worldDirection)
