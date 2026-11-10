@@ -18,7 +18,7 @@ public class DayItemHints : MonoBehaviour
 
     [Header("Тексты")]
     [TextArea] public string tangHint = "Получен предмет: Гарда. Нажмите I, чтобы открыть инвентарь.";
-    [TextArea] public string inventoryHint = "Бет может собирать малые предметы, лежащие в инвентаре";
+    [TextArea] public string inventoryHint = "\u0411\u0435\u0442 \u043C\u043E\u0436\u0435\u0442 \u0441\u043E\u0431\u0438\u0440\u0430\u0442\u044C \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B \u0438\u0437 \u0434\u0435\u0442\u0430\u043B\u0435\u0439 \u0432 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u0435, \u043B\u0435\u0436\u0430\u0449\u0438\u0435 \u0432 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u0435";
     [TextArea] public string bladeHint = "Соберите меч, открыв инвентарь";
 
     [Header("Показ")]

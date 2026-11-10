@@ -24,7 +24,7 @@ namespace NightCycle
         [Header("First Crown Use Hint")]
         [Tooltip("Hint shown the first time the player turns the crown on with F (once per playthrough, stored in save flags).")]
         [TextArea(2, 4)]
-        [SerializeField] private string firstUseHintText = "\u0420\u0430\u0441\u0445\u043E\u0434\u0443\u0439\u0442\u0435 \u044D\u0441\u0441\u0435\u043D\u0446\u0438\u044E \u0441 \u0443\u043C\u043E\u043C, \u0447\u0442\u043E\u0431\u044B \u0432\u044B\u044F\u0432\u043B\u044F\u0442\u044C \u0441\u043A\u0440\u044B\u0442\u044B\u0435 \u0440\u0443\u043D\u044B \u043A\u043E\u0440\u043E\u043D\u043E\u0439";
+        [SerializeField] private string firstUseHintText = "\u0420\u0430\u0441\u0445\u043E\u0434\u0443\u0439\u0442\u0435 \u044D\u0441\u0441\u0435\u043D\u0446\u0438\u044E \u0441 \u0443\u043C\u043E\u043C, \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0445\u043E\u0434\u0438\u0442\u044C \u0441\u043A\u0440\u044B\u0442\u044B\u0435 \u0440\u0443\u043D\u044B \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u043A\u043E\u0440\u043E\u043D\u044B";
         [SerializeField] private float firstUseHintDuration = 4f;
         [SerializeField] private float firstUseHintFade = 0.5f;
 
