@@ -158,7 +158,13 @@ public class SaveManager : MonoBehaviour
             Debug.LogWarning("SAVE: flashlight is null, Essence=0");
         }
 
-            string unitySceneName = SceneManager.GetActiveScene().name;
+        string unitySceneName = SceneManager.GetActiveScene().name;
+        // Во время сборки (замки, пьедесталы) активна аддитивная AssemblyScene, а колбэк завершения
+        // сборки может сохранять игру. Пишем сцену, в которой стоит игрок: AssemblyScene при загрузке — пустая сцена без игрока.
+        if (unitySceneName == SceneNames.Assembly && _playerProvider.PlayerView != null)
+        {
+            unitySceneName = _playerProvider.PlayerView.gameObject.scene.name;
+        }
         GameScene currentScene = GetGameSceneEnum(unitySceneName);
         data.currentSceneName = SceneNames.GetName(currentScene);
 
@@ -183,7 +189,14 @@ public class SaveManager : MonoBehaviour
 
         if (_saveSystem.Load())
         {
-            if (!_transitionService.TryBegin(_saveSystem.CurrentData.currentSceneName))
+            // Сохранения, сделанные во время сборки до исправления, указывают на AssemblyScene: вместо неё грузим ночь.
+            string sceneToLoad = _saveSystem.CurrentData.currentSceneName;
+            if (sceneToLoad == SceneNames.Assembly)
+            {
+                sceneToLoad = SceneNames.Night;
+            }
+
+            if (!_transitionService.TryBegin(sceneToLoad))
             {
                 _isProcessing = false;
                 return false;
