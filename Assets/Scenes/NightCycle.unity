@@ -71235,11 +71235,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!4 &367349953 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8116578666475044403, guid: d795ecf62053eb745964b087aeb03184, type: 3}
-  m_PrefabInstance: {fileID: 203053459}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &367400252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1032831086, guid: abc00000000010292271214443705703, type: 3}
@@ -185613,12 +185608,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 738381959}
-  - component: {fileID: 738381962}
-  - component: {fileID: 738381961}
-  - component: {fileID: 738381960}
-  - component: {fileID: 738381963}
-  - component: {fileID: 738381964}
-  - component: {fileID: 738381965}
   m_Layer: 8
   m_Name: Body3Coll
   m_TagString: Interactable
@@ -185642,241 +185631,6 @@ Transform:
   - {fileID: 203053460}
   m_Father: {fileID: 1474917613}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &738381960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738381958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &738381961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738381958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u0423\u0411\u0420\u0410\u0422\u042C"
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 738381961}
-        m_TargetAssemblyTypeName: NightCycle.Interactable, Assembly-CSharp
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 738381962}
-        m_TargetAssemblyTypeName: UnityEngine.BoxCollider, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 203053463}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 738381963}
-        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
-        m_MethodName: Clean_ForAnim
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 738381964}
-        m_TargetAssemblyTypeName: NightCycle.CleanupTrackTarget, Assembly-CSharp
-        m_MethodName: EndTracking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  delay: 0
-  LateInteraction:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerLate: 0
-  startHOLD:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 203053464}
-        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
-        m_MethodName: PlayForward
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 738381964}
-        m_TargetAssemblyTypeName: NightCycle.CleanupTrackTarget, Assembly-CSharp
-        m_MethodName: BeginTracking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  resetHOLD:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 203053464}
-        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
-        m_MethodName: TriggerRewind
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 738381964}
-        m_TargetAssemblyTypeName: NightCycle.CleanupTrackTarget, Assembly-CSharp
-        m_MethodName: EndTracking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  assemblyController: {fileID: 0}
-  interactionType: 1
-  holdDuration: 3
-  interact_sound:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
---- !u!65 &738381962
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738381958}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.2, y: 0.21, z: 2.4}
-  m_Center: {x: -1.08, y: 0.28, z: 0.5}
---- !u!114 &738381963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738381958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92352fd70a2743d48884b234f06b81c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CleanupObject
-  cleanupSound: {fileID: 0}
-  cleanObject: {fileID: 0}
-  parentStage: {fileID: 1474917615}
-  clear_GROUP: {fileID: 0}
-  anim: {fileID: 0}
-  trig: 
-  this_inter: {fileID: 0}
-  other_inter: []
---- !u!114 &738381964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738381958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3aef5f09d7e17640802e45d4901715c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CleanupTrackTarget
-  _trackedBone: {fileID: 367349953}
-  _trackingBoxSize: 1
---- !u!114 &738381965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738381958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2abb2975bdff1f4ca07bfd3d3a46307, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimRewind
-  animator: {fileID: 0}
-  rewindSpeed: -2
-  forwardSpeed: 1
-  cleanStateName: Boxes
-  idleStateName: idle
 --- !u!1001 &738511622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -310525,11 +310279,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!4 &1352537708 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8116578666475044403, guid: d795ecf62053eb745964b087aeb03184, type: 3}
-  m_PrefabInstance: {fileID: 1165206290}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1353258222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -364213,9 +363962,13 @@ GameObject:
   - component: {fileID: 1474917613}
   - component: {fileID: 1474917614}
   - component: {fileID: 1474917615}
+  - component: {fileID: 1474917619}
+  - component: {fileID: 1474917618}
+  - component: {fileID: 1474917617}
+  - component: {fileID: 1474917616}
   m_Layer: 8
   m_Name: Bodies_near_door
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -364272,7 +364025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520995ae440c4af489e92c3bafbea772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CleanupStage
-  objectsToCleanup: 3
+  objectsToCleanup: 1
   Stage_Completed:
     m_PersistentCalls:
       m_Calls:
@@ -364312,6 +364065,246 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1474917616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474917612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92352fd70a2743d48884b234f06b81c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CleanupObject
+  cleanupSound: {fileID: 0}
+  cleanObject: {fileID: 0}
+  parentStage: {fileID: 1474917615}
+  clear_GROUP: {fileID: 0}
+  anim: {fileID: 0}
+  trig: 
+  this_inter: {fileID: 0}
+  other_inter: []
+--- !u!114 &1474917617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474917612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
+  message: "\u0423\u0411\u0420\u0410\u0422\u042C"
+  onInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1474917617}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1474917619}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 279888954}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1165206294}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 203053463}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1474917616}
+        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
+        m_MethodName: Clean_ForAnim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  delay: 0
+  LateInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerLate: 0
+  startHOLD:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 279888957}
+        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
+        m_MethodName: PlayForward
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1165206295}
+        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
+        m_MethodName: PlayForward
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 203053464}
+        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
+        m_MethodName: PlayForward
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  resetHOLD:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 279888957}
+        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
+        m_MethodName: TriggerRewind
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1165206295}
+        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
+        m_MethodName: TriggerRewind
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 203053464}
+        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
+        m_MethodName: TriggerRewind
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  assemblyController: {fileID: 0}
+  interactionType: 1
+  holdDuration: 3
+  interact_sound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+--- !u!114 &1474917618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474917612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!65 &1474917619
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474917612}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.62, y: 1.3500001, z: 2.4}
+  m_Center: {x: -0.96000004, y: 0.37000006, z: 0.5}
 --- !u!1 &1475205955
 GameObject:
   m_ObjectHideFlags: 0
@@ -403758,11 +403751,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1032831450, guid: abc00000000000334886350829511027, type: 3}
   m_PrefabInstance: {fileID: 3388287606355531974}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1630571086 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8116578666475044403, guid: d795ecf62053eb745964b087aeb03184, type: 3}
-  m_PrefabInstance: {fileID: 279888950}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1631095137 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1032831086, guid: abc00000000010292271214443705703, type: 3}
@@ -435631,12 +435619,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1824779881}
-  - component: {fileID: 1824779885}
-  - component: {fileID: 1824779883}
-  - component: {fileID: 1824779882}
-  - component: {fileID: 1824779886}
-  - component: {fileID: 1824779887}
-  - component: {fileID: 1824779888}
   m_Layer: 8
   m_Name: Body2Coll
   m_TagString: Interactable
@@ -435660,241 +435642,6 @@ Transform:
   - {fileID: 1165206291}
   m_Father: {fileID: 1474917613}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1824779882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824779880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &1824779883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824779880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u0423\u0411\u0420\u0410\u0422\u042C"
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1824779883}
-        m_TargetAssemblyTypeName: NightCycle.Interactable, Assembly-CSharp
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1824779885}
-        m_TargetAssemblyTypeName: UnityEngine.BoxCollider, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1165206294}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1824779886}
-        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
-        m_MethodName: Clean_ForAnim
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1824779887}
-        m_TargetAssemblyTypeName: NightCycle.CleanupTrackTarget, Assembly-CSharp
-        m_MethodName: EndTracking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  delay: 0
-  LateInteraction:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerLate: 0
-  startHOLD:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1165206295}
-        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
-        m_MethodName: PlayForward
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1824779887}
-        m_TargetAssemblyTypeName: NightCycle.CleanupTrackTarget, Assembly-CSharp
-        m_MethodName: BeginTracking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  resetHOLD:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1165206295}
-        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
-        m_MethodName: TriggerRewind
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1824779887}
-        m_TargetAssemblyTypeName: NightCycle.CleanupTrackTarget, Assembly-CSharp
-        m_MethodName: EndTracking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  assemblyController: {fileID: 0}
-  interactionType: 1
-  holdDuration: 3
-  interact_sound:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
---- !u!65 &1824779885
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824779880}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.88, y: -0.34, z: 1.47}
-  m_Center: {x: -0.59, y: 0.23, z: 0.05}
---- !u!114 &1824779886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824779880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92352fd70a2743d48884b234f06b81c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CleanupObject
-  cleanupSound: {fileID: 0}
-  cleanObject: {fileID: 0}
-  parentStage: {fileID: 1474917615}
-  clear_GROUP: {fileID: 0}
-  anim: {fileID: 0}
-  trig: 
-  this_inter: {fileID: 0}
-  other_inter: []
---- !u!114 &1824779887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824779880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3aef5f09d7e17640802e45d4901715c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CleanupTrackTarget
-  _trackedBone: {fileID: 1352537708}
-  _trackingBoxSize: 1
---- !u!114 &1824779888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824779880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2abb2975bdff1f4ca07bfd3d3a46307, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimRewind
-  animator: {fileID: 0}
-  rewindSpeed: -2
-  forwardSpeed: 1
-  cleanStateName: Boxes
-  idleStateName: idle
 --- !u!1001 &1825083893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -482307,12 +482054,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2088758000}
-  - component: {fileID: 2088758001}
-  - component: {fileID: 2088758002}
-  - component: {fileID: 2088758003}
-  - component: {fileID: 2088758004}
-  - component: {fileID: 2088758005}
-  - component: {fileID: 2088758006}
   m_Layer: 8
   m_Name: Body1Coll
   m_TagString: Interactable
@@ -482336,241 +482077,6 @@ Transform:
   - {fileID: 279888951}
   m_Father: {fileID: 1474917613}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2088758001
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088757999}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.38, y: 1.35, z: 1.5}
-  m_Center: {x: -1.08, y: 0.37, z: 0.5}
---- !u!114 &2088758002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088757999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2abb2975bdff1f4ca07bfd3d3a46307, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimRewind
-  animator: {fileID: 0}
-  rewindSpeed: -2
-  forwardSpeed: 1
-  cleanStateName: Boxes
-  idleStateName: idle
---- !u!114 &2088758003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088757999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da4328d574033de448b5e1f85afe1f11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.Interactable
-  message: "\u0423\u0411\u0420\u0410\u0422\u042C"
-  onInteraction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2088758003}
-        m_TargetAssemblyTypeName: NightCycle.Interactable, Assembly-CSharp
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2088758001}
-        m_TargetAssemblyTypeName: UnityEngine.BoxCollider, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 279888954}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2088758005}
-        m_TargetAssemblyTypeName: NightCycle.CleanupObject, Assembly-CSharp
-        m_MethodName: Clean_ForAnim
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2088758006}
-        m_TargetAssemblyTypeName: NightCycle.CleanupTrackTarget, Assembly-CSharp
-        m_MethodName: EndTracking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  delay: 0
-  LateInteraction:
-    m_PersistentCalls:
-      m_Calls: []
-  triggerLate: 0
-  startHOLD:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 279888957}
-        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
-        m_MethodName: PlayForward
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2088758006}
-        m_TargetAssemblyTypeName: NightCycle.CleanupTrackTarget, Assembly-CSharp
-        m_MethodName: BeginTracking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  resetHOLD:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 279888957}
-        m_TargetAssemblyTypeName: AnimRewind, Assembly-CSharp
-        m_MethodName: TriggerRewind
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2088758006}
-        m_TargetAssemblyTypeName: NightCycle.CleanupTrackTarget, Assembly-CSharp
-        m_MethodName: EndTracking
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  assemblyController: {fileID: 0}
-  interactionType: 1
-  holdDuration: 3
-  interact_sound:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
---- !u!114 &2088758004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088757999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!114 &2088758005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088757999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92352fd70a2743d48884b234f06b81c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CleanupObject
-  cleanupSound: {fileID: 0}
-  cleanObject: {fileID: 0}
-  parentStage: {fileID: 1474917615}
-  clear_GROUP: {fileID: 0}
-  anim: {fileID: 0}
-  trig: 
-  this_inter: {fileID: 0}
-  other_inter: []
---- !u!114 &2088758006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088757999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3aef5f09d7e17640802e45d4901715c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CleanupTrackTarget
-  _trackedBone: {fileID: 1630571086}
-  _trackingBoxSize: 1
 --- !u!4 &2088985652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1030973031, guid: abc00000000017023452418166129679, type: 3}
