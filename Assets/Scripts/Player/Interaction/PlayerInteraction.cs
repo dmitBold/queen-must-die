@@ -14,6 +14,7 @@ namespace NightCycle
         private const string INTERACTION_KEY_TEXT = "E";
         private const float DEFAULT_PLAYER_REACH = 3f;
         private const int MAX_RAY_HITS = 16;
+        private const float DOOR_REACH_MULTIPLIER = 1.25f;
 
         #endregion
 
@@ -165,7 +166,9 @@ namespace NightCycle
         {
             nearestHit = default;
             bool found = false;
-            int hitCount = Physics.RaycastNonAlloc(ray, rayHits, GetInteractionReach());
+            float reach = GetInteractionReach();
+            float doorReach = playerReach * DOOR_REACH_MULTIPLIER;
+            int hitCount = Physics.RaycastNonAlloc(ray, rayHits, Mathf.Max(reach, doorReach));
 
             for (int i = 0; i < hitCount; i++)
             {
@@ -182,6 +185,12 @@ namespace NightCycle
                     nearestHit = candidate;
                     found = true;
                 }
+            }
+
+            // Сначала ближайшее попадание, потом дальность: иначе стена за обычной дальностью не закрыла бы дверь за собой.
+            if (found && nearestHit.distance > reach && !nearestHit.collider.TryGetComponent(out HoldDoor _))
+            {
+                return false;
             }
 
             return found;
