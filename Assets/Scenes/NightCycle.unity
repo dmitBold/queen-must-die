@@ -228836,6 +228836,60 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3802654285107226080, guid: fc5f7e35987b3934fb6a40f529bfa2a5, type: 3}
   m_PrefabInstance: {fileID: 989646504}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &973766526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 973766528}
+  - component: {fileID: 973766527}
+  m_Layer: 0
+  m_Name: ShadowLightBudget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &973766527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973766526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169fc5e6456e924428e3e341dd69abec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core.ShadowLightBudget
+  _maxShadowedLights: 6
+  _focus: {fileID: 0}
+  _minIntensity: 3
+  _maxRange: 40
+  _cullBeyondShadowDistance: 1
+  _ignoreTag: IgnoreShadowBudget
+  _rankInterval: 0.2
+  _rescanInterval: 2
+  _jumpDistance: 4
+  _stickiness: 0.8
+--- !u!4 &973766528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973766526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &974486586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044574,3 +1044628,4 @@ SceneRoots:
   - {fileID: 817605199}
   - {fileID: 1841596641}
   - {fileID: 2137675440}
+  - {fileID: 973766528}
