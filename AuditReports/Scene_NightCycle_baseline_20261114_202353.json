@@ -1,0 +1,1926 @@
+{
+    "label": "baseline",
+    "scene": "NightCycle",
+    "timeLocal": "2026-11-14 20:23:53",
+    "unityVersion": "6000.2.8f1",
+    "sections": [
+        {
+            "name": "Overview",
+            "items": [
+                {
+                    "key": "GameObjects (Transforms, incl. inactive)",
+                    "value": "43343"
+                },
+                {
+                    "key": "MeshRenderer total",
+                    "value": "8945"
+                },
+                {
+                    "key": "Renderers active (Mesh + Skinned)",
+                    "value": "5873"
+                },
+                {
+                    "key": "SkinnedMeshRenderer total",
+                    "value": "800"
+                },
+                {
+                    "key": "MeshRenderer without mesh",
+                    "value": "1"
+                },
+                {
+                    "key": "MeshRenderer with >1 material",
+                    "value": "2386"
+                },
+                {
+                    "key": "Material slots",
+                    "value": "13593"
+                },
+                {
+                    "key": "Material slots with enableInstancing",
+                    "value": "10844"
+                },
+                {
+                    "key": "Unique meshes",
+                    "value": "1404"
+                },
+                {
+                    "key": "Unique mesh base names (no _LODn)",
+                    "value": "781"
+                },
+                {
+                    "key": "Unique materials (by name)",
+                    "value": "238"
+                },
+                {
+                    "key": "Unique shaders",
+                    "value": "12"
+                },
+                {
+                    "key": "Triangles: all MeshRenderers, all LODs, incl. inactive",
+                    "value": "63845103"
+                },
+                {
+                    "key": "Triangles: active MeshRenderers, all LODs",
+                    "value": "31382233"
+                },
+                {
+                    "key": "Triangles: active, LOD0 + non-LOD only (upper bound)",
+                    "value": "16941821"
+                },
+                {
+                    "key": "Triangles: SkinnedMeshRenderer (all)",
+                    "value": "1216635"
+                },
+                {
+                    "key": "Colliders / MeshColliders",
+                    "value": "4536 / 923"
+                }
+            ]
+        },
+        {
+            "name": "LOD coverage",
+            "items": [
+                {
+                    "key": "MeshRenderers inside a LODGroup",
+                    "value": "6147"
+                },
+                {
+                    "key": "MeshRenderers outside any LODGroup",
+                    "value": "2798"
+                }
+            ]
+        },
+        {
+            "name": "Static flags (MeshRenderer only)",
+            "items": [
+                {
+                    "key": "Any static flag",
+                    "value": "1616 of 8945"
+                },
+                {
+                    "key": "Static share, %",
+                    "value": "18,1"
+                },
+                {
+                    "key": "Batching Static",
+                    "value": "1318"
+                },
+                {
+                    "key": "Occluder Static",
+                    "value": "1616"
+                },
+                {
+                    "key": "Occludee Static",
+                    "value": "1616"
+                },
+                {
+                    "key": "Contribute GI",
+                    "value": "1616"
+                },
+                {
+                    "key": "Reflection Probe Static",
+                    "value": "1616"
+                }
+            ]
+        },
+        {
+            "name": "Shadow casting (MeshRenderer)",
+            "items": [
+                {
+                    "key": "On",
+                    "value": "8929"
+                },
+                {
+                    "key": "Two Sided",
+                    "value": "0"
+                },
+                {
+                    "key": "Shadows Only",
+                    "value": "0"
+                },
+                {
+                    "key": "Off",
+                    "value": "16"
+                },
+                {
+                    "key": "Small casters (max bounds extent < 0.25 m, cast shadows)",
+                    "value": "2441"
+                },
+                {
+                    "key": "  of them active now",
+                    "value": "946"
+                }
+            ]
+        },
+        {
+            "name": "Lights",
+            "items": [
+                {
+                    "key": "Light total",
+                    "value": "410"
+                },
+                {
+                    "key": "Light active",
+                    "value": "233"
+                },
+                {
+                    "key": "Directional (any)",
+                    "value": "0"
+                },
+                {
+                    "key": "Realtime active",
+                    "value": "78"
+                },
+                {
+                    "key": "Realtime active with shadows",
+                    "value": "62"
+                },
+                {
+                    "key": "  hard / soft",
+                    "value": "28 / 34"
+                },
+                {
+                    "key": "Mixed active",
+                    "value": "1"
+                },
+                {
+                    "key": "Baked active",
+                    "value": "154"
+                },
+                {
+                    "key": "LightmapSettings.lightmaps.Length",
+                    "value": "0"
+                },
+                {
+                    "key": "LightProbes count",
+                    "value": "0"
+                },
+                {
+                    "key": "MeshRenderers that have a lightmap index",
+                    "value": "0"
+                },
+                {
+                    "key": "Baked active lights with NO lightmaps in scene (effectively zero light)",
+                    "value": "154"
+                },
+                {
+                    "key": "Baked active lights when lightmaps exist (may contribute)",
+                    "value": "0"
+                },
+                {
+                    "key": "Baked active lights with zero intensity/colour",
+                    "value": "0"
+                },
+                {
+                    "key": "Realtime light budget note",
+                    "value": "URP additional lights per object limit = see Settings section"
+                }
+            ]
+        },
+        {
+            "name": "LOD groups",
+            "items": [
+                {
+                    "key": "LODGroup total",
+                    "value": "1703"
+                },
+                {
+                    "key": "LODGroup active in hierarchy",
+                    "value": "1284"
+                },
+                {
+                    "key": "Last LOD threshold > 2% screen height (object not culled until large)",
+                    "value": "529"
+                },
+                {
+                    "key": "Last LOD threshold ~0 (never culled by LOD)",
+                    "value": "1"
+                },
+                {
+                    "key": "Last LOD has no renderers (= culled state)",
+                    "value": "0"
+                },
+                {
+                    "key": "QualitySettings.lodBias",
+                    "value": "2"
+                },
+                {
+                    "key": "QualitySettings.maximumLODLevel",
+                    "value": "0"
+                }
+            ]
+        },
+        {
+            "name": "Occlusion culling",
+            "items": [
+                {
+                    "key": "Camera 'Main Camera'",
+                    "value": "useOcclusionCulling=True far=5000 near=0,1 enabled=True"
+                },
+                {
+                    "key": "Baked Umbra data size (bytes)",
+                    "value": "0"
+                },
+                {
+                    "key": "OcclusionArea",
+                    "value": "0"
+                },
+                {
+                    "key": "OcclusionPortal",
+                    "value": "0"
+                }
+            ]
+        },
+        {
+            "name": "UI / VFX / misc",
+            "items": [
+                {
+                    "key": "Canvas total / active",
+                    "value": "4 / 4"
+                },
+                {
+                    "key": "ParticleSystem total",
+                    "value": "205"
+                },
+                {
+                    "key": "ParticleSystem on active GameObjects",
+                    "value": "145"
+                },
+                {
+                    "key": "  playing right now (Edit Mode: usually 0)",
+                    "value": "0"
+                },
+                {
+                    "key": "  looping / playOnAwake (active ones)",
+                    "value": "139 / 145"
+                },
+                {
+                    "key": "  sum of maxParticles (active ones)",
+                    "value": "133830"
+                },
+                {
+                    "key": "ReflectionProbe",
+                    "value": "0"
+                },
+                {
+                    "key": "LightProbeGroup",
+                    "value": "5"
+                },
+                {
+                    "key": "Camera",
+                    "value": "1"
+                },
+                {
+                    "key": "Application.isPlaying",
+                    "value": "False"
+                }
+            ]
+        },
+        {
+            "name": "Project / render settings snapshot",
+            "items": [
+                {
+                    "key": "Scripting backend (Standalone)",
+                    "value": "Mono2x"
+                },
+                {
+                    "key": "Static Batching (Standalone Win64)",
+                    "value": "True"
+                },
+                {
+                    "key": "Dynamic Batching (Standalone Win64)",
+                    "value": "False"
+                },
+                {
+                    "key": "Graphics Jobs (PlayerSettings.graphicsJobs)",
+                    "value": "True"
+                },
+                {
+                    "key": "Multithreaded Rendering",
+                    "value": "True"
+                },
+                {
+                    "key": "GPU Skinning",
+                    "value": "True"
+                },
+                {
+                    "key": "Color space",
+                    "value": "Linear"
+                },
+                {
+                    "key": "Use Incremental GC",
+                    "value": "True"
+                },
+                {
+                    "key": "Auto graphics API (Win)",
+                    "value": "True"
+                },
+                {
+                    "key": "Graphics APIs (Win)",
+                    "value": "Direct3D12, Direct3D11"
+                },
+                {
+                    "key": "Quality level",
+                    "value": "1 = PC"
+                },
+                {
+                    "key": "lodBias",
+                    "value": "2"
+                },
+                {
+                    "key": "pixelLightCount",
+                    "value": "2"
+                },
+                {
+                    "key": "shadowDistance (Quality)",
+                    "value": "40"
+                },
+                {
+                    "key": "vSyncCount",
+                    "value": "0"
+                },
+                {
+                    "key": "Application.targetFrameRate",
+                    "value": "-1"
+                },
+                {
+                    "key": "Anti-aliasing (Quality)",
+                    "value": "0"
+                },
+                {
+                    "key": "Texture mip limit",
+                    "value": "0"
+                },
+                {
+                    "key": "Anisotropic",
+                    "value": "ForceEnable"
+                },
+                {
+                    "key": "Active RP asset",
+                    "value": "PC_RPAsset (Assets/Settings/URP/PC_RPAsset.asset)"
+                },
+                {
+                    "key": "URP m_SupportsHDR",
+                    "value": "True"
+                },
+                {
+                    "key": "URP m_MSAA",
+                    "value": "Disabled"
+                },
+                {
+                    "key": "URP m_RenderScale",
+                    "value": "0,7"
+                },
+                {
+                    "key": "URP m_UseSRPBatcher",
+                    "value": "True"
+                },
+                {
+                    "key": "URP m_SupportsDynamicBatching",
+                    "value": "False"
+                },
+                {
+                    "key": "URP m_MainLightRenderingMode",
+                    "value": "PerPixel"
+                },
+                {
+                    "key": "URP m_MainLightShadowsSupported",
+                    "value": "True"
+                },
+                {
+                    "key": "URP m_MainLightShadowmapResolution",
+                    "value": "_2048"
+                },
+                {
+                    "key": "URP m_AdditionalLightsRenderingMode",
+                    "value": "PerPixel"
+                },
+                {
+                    "key": "URP m_AdditionalLightsPerObjectLimit",
+                    "value": "4"
+                },
+                {
+                    "key": "URP m_AdditionalLightShadowsSupported",
+                    "value": "True"
+                },
+                {
+                    "key": "URP m_AdditionalLightsShadowmapResolution",
+                    "value": "_2048"
+                },
+                {
+                    "key": "URP m_ShadowDistance",
+                    "value": "45"
+                },
+                {
+                    "key": "URP m_ShadowCascadeCount",
+                    "value": "4"
+                },
+                {
+                    "key": "URP m_SoftShadowsSupported",
+                    "value": "True"
+                },
+                {
+                    "key": "URP m_SupportsLightLayers",
+                    "value": "True"
+                },
+                {
+                    "key": "URP m_ReflectionProbeBlending",
+                    "value": "True"
+                },
+                {
+                    "key": "URP m_GPUResidentDrawerMode",
+                    "value": "Disabled"
+                },
+                {
+                    "key": "URP m_GPUResidentDrawerEnableOcclusionCullingInCameras",
+                    "value": "False"
+                },
+                {
+                    "key": "URP m_LODCrossFadeDitheringType",
+                    "value": "BlueNoise"
+                },
+                {
+                    "key": "URP m_UseAdaptivePerformance",
+                    "value": "True"
+                },
+                {
+                    "key": "Renderer[0]",
+                    "value": "PC_Renderer (default)"
+                },
+                {
+                    "key": "  m_RenderingMode",
+                    "value": "ForwardPlus"
+                },
+                {
+                    "key": "  m_DepthPrimingMode",
+                    "value": "Disabled"
+                },
+                {
+                    "key": "  m_CopyDepthMode",
+                    "value": "AfterOpaques"
+                },
+                {
+                    "key": "  m_IntermediateTextureMode",
+                    "value": "Auto"
+                },
+                {
+                    "key": "  m_UseNativeRenderPass",
+                    "value": "True"
+                },
+                {
+                    "key": "  feature[0] ScreenSpaceAmbientOcclusion",
+                    "value": "active=True"
+                },
+                {
+                    "key": "  feature[1] FullScreenPassRendererFeature",
+                    "value": "active=True"
+                },
+                {
+                    "key": "  feature[2] DecalRendererFeature",
+                    "value": "active=True"
+                },
+                {
+                    "key": "Renderer[1]",
+                    "value": "UI_Renderer_Data"
+                },
+                {
+                    "key": "  m_RenderingMode",
+                    "value": "Forward"
+                },
+                {
+                    "key": "  m_DepthPrimingMode",
+                    "value": "Disabled"
+                },
+                {
+                    "key": "  m_CopyDepthMode",
+                    "value": "AfterTransparents"
+                },
+                {
+                    "key": "  m_IntermediateTextureMode",
+                    "value": "Always"
+                },
+                {
+                    "key": "  m_UseNativeRenderPass",
+                    "value": "False"
+                }
+            ]
+        }
+    ],
+    "tables": [
+        {
+            "name": "Top 15 meshes by instance count",
+            "rows": [
+                {
+                    "key": "SM_Wall_C_LOD2",
+                    "count": 195,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_C_LOD0",
+                    "count": 160,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_C_LOD1",
+                    "count": 160,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_MDoorA_LOD0",
+                    "count": 133,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_MDoorA_LOD1",
+                    "count": 133,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_01_Chamber_Var_01_LOD0",
+                    "count": 119,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_800x800_LOD3",
+                    "count": 96,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Candle_B_LOD0",
+                    "count": 88,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_400_LOD2",
+                    "count": 84,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Floor_A",
+                    "count": 82,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Pillar_I_LOD3",
+                    "count": 76,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Candle_B_LOD2",
+                    "count": 70,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Floor_Crypt_Var_02_LOD5",
+                    "count": 70,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Candle_B_LOD3",
+                    "count": 68,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Candle_B_LOD1",
+                    "count": 68,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Top 15 mesh base names (LOD suffix stripped)",
+            "rows": [
+                {
+                    "key": "SM_Wall_C",
+                    "count": 515,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Candle_B",
+                    "count": 294,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_MDoorA",
+                    "count": 266,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Pilaster_Brick_6m_C",
+                    "count": 226,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Candle_A",
+                    "count": 204,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_PillarSection_01",
+                    "count": 192,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_800x800",
+                    "count": 180,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Balustrade_handrails_C",
+                    "count": 166,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Roof_Arc_Crypt_Var_02",
+                    "count": 160,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Candle_C",
+                    "count": 132,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Chain_A",
+                    "count": 122,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Column_Crypt_Var_02",
+                    "count": 120,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Debris_02",
+                    "count": 120,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_01_Chamber_Var_01",
+                    "count": 119,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_CandleStand_E",
+                    "count": 117,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Top 15 meshes by total triangles (tris x instances)",
+            "rows": [
+                {
+                    "key": "SM_Chapel_Candelabrum_SM_Chapel_Candelabrum_Base_LOD0",
+                    "count": 13166384,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Chapel_Candelabrum_SM_Chapel_Candelabrum_Base_LOD1",
+                    "count": 6583192,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Chapel_Candelabrum_SM_Chapel_Candelabrum_Base_LOD2",
+                    "count": 3291596,
+                    "extra": ""
+                },
+                {
+                    "key": "output_unwrapped",
+                    "count": 2564760,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Chapel_BonesAndSkillPile_Var3_SM_Chapel_BonesAndSkillPile_Var3_LOD0",
+                    "count": 1873152,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Chapel_Candelabrum_SM_Chapel_Candelabrum_Base_LOD3",
+                    "count": 1645798,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Chapel_BonesAndSkillPile_Var4_SM_Chapel_BonesAndSkillPile_Var4_LOD0",
+                    "count": 1353600,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Candle_B_LOD0",
+                    "count": 1351416,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Bookset_B_LOD0",
+                    "count": 942592,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Chapel_BonesAndSkillPile_Var3_SM_Chapel_BonesAndSkillPile_Var3_LOD1",
+                    "count": 936576,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Bookset_C_LOD0",
+                    "count": 888550,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Chain_A_LOD0",
+                    "count": 877344,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Prop_Bookset_A_LOD0",
+                    "count": 830760,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Chapel_Candelabrum_SM_Chapel_Candelabrum_Base_LOD4",
+                    "count": 822892,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_PillarSection_01_LOD0",
+                    "count": 741936,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Top 15 materials by slot count",
+            "rows": [
+                {
+                    "key": "M_Trim_A",
+                    "count": 1065,
+                    "extra": "Shader Graphs/S_BasicTextured | inst | q2225"
+                },
+                {
+                    "key": "M_Wall_A",
+                    "count": 981,
+                    "extra": "Shader Graphs/S_BasicTextured | inst | q2225"
+                },
+                {
+                    "key": "Lit",
+                    "count": 936,
+                    "extra": "Universal Render Pipeline/Lit | q2000"
+                },
+                {
+                    "key": "M_Prop_Book_A",
+                    "count": 628,
+                    "extra": "Shader Graphs/S_BasicTextured | inst | q2225"
+                },
+                {
+                    "key": "M_BrickStoneWall_Disp",
+                    "count": 589,
+                    "extra": "Shader Graphs/S_MasterBlend | inst | q2225"
+                },
+                {
+                    "key": "M_Prop_Candle_A",
+                    "count": 490,
+                    "extra": "Shader Graphs/S_BasicTextured | inst | q2225"
+                },
+                {
+                    "key": "M_Bricks_A",
+                    "count": 472,
+                    "extra": "Shader Graphs/S_General | inst | q2225"
+                },
+                {
+                    "key": "M_Trim_B",
+                    "count": 455,
+                    "extra": "Shader Graphs/S_BasicTextured | inst | q2225"
+                },
+                {
+                    "key": "Golem_New",
+                    "count": 381,
+                    "extra": "Universal Render Pipeline/Lit | q2000"
+                },
+                {
+                    "key": "M_Balustrade",
+                    "count": 373,
+                    "extra": "Shader Graphs/S_General | inst | q2225"
+                },
+                {
+                    "key": "M_Pillar_01",
+                    "count": 366,
+                    "extra": "Shader Graphs/S_Blend | inst | q2225"
+                },
+                {
+                    "key": "M_Wall_B",
+                    "count": 364,
+                    "extra": "Shader Graphs/S_BasicTextured | inst | q2225"
+                },
+                {
+                    "key": "Marble",
+                    "count": 303,
+                    "extra": "Universal Render Pipeline/Lit | q2000"
+                },
+                {
+                    "key": "M_StoneDamage",
+                    "count": 265,
+                    "extra": "Shader Graphs/S_General | inst | q2225"
+                },
+                {
+                    "key": "M_Stone_Floor_Tile_Disp",
+                    "count": 255,
+                    "extra": "Shader Graphs/S_MasterBlend | inst | q2225"
+                }
+            ]
+        },
+        {
+            "name": "Top 15 mesh+material pairs (merge/instancing candidates)",
+            "rows": [
+                {
+                    "key": "SM_Wall_C_LOD0 + M_Wall_A",
+                    "count": 200,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_C_LOD2 + M_Wall_A",
+                    "count": 195,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_C_LOD2 + M_Trim_A",
+                    "count": 195,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_C_LOD1 + M_Trim_A",
+                    "count": 160,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_C_LOD1 + M_Wall_A",
+                    "count": 160,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_MDoorA_LOD1 + M_MDoorA",
+                    "count": 133,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_C_LOD0 + M_Trim_A",
+                    "count": 120,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_01_Chamber_Var_01_LOD0 + M_WA_WallChamber",
+                    "count": 119,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_400_LOD2 + M_Stone_Floor_Tile_Disp",
+                    "count": 84,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Floor_A + M_Marblefloor_D",
+                    "count": 82,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_MDoorA_LOD0 + M_MDoorA",
+                    "count": 77,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Pillar_I_LOD3 + M_Wall_B",
+                    "count": 76,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Pillar_I_LOD3 + M_Trim_A",
+                    "count": 76,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Pillar_I_LOD3 + M_Wall_A",
+                    "count": 76,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Pillar_I_LOD3 + M_Trim_B",
+                    "count": 76,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Shaders by slot count",
+            "rows": [
+                {
+                    "key": "Shader Graphs/S_BasicTextured",
+                    "count": 5845,
+                    "extra": ""
+                },
+                {
+                    "key": "Universal Render Pipeline/Lit",
+                    "count": 2714,
+                    "extra": ""
+                },
+                {
+                    "key": "Shader Graphs/S_General",
+                    "count": 2263,
+                    "extra": ""
+                },
+                {
+                    "key": "Shader Graphs/S_Blend",
+                    "count": 999,
+                    "extra": ""
+                },
+                {
+                    "key": "Shader Graphs/S_MasterBlend",
+                    "count": 898,
+                    "extra": ""
+                },
+                {
+                    "key": "Shader Graphs/S_Brick",
+                    "count": 414,
+                    "extra": ""
+                },
+                {
+                    "key": "Shader Graphs/S_WorldAligned",
+                    "count": 409,
+                    "extra": ""
+                },
+                {
+                    "key": "Shader Graphs/S_LitORM",
+                    "count": 23,
+                    "extra": ""
+                },
+                {
+                    "key": "ProBuilder6/Standard Vertex Color",
+                    "count": 11,
+                    "extra": ""
+                },
+                {
+                    "key": "Shader Graphs/VolumetricSpotlight",
+                    "count": 11,
+                    "extra": ""
+                },
+                {
+                    "key": "Shader Graphs/S_Foliage",
+                    "count": 5,
+                    "extra": ""
+                },
+                {
+                    "key": "QMD/BalustradeDissolve",
+                    "count": 1,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Top 20 mesh base names OUTSIDE any LODGroup",
+            "rows": [
+                {
+                    "key": "SM_Wall_01_Chamber_Var_01",
+                    "count": 119,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_400",
+                    "count": 84,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Floor_A",
+                    "count": 82,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Floor_Crypt_Var_02",
+                    "count": 76,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Pillar_I",
+                    "count": 76,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_800x800",
+                    "count": 72,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_F",
+                    "count": 59,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_Crypt_Var_01",
+                    "count": 57,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_WallEnd_BrickA_4m_B",
+                    "count": 38,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_C",
+                    "count": 37,
+                    "extra": ""
+                },
+                {
+                    "key": "Plane",
+                    "count": 35,
+                    "extra": ""
+                },
+                {
+                    "key": "lid",
+                    "count": 34,
+                    "extra": ""
+                },
+                {
+                    "key": "output_unwrapped",
+                    "count": 33,
+                    "extra": ""
+                },
+                {
+                    "key": "Paper_01",
+                    "count": 32,
+                    "extra": ""
+                },
+                {
+                    "key": "Torch_01",
+                    "count": 26,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_ArchStone_A_ArchStone_01",
+                    "count": 23,
+                    "extra": ""
+                },
+                {
+                    "key": "Sword",
+                    "count": 19,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Wall_Chamber_Var_03",
+                    "count": 19,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Halberd",
+                    "count": 19,
+                    "extra": ""
+                },
+                {
+                    "key": "SM_Pilaster_Brick_6m_C",
+                    "count": 16,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Renderer kind (name heuristic): total, extra = static count",
+            "rows": [
+                {
+                    "key": "other",
+                    "count": 3449,
+                    "extra": "static=304 casting=3433"
+                },
+                {
+                    "key": "wall",
+                    "count": 1694,
+                    "extra": "static=577 casting=1694"
+                },
+                {
+                    "key": "candle/torch",
+                    "count": 931,
+                    "extra": "static=0 casting=931"
+                },
+                {
+                    "key": "book",
+                    "count": 690,
+                    "extra": "static=0 casting=690"
+                },
+                {
+                    "key": "pillar",
+                    "count": 557,
+                    "extra": "static=164 casting=557"
+                },
+                {
+                    "key": "door",
+                    "count": 489,
+                    "extra": "static=266 casting=489"
+                },
+                {
+                    "key": "ceiling",
+                    "count": 349,
+                    "extra": "static=141 casting=349"
+                },
+                {
+                    "key": "floor",
+                    "count": 311,
+                    "extra": "static=139 casting=311"
+                },
+                {
+                    "key": "prop",
+                    "count": 243,
+                    "extra": "static=0 casting=243"
+                },
+                {
+                    "key": "trim",
+                    "count": 137,
+                    "extra": "static=25 casting=137"
+                },
+                {
+                    "key": "paper",
+                    "count": 72,
+                    "extra": "static=0 casting=72"
+                },
+                {
+                    "key": "statue",
+                    "count": 23,
+                    "extra": "static=0 casting=23"
+                }
+            ]
+        },
+        {
+            "name": "Small shadow casters by kind",
+            "rows": [
+                {
+                    "key": "other",
+                    "count": 1381,
+                    "extra": ""
+                },
+                {
+                    "key": "candle/torch",
+                    "count": 652,
+                    "extra": ""
+                },
+                {
+                    "key": "book",
+                    "count": 375,
+                    "extra": ""
+                },
+                {
+                    "key": "paper",
+                    "count": 20,
+                    "extra": ""
+                },
+                {
+                    "key": "prop",
+                    "count": 8,
+                    "extra": ""
+                },
+                {
+                    "key": "floor",
+                    "count": 5,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "MeshRenderers by layer",
+            "rows": [
+                {
+                    "key": "Default (0)",
+                    "count": 7884,
+                    "extra": ""
+                },
+                {
+                    "key": "Environment (8)",
+                    "count": 1009,
+                    "extra": ""
+                },
+                {
+                    "key": "DoorLayer (7)",
+                    "count": 52,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Lights by type / bake mode / shadows / active",
+            "rows": [
+                {
+                    "key": "Point / Baked / shadows=None / inactive",
+                    "count": 106,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Baked / shadows=Soft / ACTIVE",
+                    "count": 60,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Baked / shadows=None / ACTIVE",
+                    "count": 56,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Baked / shadows=Soft / inactive",
+                    "count": 52,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Realtime / shadows=Soft / ACTIVE",
+                    "count": 34,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Realtime / shadows=Hard / ACTIVE",
+                    "count": 28,
+                    "extra": ""
+                },
+                {
+                    "key": "Spot / Baked / shadows=Soft / ACTIVE",
+                    "count": 15,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Realtime / shadows=None / ACTIVE",
+                    "count": 15,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Baked / shadows=Hard / ACTIVE",
+                    "count": 9,
+                    "extra": ""
+                },
+                {
+                    "key": "Spot / Baked / shadows=Hard / ACTIVE",
+                    "count": 7,
+                    "extra": ""
+                },
+                {
+                    "key": "Spot / Baked / shadows=None / ACTIVE",
+                    "count": 7,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Realtime / shadows=None / inactive",
+                    "count": 7,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Mixed / shadows=None / inactive",
+                    "count": 4,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Realtime / shadows=Hard / inactive",
+                    "count": 2,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Realtime / shadows=Soft / inactive",
+                    "count": 2,
+                    "extra": ""
+                },
+                {
+                    "key": "Spot / Baked / shadows=Hard / inactive",
+                    "count": 2,
+                    "extra": ""
+                },
+                {
+                    "key": "Spot / Baked / shadows=None / inactive",
+                    "count": 2,
+                    "extra": ""
+                },
+                {
+                    "key": "Point / Mixed / shadows=None / ACTIVE",
+                    "count": 1,
+                    "extra": ""
+                },
+                {
+                    "key": "Spot / Realtime / shadows=None / ACTIVE",
+                    "count": 1,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Active realtime lights by room (depth 2)",
+            "rows": [
+                {
+                    "key": "EternalLadder/Eternal ladder",
+                    "count": 28,
+                    "extra": "withShadows=28"
+                },
+                {
+                    "key": "Palace/Hall",
+                    "count": 27,
+                    "extra": "withShadows=20"
+                },
+                {
+                    "key": "Palace/Office",
+                    "count": 8,
+                    "extra": "withShadows=4"
+                },
+                {
+                    "key": "Palace/Library Teleport",
+                    "count": 3,
+                    "extra": "withShadows=3"
+                },
+                {
+                    "key": "Palace/Bedroom",
+                    "count": 2,
+                    "extra": "withShadows=2"
+                },
+                {
+                    "key": "Palace/Reliquary",
+                    "count": 2,
+                    "extra": "withShadows=1"
+                },
+                {
+                    "key": "Notes/Dead Guard_ Note",
+                    "count": 2,
+                    "extra": "withShadows=0"
+                },
+                {
+                    "key": "Point Light",
+                    "count": 1,
+                    "extra": "withShadows=1"
+                },
+                {
+                    "key": "Point Light (3)",
+                    "count": 1,
+                    "extra": "withShadows=1"
+                },
+                {
+                    "key": "Point Light (1)",
+                    "count": 1,
+                    "extra": "withShadows=1"
+                },
+                {
+                    "key": "Point Light (5)",
+                    "count": 1,
+                    "extra": "withShadows=1"
+                },
+                {
+                    "key": "Point Light (4)",
+                    "count": 1,
+                    "extra": "withShadows=0"
+                },
+                {
+                    "key": "Golem/GolemParts",
+                    "count": 1,
+                    "extra": "withShadows=0"
+                }
+            ]
+        },
+        {
+            "name": "Active BAKED lights by room (depth 2)",
+            "rows": [
+                {
+                    "key": "Palace/Office",
+                    "count": 47,
+                    "extra": ""
+                },
+                {
+                    "key": "Palace/Hall",
+                    "count": 34,
+                    "extra": ""
+                },
+                {
+                    "key": "Palace/Bedroom",
+                    "count": 25,
+                    "extra": ""
+                },
+                {
+                    "key": "Palace/Laboratory",
+                    "count": 15,
+                    "extra": ""
+                },
+                {
+                    "key": "Palace/Reliquary",
+                    "count": 11,
+                    "extra": ""
+                },
+                {
+                    "key": "Notes/Dead Guard_ Note",
+                    "count": 8,
+                    "extra": ""
+                },
+                {
+                    "key": "PUZZLES/StatuePuzzle",
+                    "count": 4,
+                    "extra": ""
+                },
+                {
+                    "key": "Notes/Archive_Note 3 (1)",
+                    "count": 3,
+                    "extra": ""
+                },
+                {
+                    "key": "PUZZLES/PedestalPuzzle",
+                    "count": 3,
+                    "extra": ""
+                },
+                {
+                    "key": "Golem/GolemParts",
+                    "count": 2,
+                    "extra": ""
+                },
+                {
+                    "key": "Loot/Reagent",
+                    "count": 1,
+                    "extra": ""
+                },
+                {
+                    "key": "Notes/Lab_Note",
+                    "count": 1,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "LODGroup by level count",
+            "rows": [
+                {
+                    "key": "4 levels",
+                    "count": 776,
+                    "extra": ""
+                },
+                {
+                    "key": "2 levels",
+                    "count": 318,
+                    "extra": ""
+                },
+                {
+                    "key": "3 levels",
+                    "count": 271,
+                    "extra": ""
+                },
+                {
+                    "key": "5 levels",
+                    "count": 227,
+                    "extra": ""
+                },
+                {
+                    "key": "6 levels",
+                    "count": 111,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "LODGroup fade mode",
+            "rows": [
+                {
+                    "key": "None / animate=False",
+                    "count": 1703,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "LOD0 -> LOD1 threshold (screen height)",
+            "rows": [
+                {
+                    "key": ">=40%",
+                    "count": 1125,
+                    "extra": ""
+                },
+                {
+                    "key": "5-15%",
+                    "count": 345,
+                    "extra": ""
+                },
+                {
+                    "key": "15-40%",
+                    "count": 124,
+                    "extra": ""
+                },
+                {
+                    "key": "2-5%",
+                    "count": 109,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Last LOD threshold (screen height)",
+            "rows": [
+                {
+                    "key": "0.5-1%",
+                    "count": 713,
+                    "extra": ""
+                },
+                {
+                    "key": "1-2%",
+                    "count": 453,
+                    "extra": ""
+                },
+                {
+                    "key": "2-5%",
+                    "count": 437,
+                    "extra": ""
+                },
+                {
+                    "key": "5-15%",
+                    "count": 98,
+                    "extra": ""
+                },
+                {
+                    "key": "15-40%",
+                    "count": 1,
+                    "extra": ""
+                },
+                {
+                    "key": "0",
+                    "count": 1,
+                    "extra": ""
+                }
+            ]
+        },
+        {
+            "name": "Hierarchy: root objects (extra = active | descendants | renderers | tris(all LOD) | lights | LODGroups)",
+            "rows": [
+                {
+                    "key": "Palace",
+                    "count": 23754,
+                    "extra": "ON | 23754 | 7027 | 61289798 | 286 | 1401"
+                },
+                {
+                    "key": "Day/Night Connection",
+                    "count": 6332,
+                    "extra": "ON | 6332 | 368 | 430478 | 50 | 5"
+                },
+                {
+                    "key": "DeathCutscenes",
+                    "count": 4267,
+                    "extra": "ON | 4267 | 810 | 74217 | 3 | 0"
+                },
+                {
+                    "key": "Knight_Statues",
+                    "count": 2080,
+                    "extra": "ON | 2080 | 26 | 72134 | 0 | 0"
+                },
+                {
+                    "key": "Main scripts",
+                    "count": 1756,
+                    "extra": "ON | 1756 | 231 | 208327 | 11 | 3"
+                },
+                {
+                    "key": "Statues_after_Golem",
+                    "count": 1750,
+                    "extra": "OFF | 1750 | 9 | 23910 | 0 | 0"
+                },
+                {
+                    "key": "EternalLadder",
+                    "count": 1198,
+                    "extra": "ON | 1198 | 831 | 1516690 | 30 | 232"
+                },
+                {
+                    "key": "Golem",
+                    "count": 668,
+                    "extra": "ON | 668 | 205 | 114748 | 3 | 3"
+                },
+                {
+                    "key": "Start events",
+                    "count": 410,
+                    "extra": "ON | 410 | 167 | 598884 | 0 | 31"
+                },
+                {
+                    "key": "OLD_Statues",
+                    "count": 401,
+                    "extra": "OFF | 401 | 22 | 64372 | 0 | 0"
+                },
+                {
+                    "key": "PUZZLES",
+                    "count": 256,
+                    "extra": "ON | 256 | 141 | 566904 | 7 | 26"
+                },
+                {
+                    "key": "Eyes",
+                    "count": 212,
+                    "extra": "ON | 212 | 68 | 54264 | 0 | 0"
+                },
+                {
+                    "key": "Dead Guard Library",
+                    "count": 155,
+                    "extra": "ON | 155 | 25 | 33022 | 0 | 1"
+                },
+                {
+                    "key": "Notes",
+                    "count": 31,
+                    "extra": "ON | 31 | 14 | 11332 | 14 | 1"
+                },
+                {
+                    "key": "Decal2",
+                    "count": 17,
+                    "extra": "ON | 17 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "Loot",
+                    "count": 7,
+                    "extra": "ON | 7 | 4 | 2646 | 1 | 0"
+                },
+                {
+                    "key": "TeleportTriggers",
+                    "count": 7,
+                    "extra": "ON | 7 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "GlobalVolume",
+                    "count": 5,
+                    "extra": "ON | 5 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "Quests",
+                    "count": 5,
+                    "extra": "ON | 5 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "CheckPoints",
+                    "count": 4,
+                    "extra": "ON | 4 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "TutorialHints",
+                    "count": 4,
+                    "extra": "ON | 4 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "LevelLoader_Library",
+                    "count": 3,
+                    "extra": "ON | 3 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "SavedEvents",
+                    "count": 3,
+                    "extra": "ON | 3 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "ESSENCE",
+                    "count": 2,
+                    "extra": "ON | 2 | 1 | 0 | 0 | 0"
+                },
+                {
+                    "key": "Завал для уборки",
+                    "count": 2,
+                    "extra": "ON | 2 | 1 | 12 | 0 | 0"
+                },
+                {
+                    "key": "--Sound--",
+                    "count": 2,
+                    "extra": "ON | 2 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "LadderTrigger",
+                    "count": 2,
+                    "extra": "OFF | 2 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "Point Light",
+                    "count": 1,
+                    "extra": "ON | 1 | 0 | 0 | 1 | 0"
+                },
+                {
+                    "key": "Point Light (1)",
+                    "count": 1,
+                    "extra": "ON | 1 | 0 | 0 | 1 | 0"
+                },
+                {
+                    "key": "Point Light (3)",
+                    "count": 1,
+                    "extra": "ON | 1 | 0 | 0 | 1 | 0"
+                },
+                {
+                    "key": "Point Light (5)",
+                    "count": 1,
+                    "extra": "ON | 1 | 0 | 0 | 1 | 0"
+                },
+                {
+                    "key": "Point Light (4)",
+                    "count": 1,
+                    "extra": "ON | 1 | 0 | 0 | 1 | 0"
+                },
+                {
+                    "key": "LadderTrigger_Reliq",
+                    "count": 1,
+                    "extra": "OFF | 1 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "BloodPuddle",
+                    "count": 1,
+                    "extra": "ON | 1 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "BloodPuddle (1)",
+                    "count": 1,
+                    "extra": "ON | 1 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "LockDoorQuest",
+                    "count": 1,
+                    "extra": "ON | 1 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "Player Spawn Point",
+                    "count": 1,
+                    "extra": "ON | 1 | 0 | 0 | 0 | 0"
+                }
+            ]
+        },
+        {
+            "name": "Hierarchy: children of big roots (extra = active | descendants | renderers | tris | lights | LODGroups)",
+            "rows": [
+                {
+                    "key": "Palace/OLD Arms Corridor",
+                    "count": 10760,
+                    "extra": "OFF | 10760 | 399 | 514472 | 55 | 0"
+                },
+                {
+                    "key": "Day/Night Connection/Office_statues",
+                    "count": 5396,
+                    "extra": "OFF | 5396 | 74 | 185232 | 50 | 1"
+                },
+                {
+                    "key": "Palace/Office",
+                    "count": 4591,
+                    "extra": "ON | 4591 | 2411 | 16976291 | 66 | 508"
+                },
+                {
+                    "key": "Palace/Hall",
+                    "count": 2619,
+                    "extra": "ON | 2619 | 1016 | 2634473 | 63 | 123"
+                },
+                {
+                    "key": "Palace/Laboratory",
+                    "count": 1919,
+                    "extra": "ON | 1919 | 1156 | 5445468 | 49 | 280"
+                },
+                {
+                    "key": "Main scripts/Media_Shit",
+                    "count": 1729,
+                    "extra": "OFF | 1729 | 231 | 208327 | 11 | 3"
+                },
+                {
+                    "key": "DeathCutscenes/CS_Reliq_DEATH",
+                    "count": 1420,
+                    "extra": "OFF | 1420 | 270 | 24739 | 1 | 0"
+                },
+                {
+                    "key": "DeathCutscenes/CS_Pillar_DEATH",
+                    "count": 1420,
+                    "extra": "OFF | 1420 | 270 | 24739 | 1 | 0"
+                },
+                {
+                    "key": "DeathCutscenes/CS_Office_DEATH",
+                    "count": 1420,
+                    "extra": "OFF | 1420 | 270 | 24739 | 1 | 0"
+                },
+                {
+                    "key": "Knight_Statues/GEAR_STATUE",
+                    "count": 1276,
+                    "extra": "ON | 1276 | 10 | 31868 | 0 | 0"
+                },
+                {
+                    "key": "EternalLadder/Eternal ladder",
+                    "count": 1194,
+                    "extra": "ON | 1194 | 830 | 1516678 | 30 | 232"
+                },
+                {
+                    "key": "Palace/Archive ",
+                    "count": 1163,
+                    "extra": "OFF | 1163 | 547 | 24023114 | 2 | 103"
+                },
+                {
+                    "key": "Palace/Bedroom",
+                    "count": 962,
+                    "extra": "ON | 962 | 611 | 5614181 | 27 | 127"
+                },
+                {
+                    "key": "Day/Night Connection/DeadGolems",
+                    "count": 914,
+                    "extra": "OFF | 914 | 277 | 232950 | 0 | 4"
+                },
+                {
+                    "key": "Palace/Reliquary",
+                    "count": 782,
+                    "extra": "ON | 782 | 435 | 2792847 | 13 | 109"
+                },
+                {
+                    "key": "Palace/New arms corridor",
+                    "count": 614,
+                    "extra": "OFF | 614 | 331 | 3256124 | 0 | 149"
+                },
+                {
+                    "key": "Knight_Statues/RELIQ_STATUE",
+                    "count": 587,
+                    "extra": "ON | 587 | 3 | 7970 | 0 | 0"
+                },
+                {
+                    "key": "Statues_after_Golem/ActiveStatue3",
+                    "count": 583,
+                    "extra": "ON | 583 | 3 | 7970 | 0 | 0"
+                },
+                {
+                    "key": "Statues_after_Golem/ActiveStatue2",
+                    "count": 583,
+                    "extra": "ON | 583 | 3 | 7970 | 0 | 0"
+                },
+                {
+                    "key": "Statues_after_Golem/ActiveStatue1",
+                    "count": 583,
+                    "extra": "ON | 583 | 3 | 7970 | 0 | 0"
+                },
+                {
+                    "key": "Golem/Golem with door",
+                    "count": 497,
+                    "extra": "ON | 497 | 151 | 82846 | 0 | 3"
+                },
+                {
+                    "key": "Palace/Reliq/Bedroom secret path",
+                    "count": 260,
+                    "extra": "OFF | 260 | 101 | 9188 | 8 | 0"
+                },
+                {
+                    "key": "Golem/GOLEM_RIGGED_BROKEN",
+                    "count": 157,
+                    "extra": "ON | 157 | 49 | 26064 | 0 | 0"
+                },
+                {
+                    "key": "Knight_Statues/CEIL_STATUE",
+                    "count": 105,
+                    "extra": "ON | 105 | 6 | 16148 | 0 | 0"
+                },
+                {
+                    "key": "Knight_Statues/Reliq.statue copy2",
+                    "count": 53,
+                    "extra": "ON | 53 | 3 | 8074 | 0 | 0"
+                },
+                {
+                    "key": "Knight_Statues/Harakiri statue",
+                    "count": 53,
+                    "extra": "ON | 53 | 4 | 8074 | 0 | 0"
+                },
+                {
+                    "key": "Palace/BloodTrail",
+                    "count": 44,
+                    "extra": "ON | 44 | 0 | 0 | 0 | 0"
+                },
+                {
+                    "key": "Palace/Library Teleport",
+                    "count": 39,
+                    "extra": "ON | 39 | 20 | 23640 | 3 | 2"
+                },
+                {
+                    "key": "Day/Night Connection/Toy",
+                    "count": 21,
+                    "extra": "OFF | 21 | 17 | 12296 | 0 | 0"
+                }
+            ]
+        },
+        {
+            "name": "Canvas by render mode",
+            "rows": [
+                {
+                    "key": "ScreenSpaceOverlay / ACTIVE",
+                    "count": 4,
+                    "extra": ""
+                }
+            ]
+        }
+    ]
+}
