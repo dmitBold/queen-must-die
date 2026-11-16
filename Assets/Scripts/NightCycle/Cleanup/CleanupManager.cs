@@ -192,8 +192,7 @@ namespace NightCycle
                     {
                         musicController.PlayTrack(2);
                     }
-                    _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-3.86f, 10.51f, -102.38f), 1, true, 0.27f, 4.29f);
-                    _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-9.71f, 10.51f, -120.86f), 1, true, 0.27f, 6.18f);
+                    PlayReznyaLoops();
                     break;
                 case 4:
                     //musicController.PlayTrack(3);
@@ -203,6 +202,40 @@ namespace NightCycle
                 default:
                     break;
             }
+        }
+
+        private void PlayReznyaLoops()
+        {
+            _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-3.86f, 10.51f, -102.38f), 1, true, 0.27f, 4.29f);
+            _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-9.71f, 10.51f, -120.86f), 1, true, 0.27f, 6.18f);
+        }
+
+        /// <summary>
+        /// Мгновенно ставит состояние после завершённой уборки при загрузке сохранения: свет стадий, свечи, звуки резни.
+        /// Без затемнения, стука и ON_Cleanup_Completed, иначе снова откроется дверь катсцены. Вызывать после Start всех объектов сцены.
+        /// </summary>
+        public void RestoreCompleted()
+        {
+            // Свет переключают события стадий 2 и 3 (день → ночь → огонь), берём их же, чтобы не дублировать ссылки сцены.
+            for (int i = 2; i <= 3 && i < _events.Count; i++)
+            {
+                _events[i]?.Invoke();
+            }
+            if (scene_light != null) scene_light.enabled = false;
+            foreach (CandleController candle in OrderedCandles)
+            {
+                if (candle != null) candle.SetCandleState(true);
+            }
+            foreach (CandleController candle in ImmediateCandles)
+            {
+                if (candle != null) candle.SetCandleState(true);
+            }
+            foreach (CandleController candle in BlackoutCandles)
+            {
+                if (candle != null) candle.SetCandleState(true);
+            }
+            PlayReznyaLoops();
+            currentStageIndex = Mathf.Max(currentStageIndex, stages.Count + 1);
         }
 
         public void StopMusic()

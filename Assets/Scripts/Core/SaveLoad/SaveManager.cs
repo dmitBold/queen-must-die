@@ -23,6 +23,9 @@ public class SaveManager : MonoBehaviour
 
     private bool _isProcessing = false;
 
+    // ћетка Ђэссенци€ неизвестнаї в SaveData.Essence: при загрузке не примен€етс€.
+    private const float UnknownEssence = -1f;
+
     [System.Serializable]
     public struct SaveData
     {
@@ -153,9 +156,14 @@ public class SaveManager : MonoBehaviour
             data.Essence = fl.GetEssense();
             Debug.Log($"ESSENCE SAVED: {data.Essence}");
         }
+        else if (_flashlightProvider.PendingEssence.HasValue)
+        {
+            // ‘онар€ в сцене нет (день): берЄм эссенцию, перенесЄнную из прошлой сцены, иначе сохранение днЄм обнулило бы еЄ.
+            data.Essence = _flashlightProvider.PendingEssence.Value;
+        }
         else
         {
-            Debug.LogWarning("SAVE: flashlight is null, Essence=0");
+            data.Essence = UnknownEssence;
         }
 
         string unitySceneName = SceneManager.GetActiveScene().name;
@@ -203,7 +211,11 @@ public class SaveManager : MonoBehaviour
             }
 
             var fl = _flashlightProvider.Current;
-            if (fl != null)
+            if (_saveSystem.CurrentData.Essence < 0f)
+            {
+                // Ёссенци€ неизвестна (сохранение днЄм до первой ночи): фонарь остаЄтс€ со значением по умолчанию.
+            }
+            else if (fl != null)
             {
                 fl.SetEssense(_saveSystem.CurrentData.Essence);
             }

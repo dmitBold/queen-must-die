@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
@@ -12,6 +13,9 @@ namespace NightCycle
         [Tooltip("Что сделать СРАЗУ при загрузке сцены, если этот ивент уже был активирован?")]
         [SerializeField] private UnityEvent onStateRestored;
 
+        /// <summary>Вызвать onStateRestored кадром позже, когда все Start сцены уже отработали и не перетрут восстановленное состояние.</summary>
+        [SerializeField] private bool _restoreNextFrame;
+
         private SaveSystem _saveSystem;
 
         [Inject]
@@ -25,12 +29,19 @@ namespace NightCycle
             if (_saveSystem.SessionTriggeredEvents.Contains(_uniqueId))
             {
                 Debug.Log(_uniqueId);
-                onStateRestored.Invoke();
+                if (_restoreNextFrame) StartCoroutine(RestoreNextFrame());
+                else onStateRestored.Invoke();
             }
             else
             {
                 Debug.Log("NOTCONTAINED");
             }
+        }
+
+        private IEnumerator RestoreNextFrame()
+        {
+            yield return null;
+            onStateRestored.Invoke();
         }
 
         public void SaveEventState()

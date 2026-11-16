@@ -29,6 +29,19 @@ public class AnimRewind : MonoBehaviour
         animator.Play(cleanStateName);
     }
 
+    /// <summary>Сразу ставит конец анимации уборки, без проигрывания: для восстановления из сохранения.</summary>
+    public void SnapToClean()
+    {
+        if (animator == null) return;
+        if (rewindCoroutine != null)
+        {
+            StopCoroutine(rewindCoroutine);
+            rewindCoroutine = null;
+        }
+        animator.SetFloat("AnimSpeed", forwardSpeed);
+        animator.Play(cleanStateName, 0, 1f);
+    }
+
     public void TriggerRewind()
     {
         Debug.Log("Anim_rewind");
