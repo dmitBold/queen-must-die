@@ -78,6 +78,9 @@ namespace Inventory
             Vector3 spawnPos = new Vector3(0, -10000f - (slotCounter * 50f), 0);
             previewScene = new GameObject($"PreviewScene_{data.id}");
             previewScene.transform.position = spawnPos;
+            // Окно инвентаря живёт в ProjectContext и переиспользует слоты после смены сцены,
+            // поэтому превью не должно выгружаться вместе с текущей сценой. Удаляется в ClearPreview.
+            DontDestroyOnLoad(previewScene);
 
             // 3. ����������� ������ ������
             GameObject camObj = new GameObject("PreviewCamera");
