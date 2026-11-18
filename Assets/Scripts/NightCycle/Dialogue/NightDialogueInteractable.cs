@@ -1,4 +1,5 @@
 using Core;
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,10 +15,10 @@ namespace NightCycle
         public string[] dialoguePages;
         public string[] dialogueNames;
         //TEST
-        public AudioClip interact_sound;
+        public EventReference interact_sound;
         bool play_once = true;
 
-        public List<AudioClip> dialogue_sounds;
+        public List<EventReference> dialogue_sounds;
         public int dialogue_sounds_index = 0;
         //TEST
 
@@ -58,12 +59,12 @@ namespace NightCycle
         {
             Debug.Log("sss");
             //TEST
-            if (interact_sound != null)
+            if (!interact_sound.IsNull)
             {
                 if (play_once)
                 {
                     Debug.Log("sss");
-                   _audioService.PlaySound(interact_sound);
+                   _audioService.PlayFMODEvent(interact_sound);
                     play_once = false;
                 }
             }

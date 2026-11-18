@@ -1,4 +1,5 @@
 using Core;
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -9,7 +10,7 @@ namespace NightCycle
     {
         [Header("Settings")]
         //[SerializeField] private GameObject cleanupEffect; // ������ ������
-        [SerializeField] private AudioClip cleanupSound;   // ���� ������
+        [SerializeField] private EventReference cleanupSound;   // ���� ������
         [SerializeField] private GameObject cleanObject;
 
         [SerializeField] CleanupStage parentStage;
@@ -31,9 +32,9 @@ namespace NightCycle
 
         public void Clean()
         {
-            if (cleanupSound != null && _audioService != null)
+            if (_audioService != null)
             {
-                _audioService.PlaySound(cleanupSound);
+                _audioService.PlayFMODEvent(cleanupSound);
             }
 
             //
@@ -57,9 +58,9 @@ namespace NightCycle
 
         public void Clean_ForAnim()
         {
-            if (cleanupSound != null && _audioService != null)
+            if (_audioService != null)
             {
-                _audioService.PlaySound(cleanupSound);
+                _audioService.PlayFMODEvent(cleanupSound);
             }
 
             if (parentStage != null)
@@ -75,9 +76,9 @@ namespace NightCycle
 
         public void Clean_with_anim()
         {
-            if (cleanupSound != null && _audioService != null)
+            if (_audioService != null)
             {
-                _audioService.PlaySound(cleanupSound);
+                _audioService.PlayFMODEvent(cleanupSound);
             }
 
             if (this_inter != null) { this_inter.enabled = false; }

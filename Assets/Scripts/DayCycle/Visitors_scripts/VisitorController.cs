@@ -4,6 +4,7 @@ using Environment;
 using UnityEngine;
 using Zenject;
 using Core;
+using FMODUnity;
 
 namespace Visitors
 {
@@ -18,8 +19,8 @@ namespace Visitors
         private GameObject currentVisitor;
         public CardData currentCard;
 
-        public AudioClip cage_arrive;
-        public AudioClip cage_leave;
+        public EventReference cage_arrive;
+        public EventReference cage_leave;
 
         private AudioService _audioService;
 
@@ -50,7 +51,7 @@ namespace Visitors
 
             }
 
-            _audioService.PlaySound(cage_arrive, 0.8f);
+            _audioService.PlayFMODEvent(cage_arrive);
 
             cage.PlayArrival();
         }
@@ -58,7 +59,7 @@ namespace Visitors
         public void Despawn()
         {
             Debug.Log("Visitor: leaving");
-            _audioService.PlaySound(cage_leave, 0.8f);
+            _audioService.PlayFMODEvent(cage_leave);
             cage.PlayLeave();
         }
 
@@ -78,10 +79,7 @@ namespace Visitors
             }
 
 
-            if (currentCard.visitor != null && currentCard.visitor.arrivalSound != null)
-            {
-                _audioService.PlaySound(currentCard.visitor.arrivalSound);
-            }
+            _audioService.PlayFMODEvent(currentCard.visitor.arrivalSound);
 
             //var visitorPrefab = currentCard.visitor.prefab;
             //currentVisitor = Instantiate(visitorPrefab, visitorSlot);

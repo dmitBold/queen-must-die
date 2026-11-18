@@ -166,9 +166,9 @@ namespace NightCycle
             if (currentNPC != null)
             {
                 //
-                if (currentNPC.dialogue_sounds_index < currentNPC.dialogue_sounds.Count && currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index] != null)
+                if (currentNPC.dialogue_sounds_index < currentNPC.dialogue_sounds.Count)
                 {
-                    _audioService.PlaySound(currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index]);
+                    _audioService.PlayFMODEvent(currentNPC.dialogue_sounds[currentNPC.dialogue_sounds_index]);
                 }
                 currentNPC.dialogue_sounds_index += 1;
             }

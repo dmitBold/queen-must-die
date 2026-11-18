@@ -25,7 +25,7 @@ namespace NightCycle
         public void Pickup()
         {
             _inventoryManager.AddItem(item);
-            _audioService.PlaySound(_audioConfig.pickupSound);
+            _audioService.PlayFMODEvent(_audioConfig.pickupSound);
 
             if (destroyOnPickup)
             {

@@ -1,5 +1,6 @@
 using System.Collections;
 using Core;
+using FMODUnity;
 using UnityEngine;
 using Zenject;
 
@@ -7,7 +8,7 @@ namespace NightCycle
 {
     public class StartDialogueSound : MonoBehaviour
     {
-        public AudioClip StartSound;
+        public EventReference StartSound;
 
         [Header(" ")]
         [TextArea(3, 5)]
@@ -30,9 +31,9 @@ namespace NightCycle
 
         void Start()
         {
-            if (StartSound != null)
+            if (!StartSound.IsNull)
             {
-                _audioService.PlaySound(StartSound);
+                _audioService.PlayFMODEvent(StartSound);
                 StartCoroutine(WaitAndExecute(delay));
             }
             //NightDialogueManager.Instance.StartDialogue(null, dialoguePages);

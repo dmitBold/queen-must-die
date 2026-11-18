@@ -1,4 +1,5 @@
 using Core;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;   
 using Zenject;
@@ -9,7 +10,7 @@ namespace NightCycle
     {
         [SerializeField] private string targetTag = "Player";
         [SerializeField] private UnityEvent onTriggerEnter;
-        public AudioClip triggerSound;
+        public EventReference triggerSound;
         public bool disable;
         
         
@@ -25,10 +26,7 @@ namespace NightCycle
         {
             if (other.CompareTag(targetTag))
             {
-                if (triggerSound != null)
-                {
-                    _audioService.PlaySound(triggerSound);
-                }
+                _audioService.PlayFMODEvent(triggerSound);
                 onTriggerEnter?.Invoke();
                 if (disable)
                 {

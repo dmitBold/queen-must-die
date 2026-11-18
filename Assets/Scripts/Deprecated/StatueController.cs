@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Core;
+using FMODUnity;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +9,7 @@ namespace NightCycle
     public class StatueController : MonoBehaviour {
 
         public List<GameObject> poses;
-        public AudioClip MoveSound;
+        public EventReference MoveSound;
         
         int curr_pose_index = 0;
 
@@ -33,7 +34,7 @@ namespace NightCycle
         {
             if (curr_pose_index < poses.Count - 1)
             {
-                _audioService.PlaySound(MoveSound);
+                _audioService.PlayFMODEvent(MoveSound);
                 poses[curr_pose_index].SetActive(false);
                 curr_pose_index++;
                 poses[curr_pose_index].SetActive(true);

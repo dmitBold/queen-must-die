@@ -1,10 +1,11 @@
+using FMODUnity;
 using UnityEngine;
 
 namespace NightCycle
 {
     public class LockObject : MonoBehaviour
     {
-        public AudioClip LockSound;
+        public EventReference LockSound;
         public bool isLocked = true;
 
         public void Unlock()

@@ -1,76 +1,99 @@
-using UnityEngine;
+using FMOD.Studio;
 using FMODUnity;
+using UnityEngine;
 
 namespace Core
 {
+    /// <summary>
+    /// Проигрывание FMOD-ивентов и громкость музыки и эффектов (VCA FMOD-проекта, значения хранятся в PlayerPrefs).
+    /// </summary>
     public class AudioService : MonoBehaviour
     {
-        [SerializeField] private AudioSource sfxSource;
-        public static AudioClip pickup_Sound;
-        public AudioSource musicSource;
+        private const string MusicVcaPath = "vca:/Music";
+        private const string SfxVcaPath = "vca:/SFX";
+        private const string MusicVolumeKey = "MusicVolume";
+        private const string SfxVolumeKey = "SfxVolume";
+        private const float DefaultVolume = 0.75f;
 
-        public void PlaySound(AudioClip clip, float volume = 1f)
+        /// <summary>
+        /// Сохранённая громкость музыки, 0–1.
+        /// </summary>
+        public float MusicVolume => PlayerPrefs.GetFloat(MusicVolumeKey, DefaultVolume);
+
+        /// <summary>
+        /// Сохранённая громкость эффектов, 0–1.
+        /// </summary>
+        public float SfxVolume => PlayerPrefs.GetFloat(SfxVolumeKey, DefaultVolume);
+
+        // VCA живут в FMOD-системе, а не в сцене, поэтому достаточно выставить их один раз при старте игры.
+        private void Start()
         {
-            if (clip == null || CutsceneSkipper.IsSkipping) return;
-            sfxSource.PlayOneShot(clip, volume);
+            ApplyVolume(MusicVcaPath, MusicVolume);
+            ApplyVolume(SfxVcaPath, SfxVolume);
         }
 
-        /*public void PlayPickUP(float volume = 1f)
+        /// <summary>
+        /// Задаёт и сохраняет громкость музыки, 0–1.
+        /// </summary>
+        public void SetMusicVolume(float volume)
         {
-            if(pickup_Sound == null) return;
-            sfxSource.PlayOneShot(pickup_Sound, volume);
-            Debug.Log("VGVYVGYVYGVYGVYVG");
-        }*/
-
-        public void PlaySoundAtPoint(AudioClip clip, Vector3 position, float volume = 1f)
-        {
-            if (clip == null || CutsceneSkipper.IsSkipping) return;
-            AudioSource.PlayClipAtPoint(clip, position, volume);
+            PlayerPrefs.SetFloat(MusicVolumeKey, volume);
+            ApplyVolume(MusicVcaPath, volume);
         }
 
-        public AudioSource PlaySoundAtPoint_loop(AudioClip clip, Vector3 position, float volume = 1f, bool loop = false, float minDistance = 1f, float maxDistance = 20f)
+        /// <summary>
+        /// Задаёт и сохраняет громкость эффектов, 0–1.
+        /// </summary>
+        public void SetSfxVolume(float volume)
         {
-            if (clip == null) return null;
+            PlayerPrefs.SetFloat(SfxVolumeKey, volume);
+            ApplyVolume(SfxVcaPath, volume);
+        }
 
-            GameObject go = new GameObject("[Audio] " + clip.name);
-            go.transform.position = position;
-
-            AudioSource source = go.AddComponent<AudioSource>();
-
-            // Основные настройки
-            source.clip = clip;
-            source.volume = volume;
-            source.loop = loop;
-
-            source.spatialBlend = 1f;
-            source.minDistance = minDistance;
-            source.maxDistance = maxDistance;
-            source.rolloffMode = AudioRolloffMode.Linear;
-
-            source.Play();
-
-            if (!loop)
+        private static void ApplyVolume(string vcaPath, float volume)
+        {
+            try
             {
-                Destroy(go, clip.length);
+                RuntimeManager.GetVCA(vcaPath).setVolume(volume);
             }
-
-            return source;
+            catch (VCANotFoundException)
+            {
+                Debug.LogWarning($"AudioService: в FMOD-банках нет {vcaPath}, громкость не применена.");
+            }
         }
 
-        //для FMOD
-
-        // Воспроизведение через EventReference (самый удобный способ для инспектора)
+        /// <summary>
+        /// Однократно проигрывает ивент. Пустая ссылка и пропуск катсцены игнорируются.
+        /// </summary>
         public void PlayFMODEvent(EventReference eventReference, Vector3 position = default)
         {
             if (eventReference.IsNull || CutsceneSkipper.IsSkipping) return;
             RuntimeManager.PlayOneShot(eventReference, position);
         }
 
-        // Воспроизведение через строковый путь (например: "event:/FS_Wood")
+        /// <summary>
+        /// Однократно проигрывает ивент по пути, например "event:/UI/Text".
+        /// </summary>
         public void PlayFMODEvent(string eventPath, Vector3 position = default)
         {
             if (string.IsNullOrEmpty(eventPath) || CutsceneSkipper.IsSkipping) return;
             RuntimeManager.PlayOneShot(eventPath, position);
+        }
+
+        /// <summary>
+        /// Запускает 3D-ивент в точке с заданной дальностью слышимости. Остановить и освободить экземпляр должен вызывающий код:
+        /// FMOD-экземпляры переживают выгрузку сцены. Для пустой ссылки возвращает невалидный экземпляр.
+        /// </summary>
+        public EventInstance PlayFMODEventAtPoint(EventReference eventReference, Vector3 position, float minDistance, float maxDistance)
+        {
+            if (eventReference.IsNull) return default;
+
+            EventInstance instance = RuntimeManager.CreateInstance(eventReference);
+            instance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+            instance.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, minDistance);
+            instance.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxDistance);
+            instance.start();
+            return instance;
         }
     }
 }

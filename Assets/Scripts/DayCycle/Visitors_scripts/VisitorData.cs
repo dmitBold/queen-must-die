@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Timeline;
 
@@ -7,7 +8,7 @@ namespace Visitors
     public class VisitorData : ScriptableObject
     {
         public GameObject prefab;
-        public AudioClip arrivalSound;
+        public EventReference arrivalSound;
         public RuntimeAnimatorController animator;
         public TimelineAsset arrivalTime;
         public TimelineAsset leavelTime;

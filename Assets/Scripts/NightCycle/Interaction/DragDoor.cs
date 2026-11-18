@@ -1,4 +1,5 @@
 using Core;
+using FMODUnity;
 using UI;
 using UnityEngine;
 using Zenject;
@@ -58,9 +59,9 @@ namespace NightCycle
                 {
                     SetCursor(LockImage, true);
 
-                    if (Input.GetMouseButtonDown(0) && lockObj.LockSound != null)
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        _audioService.PlaySound(lockObj.LockSound);
+                        _audioService.PlayFMODEvent(lockObj.LockSound);
                     }
                     return; // Если объект закрыт, прерываем выполнение (рука не появится)
                 }

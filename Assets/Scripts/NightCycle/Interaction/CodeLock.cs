@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Core;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,7 +24,7 @@ namespace NightCycle
         private bool isUnlocked = false;
 
         //TEST
-        public AudioClip unlockSound;
+        public EventReference unlockSound;
 
         private AudioService _audioService;
 
@@ -94,10 +95,7 @@ namespace NightCycle
         private void Unlock()
         {
             isUnlocked = true;
-            if (unlockSound != null)
-            {
-                _audioService.PlaySound(unlockSound);
-            }
+            _audioService.PlayFMODEvent(unlockSound);
             Debug.Log("<color=green>����� ������! � ���� ������� ����!</color>");
             OnUnlocked?.Invoke();
             // ���� � ���������� ����� ����� �������� �������� �����, ���� ��� ������ ��������

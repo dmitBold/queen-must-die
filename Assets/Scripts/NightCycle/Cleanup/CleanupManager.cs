@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Core;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -11,7 +13,7 @@ namespace NightCycle
     public class CleanupManager : MonoBehaviour
     {
         [SerializeField] List<GameObject> stages;
-        [SerializeField] List<AudioClip> musicTracks;
+        [SerializeField] List<EventReference> musicTracks;
         private bool isMusicStarted = false;
         private int currentStageIndex = 0;
 
@@ -28,8 +30,8 @@ namespace NightCycle
         public float SlowRestoreFactor = 1.5f;
         public float CandleTime;
         public float FirstDelay;
-        public AudioClip candleSound;
-        public AudioClip TinderSound;
+        public EventReference candleSound;
+        public EventReference TinderSound;
         [SerializeField]
         private List<UnityEvent> _events = new List<UnityEvent>();
         // Изменено: теперь мы храним корутины для каждого источника света отдельно
@@ -37,10 +39,13 @@ namespace NightCycle
         //test
 
         //test
-        public AudioClip KnockSound;
+        public EventReference KnockSound;
         public GameObject door;
-        public AudioClip Reznya;
+        public EventReference Reznya;
         private AudioService _audioService;
+        private EventInstance _musicInstance;
+        private int _musicTrackIndex = -1;
+        private readonly List<EventInstance> _reznyaInstances = new List<EventInstance>();
         //test
         public UnityEvent ON_Cleanup_Completed;
         [Tooltip("Свет после второго этапа полностью погас")]
@@ -96,21 +101,21 @@ namespace NightCycle
         {
             if (musicTracks.Count == 0) return;
 
-            _audioService.musicSource.loop = true;
-
             int trackIndex = Mathf.Clamp(currentStageIndex, 0, musicTracks.Count - 1);
-            AudioClip clipToPlay = musicTracks[trackIndex];
+            if (trackIndex == _musicTrackIndex) return;
 
-            if (_audioService.musicSource.clip != clipToPlay)
-            {
-                _audioService.musicSource.clip = clipToPlay;
-                _audioService.musicSource.Play();
-            }
+            StopMusic();
+            _musicTrackIndex = trackIndex;
+            if (musicTracks[trackIndex].IsNull) return;
+
+            // Зацикливание трека задаётся в самом FMOD-ивенте (loop region).
+            _musicInstance = RuntimeManager.CreateInstance(musicTracks[trackIndex]);
+            _musicInstance.start();
         }
 
         public void StartCleanup()
         {
-            _audioService.PlaySound(TinderSound);
+            _audioService.PlayFMODEvent(TinderSound);
             //if (isMusicStarted) return;
 
             //isMusicStarted = true;
@@ -146,7 +151,7 @@ namespace NightCycle
             foreach (CandleController candle in OrderedCandles)
             {
                 yield return new WaitForSeconds(CandleTime);
-                _audioService.PlaySound(candleSound);
+                _audioService.PlayFMODEvent(candleSound);
                 if (candle != null) candle.FadeTo(1f, CandleFadeTime);
             }
             TurnOnAllLight();
@@ -158,7 +163,7 @@ namespace NightCycle
             {
                 if (candle != null) candle.FadeTo(1f, turnON_time);
             }
-            _audioService.PlaySound(candleSound, 2.0f);
+            _audioService.PlayFMODEvent(candleSound);
 
             bool hasSlowLights = SlowRestoreLights != null && SlowRestoreLights.Count > 0;
             yield return new WaitForSeconds(hasSlowLights ? turnON_time * SlowRestoreFactor : turnON_time);
@@ -197,7 +202,7 @@ namespace NightCycle
                 case 4:
                     //musicController.PlayTrack(3);
                     ON_Cleanup_Completed?.Invoke();
-                    _audioService.PlaySound(KnockSound);
+                    _audioService.PlayFMODEvent(KnockSound);
                     break;
                 default:
                     break;
@@ -206,8 +211,26 @@ namespace NightCycle
 
         private void PlayReznyaLoops()
         {
-            _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-3.86f, 10.51f, -102.38f), 1, true, 0.27f, 4.29f);
-            _audioService.PlaySoundAtPoint_loop(Reznya, new Vector3(-9.71f, 10.51f, -120.86f), 1, true, 0.27f, 6.18f);
+            PlayReznyaLoop(new Vector3(-3.86f, 10.51f, -102.38f), 0.27f, 4.29f);
+            PlayReznyaLoop(new Vector3(-9.71f, 10.51f, -120.86f), 0.27f, 6.18f);
+        }
+
+        private void PlayReznyaLoop(Vector3 position, float minDistance, float maxDistance)
+        {
+            EventInstance instance = _audioService.PlayFMODEventAtPoint(Reznya, position, minDistance, maxDistance);
+            if (instance.isValid()) _reznyaInstances.Add(instance);
+        }
+
+        // FMOD-экземпляры не привязаны к сцене: без явной остановки лупы и музыка играли бы после её выгрузки.
+        private void OnDestroy()
+        {
+            StopMusic();
+            foreach (EventInstance instance in _reznyaInstances)
+            {
+                instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                instance.release();
+            }
+            _reznyaInstances.Clear();
         }
 
         /// <summary>
@@ -240,7 +263,10 @@ namespace NightCycle
 
         public void StopMusic()
         {
-            _audioService.musicSource.Stop();
+            if (!_musicInstance.isValid()) return;
+            _musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            _musicInstance.release();
+            _musicInstance = default;
         }
 
         public void ChangeLightIntensity(Light light, float targetIntensity, float duration)

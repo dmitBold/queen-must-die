@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
+using Core;
 using Inventory;
 using NightCycle;
 using UI;
@@ -47,13 +48,23 @@ public class SettingsMenu : MonoBehaviour, IUIScreen
     [SerializeField] private UniversalRendererData rendererData;
     [SerializeField] private string retroFeatureName = "FullScreenPassRendererFeature";
 
+    [Header("Sound")]
+    [Tooltip("Основная страница настроек: скрывается, пока открыта страница звука.")]
+    [SerializeField] private GameObject optionsPage;
+    [Tooltip("Страница звука со слайдерами громкости и кнопкой возврата.")]
+    [SerializeField] private GameObject soundPage;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+
     private UIManager _uiManager;
+    private AudioService _audioService;
 
     [Inject]
-    public void Construct(SaveManager saveManager, UIManager uiManager)
+    public void Construct(SaveManager saveManager, UIManager uiManager, AudioService audioService)
     {
         _saveManager = saveManager;
         _uiManager = uiManager;
+        _audioService = audioService;
         uiManager.Register(this);
     }
 
@@ -88,6 +99,29 @@ public class SettingsMenu : MonoBehaviour, IUIScreen
         retroToggle.isOn = isRetroOn;
         SetRetroEffect(isRetroOn);
         retroToggle.onValueChanged.AddListener(SetRetroEffect);
+
+        musicSlider.value = _audioService.MusicVolume;
+        musicSlider.onValueChanged.AddListener(_audioService.SetMusicVolume);
+        sfxSlider.value = _audioService.SfxVolume;
+        sfxSlider.onValueChanged.AddListener(_audioService.SetSfxVolume);
+    }
+
+    /// <summary>
+    /// Открывает страницу звука вместо основной страницы. Вызывается кнопкой «Звук».
+    /// </summary>
+    public void OpenSoundPage()
+    {
+        optionsPage.SetActive(false);
+        soundPage.SetActive(true);
+    }
+
+    /// <summary>
+    /// Возвращает на основную страницу настроек. Вызывается кнопкой возврата на странице звука.
+    /// </summary>
+    public void CloseSoundPage()
+    {
+        soundPage.SetActive(false);
+        optionsPage.SetActive(true);
     }
 
     public void SetSensitivity(float value)
@@ -117,6 +151,8 @@ public class SettingsMenu : MonoBehaviour, IUIScreen
     {
         sensitivitySlider.onValueChanged.RemoveListener(SetSensitivity);
         retroToggle.onValueChanged.RemoveListener(SetRetroEffect);
+        musicSlider.onValueChanged.RemoveListener(_audioService.SetMusicVolume);
+        sfxSlider.onValueChanged.RemoveListener(_audioService.SetSfxVolume);
     }
 
     public void SetUPResolution()
@@ -175,6 +211,7 @@ public class SettingsMenu : MonoBehaviour, IUIScreen
         isOpen = false;
         panel.SetActive(false);
         BrightnessRoot.SetActive(false);
+        CloseSoundPage();
         BrightnessCamera.gameObject.SetActive(false);
         ResumeGame();
     }
