@@ -30,7 +30,7 @@
 
 - `Assets/Scripts/`: `Core`, `DayCycle`, `NightCycle`, `Player`, `Inventory`, `Quests`, `UI`, `World`, `Data`, `Shared`, `FMOD`, `Day_notes`.
 - `Assets/Scripts/Deprecated/` — не использовать и не наследовать.
-- `Assets/Scenes/`: `MainMenu`, `DayCycle`, `NightCycle`, `LoadingScene`, `AssemblyScene` и другие. Список сцен сборки — в `ProjectSettings/EditorBuildSettings.asset`.
+- `Assets/Scenes/`: `MainMenu`, `DayCycle`, `Night1/` (`King Block(Night 1)`, `Library`, `Office`), `LoadingScene`, `AssemblyScene` и другие. Список сцен сборки — в `ProjectSettings/EditorBuildSettings.asset`.
 - `Documentation/dirty_spec.md` — черновая инвентаризация скриптов (700+ строк). Читай раздел нужной системы перед работой с ней. Пометки «не уверен» и «вроде бы» — открытые вопросы, а не факты: сверяй с кодом.
 
 Только для чтения, если задача не про них: `Assets/Plugins/`, `Assets/Third Party/`, `Library/`, `Logs/`, `UserSettings/`, сгенерированные `*.csproj` и `*.sln`.

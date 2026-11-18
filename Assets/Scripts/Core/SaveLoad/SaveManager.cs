@@ -11,6 +11,9 @@ using Zenject.SpaceFighter;
 
 public class SaveManager : MonoBehaviour
 {
+    // Имя ночной сцены до переименования в King Block(Night 1): оно осталось в старых сохранениях.
+    private const string LegacyNightSceneName = "NightCycle";
+
     //[Inject] private DiContainer _container;
     [Inject] private IPlayerProvider _playerProvider;
     [Inject] private SceneTransitionService _transitionService;
@@ -199,7 +202,7 @@ public class SaveManager : MonoBehaviour
         {
             // Сохранения, сделанные во время сборки до исправления, указывают на AssemblyScene: вместо неё грузим ночь.
             string sceneToLoad = _saveSystem.CurrentData.currentSceneName;
-            if (sceneToLoad == SceneNames.Assembly)
+            if (sceneToLoad == SceneNames.Assembly || sceneToLoad == LegacyNightSceneName)
             {
                 sceneToLoad = SceneNames.Night;
             }
