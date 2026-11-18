@@ -185,7 +185,8 @@ namespace Core
         private static bool IsManageable(Light light)
         {
             return light.type != LightType.Directional
-                && light.lightmapBakeType != LightmapBakeType.Baked
+                //&& light.lightmapBakeType != LightmapBakeType.Baked
+                && light.bakingOutput.lightmapBakeType != LightmapBakeType.Baked
                 && light.shadows != LightShadows.None;
         }
 
