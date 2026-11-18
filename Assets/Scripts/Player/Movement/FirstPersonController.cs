@@ -75,6 +75,12 @@ namespace NightCycle
 
         public float SpeedMultiplier { get; set; } = 1f;
 
+        /// <summary>Сидит ли игрок: присед держится и под низким потолком, даже если клавиша уже отпущена.</summary>
+        public bool IsCrouching => isCrouching;
+
+        /// <summary>Камера игрока (Cinemachine). Пока игрок не может двигаться, контроллер её не поворачивает.</summary>
+        public Transform View => mainCamera.transform;
+
         private float CurrentSpeed
         {
             get
