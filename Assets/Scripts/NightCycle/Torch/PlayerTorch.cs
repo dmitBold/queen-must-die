@@ -97,6 +97,9 @@ namespace NightCycle
         /// <summary>Контроллер игрока: брошенный факел не должен с ним сталкиваться.</summary>
         public CharacterController Controller => _controller;
 
+        /// <summary>Факел в руке, включая полёт к руке при подборе. Null, если руки пусты.</summary>
+        public TorchItem HeldTorch => _held;
+
         /// <summary>Можно ли сейчас взять факел: во время анимации подбора нельзя.</summary>
         public bool CanTake => !_animating;
 

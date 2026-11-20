@@ -67,6 +67,13 @@ namespace NightCycle
         private float _flame = 1f;
         private bool _held;
         private bool _wentOut;
+        private bool _inFlight;
+
+        /// <summary>Горит ли факел. Погасший больше не зажигается.</summary>
+        public bool IsLit => !_wentOut;
+
+        /// <summary>Время (Time.time) последнего падения после броска или выпадения из руки. До первого падения — минус бесконечность.</summary>
+        public float LandedTime { get; private set; } = float.NegativeInfinity;
 
         [Inject]
         private void Construct(PlayerTorch player, PlayerStateController state)
@@ -174,6 +181,7 @@ namespace NightCycle
         public void Release(Vector3 position, Vector3 velocity, Vector3 spin)
         {
             _held = false;
+            _inFlight = true;
             _handBlend = 0f;
             if (_flameWind != null) _flameWind.SetCarrier(null);
             transform.SetParent(null);
@@ -196,7 +204,14 @@ namespace NightCycle
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!_held) _body.angularDamping = _landedAngularDamping;
+            if (_held) return;
+            _body.angularDamping = _landedAngularDamping;
+            // Падением считается только первое касание после броска: отскоки и перекатывание шума не дают.
+            if (_inFlight)
+            {
+                _inFlight = false;
+                LandedTime = Time.time;
+            }
         }
 
         private void SetCollidersEnabled(bool value)
