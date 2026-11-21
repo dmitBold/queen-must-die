@@ -13,6 +13,7 @@ namespace NightCycle
     {
         [SerializeField] private TextMeshProUGUI dialogueText;
         [SerializeField] private float typingDelay = 0;
+        [SerializeField] private EventReference defaulTtypeSound;
         [SerializeField] private EventReference typeSound;
         [SerializeField] private string TextingParameterName = "IsTyping";
         public TextEffect textEffectComponent;
@@ -28,6 +29,18 @@ namespace NightCycle
         public void Constructor(AudioService audioService)
         {
             _audioService = audioService;
+        }
+
+        public void SetTypeSound(EventReference _typeSound)
+        {
+            if (!_typeSound.IsNull)
+            {
+                typeSound = _typeSound;
+            }
+            else
+            {
+                typeSound = defaulTtypeSound;
+            }
         }
 
         public void TypeText(string text)

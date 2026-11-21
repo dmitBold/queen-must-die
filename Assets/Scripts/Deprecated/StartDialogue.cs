@@ -37,7 +37,7 @@ namespace NightCycle
 
         public void startDialogue()
         {
-            Debug.Log("SSDD");
+            /*Debug.Log("SSDD");
             _playerStateController.SetMode(PlayerMode.Focused);
 
             NightDialogueManager.Instance.StartDialogue(null, dialoguePages, dialogueNames, () =>
@@ -52,7 +52,7 @@ namespace NightCycle
 
                 onDialogueCompleted?.Invoke();
                 hasTriggeredEvent = true;
-            });
+            });*/
 
             /*manager.StartDialogue(null, dialoguePages, () =>
             {

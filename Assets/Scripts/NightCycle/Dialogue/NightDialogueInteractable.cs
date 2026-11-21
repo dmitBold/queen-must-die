@@ -16,6 +16,7 @@ namespace NightCycle
         public string[] dialogueNames;
         //TEST
         public EventReference interact_sound;
+        public EventReference typeSound;
         bool play_once = true;
 
         public List<EventReference> dialogue_sounds;
@@ -41,7 +42,7 @@ namespace NightCycle
         {
             PlayIneractionSound();
 
-            NightDialogueManager.Instance.StartDialogue(this, dialoguePages, dialogueNames, () =>
+            NightDialogueManager.Instance.StartDialogue(this, dialoguePages, dialogueNames, typeSound, () =>
             {
                 if (triggerEventOnlyOnce && hasTriggeredEvent) return;
 

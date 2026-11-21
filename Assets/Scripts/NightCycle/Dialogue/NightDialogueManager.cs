@@ -1,4 +1,5 @@
 using Core;
+using FMODUnity;
 using System;
 using TMPro;
 using Unity.Cinemachine;
@@ -91,6 +92,30 @@ namespace NightCycle
             currentDialogueCallback = onComplete;
 
             dialoguePanel.SetActive(true);
+            PlayCurrentPage();
+        }
+
+        public void StartDialogue(NightDialogueInteractable npc, string[] pages, string[] dialNames, EventReference typesound, Action onComplete = null)
+        {
+            typewriter.SetTypeSound(typesound);
+            if (pages == null || pages.Length == 0) return;
+            /*if (dialNames[currentPageIndex] != null && dialNames.Length > 0) { 
+                dialogueName.text = dialNames[currentPageIndex];
+                dialogueName.ForceMeshUpdate();
+            }*/
+
+            currentNPC = npc;
+            currentPages = pages;
+            currentNames = dialNames;
+            currentPageIndex = 0;
+
+            currentDirector = null;
+            currentTimelineDirector = null;
+
+            currentDialogueCallback = onComplete;
+
+            dialoguePanel.SetActive(true);
+
             PlayCurrentPage();
         }
 
