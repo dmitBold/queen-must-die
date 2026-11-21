@@ -1,3 +1,4 @@
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 
@@ -50,6 +51,11 @@ namespace Dialogue
         public void set_name(string name)
         {
             name_text.text = name;
+        }
+
+        public void set_type_sound(EventReference _typeSound)
+        {
+            typewriter.typeSound = _typeSound;
         }
 
         public bool IsFinished => typewriter.IsFinished;

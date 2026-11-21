@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Dialogue
 
         [SerializeField] DialogueView view;
 
+        [SerializeField] EventReference DefaultTypeSound;
+
         private bool isNavigationLocked = false;
 
         enum Mode { Normal, Reaction }
@@ -17,12 +20,20 @@ namespace Dialogue
 
         Action onReactionClosed;
         public CanvasGroup cg;
-
-        public void Show(string[] pages, string card_name)
+        //TEST!!!
+        public void Show(string[] pages, string card_name, EventReference typeSound)
         {
             isNavigationLocked = false;
             mode = Mode.Normal;
             view.Show();
+            if (!typeSound.IsNull)
+            {
+                view.set_type_sound(typeSound);
+            }
+            else
+            {
+                view.set_type_sound(DefaultTypeSound);
+            }
             view.set_name(card_name);
             view.PlayText(pages);
             view.SetSkipVisible(true);

@@ -12,6 +12,7 @@ namespace Visitors
         public RuntimeAnimatorController animator;
         public TimelineAsset arrivalTime;
         public TimelineAsset leavelTime;
+        public EventReference VisitortypeSound;
 
         [Header("Placement Settings")]
         public Vector3 localOffset;    // �������� ������������ �����

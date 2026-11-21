@@ -15,7 +15,7 @@ namespace Dialogue
         [SerializeField] float delay = 0.03f;
 
         public TextEffect textEffectComponent;
-        [SerializeField] private EventReference typeSound;
+        public EventReference typeSound;
 
         TextMeshProUGUI field;
         string[] pages;

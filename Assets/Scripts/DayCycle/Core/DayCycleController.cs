@@ -170,8 +170,8 @@ namespace Core
             currentIntermediatePage = -1;
             //
             state = DayState.ShowingDialogue;
-            
-            dialogue.Show(visitor.currentCard.CardPages, visitor.currentCard.Card_name); 
+            //TEST!!!
+            dialogue.Show(visitor.currentCard.CardPages, visitor.currentCard.Card_name, visitor.currentCard.visitor.VisitortypeSound); 
         }
 
         void GrantPageRewardOnce(int pageIndex)
