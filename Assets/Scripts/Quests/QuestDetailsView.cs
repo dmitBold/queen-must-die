@@ -13,12 +13,29 @@ public class QuestDetailsView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private ScrollRect descriptionScroll;
 
+    private Quest _shownQuest;
+    private string _shownDescription;
+
     /// <summary>
-    /// Показывает арт и описание квеста.
+    /// Показывает арт и актуальное для текущего этапа описание квеста. Если квест и описание не изменились,
+    /// панель не трогается, чтобы не сбрасывать прокрутку при несвязанных обновлениях журнала.
     /// </summary>
-    public void Show(Quest quest)
+    public void Show(QuestProgress progress)
     {
-        Apply(quest.ArtSprite, quest.Description);
+        Quest quest = progress.Quest;
+
+        // У завершённого квеста индекс остаётся на последнем этапе, поэтому его флаг тоже учитывается.
+        int stageIndex = progress.IsCompleted ? quest.QuestStages.Count - 1 : progress.CurrentStageIndex;
+        string description = quest.GetDescription(stageIndex) ?? string.Empty;
+
+        if (quest == _shownQuest && description == _shownDescription)
+        {
+            return;
+        }
+
+        _shownQuest = quest;
+        _shownDescription = description;
+        Apply(quest.ArtSprite, description);
     }
 
     /// <summary>
@@ -26,6 +43,8 @@ public class QuestDetailsView : MonoBehaviour
     /// </summary>
     public void Clear()
     {
+        _shownQuest = null;
+        _shownDescription = null;
         Apply(null, string.Empty);
     }
 

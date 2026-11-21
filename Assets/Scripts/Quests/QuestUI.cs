@@ -120,6 +120,8 @@ public class QuestUI : MonoBehaviour, IUIScreen
             ClearSelection();
         }
 
+        // Описание квеста зависит от текущего этапа, поэтому правую панель обновляем вместе со слотами.
+        ShowSelectedDetails();
         UpdateSlotHighlight();
     }
 
@@ -168,8 +170,19 @@ public class QuestUI : MonoBehaviour, IUIScreen
     private void HandleSlotSelected(QuestSlot slot)
     {
         _selectedQuest = slot.Quest;
-        detailsView.Show(_selectedQuest);
+        ShowSelectedDetails();
         UpdateSlotHighlight();
+    }
+
+    private void ShowSelectedDetails()
+    {
+        if (_selectedQuest == null) return;
+
+        var progress = questManager.GetActiveQuests().Find(p => p.Quest == _selectedQuest);
+        if (progress != null)
+        {
+            detailsView.Show(progress);
+        }
     }
 
     private void ClearSelection()
