@@ -29,6 +29,7 @@ namespace NightCycle
         [SerializeField] private float firstUseHintFade = 0.5f;
 
         private const string FirstUseHintFlag = "hint_crown_first_use_shown";
+        private const string EssenceObtainedFlag = "crown_essence_obtained";
 
         [Header("Reveal Shader Settings")]
         [SerializeField] private float revealDistance = 15f;
@@ -38,9 +39,8 @@ namespace NightCycle
 
         [Header("Flashlight Base")]
         public Light flashlight;
-        [SerializeField] private Animator anim;
-        [SerializeField] private string trig_on = "enable";
-        [SerializeField] private string trig_off = "disable";
+        /// <summary>Фиолетовый эффект света короны на префабе игрока (FlashLighnt), плавно появляется при включении.</summary>
+        [SerializeField] private CrownLightEffect crownEffect;
         public bool light_active = false;
 
         [Header("Essence Settings")]
@@ -89,7 +89,7 @@ namespace NightCycle
                 {
                     TurnOffCrown();
                 }
-                else if (currentEssence > 0)
+                else if (currentEssence > 0 && IsEssenceObtained())
                 {
                     TurnOnCrown();
                     ShowFirstUseHint();
@@ -135,6 +135,9 @@ namespace NightCycle
                 StopCoroutine(activeUIFade);
                 flashlightUI.ResetAlpha(); // Резко возвращаем прозрачность в норму, чтобы не застрять полупрозрачными
             }
+
+            // Корона открывается первым подбором эссенции; флаг уходит в сохранение вместе с WorldState.
+            if (worldState != null) worldState.AddFlag(EssenceObtainedFlag);
 
             float oldEssence = currentEssence;
             currentEssence += amount;
@@ -206,8 +209,7 @@ namespace NightCycle
                 flashlightUI.Open();
             }
 
-            anim.ResetTrigger(trig_off);
-            anim.SetTrigger(trig_on);
+            if (crownEffect != null) crownEffect.SetVisible(true);
             light_active = true;
         }
 
@@ -220,10 +222,12 @@ namespace NightCycle
                 flashlightUI.Close();
             }
 
-            anim.ResetTrigger(trig_on);
-            anim.SetTrigger(trig_off);
+            if (crownEffect != null) crownEffect.SetVisible(false);
             light_active = false;
         }
+
+        // Без WorldState (сцена без ночного контекста) корону не запираем.
+        private bool IsEssenceObtained() => worldState == null || worldState.HasFlag(EssenceObtainedFlag);
 
         private void ShowFirstUseHint()
         {

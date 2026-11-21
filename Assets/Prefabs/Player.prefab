@@ -1050,9 +1050,7 @@ MonoBehaviour:
   revealSmoothSpeed: 1
   coneBackOffset: 1.5
   flashlight: {fileID: 7374664904985201373}
-  anim: {fileID: 4872183160668967902}
-  trig_on: enable
-  trig_off: disable
+  crownEffect: {fileID: 7972079939421944896}
   light_active: 0
   maxEssence: 1000
   currentEssence: 50
@@ -1179,6 +1177,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3423388300971593625, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
   m_PrefabInstance: {fileID: 4422737961534031428}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &3123538708157921865 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1601506141239540749, guid: 48c5715f9603c3842a353516a8baefbb, type: 3}
+  m_PrefabInstance: {fileID: 4422737961534031428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8619563070728447308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1277,15 +1280,49 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3975419632369283020, guid: c03fff3dd7c965346beba14a69b8a80a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1360906480730819037}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6623305536261218871, guid: c03fff3dd7c965346beba14a69b8a80a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7972079939421944896}
   m_SourcePrefab: {fileID: 100100000, guid: c03fff3dd7c965346beba14a69b8a80a, type: 3}
 --- !u!4 &2247703792186206697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7543428501699202213, guid: c03fff3dd7c965346beba14a69b8a80a, type: 3}
   m_PrefabInstance: {fileID: 8619563070728447308}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3203294889146206075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6623305536261218871, guid: c03fff3dd7c965346beba14a69b8a80a, type: 3}
+  m_PrefabInstance: {fileID: 8619563070728447308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7972079939421944896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3203294889146206075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b9acefd1e93c747b9d9fb0b0f0c136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.CrownLightEffect
+  spotLight: {fileID: 8414727837169556082}
+  coneRenderer: {fileID: 3640697368908062889}
+  particles: {fileID: 3123538708157921865}
+  fadeDuration: 1
+--- !u!23 &3640697368908062889 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4978883345551115749, guid: c03fff3dd7c965346beba14a69b8a80a, type: 3}
+  m_PrefabInstance: {fileID: 8619563070728447308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4662723037658090112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3975419632369283020, guid: c03fff3dd7c965346beba14a69b8a80a, type: 3}
+  m_PrefabInstance: {fileID: 8619563070728447308}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &8414727837169556082 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 241444589897858878, guid: c03fff3dd7c965346beba14a69b8a80a, type: 3}
   m_PrefabInstance: {fileID: 8619563070728447308}
   m_PrefabAsset: {fileID: 0}
