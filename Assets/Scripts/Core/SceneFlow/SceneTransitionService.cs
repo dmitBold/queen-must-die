@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 namespace Core
@@ -26,11 +27,18 @@ namespace Core
         public string TargetSceneName { get; private set; }
 
         /// <summary>
+        /// Звук, который сцена загрузки проигрывает при активации целевой сцены (например, закрывание двери).
+        /// Пустой, если вызывающий код его не передал.
+        /// </summary>
+        public EventReference ArrivalSound { get; private set; }
+
+        /// <summary>
         /// Запускает переход в целевую сцену через сцену загрузки.
         /// Возвращает false, если переход уже идёт или имя сцены пустое. В этом случае вызывающий код
         /// не должен менять состояние игры, потому что загрузка не начата.
+        /// arrivalSound проигрывается при появлении целевой сцены; в аварийной прямой загрузке не звучит.
         /// </summary>
-        public bool TryBegin(string targetSceneName)
+        public bool TryBegin(string targetSceneName, EventReference arrivalSound = default)
         {
             if (IsTransitioning)
                 return false;
@@ -52,6 +60,7 @@ namespace Core
 
             IsTransitioning = true;
             TargetSceneName = targetSceneName;
+            ArrivalSound = arrivalSound;
             _scenesManager.LoadSingle(SceneNames.Loading);
             return true;
         }
@@ -64,6 +73,7 @@ namespace Core
         {
             IsTransitioning = false;
             TargetSceneName = null;
+            ArrivalSound = default;
         }
     }
 }

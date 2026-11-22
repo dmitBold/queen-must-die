@@ -3681,6 +3681,7 @@ GameObject:
   - component: {fileID: 49548758}
   - component: {fileID: 49548757}
   - component: {fileID: 49548755}
+  - component: {fileID: 49548760}
   m_Layer: 0
   m_Name: FirePlace_01 (3)
   m_TagString: Untagged
@@ -3706,7 +3707,14 @@ MonoBehaviour:
   - {fileID: 423095951}
   smoke: []
   glowMeshes: []
-  sound: {fileID: 0}
+  sound: {fileID: 49548760}
+  _igniteSound:
+    Guid:
+      Data1: -1197303731
+      Data2: 1226515658
+      Data3: -846949725
+      Data4: 1782222001
+    Path: event:/Scenes/NightSycle/Brazier/Braizer light up
   igniteDuration: 1.2
   igniteLight:
     serializedVersion: 2
@@ -3927,6 +3935,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49548754}
   m_Mesh: {fileID: 2972364292484029205, guid: 4990dc1bd2de6824ea7c3f1b6b52081b, type: 3}
+--- !u!114 &49548760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49548754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 232147163
+      Data2: 1269579277
+      Data3: -1100323909
+      Data4: 909841851
+    Path: event:/Scenes/NightSycle/Brazier/Braizer burning
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1001 &50783824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15421,6 +15460,46 @@ PrefabInstance:
     - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
       propertyPath: useCustomSpawn
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorOpenSound.Path
+      value: event:/Scenes/NightSycle/Door Loading/Load Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorCloseSound.Path
+      value: event:/Scenes/NightSycle/Door Loading/Load End
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorOpenSound.Guid.Data1
+      value: -1108089781
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorOpenSound.Guid.Data2
+      value: 1076309882
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorOpenSound.Guid.Data3
+      value: 1344606850
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorOpenSound.Guid.Data4
+      value: 1917245859
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorCloseSound.Guid.Data1
+      value: 603140596
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorCloseSound.Guid.Data2
+      value: 1330909316
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorCloseSound.Guid.Data3
+      value: 2115188397
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694903572658350758, guid: a8ee292e72f2347458ce5b567c5baec9, type: 3}
+      propertyPath: _doorCloseSound.Guid.Data4
+      value: 949067513
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -144707,6 +144786,7 @@ GameObject:
   - component: {fileID: 1420778655}
   - component: {fileID: 1420778654}
   - component: {fileID: 1420778652}
+  - component: {fileID: 1420778657}
   m_Layer: 0
   m_Name: FirePlace_01 (2)
   m_TagString: Untagged
@@ -144732,7 +144812,14 @@ MonoBehaviour:
   - {fileID: 1689152880}
   smoke: []
   glowMeshes: []
-  sound: {fileID: 0}
+  sound: {fileID: 1420778657}
+  _igniteSound:
+    Guid:
+      Data1: -1197303731
+      Data2: 1226515658
+      Data3: -846949725
+      Data4: 1782222001
+    Path: event:/Scenes/NightSycle/Brazier/Braizer light up
   igniteDuration: 1.2
   igniteLight:
     serializedVersion: 2
@@ -144953,6 +145040,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420778651}
   m_Mesh: {fileID: 2972364292484029205, guid: 4990dc1bd2de6824ea7c3f1b6b52081b, type: 3}
+--- !u!114 &1420778657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420778651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 232147163
+      Data2: 1269579277
+      Data3: -1100323909
+      Data4: 909841851
+    Path: event:/Scenes/NightSycle/Brazier/Braizer burning
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &1421930919
 GameObject:
   m_ObjectHideFlags: 0
@@ -253168,7 +253286,7 @@ GameObject:
   - component: {fileID: 5001610428297885053}
   m_Layer: 0
   m_Name: SM_Floor_Round_A
-  m_TagString: Untagged
+  m_TagString: Cobblestone_Heels
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -254783,7 +254901,7 @@ GameObject:
   - component: {fileID: 1536002301506859999}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Cobblestone_Heels
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -258090,6 +258208,13 @@ MonoBehaviour:
   - {fileID: 1080051527363772909}
   glowMeshes: []
   sound: {fileID: 0}
+  _igniteSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   igniteDuration: 1.2
   igniteLight:
     serializedVersion: 2
@@ -274474,6 +274599,7 @@ GameObject:
   - component: {fileID: 506193893977305098}
   - component: {fileID: 6653513626109769947}
   - component: {fileID: 6653513626109769948}
+  - component: {fileID: 6653513626109769949}
   m_Layer: 0
   m_Name: FirePlace_01 (1)
   m_TagString: Untagged
@@ -291914,6 +292040,7 @@ GameObject:
   - component: {fileID: 3620590795066942541}
   - component: {fileID: 5220022707322639386}
   - component: {fileID: 5220022707322639387}
+  - component: {fileID: 5220022707322639388}
   m_Layer: 0
   m_Name: FirePlace_01 (5)
   m_TagString: Untagged
@@ -333747,7 +333874,14 @@ MonoBehaviour:
   - {fileID: 3427162711421691615}
   smoke: []
   glowMeshes: []
-  sound: {fileID: 0}
+  sound: {fileID: 5220022707322639388}
+  _igniteSound:
+    Guid:
+      Data1: -1197303731
+      Data2: 1226515658
+      Data3: -846949725
+      Data4: 1782222001
+    Path: event:/Scenes/NightSycle/Brazier/Braizer light up
   igniteDuration: 1.2
   igniteLight:
     serializedVersion: 2
@@ -333879,6 +334013,37 @@ MonoBehaviour:
   onExtinguished:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5220022707322639388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2971830761632302488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 232147163
+      Data2: 1269579277
+      Data3: -1100323909
+      Data4: 909841851
+    Path: event:/Scenes/NightSycle/Brazier/Braizer burning
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &5223705372393126312
 GameObject:
   m_ObjectHideFlags: 0
@@ -363790,7 +363955,14 @@ MonoBehaviour:
   - {fileID: 7682507404855092878}
   smoke: []
   glowMeshes: []
-  sound: {fileID: 0}
+  sound: {fileID: 6653513626109769949}
+  _igniteSound:
+    Guid:
+      Data1: -1197303731
+      Data2: 1226515658
+      Data3: -846949725
+      Data4: 1782222001
+    Path: event:/Scenes/NightSycle/Brazier/Braizer light up
   igniteDuration: 1.2
   igniteLight:
     serializedVersion: 2
@@ -363922,6 +364094,37 @@ MonoBehaviour:
   onExtinguished:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6653513626109769949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019478341409739231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 232147163
+      Data2: 1269579277
+      Data3: -1100323909
+      Data4: 909841851
+    Path: event:/Scenes/NightSycle/Brazier/Braizer burning
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!23 &6654887977562925972
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -372297,6 +372500,7 @@ GameObject:
   - component: {fileID: 638736678005682326}
   - component: {fileID: 4877608284418684537}
   - component: {fileID: 7071928209761922397}
+  - component: {fileID: 7071928209761922398}
   m_Layer: 0
   m_Name: FirePlace_01
   m_TagString: Untagged
@@ -372322,7 +372526,14 @@ MonoBehaviour:
   - {fileID: 6456337578383312321}
   smoke: []
   glowMeshes: []
-  sound: {fileID: 0}
+  sound: {fileID: 7071928209761922398}
+  _igniteSound:
+    Guid:
+      Data1: -1197303731
+      Data2: 1226515658
+      Data3: -846949725
+      Data4: 1782222001
+    Path: event:/Scenes/NightSycle/Brazier/Braizer light up
   igniteDuration: 1.2
   igniteLight:
     serializedVersion: 2
@@ -372454,6 +372665,37 @@ MonoBehaviour:
   onExtinguished:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7071928209761922398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071928209761922396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 232147163
+      Data2: 1269579277
+      Data3: -1100323909
+      Data4: 909841851
+    Path: event:/Scenes/NightSycle/Brazier/Braizer burning
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!4 &7072579918537366931
 Transform:
   m_ObjectHideFlags: 0
@@ -380057,6 +380299,27 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  _openSound:
+    Guid:
+      Data1: -1799786202
+      Data2: 1081107460
+      Data3: 955077783
+      Data4: 1760601422
+    Path: event:/Scenes/NightSycle/Door/Door Open
+  _closeSound:
+    Guid:
+      Data1: 148397481
+      Data2: 1223189820
+      Data3: 2003295646
+      Data4: 2067787026
+    Path: event:/Scenes/NightSycle/Door/Door Close
+  _shutSound:
+    Guid:
+      Data1: 795181922
+      Data2: 1171097169
+      Data3: -1684132678
+      Data4: 1192904107
+    Path: event:/Scenes/NightSycle/Door/Door Shut
 --- !u!114 &7514357381117975337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391652,6 +391915,7 @@ GameObject:
   - component: {fileID: 8522610225145329132}
   - component: {fileID: 1683691301663017999}
   - component: {fileID: 8522610225145329133}
+  - component: {fileID: 8522610225145329134}
   m_Layer: 0
   m_Name: FirePlace_01 (4)
   m_TagString: Untagged
@@ -416307,7 +416571,14 @@ MonoBehaviour:
   - {fileID: 124052772105061160}
   smoke: []
   glowMeshes: []
-  sound: {fileID: 0}
+  sound: {fileID: 8522610225145329134}
+  _igniteSound:
+    Guid:
+      Data1: -1197303731
+      Data2: 1226515658
+      Data3: -846949725
+      Data4: 1782222001
+    Path: event:/Scenes/NightSycle/Brazier/Braizer light up
   igniteDuration: 1.2
   igniteLight:
     serializedVersion: 2
@@ -416439,6 +416710,37 @@ MonoBehaviour:
   onExtinguished:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8522610225145329134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7874148847474807865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 232147163
+      Data2: 1269579277
+      Data3: -1100323909
+      Data4: 909841851
+    Path: event:/Scenes/NightSycle/Brazier/Braizer burning
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!4 &8523833989557980385
 Transform:
   m_ObjectHideFlags: 0
@@ -420050,6 +420352,27 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  _openSound:
+    Guid:
+      Data1: -1799786202
+      Data2: 1081107460
+      Data3: 955077783
+      Data4: 1760601422
+    Path: event:/Scenes/NightSycle/Door/Door Open
+  _closeSound:
+    Guid:
+      Data1: 148397481
+      Data2: 1223189820
+      Data3: 2003295646
+      Data4: 2067787026
+    Path: event:/Scenes/NightSycle/Door/Door Close
+  _shutSound:
+    Guid:
+      Data1: 795181922
+      Data2: 1171097169
+      Data3: -1684132678
+      Data4: 1192904107
+    Path: event:/Scenes/NightSycle/Door/Door Shut
 --- !u!114 &8700397433137669248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430923,6 +431246,27 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  _openSound:
+    Guid:
+      Data1: -1799786202
+      Data2: 1081107460
+      Data3: 955077783
+      Data4: 1760601422
+    Path: event:/Scenes/NightSycle/Door/Door Open
+  _closeSound:
+    Guid:
+      Data1: 148397481
+      Data2: 1223189820
+      Data3: 2003295646
+      Data4: 2067787026
+    Path: event:/Scenes/NightSycle/Door/Door Close
+  _shutSound:
+    Guid:
+      Data1: 795181922
+      Data2: 1171097169
+      Data3: -1684132678
+      Data4: 1192904107
+    Path: event:/Scenes/NightSycle/Door/Door Shut
 --- !u!114 &9217261839709586820
 MonoBehaviour:
   m_ObjectHideFlags: 0

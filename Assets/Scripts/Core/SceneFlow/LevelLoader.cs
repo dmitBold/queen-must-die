@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Core;
+using FMODUnity;
 using Zenject;
 
 namespace NightCycle
@@ -11,6 +12,7 @@ namespace NightCycle
         [SerializeField] private GameScene targetScene;
         
         private SceneTransitionService _transitionService;
+        private AudioService _audioService;
 
         [Header(" уда спавнить игрока в новой сцене")]
         [SerializeField] private Transform exitSpawnPoint;
@@ -24,9 +26,10 @@ namespace NightCycle
         [Inject] private IFlashlightProvider _flashlightProvider;
 
         [Inject]
-        private void Construct(SceneTransitionService transitionService)
+        private void Construct(SceneTransitionService transitionService, AudioService audioService)
         {
             _transitionService = transitionService;
+            _audioService = audioService;
         }
         public Animator transition;
 
@@ -35,6 +38,13 @@ namespace NightCycle
 
         /// <summary>—колько ждать затемнени€ CrossFade перед загрузкой, секунды. —овпадает с длиной клипа CrossFadeStart.</summary>
         [SerializeField, Min(0f)] private float _fadeOutDuration = 1f;
+
+        /// <summary>«вук открывани€ двери при входе в переход. ѕусто Ч переход без звука.</summary>
+        [Header("«вук двери")]
+        [SerializeField] private EventReference _doorOpenSound;
+
+        /// <summary>«вук закрывани€ двери в момент по€влени€ целевой сцены. ѕусто Ч без звука.</summary>
+        [SerializeField] private EventReference _doorCloseSound;
 
         private bool _isFadingOut;
 
@@ -51,6 +61,8 @@ namespace NightCycle
         {
             if (_isFadingOut || _transitionService.IsTransitioning)
                 return;
+
+            _audioService.PlayFMODEvent(_doorOpenSound);
 
             if (transition == null)
             {
@@ -72,7 +84,7 @@ namespace NightCycle
 
         private void BeginTransition()
         {
-            if (!_transitionService.TryBegin(SceneNames.GetName(targetScene)))
+            if (!_transitionService.TryBegin(SceneNames.GetName(targetScene), _doorCloseSound))
                 return;
 
             var fl = _flashlightProvider?.Current;

@@ -36,6 +36,15 @@ namespace NightCycle
         /// <summary>Звук удара, когда статуя выбивает дверь. Пустое поле — без звука.</summary>
         [SerializeField] private EventReference _kickSound;
 
+        /// <summary>Звук, когда игрок сдвигает створку из закрытого положения. Пустое поле — без звука.</summary>
+        [SerializeField] private EventReference _openSound;
+
+        /// <summary>Звук, когда игрок начинает закрывать полностью открытую створку. Пустое поле — без звука.</summary>
+        [SerializeField] private EventReference _closeSound;
+
+        /// <summary>Звук, когда игрок закрыл створку до конца. Пустое поле — без звука.</summary>
+        [SerializeField] private EventReference _shutSound;
+
         private Interactable _interactable;
         private BoxCollider _collider;
         private LockObject _lock;
@@ -160,10 +169,25 @@ namespace NightCycle
                 return false;
             }
 
+            // Звуки только от игрока, как у дверей в Amnesia: автооткрытие и удар статуи их не играют.
+            // Продолжение прерванного удержания с середины хода звука не даёт.
+            if (_isOpening && _openAmount <= 0f)
+            {
+                PlayLeafSound(_openSound);
+            }
+            else if (!_isOpening && _openAmount >= 1f)
+            {
+                PlayLeafSound(_closeSound);
+            }
+
             _openAmount = nextAmount;
             transform.rotation = nextRotation;
 
             bool reachedEnd = _isOpening ? nextAmount >= 1f : nextAmount <= 0f;
+            if (reachedEnd && !_isOpening)
+            {
+                PlayLeafSound(_shutSound);
+            }
             if (reachedEnd)
             {
                 _isOpening = !_isOpening;
@@ -208,6 +232,11 @@ namespace NightCycle
             _swingSign = awaySign;
             SetFullyOpen();
             _isKicking = false;
+        }
+
+        private void PlayLeafSound(EventReference sound)
+        {
+            _audioService?.PlayFMODEvent(sound, transform.TransformPoint(_collider.center));
         }
 
         private void SetFullyOpen()

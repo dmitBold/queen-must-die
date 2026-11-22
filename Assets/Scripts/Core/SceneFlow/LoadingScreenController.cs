@@ -1,4 +1,5 @@
 using System.Collections;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -35,12 +36,14 @@ namespace Core
 
         private ScenesManager _scenesManager;
         private SceneTransitionService _transitionService;
+        private AudioService _audioService;
 
         [Inject]
-        private void Construct(ScenesManager scenesManager, SceneTransitionService transitionService)
+        private void Construct(ScenesManager scenesManager, SceneTransitionService transitionService, AudioService audioService)
         {
             _scenesManager = scenesManager;
             _transitionService = transitionService;
+            _audioService = audioService;
         }
 
         private void Awake()
@@ -99,8 +102,12 @@ namespace Core
 
             yield return new WaitForSecondsRealtime(holdAtFullSeconds);
 
+            EventReference arrivalSound = _transitionService.ArrivalSound;
+
             // Флаг сбрасываем до активации: после неё эта сцена и корутина уничтожаются.
             _transitionService.Complete();
+            // One-shot FMOD не привязан к объекту сцены, поэтому доигрывает после выгрузки сцены загрузки.
+            _audioService.PlayFMODEvent(arrivalSound);
             operation.allowSceneActivation = true;
         }
     }

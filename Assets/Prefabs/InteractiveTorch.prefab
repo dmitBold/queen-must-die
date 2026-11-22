@@ -171,7 +171,6 @@ GameObject:
   - component: {fileID: 7705820608578759785}
   - component: {fileID: 7422573485201384931}
   - component: {fileID: 5669955247005240345}
-  - component: {fileID: 6003711512302884411}
   - component: {fileID: 860837201918355324}
   - component: {fileID: 1548989807037665247}
   - component: {fileID: 5815102127911635710}
@@ -257,37 +256,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6003711512302884411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5332277431446854275}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 1059178881
-      Data2: 1139591707
-      Data3: -1523548239
-      Data4: -1067781560
-    Path: event:/Scenes/NightSycle/Torch
-  Event: 
-  EventPlayTrigger: 0
-  EventStopTrigger: 0
-  AllowFadeout: 0
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 20
 --- !u!114 &860837201918355324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +275,14 @@ MonoBehaviour:
   smoke: []
   glowMeshes:
   - {fileID: 5669955247005240345}
-  sound: {fileID: 6003711512302884411}
+  sound: {fileID: 0}
+  _igniteSound:
+    Guid:
+      Data1: -1197303731
+      Data2: 1226515658
+      Data3: -846949725
+      Data4: 1782222001
+    Path: event:/Scenes/NightSycle/Brazier/Braizer light up
   igniteDuration: 1.2
   igniteLight:
     serializedVersion: 2

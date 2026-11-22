@@ -4973,7 +4973,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2435536461318580035}
-  - component: {fileID: 7673292214905020510}
   - component: {fileID: 1521009177878694515}
   - component: {fileID: 541739327897040285}
   - component: {fileID: 8905998565323465201}
@@ -5006,37 +5005,6 @@ Transform:
   - {fileID: 4253374240702898550}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7673292214905020510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8417364936588027342}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 1059178881
-      Data2: 1139591707
-      Data3: -1523548239
-      Data4: -1067781560
-    Path: event:/Scenes/NightSycle/Torch
-  Event: 
-  EventPlayTrigger: 0
-  EventStopTrigger: 0
-  AllowFadeout: 0
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 20
 --- !u!114 &1521009177878694515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5056,7 +5024,14 @@ MonoBehaviour:
   smoke: []
   glowMeshes:
   - {fileID: 7079881539917654160}
-  sound: {fileID: 7673292214905020510}
+  sound: {fileID: 0}
+  _igniteSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   igniteDuration: 1.2
   igniteLight:
     serializedVersion: 2

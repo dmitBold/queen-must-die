@@ -5,7 +5,7 @@
 			<value>Braizer light up</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{21241457-bd9c-421a-8593-da84d87545c9}</destination>
@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{84fe2421-d4eb-4521-a772-a95b613c2d48}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{15dd0ae5-9dff-4df2-96a6-c1622a3db3ad}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{1a77a4ec-4775-4021-bc0e-d952e4412478}">
 		<relationship name="masterBus">
@@ -53,7 +56,11 @@
 			<destination>{dd0f59a9-5804-4982-aa89-b2ad5b777fbe}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{d773c68e-e627-4324-9692-b77369cffd88}" />
+	<object class="EventAutomatableProperties" id="{d773c68e-e627-4324-9692-b77369cffd88}">
+		<property name="maximumDistance">
+			<value>25</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{a13f09c3-425f-4191-9deb-c4e76209b1f8}" />
 	<object class="GroupTrack" id="{d0d0d41d-61ae-48d8-9f24-366fe21d3bc1}">
 		<relationship name="modules">
@@ -111,6 +118,7 @@
 	<object class="MixerBusEffectChain" id="{ae98661b-b697-4c38-bdcc-bf57a3b3852c}">
 		<relationship name="effects">
 			<destination>{ded0a895-b02d-4c77-8043-d2a7f1762e7e}</destination>
+			<destination>{50485766-3553-4dff-a9d5-d40c43d88ce8}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{519f9190-93ac-42c3-ac4c-be5b7392b75d}" />
@@ -138,5 +146,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{bab5b357-7348-44d0-838b-85e673c0b5f0}" />
 	<object class="MixerBusFader" id="{ded0a895-b02d-4c77-8043-d2a7f1762e7e}" />
+	<object class="SpatialiserEffect" id="{50485766-3553-4dff-a9d5-d40c43d88ce8}" />
 	<object class="MixerBusFader" id="{ef492873-91c8-4ec3-bee1-039f66e9b4c9}" />
 </objects>

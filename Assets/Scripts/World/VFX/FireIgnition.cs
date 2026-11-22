@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Core;
+using Zenject;
 
 namespace NightCycle
 {
@@ -19,7 +21,9 @@ namespace NightCycle
         public List<Renderer> glowMeshes = new List<Renderer>();
         public FMODUnity.StudioEventEmitter sound;
 
+        /// <summary>Разовый звук розжига в точке огня, только при Ignite(). Пусто — без звука.</summary>
         [Header("Разгорание")]
+        [SerializeField] private FMODUnity.EventReference _igniteSound;
         public float igniteDuration = 1.2f;
         [Tooltip("Яркость света во время разгорания (0..1 времени -> множитель яркости)")]
         public AnimationCurve igniteLight = new AnimationCurve(
@@ -52,6 +56,11 @@ namespace NightCycle
         private float _darkness = 1f;
         private float _lightLevel = 1f;
         private float _glowLevel = 1f;
+
+        private AudioService _audioService;
+
+        [Inject]
+        private void Construct(AudioService audioService) => _audioService = audioService;
 
         private void Awake() => Capture();
 
@@ -147,7 +156,8 @@ namespace NightCycle
                 f.Play(true);
             }
             foreach (var l in lights) if (l) l.enabled = true;
-            if (sound && !sound.IsPlaying()) sound.Play();
+            // Постоянный звук горения запускает ApplyFull в конце разгорания: сначала звучит розжиг.
+            if (!_igniteSound.IsNull) _audioService.PlayFMODEvent(_igniteSound, transform.position);
 
             bool smokeOn = false;
             float t = 0f, seed = Random.value * 100f;
