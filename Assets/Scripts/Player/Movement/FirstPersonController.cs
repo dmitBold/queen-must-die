@@ -3,6 +3,7 @@ using Zenject;
 using Unity.Cinemachine;
 using Core;
 using FMODUnity;
+using FMOD.Studio;
 
 namespace NightCycle
 {
@@ -43,10 +44,15 @@ namespace NightCycle
         [SerializeField] private float crouchFrequency = 0.7f;
 
         [Header("Footsteps (FMOD)")]
+        [SerializeField] private EventInstance footstepInstance;
         [SerializeField] private EventReference footstepEvent;
         [SerializeField] private float walkStepInterval = 0.5f;
         [SerializeField] private float sprintStepInterval = 0.3f;
         [SerializeField] private float crouchStepInterval = 0.7f; // Интервал шагов в приседе
+
+        RaycastHit rh; //контейнер для типа поверхности
+        public LayerMask lm;
+        float Material = 1f;
 
         private float stepTimer;
         private bool wasMoving;
@@ -213,6 +219,7 @@ namespace NightCycle
 
             if (!wasMoving && stepTimer <= 0f)
             {
+                MaterialCheck();
                 PlayFootstepSound();
                 stepTimer = currentStepInterval;
             }
@@ -221,6 +228,7 @@ namespace NightCycle
                 stepTimer -= Time.deltaTime;
                 if (stepTimer <= 0f)
                 {
+                    MaterialCheck();
                     PlayFootstepSound();
                     stepTimer = currentStepInterval;
                 }
@@ -231,11 +239,31 @@ namespace NightCycle
 
         private void PlayFootstepSound()
         {
+
             if (audioService != null)
             {
-                audioService.PlayFMODEvent(footstepEvent, transform.position);
+                footstepInstance = RuntimeManager.CreateInstance(footstepEvent);
+                footstepInstance.start();
+                footstepInstance.release();
+                footstepInstance.setParameterByName("Surface", Material);
+                // audioService.PlayFMODEvent(footstepEvent, transform.position);
             }
         }
+
+        //Чекаем материл поверхности
+        void MaterialCheck()
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out rh, 1.2f, lm))
+            {
+                Debug.Log(rh.collider.tag);
+                if (rh.collider.tag == "Wood") Material = 1f;
+                else if (rh.collider.tag == "Cobblestone") Material = 2f;
+                else if (rh.collider.tag == "Cobblestone_Heels") Material = 3f;
+                else if (rh.collider.tag == "Carpet") Material = 4f;
+                else Material = 0f;
+            }
+        }
+
 
         private void HandleCameraBobbing(bool isMoving)
         {

@@ -565,6 +565,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 8807
+--- !u!114 &-5447485895416645513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Characters/Main/Footsteps/Footsteps
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Characters/Main/Footsteps/Footsteps
+  Guid:
+    Data1: 166466416
+    Data2: 1104359246
+    Data3: -175758955
+    Data4: -328872490
+  Banks:
+  - {fileID: -4548252348506558157}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 3706301653442486131}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5441792877337315369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,10 +710,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639309732825553518
+  lastModified: 639309760384045798
   FileSizes:
   - Name: Desktop
-    Value: 14904320
+    Value: 15094048
   Exists: 1
 --- !u!114 &-4528472134983763805
 MonoBehaviour:
@@ -1113,6 +1141,7 @@ MonoBehaviour:
   - {fileID: -7443224151011286393}
   - {fileID: 4950718324302855208}
   - {fileID: 1518842244122562384}
+  - {fileID: -5447485895416645513}
   EditorParameters:
   - {fileID: 4742735435840111238}
   - {fileID: -401231331353995621}
@@ -1121,7 +1150,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6213692079555805138}
   cacheVersion: 131859
-  cacheTime: 639309732825627675
+  cacheTime: 639309760384091064
   SerializableEventsDict:
   - key: event:/Characters/Main/Footsteps/Footsteps_scene1
     index: 0
@@ -1257,6 +1286,8 @@ MonoBehaviour:
     index: 65
   - key: event:/UI/Text/Soter Text
     index: 66
+  - key: event:/Characters/Main/Footsteps/Footsteps
+    index: 67
 --- !u!114 &31738051923773394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1789,6 +1820,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 13750
+--- !u!114 &3706301653442486131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Surface
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: Surface
+  StudioPath: 
+  Min: 0
+  Max: 4
+  Default: 4
+  ID:
+    data1: 1177358128
+    data2: 3676089420
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Default
+  - Wood
+  - Cobblestone
+  - Heels
+  - Carpet
+  Exists: 1
 --- !u!114 &3762428620662624110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2095,10 +2155,10 @@ MonoBehaviour:
   Path: Assets/FMOD_project/QMD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639309732825627675
+  lastModified: 639309760384091064
   FileSizes:
   - Name: Desktop
-    Value: 4126
+    Value: 4206
   Exists: 1
 --- !u!114 &6713093496099956156
 MonoBehaviour:
