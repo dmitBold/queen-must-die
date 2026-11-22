@@ -76,5 +76,15 @@ namespace UI
         /// Вызывать из сигнала OnCutsceneEnd.
         /// </summary>
         public void EndCutscene() => _uiManager.EndCutscene();
+
+        /// <summary>
+        /// Показывает курсор внутри катсцены (выбор в доках). Сбрасывается в EndCutscene.
+        /// </summary>
+        public void ShowCutsceneCursor() => _uiManager.SetCutsceneCursor(true);
+
+        /// <summary>
+        /// Снова прячет курсор внутри катсцены.
+        /// </summary>
+        public void HideCutsceneCursor() => _uiManager.SetCutsceneCursor(false);
     }
 }

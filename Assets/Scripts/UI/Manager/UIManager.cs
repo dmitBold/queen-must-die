@@ -37,6 +37,7 @@ namespace UI
         private UIScreenId _currentId;
 
         private bool _cutsceneActive;
+        private bool _cutsceneCursor;
         private bool _doorState;
 
         private bool _assemblyActive;
@@ -359,6 +360,17 @@ namespace UI
                 return;
 
             _cutsceneActive = false;
+            _cutsceneCursor = false;
+            Recompute();
+        }
+
+        /// <summary>
+        /// Показывает курсор внутри катсцены, например для кнопок выбора в доках. Игрок по-прежнему не двигается и не вращает камеру.
+        /// Действует только во время катсцены и сбрасывается в EndCutscene.
+        /// </summary>
+        public void SetCutsceneCursor(bool visible)
+        {
+            _cutsceneCursor = visible;
             Recompute();
         }
 
@@ -530,7 +542,7 @@ namespace UI
         private PlayerMode ResolveMode()
         {
             if (_cutsceneActive)
-                return CutsceneMode;
+                return _cutsceneCursor ? PlayerMode.Focused : CutsceneMode;
 
             if (_assemblyActive || _focusActive || _current != null)
                 return PlayerMode.Focused;
