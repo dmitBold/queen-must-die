@@ -4,10 +4,10 @@ namespace NightCycle
 {
     /// <summary>
     /// Подсветка Important item рядом с предметом или запиской. Видна, пока предмет включён (activeSelf),
-    /// и плавно гаснет навсегда, когда предмет выключается (подбор или восстановление из сохранения).
+    /// и плавно гаснет навсегда через VFXFadeController (как эссенция), когда предмет выключается.
     /// Кладётся соседом предмета, а не внутрь: иначе Outline предмета обводит частицы.
     /// </summary>
-    [RequireComponent(typeof(ParticleFadeOut))]
+    [RequireComponent(typeof(VFXFadeController))]
     public class ItemHighlight : MonoBehaviour
     {
         // WorldEventSaver восстанавливает подобранные предметы в Start или кадром позже:
@@ -57,7 +57,7 @@ namespace NightCycle
             {
                 _isShown = false;
                 enabled = false;
-                GetComponent<ParticleFadeOut>().FadeOut();
+                GetComponent<VFXFadeController>().TriggerFadeOut();
             }
         }
 

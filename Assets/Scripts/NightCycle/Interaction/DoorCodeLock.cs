@@ -17,7 +17,7 @@ namespace NightCycle
         [SerializeField] private GameObject _room;
 
         /// <summary>Подсветка замка (эффект Important item). Гаснет при открытии, может быть пустой.</summary>
-        [SerializeField] private ParticleFadeOut _highlight;
+        [SerializeField] private VFXFadeController _highlight;
 
         /// <summary>Растворение модели замка. Пустое поле — замок выключается сразу.</summary>
         [SerializeField] private DissolveAppear _dissolve;
@@ -65,10 +65,10 @@ namespace NightCycle
             _interactable.enabled = false;
             _collider.enabled = false;
 
-            // ParticleFadeOut запускает корутину, на выключенном объекте она упадёт.
+            // VFXFadeController запускает корутину, на выключенном объекте она упадёт.
             if (_highlight != null && _highlight.gameObject.activeInHierarchy)
             {
-                _highlight.FadeOut();
+                _highlight.TriggerFadeOut();
             }
 
             if (_dissolve != null)

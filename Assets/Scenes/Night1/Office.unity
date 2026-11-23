@@ -2492,10 +2492,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 197700457}
+      addedObject: {fileID: 197700456}
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 197700456}
+      addedObject: {fileID: 197700461}
   m_SourcePrefab: {fileID: 100100000, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
 --- !u!4 &197700454 stripped
 Transform:
@@ -2520,7 +2520,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ItemHighlight
   _target: {fileID: 716887097}
---- !u!114 &197700457
+--- !u!198 &197700457 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1457801184598345654, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 197700453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &197700458 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7194351831689376219, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 197700453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &197700459 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5703413397741319896, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 197700453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &197700460 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 197700453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &197700461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2529,11 +2549,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 197700455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035bb2ee2c2704f449e5d1ee6acc6102, type: 3}
+  m_Script: {fileID: 11500000, guid: e89de6b55c9913e41a7042d8b6f84f48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ParticleFadeOut
-  _duration: 2
-  _sound: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::VFXFadeController
+  fadeMode: 1
+  fadeDuration: 3.5
+  fadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  vfxRenderer: {fileID: 0}
+  dissolvePropertyName: _DissolveAmount
+  OnFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  particleSystems:
+  - {fileID: 197700460}
+  - {fileID: 197700459}
+  - {fileID: 197700458}
+  - {fileID: 197700457}
 --- !u!1 &221329481
 GameObject:
   m_ObjectHideFlags: 0
@@ -17678,7 +17732,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 534559818}
+      addedObject: {fileID: 534559822}
   m_SourcePrefab: {fileID: 100100000, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
 --- !u!4 &534559816 stripped
 Transform:
@@ -17690,7 +17744,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
   m_PrefabInstance: {fileID: 534559815}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &534559818
+--- !u!198 &534559818 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1457801184598345654, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 534559815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &534559819 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7194351831689376219, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 534559815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &534559820 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5703413397741319896, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 534559815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &534559821 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 534559815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &534559822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17699,11 +17773,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 534559817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035bb2ee2c2704f449e5d1ee6acc6102, type: 3}
+  m_Script: {fileID: 11500000, guid: e89de6b55c9913e41a7042d8b6f84f48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ParticleFadeOut
-  _duration: 2
-  _sound: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::VFXFadeController
+  fadeMode: 1
+  fadeDuration: 3.5
+  fadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  vfxRenderer: {fileID: 0}
+  dissolvePropertyName: _DissolveAmount
+  OnFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  particleSystems:
+  - {fileID: 534559821}
+  - {fileID: 534559820}
+  - {fileID: 534559819}
+  - {fileID: 534559818}
 --- !u!1 &539864843
 GameObject:
   m_ObjectHideFlags: 0
@@ -20196,10 +20304,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 612504123}
+      addedObject: {fileID: 612504122}
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 612504122}
+      addedObject: {fileID: 612504127}
   m_SourcePrefab: {fileID: 100100000, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
 --- !u!4 &612504120 stripped
 Transform:
@@ -20224,7 +20332,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ItemHighlight
   _target: {fileID: 999844899}
---- !u!114 &612504123
+--- !u!198 &612504123 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1457801184598345654, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 612504119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &612504124 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7194351831689376219, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 612504119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &612504125 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5703413397741319896, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 612504119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &612504126 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 612504119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &612504127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20233,11 +20361,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 612504121}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035bb2ee2c2704f449e5d1ee6acc6102, type: 3}
+  m_Script: {fileID: 11500000, guid: e89de6b55c9913e41a7042d8b6f84f48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ParticleFadeOut
-  _duration: 2
-  _sound: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::VFXFadeController
+  fadeMode: 1
+  fadeDuration: 3.5
+  fadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  vfxRenderer: {fileID: 0}
+  dissolvePropertyName: _DissolveAmount
+  OnFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  particleSystems:
+  - {fileID: 612504126}
+  - {fileID: 612504125}
+  - {fileID: 612504124}
+  - {fileID: 612504123}
 --- !u!1001 &618114221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20658,10 +20820,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 631203910}
+      addedObject: {fileID: 631203909}
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 631203909}
+      addedObject: {fileID: 631203914}
   m_SourcePrefab: {fileID: 100100000, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
 --- !u!4 &631203907 stripped
 Transform:
@@ -20686,7 +20848,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ItemHighlight
   _target: {fileID: 942521491}
---- !u!114 &631203910
+--- !u!198 &631203910 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1457801184598345654, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 631203906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &631203911 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7194351831689376219, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 631203906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &631203912 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5703413397741319896, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 631203906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &631203913 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 631203906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &631203914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20695,11 +20877,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 631203908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035bb2ee2c2704f449e5d1ee6acc6102, type: 3}
+  m_Script: {fileID: 11500000, guid: e89de6b55c9913e41a7042d8b6f84f48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ParticleFadeOut
-  _duration: 2
-  _sound: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::VFXFadeController
+  fadeMode: 1
+  fadeDuration: 3.5
+  fadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  vfxRenderer: {fileID: 0}
+  dissolvePropertyName: _DissolveAmount
+  OnFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  particleSystems:
+  - {fileID: 631203913}
+  - {fileID: 631203912}
+  - {fileID: 631203911}
+  - {fileID: 631203910}
 --- !u!1 &633519943
 GameObject:
   m_ObjectHideFlags: 0
@@ -83816,10 +84032,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1439375146}
+      addedObject: {fileID: 1439375145}
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1439375145}
+      addedObject: {fileID: 1439375150}
   m_SourcePrefab: {fileID: 100100000, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
 --- !u!4 &1439375143 stripped
 Transform:
@@ -83844,7 +84060,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ItemHighlight
   _target: {fileID: 500318615}
---- !u!114 &1439375146
+--- !u!198 &1439375146 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1457801184598345654, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1439375142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1439375147 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7194351831689376219, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1439375142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1439375148 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5703413397741319896, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1439375142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1439375149 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1439375142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1439375150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83853,11 +84089,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439375144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035bb2ee2c2704f449e5d1ee6acc6102, type: 3}
+  m_Script: {fileID: 11500000, guid: e89de6b55c9913e41a7042d8b6f84f48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ParticleFadeOut
-  _duration: 2
-  _sound: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::VFXFadeController
+  fadeMode: 1
+  fadeDuration: 3.5
+  fadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  vfxRenderer: {fileID: 0}
+  dissolvePropertyName: _DissolveAmount
+  OnFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  particleSystems:
+  - {fileID: 1439375149}
+  - {fileID: 1439375148}
+  - {fileID: 1439375147}
+  - {fileID: 1439375146}
 --- !u!1001 &1440436676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100223,10 +100493,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1517389200}
+      addedObject: {fileID: 1517389199}
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1517389199}
+      addedObject: {fileID: 1517389204}
   m_SourcePrefab: {fileID: 100100000, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
 --- !u!4 &1517389197 stripped
 Transform:
@@ -100251,7 +100521,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ItemHighlight
   _target: {fileID: 1317313193}
---- !u!114 &1517389200
+--- !u!198 &1517389200 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1457801184598345654, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1517389196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1517389201 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7194351831689376219, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1517389196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1517389202 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5703413397741319896, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1517389196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1517389203 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1517389196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1517389204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100260,11 +100550,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 1517389198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035bb2ee2c2704f449e5d1ee6acc6102, type: 3}
+  m_Script: {fileID: 11500000, guid: e89de6b55c9913e41a7042d8b6f84f48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ParticleFadeOut
-  _duration: 2
-  _sound: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::VFXFadeController
+  fadeMode: 1
+  fadeDuration: 3.5
+  fadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  vfxRenderer: {fileID: 0}
+  dissolvePropertyName: _DissolveAmount
+  OnFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  particleSystems:
+  - {fileID: 1517389203}
+  - {fileID: 1517389202}
+  - {fileID: 1517389201}
+  - {fileID: 1517389200}
 --- !u!1 &1530268410
 GameObject:
   m_ObjectHideFlags: 0
@@ -108508,10 +108832,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1573062840}
+      addedObject: {fileID: 1573062839}
     - targetCorrespondingSourceObject: {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1573062839}
+      addedObject: {fileID: 1573062844}
   m_SourcePrefab: {fileID: 100100000, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
 --- !u!4 &1573062837 stripped
 Transform:
@@ -108536,7 +108860,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ItemHighlight
   _target: {fileID: 1250307953}
---- !u!114 &1573062840
+--- !u!198 &1573062840 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1457801184598345654, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1573062836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1573062841 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7194351831689376219, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1573062836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1573062842 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5703413397741319896, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1573062836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1573062843 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  m_PrefabInstance: {fileID: 1573062836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1573062844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108545,11 +108889,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 1573062838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035bb2ee2c2704f449e5d1ee6acc6102, type: 3}
+  m_Script: {fileID: 11500000, guid: e89de6b55c9913e41a7042d8b6f84f48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NightCycle.ParticleFadeOut
-  _duration: 2
-  _sound: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::VFXFadeController
+  fadeMode: 1
+  fadeDuration: 3.5
+  fadeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  vfxRenderer: {fileID: 0}
+  dissolvePropertyName: _DissolveAmount
+  OnFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  particleSystems:
+  - {fileID: 1573062843}
+  - {fileID: 1573062842}
+  - {fileID: 1573062841}
+  - {fileID: 1573062840}
 --- !u!1 &1576767767
 GameObject:
   m_ObjectHideFlags: 0
@@ -112011,9 +112389,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 534559818}
-        m_TargetAssemblyTypeName: NightCycle.ParticleFadeOut, Assembly-CSharp
-        m_MethodName: FadeOut
+      - m_Target: {fileID: 534559822}
+        m_TargetAssemblyTypeName: VFXFadeController, Assembly-CSharp
+        m_MethodName: TriggerFadeOut
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
