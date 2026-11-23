@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NightCycle
 {
@@ -20,8 +21,12 @@ namespace NightCycle
         /// <summary>Корневая система частиц эффекта; дочерние системы запускаются и гасятся вместе с ней.</summary>
         [SerializeField] private ParticleSystem particles;
 
-        /// <summary>Время появления и исчезновения эффекта в секундах.</summary>
-        [SerializeField] private float fadeDuration = 1f;
+        /// <summary>Время появления света и конуса в секундах. Совпадает с разгоранием частицы Light магического круга (около 0.25 с).</summary>
+        [SerializeField] private float fadeInDuration = 0.25f;
+
+        /// <summary>Время исчезновения эффекта в секундах.</summary>
+        [FormerlySerializedAs("fadeDuration")]
+        [SerializeField] private float fadeOutDuration = 1f;
 
         private float _fullIntensity;
         private float _fullOpacity;
@@ -47,7 +52,11 @@ namespace NightCycle
 
             if (particles != null)
             {
-                if (visible) particles.Play(true);
+                if (visible)
+                {
+                    particles.Play(true);
+                    EmitFirstParticles();
+                }
                 // Частицы не гасим резко: уже вылетевшие доживают свой цикл и исчезают сами.
                 else particles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
             }
@@ -55,9 +64,20 @@ namespace NightCycle
             _fade = StartCoroutine(Fade(visible ? 1f : 0f));
         }
 
+        // Системы без стартового выброса (Sides) выпускают первую частицу только через 1/rate секунд,
+        // и эффект догоняет свет и руны с заметным опозданием. Первую частицу выпускаем сразу.
+        private void EmitFirstParticles()
+        {
+            foreach (var system in particles.GetComponentsInChildren<ParticleSystem>())
+            {
+                if (system.emission.burstCount == 0 && system.particleCount == 0) system.Emit(1);
+            }
+        }
+
         private IEnumerator Fade(float target)
         {
-            float speed = fadeDuration > 0f ? 1f / fadeDuration : float.MaxValue;
+            float duration = target > _weight ? fadeInDuration : fadeOutDuration;
+            float speed = duration > 0f ? 1f / duration : float.MaxValue;
             while (!Mathf.Approximately(_weight, target))
             {
                 _weight = Mathf.MoveTowards(_weight, target, speed * Time.deltaTime);
@@ -69,19 +89,19 @@ namespace NightCycle
 
         private void Apply()
         {
-            float eased = Mathf.SmoothStep(0f, 1f, _weight);
+            // Линейно, как разгорается частица Light магического круга: свет и частицы проявляются синхронно.
             bool visible = _weight > 0f;
 
             if (spotLight != null)
             {
-                spotLight.intensity = _fullIntensity * eased;
+                spotLight.intensity = _fullIntensity * _weight;
                 spotLight.enabled = visible;
             }
 
             if (coneRenderer != null)
             {
                 coneRenderer.GetPropertyBlock(_block);
-                _block.SetFloat(OpacityId, _fullOpacity * eased);
+                _block.SetFloat(OpacityId, _fullOpacity * _weight);
                 coneRenderer.SetPropertyBlock(_block);
                 coneRenderer.enabled = visible;
             }
