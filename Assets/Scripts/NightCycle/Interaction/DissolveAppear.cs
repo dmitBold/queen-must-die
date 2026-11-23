@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +10,7 @@ namespace NightCycle
     /// <summary>
     /// Проявляет выключенный объект со всеми дочерними мешами обратным растворением QMD/BalustradeDissolve.
     /// На время проявления подменяет материалы, по окончании возвращает исходные.
+    /// Disappear делает обратное: растворяет меши и выключает их рендеры, объект остаётся включённым.
     /// </summary>
     public class DissolveAppear : MonoBehaviour
     {
@@ -57,6 +60,45 @@ namespace NightCycle
                 renderers[i].sharedMaterials = originals[i];
             }
             _onAppeared?.Invoke();
+        }
+
+        /// <summary>
+        /// Растворяет дочерние меши, у которых есть материал из списка, и выключает их рендеры.
+        /// Остальные рендеры (например, частицы) не трогает, чтобы их можно было гасить отдельно.
+        /// </summary>
+        public void Disappear()
+        {
+            StartCoroutine(DisappearRoutine());
+        }
+
+        private IEnumerator DisappearRoutine()
+        {
+            var renderers = new List<MeshRenderer>();
+            var originals = new List<Material[]>();
+            foreach (MeshRenderer r in GetComponentsInChildren<MeshRenderer>())
+            {
+                Material[] source = r.sharedMaterials;
+                Material[] dissolve = Array.ConvertAll(source, GetDissolveMaterial);
+                if (dissolve.SequenceEqual(source)) continue;
+                renderers.Add(r);
+                originals.Add(source);
+                r.sharedMaterials = dissolve;
+            }
+
+            var block = new MaterialPropertyBlock();
+            for (float t = 0f; t < _duration; t += Time.deltaTime)
+            {
+                block.SetFloat(DissolveId, t / _duration);
+                foreach (MeshRenderer r in renderers) r.SetPropertyBlock(block);
+                yield return null;
+            }
+
+            for (int i = 0; i < renderers.Count; i++)
+            {
+                renderers[i].enabled = false;
+                renderers[i].SetPropertyBlock(null);
+                renderers[i].sharedMaterials = originals[i];
+            }
         }
 
         private Material GetDissolveMaterial(Material source)
