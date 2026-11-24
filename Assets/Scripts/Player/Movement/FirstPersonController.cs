@@ -216,7 +216,7 @@ namespace NightCycle
             }
 
             float currentStepInterval = isCrouching ? crouchStepInterval : (playerInputHandler.SprintTriggered ? sprintStepInterval : walkStepInterval);
-
+            
             if (!wasMoving && stepTimer <= 0f)
             {
                 MaterialCheck();
@@ -243,9 +243,12 @@ namespace NightCycle
             if (audioService != null)
             {
                 footstepInstance = RuntimeManager.CreateInstance(footstepEvent);
+                footstepInstance.setParameterByName("Surface", Material);
+                //Паша, 1/0 на параметр для тебя, когда приседаем - 1, иначе 0. Сейчас для теста когда приседаем - 2f на Surface
+                float CrouchParam = IsCrouching ? 1f : 0f;
+                if (IsCrouching) { footstepInstance.setParameterByName("Surface", 2f); }//Это для теста. тут подставишь нужный параметр
                 footstepInstance.start();
                 footstepInstance.release();
-                footstepInstance.setParameterByName("Surface", Material);
                 // audioService.PlayFMODEvent(footstepEvent, transform.position);
             }
         }
