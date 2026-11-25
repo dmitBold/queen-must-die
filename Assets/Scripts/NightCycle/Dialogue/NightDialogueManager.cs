@@ -271,6 +271,14 @@ namespace NightCycle
             EndDialogue();
         }
 
+        /// <summary>
+        /// Открыто ли сейчас окно реплики из таймлайна этого режиссёра. По нему персонаж катсцены понимает, что сейчас говорит с Бет.
+        /// </summary>
+        public bool IsShowingTimelineDialogue(PlayableDirector director)
+        {
+            return director != null && currentTimelineDirector == director && dialoguePanel.activeSelf;
+        }
+
         public void ForceEndDialogue()
         {
             dialoguePanel.SetActive(false);
