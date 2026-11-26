@@ -122,6 +122,21 @@ namespace NightCycle
         }
 
         /// <summary>
+        /// Мгновенно возвращает створку в закрытое положение без звука: для смены сцены за кадром (под фейдом).
+        /// Прерывает автооткрытие и удар статуи.
+        /// </summary>
+        public void CloseImmediately()
+        {
+            StopAllCoroutines();
+            _isAutoOpening = false;
+            _isKicking = false;
+            _openAmount = 0f;
+            _isOpening = true;
+            transform.rotation = _closedRotation;
+            _interactable.message = _openMessage;
+        }
+
+        /// <summary>
         /// Удар статуи: если она идёт через проём, дверь резко распахивается от неё до конца.
         /// Запертые двери и двери, уже открытые от статуи до конца, не трогаются.
         /// </summary>
