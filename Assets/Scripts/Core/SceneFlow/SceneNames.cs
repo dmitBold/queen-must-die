@@ -14,7 +14,8 @@ namespace Core
         Night1_final,
         Night1_outro,
         Library,
-        Office
+        Office,
+        KingBlockDay
     }
 
     public static class SceneNames
@@ -32,6 +33,7 @@ namespace Core
         public const string Night1_outro = "Night1_outro";
         public const string Library = "Library";
         public const string Office = "Office";
+        public const string KingBlockDay = "King block Day";
         public const string Loading = "LoadingScene";
 
         public static string GetName(GameScene scene)
@@ -51,6 +53,7 @@ namespace Core
                 case GameScene.Night1_outro: return Night1_outro;
                 case GameScene.Library: return Library;
                 case GameScene.Office: return Office;
+                case GameScene.KingBlockDay: return KingBlockDay;
                 default: return Night;
             }
         }

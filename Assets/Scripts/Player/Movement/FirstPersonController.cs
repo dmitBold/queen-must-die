@@ -341,7 +341,7 @@ namespace NightCycle
 
             if (characterController.isGrounded)
             {
-                currentMovement.y = GROUNDED_GRAVITY;
+                currentMovement.y = GroundedVerticalSpeed();
 
                 // Блокируем прыжок, если игрок сидит
                 if (jumpPressed && !isCrouching)
@@ -359,12 +359,27 @@ namespace NightCycle
         {
             Vector3 worldDirection = CalculateWorldDirection();
             SetHorizontalMovement(worldDirection);
+            bool wasGrounded = characterController.isGrounded;
             HandleJumping();
             CollisionFlags flags = characterController.Move(currentMovement * Time.deltaTime);
+
+            // Прижим к склону не должен разгонять падение с обрыва: сошёл с края — падение начинается с места.
+            if (wasGrounded && !characterController.isGrounded && currentMovement.y < 0f)
+                currentMovement.y = 0f;
 
             // Удар головой гасит подъём: иначе скорость прыжка держит игрока прижатым к потолку или балке, пока её не съест гравитация.
             if ((flags & CollisionFlags.Above) != 0 && currentMovement.y > 0f)
                 currentMovement.y = 0f;
+        }
+
+        // На спуске слабый GROUNDED_GRAVITY не успевает за склоном: CharacterController на кадр отрывается от земли,
+        // пропадают шаги и тряска камеры, игрок будто скользит, а доски и ульи не засчитывают бег. Поэтому на земле
+        // прижимаем его со скоростью спуска по склону предельной крутизны. Отдельный Move для прижима не годится:
+        // CharacterController.velocity берётся из последнего Move, и горизонтальная скорость для доски и улья обнулялась бы.
+        private float GroundedVerticalSpeed()
+        {
+            float horizontalSpeed = new Vector2(currentMovement.x, currentMovement.z).magnitude;
+            return Mathf.Min(GROUNDED_GRAVITY, -horizontalSpeed * Mathf.Tan(characterController.slopeLimit * Mathf.Deg2Rad));
         }
 
         private void SetHorizontalMovement(Vector3 worldDirection)
