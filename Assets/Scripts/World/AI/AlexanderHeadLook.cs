@@ -70,7 +70,8 @@ public class AlexanderHeadLook : MonoBehaviour
     {
         Transform playerView = _player != null ? _player.View : null;
 
-        Transform dialogueView = _dialogueView != null ? _dialogueView : playerView;
+        // Пока камера катсцены выключена (первые реплики идут от лица игрока), Бет смотрит своей камерой.
+        Transform dialogueView = _dialogueView != null && _dialogueView.gameObject.activeInHierarchy ? _dialogueView : playerView;
         if (dialogueView != null && IsTalking())
         {
             return dialogueView;

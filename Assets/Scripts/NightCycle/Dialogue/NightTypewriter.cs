@@ -47,14 +47,15 @@ namespace NightCycle
         {
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
 
+            // Обнуляем до смены текста: перестройка меша сразу прячет ещё не напечатанные символы.
+            currentVisibleCharacters = 0;
+
             dialogueText.text = text;
 
             dialogueText.maxVisibleCharacters = 99999;
             dialogueText.ForceMeshUpdate();
 
             textEffectComponent.Refresh();
-
-            currentVisibleCharacters = 0;
 
             typingCoroutine = StartCoroutine(TypeRoutine());
         }
@@ -103,7 +104,30 @@ namespace NightCycle
             RuntimeManager.StudioSystem.setParameterByName(TextingParameterName, 0);
         }
 
+        private void OnEnable()
+        {
+            TMPro_EventManager.TEXT_CHANGED_EVENT.Add(OnTextMeshRebuilt);
+        }
+
+        private void OnDisable()
+        {
+            TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(OnTextMeshRebuilt);
+        }
+
+        // TMP перестраивает меш и вне LateUpdate (при включении панели — во время отрисовки канваса,
+        // EasyTextEffects — в своём Update) и возвращает всем символам полную альфу.
+        // Без повторного скрытия весь текст на кадр вспыхивает в пустом окне.
+        private void OnTextMeshRebuilt(UnityEngine.Object obj)
+        {
+            if (obj == dialogueText) HideUntypedCharacters();
+        }
+
         private void LateUpdate()
+        {
+            HideUntypedCharacters();
+        }
+
+        private void HideUntypedCharacters()
         {
             if (dialogueText.textInfo == null || dialogueText.textInfo.characterCount == 0) return;
 
