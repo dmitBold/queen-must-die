@@ -79,6 +79,9 @@ namespace NightCycle
         // Буфер для проверки места над головой при вставании, чтобы не выделять память каждый кадр.
         private readonly Collider[] _ceilingHits = new Collider[16];
 
+        // Прыжок срабатывает на нажатие, а не пока клавиша зажата: иначе при удержании игрок прыгает при каждом приземлении.
+        private bool _jumpHeld;
+
         public float SpeedMultiplier { get; set; } = 1f;
 
         /// <summary>Сидит ли игрок: присед держится и под низким потолком, даже если клавиша уже отпущена.</summary>
@@ -333,12 +336,15 @@ namespace NightCycle
 
         private void HandleJumping()
         {
+            bool jumpPressed = playerInputHandler.JumpTriggered && !_jumpHeld;
+            _jumpHeld = playerInputHandler.JumpTriggered;
+
             if (characterController.isGrounded)
             {
                 currentMovement.y = GROUNDED_GRAVITY;
 
                 // Блокируем прыжок, если игрок сидит
-                if (playerInputHandler.JumpTriggered && !isCrouching)
+                if (jumpPressed && !isCrouching)
                 {
                     currentMovement.y = jumpForce;
                 }
