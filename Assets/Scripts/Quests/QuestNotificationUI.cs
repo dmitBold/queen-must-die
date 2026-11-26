@@ -81,13 +81,16 @@ public class QuestNotificationUI : MonoBehaviour
 
     private void HandleQuestAdded(Quest quest)
     {
-        string firstStageText = quest.QuestStages != null && quest.QuestStages.Count > 0 ? quest.QuestStages[0].StageDescription : "";
+        //  вест может быть выдан сразу на поздний этап (AddQuest со стартовым этапом), поэтому показываем текущий этап.
+        QuestProgress progress = questManager.GetActiveQuests().Find(q => q.Quest == quest);
+        QuestStage startStage = progress != null ? progress.GetCurrentStage() : null;
+        string startStageText = startStage != null ? startStage.StageDescription : "";
 
         EnqueueNotification(new QuestNotificationData
         {
             Type = QuestNotificationType.NewQuest,
             QuestName = quest.QuestName,
-            StageName = firstStageText
+            StageName = startStageText
         });
     }
 

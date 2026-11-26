@@ -97,9 +97,22 @@ public bool HasQuest(Quest quest)
 
     public void AddQuest(Quest quest)
     {
+        AddQuest(quest, 0);
+    }
+
+    /// <summary>
+    /// ƒобавл€ет квест сразу на указанный этап, без уведомлений о пройденных этапах.
+    /// Ќужен, когда условие этапа выполнено раньше, чем выдан квест. »ндекс ограничиваетс€ последним этапом.
+    /// </summary>
+    public void AddQuest(Quest quest, int startStageIndex)
+    {
         if (!HasQuest(quest))
         {
-            activeQuests.Add(new QuestProgress(quest));
+            int lastStageIndex = quest.QuestStages != null ? quest.QuestStages.Count - 1 : 0;
+            activeQuests.Add(new QuestProgress(quest)
+            {
+                CurrentStageIndex = Math.Max(0, Math.Min(startStageIndex, lastStageIndex))
+            });
             OnQuestPoolChanged?.Invoke();
             OnQuestAdded?.Invoke(quest);
         }
