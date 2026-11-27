@@ -7,7 +7,8 @@ using Zenject;
 /// Квест «Запретная археология» в King block Day. Выдаётся после разговора с Ромом (GiveQuest из onDialogueCompleted).
 /// Второй этап наступает после любого решения по ExcavationCard2: оба выбора ставят флаг, и компонент переносит его
 /// в общий WorldState, поэтому если решение принято до разговора с Ромом, квест выдаётся сразу со второго этапа.
-/// Третий этап наступает при прочтении любого из писем в пещерах (OnLetterRead). Этапы только растут.
+/// Третий этап наступает при прочтении любого из писем в пещерах Cave Day 1 (OnLetterRead): там стоит свой экземпляр
+/// компонента без доков. Этапы только растут.
 /// </summary>
 public class ForbiddenArchaeologyQuest : MonoBehaviour
 {
@@ -16,12 +17,15 @@ public class ForbiddenArchaeologyQuest : MonoBehaviour
     /// <summary>Ассет квеста «Запретная археология».</summary>
     [SerializeField] private Quest _quest;
 
-    /// <summary>CardManager доков, в которых принимается решение по ExcavationCard2.</summary>
+    /// <summary>
+    /// CardManager доков, в которых принимается решение по ExcavationCard2. Пуст в сцене без доков (Cave Day 1),
+    /// где компонент только принимает прочтение писем.
+    /// </summary>
     [SerializeField] private CardManager _cardManager;
 
     /// <summary>
     /// StateManager, в который пишет CardManager доков (его поле World State Manual). В King block Day доки
-    /// намеренно работают с локальным состоянием сцены, а не с общим WorldState.
+    /// намеренно работают с локальным состоянием сцены, а не с общим WorldState. Назначается вместе с CardManager.
     /// </summary>
     [SerializeField] private WorldState _docsWorldState;
 
@@ -40,9 +44,9 @@ public class ForbiddenArchaeologyQuest : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_cardManager != null) _cardManager.OnAnyChoiceResolved += OnChoiceResolved;
-        else Debug.LogError($"{name}: не назначен CardManager, второй этап квеста не включится по решению в доках.", this);
+        if (_cardManager == null) return;
 
+        _cardManager.OnAnyChoiceResolved += OnChoiceResolved;
         if (_docsWorldState == null)
             Debug.LogError($"{name}: не назначен StateManager доков, решение по карте не будет учтено.", this);
     }

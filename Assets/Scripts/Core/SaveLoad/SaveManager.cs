@@ -268,6 +268,7 @@ public class SaveManager : MonoBehaviour
             case SceneNames.Library: return GameScene.Library;
             case SceneNames.Office: return GameScene.Office;
             case SceneNames.KingBlockDay: return GameScene.KingBlockDay;
+            case SceneNames.CaveDay1: return GameScene.CaveDay1;
             default: return GameScene.Night;
         }
     }
