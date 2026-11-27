@@ -5,8 +5,8 @@ using Zenject;
 namespace NightCycle
 {
     /// <summary>
-    /// Хрупкая доска: копит нагрузку от бега Бет и приземлений на неё, прогибается и сыплет трухой,
-    /// а на пороге ломается на куски, и Бет проваливается вниз. Ходьба доску не нагружает.
+    /// Хрупкая доска: копит нагрузку от шагов и бега Бет и от приземлений на неё, прогибается и сыплет трухой,
+    /// а на пороге ломается на куски, и Бет проваливается вниз. Присед доску не нагружает.
     /// </summary>
     public class FragilePlank : MonoBehaviour
     {
@@ -30,6 +30,8 @@ namespace NightCycle
         [SerializeField] private float _breakThreshold = 3f;
         /// <summary>Нагрузка за секунду бега по доске.</summary>
         [SerializeField] private float _sprintStress = 1f;
+        /// <summary>Нагрузка за секунду обычного шага по доске. Присед доску не нагружает.</summary>
+        [SerializeField] private float _walkStress = 0.5f;
         /// <summary>Нагрузка за приземление на доску.</summary>
         [SerializeField] private float _landingStress = 1f;
         /// <summary>Сколько нагрузки спадает за секунду, пока Бет не на доске. На доске нагрузка не спадает, даже если Бет стоит.</summary>
@@ -103,7 +105,7 @@ namespace NightCycle
             if (_broken) return;
 
             float deltaTime = Time.deltaTime;
-            bool running = false;
+            float stepStress = 0f;
 
             if (!_controller.isGrounded)
             {
@@ -119,10 +121,11 @@ namespace NightCycle
                     if (_dust != null) _dust.Emit(_landingDustCount);
                 }
                 _airTime = 0f;
-                running = _playerOnPlank && IsPlayerRunning();
+                if (_playerOnPlank) stepStress = GetStepStress();
             }
 
-            if (running) _stress.Add(_sprintStress * deltaTime);
+            bool stepping = stepStress > 0f;
+            if (stepping) _stress.Add(stepStress * deltaTime);
             if (!_playerOnPlank) _stress.Decay(deltaTime);
 
             if (_stress.IsOverloaded)
@@ -131,8 +134,8 @@ namespace NightCycle
                 return;
             }
 
-            UpdateSag(running, deltaTime);
-            SetDustRate(running ? _maxDustRate * _stress.Ratio : 0f);
+            UpdateSag(stepping, deltaTime);
+            SetDustRate(stepping ? _maxDustRate * _stress.Ratio : 0f);
         }
 
         // Ось прогиба лежит в плоскости доски поперёк её длины: поворот вокруг неё опускает внутренний конец половины.
@@ -165,21 +168,23 @@ namespace NightCycle
                    && hit.collider == _support;
         }
 
-        private bool IsPlayerRunning()
+        // Нагрузка за секунду движения по доске: бег, обычный шаг, а присед не нагружает.
+        private float GetStepStress()
         {
             Vector3 velocity = _controller.velocity;
             velocity.y = 0f;
-            return velocity.magnitude >= MinMoveSpeed && _input.SprintTriggered && !_player.IsCrouching;
+            if (velocity.magnitude < MinMoveSpeed || _player.IsCrouching) return 0f;
+            return _input.SprintTriggered ? _sprintStress : _walkStress;
         }
 
-        private void UpdateSag(bool running, float deltaTime)
+        private void UpdateSag(bool stepping, float deltaTime)
         {
             float ratio = _stress.Ratio;
             _sag = Mathf.MoveTowards(_sag, _maxSagAngle * ratio, _sagSpeed * deltaTime);
 
             for (int i = 0; i < _halves.Length; i++)
             {
-                float shake = running ? (Mathf.PerlinNoise(Time.time * _shakeFrequency, i) - 0.5f) * 2f * _shakeAngle * ratio : 0f;
+                float shake = stepping ? (Mathf.PerlinNoise(Time.time * _shakeFrequency, i) - 0.5f) * 2f * _shakeAngle * ratio : 0f;
                 _halves[i].localRotation = Quaternion.AngleAxis(_sag + shake, _sagAxes[i]) * _restRotations[i];
             }
         }
