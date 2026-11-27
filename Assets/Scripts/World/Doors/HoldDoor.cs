@@ -3,6 +3,7 @@ using Core;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using Zenject;
 
 namespace NightCycle
@@ -44,6 +45,9 @@ namespace NightCycle
 
         /// <summary>Звук, когда игрок закрыл створку до конца. Пустое поле — без звука.</summary>
         [SerializeField] private EventReference _shutSound;
+
+        /// <summary>Вызывается, когда игрок сдвигает закрытую створку, то есть только начал открывать дверь. Автооткрытие и удар статуи его не вызывают.</summary>
+        [SerializeField] private UnityEvent _onOpenStarted;
 
         private Interactable _interactable;
         private BoxCollider _collider;
@@ -189,6 +193,7 @@ namespace NightCycle
             if (_isOpening && _openAmount <= 0f)
             {
                 PlayLeafSound(_openSound);
+                _onOpenStarted?.Invoke();
             }
             else if (!_isOpening && _openAmount >= 1f)
             {
