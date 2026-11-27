@@ -133621,6 +133621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1949531026}
   - component: {fileID: 1949531027}
+  - component: {fileID: 1949531028}
   m_Layer: 0
   m_Name: DocsController
   m_TagString: Untagged
@@ -133701,6 +133702,25 @@ MonoBehaviour:
   skipDocs: 0
   choiceUI: {fileID: 324556146}
   cardManager: {fileID: 94773047}
+--- !u!114 &1949531028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949531025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732e298b5c2a2eb479a48601a1a3060f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Core.DocsFlagTransfer
+  _cardManager: {fileID: 94773047}
+  _docsWorldState: {fileID: 1205996424}
+  _flags:
+  - docs:excavation:stone
+  - docs:excavation:wood
+  - docs:excavation:torches
+  - docs:excavation:bypass
 --- !u!1001 &1950062751
 PrefabInstance:
   m_ObjectHideFlags: 0
